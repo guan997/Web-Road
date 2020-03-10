@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>携程网导航flex布局</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				width: 540px;
+				height: 484px;
+				margin: 0 auto;
+			}
+
+			img {
+				width: 100%;
+			}
+
+			ul {
+				list-style: none;
+			}
+
+			nav {
+				padding: 8px;
+			}
+
+			nav .row {
+				margin-bottom: 5px;
+				height: 90px;
+				width: 520px;
+				border-radius: 8px;
+				background: #ff697a;
+				display: flex;
+
+			}
+
+			nav .row:nth-child(2) {
+				background-color: #3d98ff;
+			}
+
+			nav .row:nth-child(3) {
+				background: #44c522;
+			}
+
+			nav .row:nth-child(4) {
+				background: #fc9720;
+			}
+
+			.row3 {
+				flex: 1;
+				border-left: 1px solid #fff;
+			}
+
+			.row div:first-child {
+				border: 0;
+			}
+
+			.hotel {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.hotel a {
+				flex: 1;
+				font-size: 16px;
+				color: #FFFFFF;
+				text-align: center;
+				line-height: 45px;
+				text-decoration: none;
+				text-shadow: 0 2px 1px rgba(0, 0, 0, 0.3);
+			}
+
+			.hotel a:first-child {
+				border-bottom: 1px solid #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<img src="img/ctrip.jpg" alt="">
+		</header>
+		<nav>
+			<div class="row">
+				<div class="row3"></div>
+				<div class="row3 hotel">
+					<a href="#">海外酒店</a>
+					<a href="#">团购</a>
+				</div>
+				<div class="row3 hotel">
+					<a href="#">特价酒店</a>
+					<a href="#">同福客栈</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="row3"></div>
+				<div class="row3 hotel">
+					<a href="#">海外酒店</a>
+					<a href="#">团购</a>
+				</div>
+				<div class="row3 hotel">
+					<a href="#">特价酒店</a>
+					<a href="#">同福客栈</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="row3"></div>
+				<div class="row3 hotel">
+					<a href="#">海外酒店</a>
+					<a href="#">团购</a>
+				</div>
+				<div class="row3 hotel">
+					<a href="#">特价酒店</a>
+					<a href="#">同福客栈</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="row3 hotel">
+					<a href="#">海外酒店</a>
+					<a href="#">特价酒店</a>
+				</div>
+				<div class="row3 hotel">
+					<a href="#">海外酒店</a>
+					<a href="#">特价酒店</a>
+				</div>
+				<div class="row3 hotel">
+					<a href="#">团购</a>
+					<a href="#">同福客栈</a>
+				</div>
+			</div>
+		</nav>
+	</body>
+
+</html>
