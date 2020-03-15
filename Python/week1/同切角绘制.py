@@ -1,0 +1,19 @@
+#同切角绘制
+import turtle
+turtle.pensize(1)#画笔线条粗细
+turtle.circle(10)
+turtle.circle(40)
+turtle.circle(80)
+turtle.circle(160)
+#2
+turtle.pensize(2)
+turtle.circle(10)
+turtle.circle(40)
+turtle.circle(80)
+turtle.circle(160)
+#3
+turtle.pensize(3)
+turtle.circle(10)
+turtle.circle(40)
+turtle.circle(80)
+turtle.circle(160)
