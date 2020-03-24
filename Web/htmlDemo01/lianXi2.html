@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				list-style: none;
+			}
+			/* 轮播图样式 */
+			.slider{
+				background: pink;
+				width: 520px;
+				height: 280px;
+				margin: 50px auto;
+				position: relative;/* 子绝父相 */
+			}
+			.arrow-l,
+			.arrow-r{
+				position: absolute;
+				width: 24px;
+				height: 36px;
+				display: block;/* 转换 */
+				top: 50%;/* 这个%是按照父级高度的来计算的 */
+				margin-top: -18px;/* 往上走是负值， */
+			}
+			.arrow-l{
+				left: 0;
+			}
+			.arrow-r{
+				right: 0;
+			}
+			.circle{
+				width: 65px;
+				height: 13px;
+				background: rgba(255,255,255,0.2);
+				position: absolute;
+				bottom: 15px;
+				left: 50%;
+				margin-left: -32px;
+			}
+			.circle li{
+				height: 9px;
+				width: 9px;
+				background: #b7b7b7;
+				float: left;
+				margin: 2px;
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="slider">
+			<img src="img/taobao.jpg" alt="">
+			<a href="#"class="arrow-l"><img src="img/left.png" ></a>
+			<a href="#"class="arrow-r"><img src="img/right.png" alt=""></a>
+			<ul class="circle"><!-- 小圆点 -->
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</body>
+</html>
