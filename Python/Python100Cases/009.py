@@ -1,15 +1,9 @@
 #9回文
-def isPalindrome(x):
-     if (x<0) or (x%10==0 and x!=0):
-          return print(False)
-     revertedNumber=0
-     while(x>revertedNumber):
-          print(x)
-          revertedNumber=revertedNumber*10+x%10
-          x/=10
-          if x==revertedNumber or x==revertedNumber/10:
-               return print(False)
-          else:
-               return print(True)
-isPalindrome(230)
-
+def isPalindrome(x:int):
+        if x<0:	#字符串切片
+            return print('False')
+        if str(x)[::-1]==str(x):
+            return print('True')
+        else:
+            return print('False')
+isPalindrome(-10)
