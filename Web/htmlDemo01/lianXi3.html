@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			/*仿新浪固定头部和广告*/
+			/*导航栏*/
+			.top{
+				height: 44px;
+				position:fixed;
+				top: 0;
+				left: 0;
+			}
+			/**左右固定广告栏*/
+			.ad-l,
+			.ad-r{
+				position: fixed;
+				top: 100px;
+				
+			}
+			.ad-l{
+				left: 0;
+			}
+			.ad-r{
+				right: 0;
+			}
+			/* 主体内容 */
+			.main{
+				width: 1002px;
+				margin: 44px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="top">
+			<img src="img/top.png" >
+		</div>
+		<div class="ad-l">
+			<img src="img/ad-l.png" alt="">
+		</div>
+		<div class="ad-r">
+			<img src="img/ad-r.png" alt="">
+		</div>
+		<div class="main">
+			<img src="img/box.png" alt="">
+		</div>
+	</body>
+</html>
