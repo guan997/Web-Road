@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>::before伪元素详解</title>
+		<style>
+			div {
+				width: 296px;
+				height: 180px;
+				margin: 20px auto;
+				position: relative;
+			}
+
+			div:hover::before {
+				content: "";
+				width: 100%;
+				height: 100%;
+				display: block;
+				border: 10px solid red;
+				box-sizing: border-box;
+				/* 把padding和border都算在width里面 */
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			
+		</style>
+	</head>
+	<body>
+		<div>
+			<img src="img/mi.jpg" width="296px" height="180px">
+		</div>
+		<div class="trans-img">
+			<img src="img/mi.jpg" width="296px" height="180px">
+		</div>
+	</body>
+</html>
