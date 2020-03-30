@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>定位盒子居中</title>
+		<style>
+			div{width:200px;
+				height: 200px;
+				background-color: pink;
+				/* transform: translate(50%);以自己宽度为准 */
+				position: absolute;
+				left: 50%;/* 以父级宽度为准 */
+				top: 50%;
+				transform: translate(-50%,-50%);
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>
