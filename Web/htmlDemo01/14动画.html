@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			img{
+				width: 200px;
+				height: 100px;
+				animation: go 7s infinite;
+				/* animation-iteration-count:infinite;  无限循环播放 */
+				/* animation: go 2s ease 1s infinite; */
+				/* animation:动画名称 动画时间 运动曲线  何时开始  播放次数  是否反方向; */
+			}
+			@keyframes go{
+				/* from{
+					transform: translateX(0%);
+				}
+				to{
+					transform: translateX(100%);
+				} */
+				0%{
+					transform: translate3d(0,0,0);
+				}
+				30%{
+					transform: translate3d(1000px,0,0);
+				}
+				60%{
+					transform: translate3d(1000px,400px,0) rotateZ(90deg);
+				}
+				80%{
+					transform: translate3d(0,400px,0) rotateY(180deg);
+				}
+				100%{
+					transform: translate3d(0,0,0) rotateZ(-90deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<img src="img/car.jpg" >
+	</body>
+</html>

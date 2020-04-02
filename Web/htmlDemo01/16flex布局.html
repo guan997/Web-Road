@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title></title>
+		<style>
+			section{
+				width: 900px;
+				height: 200px;
+				margin:  100px auto;
+				/* 父级盒子添加flex模式 */
+				display: flex;
+				flex-direction: row-reverse;
+			}
+			section div{
+				
+				min-width: 220px;
+				height: 100%;
+				float: left;
+			}
+			div:nth-child(1){
+				background: palegoldenrod;
+				flex: 1;
+				/* 子盒子占比 */
+			}
+			div:nth-child(2){
+				background: palegreen;
+				flex: 2;
+				/* 子盒子占比 */
+			}
+			div:nth-child(3){
+				background: paleturquoise;
+				flex: 3;
+				/* 子盒子占比 */
+				
+			}
+		</style>
+    </head>
+    <body>
+		<section>
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+		</section>
+
+    </body>
+</html>
