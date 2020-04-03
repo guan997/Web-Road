@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			section{
+				border: 1px solid gold;
+				width: 1000px;
+				height: 600px;
+				margin: 100px auto;
+				display: flex;
+				/* align-items:单行对齐 */
+				/* justify-content:flex-start;让子元素从父容器的开头开始排序 */
+				/* justify-content:flex-end;让子元素从父容器的后面开始排序,盒子顺序不变 */ 
+				/* justify-content:center;	让子元素从父容器的中间开始排序,盒子顺序不变 */
+				/* justify-content:space-between;让左右的盒子贴近父盒子中间的平均分配 */
+				/* justify-content:space-around;相当于两边添加左右边距 水平居中 */ 
+				/* align-items: flex-end;下对其 */
+				/* align-items: flex-start;上对其 */
+				/* align-items: center;垂直居中 */
+				/* align-items: stretch; 拉伸对其，子元素随父元素拉伸，相当于height:100%; */ 
+				/* flex-wrap: nowrap;强制一行内显示 */ 
+				/* flex-wrap:  wrap;自动换行 */
+				/* flex-wrap: wrap-reverse;翻转 */
+				flex-flow: row wrap;/* 这句话必须有，否则下面不起效果 */ 
+				/* 多行垂直对齐stretch拉伸适应 center;flex-strat;flex-end;space-between;space-around; */
+				align-content: space-around;
+				
+			}
+			section div{
+				width: 250px;
+				height: 200px;
+			}
+			section div:nth-child(1){
+				background: pink;
+				/* order: 数值越小越靠前，默认值0可以为负，控制子项目的排列顺序 */
+				order: 4;
+			}
+			section div:nth-child(2){
+				background: paleturquoise;
+				order: -2;
+			}
+			section div:nth-child(3){
+				background: palegoldenrod;
+			}
+			section div:nth-child(4){
+				background: palevioletred;
+				order: -1;
+			}
+			section div:nth-child(5){
+				background: peru;
+			}
+			section div:nth-child(6){
+				background: palegoldenrod;
+			}
+			section div:nth-child(7){
+				background: palevioletred;
+			}
+			section div:nth-child(8){
+				background: peru;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>6</div>
+			<div>7</div>
+			<div>8</div>
+		</section>
+	</body>
+</html>
