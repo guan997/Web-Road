@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.father {
+				width:400px;
+				height: 500px;
+				border: 1px solid red;
+				margin: 0 auto;
+				/* position: absolute; */
+			}
+			.box{
+				width: 100px;
+				height: 100px;
+				background-color: pink;
+				float: left;
+			}
+			.txt{
+				overflow: hidden;/*给txt 创建BFC 区域 在不和浮动产生交集 紧贴制浮动的边缘 */
+				height: 300px;
+				background-color: springgreen;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="father">
+			<div class="box"></div>
+			<div class="txt">BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。包括浮动，和外边距合并等等，因此，有了这个特性，我们布局的时候就不会出现意外情况了。
+			BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。包括浮动，和外边距合并等等，因此，有了这个特性，我们布局的时候就不会出现意外情况了。</div>
+		</div>
+	</body>
+</html>
