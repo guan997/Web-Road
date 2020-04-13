@@ -30,6 +30,7 @@
 				/* 身体位置 */
 				transform: translate(-50%, -50%);
 				background: yellow;
+				overflow: hidden;
 			}
 
 			/* 头发 */
@@ -45,13 +46,13 @@
 			.xhr_hair_1 {
 				top: 80px;
 				left: 100px;
-				transform: rotate(40deg);
+				transform: rotate(48deg);
 			}
 
 			.xhr_hair_2 {
 				top: 70px;
 				left: 100px;
-				transform: rotate(47deg);
+				transform: rotate(48deg);
 			}
 
 			/* 手臂 */
@@ -175,13 +176,177 @@
 				transform: rotate(-20deg);
 				border-radius: 7px 2px 0px 0px;
 			}
+			/* 制作眼珠 */
+			.xhr_eyes_l_black,.xhr_eyes_r_black{
+				width: 50px;
+				height: 50px;
+				background: #000000;
+				position: absolute;
+				border-radius: 50%;
+			}
+			.xhr_eyes_l_black{
+				left: 25px;
+				top: 25px;
+			}
+			.xhr_eyes_r_black{
+				left: 125px;
+				top: 25px;
+			}
+			/* 制作眼珠白色部位 */
+			.xhr_eyes_l_white,.xhr_eyes_r_white{
+				width: 20px;
+				height: 20px;
+				background: #FFFDEF;
+				position: absolute;
+				border-radius: 50%;
+			}
+			.xhr_eyes_l_white{
+				left: 50px;
+				top: 40px;
+			}
+			.xhr_eyes_r_white{
+				left: 130px;
+				top: 40px;
+			}
+			/* 制作嘴巴 */
+			.xhr_month{
+				width: 60px;
+				height: 35px;
+				border: 5px solid #000000;
+				border-radius:0 0 0 30px;
+				background: #FFFDEF;
+				position: absolute;
+				top: 180px;
+				left: 90px;
+				transform: rotate(-30deg);
+			}
+			.xhr_month::after{
+				content: "";
+				width: 80px;
+				height: 40px;
+				background:yellow;
+				border-bottom: 5px solid #000000;
+				position: absolute;
+				left: 1.9px;
+				top: -22.5px;
+				transform: rotate(30deg);
+				
+			}
+			/* 制作裤子 */
+			.xhr_trousers{
+				width: 100%;
+				height: 150px;
+				position: absolute;
+				top: 260px;
+			}
+			.xhr_trousers_t{
+				width: 150px;
+				height: 50px;
+				background: blue;
+				border: 5px solid #000;
+				position: absolute;
+				border-bottom: none;
+				left: 45px;
+				z-index: 999;
+			}
+			.xhr_trousers_b{
+				width: 250px;
+				height: 84px;
+				background: blue;
+				position: absolute;
+				top: 50px;
+				border-top: 5px solid #000;
+			}
+			/* 制作肩带 */
+			.t_l_belt,.t_r_belt{
+				width: 100px;
+				height: 20px;
+				background: blue;
+				border: 5px solid #000000;
+				position: absolute;
+				top: -30px;
+			}
+			.t_l_belt{
+				left: -79px;
+				transform: rotate(30deg);
+			}
+			.t_r_belt{
+				right: -74px;
+				transform: rotate(-35deg);
+			}
+			.t_l_belt::after,.t_r_belt::after{
+				content: "";
+				width: 10px;
+				height: 10px;
+				background: #000000;
+				border-radius: 50%;
+				position: absolute;
+				top: 5px;
+			}
+			.t_l_belt::after{
+				left: 87px;
+			}
+			.t_r_belt::after{
+				left: 3px;
+			}
+			/* 头发的动画效果 */
+			.xhr_hair_1,.xhr_hair_2{
+				animation: hair 5s ease-in infinite;
+			}
+			@keyframes hair{
+				10%,50%,100%{
+					transform: rotate(48deg);
+				}
+				20%,80%{
+					transform: rotate(57deg);
+				}
+			}
+			/* 眼睛的动画效果 */
+			.xhr_eyes_l_black,.xhr_eyes_r_black{
+				animation: eyes 5s ease-in infinite;
+			}
+			@keyframes eyes{
+				20%,50%,60%,100%{
+					transform: translate(0);
+				}
+				30%,40%{
+					transform: translate(15px);
+				}
+				70%,80%{
+					transform: translate(-15px);
+				}
+			}
+			.xhr_eyes_l_white,.xhr_eyes_r_white{
+				animation: eyeswhite 5s ease-in infinite;
+			}
+			@keyframes eyeswhite{
+				20%,50%,60%,100%{
+					transform: translate(0);
+				}
+				30%,40%{
+					transform: translate(15px,4px);
+				}
+				70%,80%{
+					transform: translate(-15px,4px);
+				}
+			}
 		</style>
 	</head>
 	<body>
-		<!-- 容器 、头发、身体、
-		眼睛、眼镜腿、眼珠、嘴巴、裤子、手臂、脚
-		头发和眼睛动画-->
-		<!-- 小黄人头发 -->
+		<!-- 
+			①容器设定及定位
+			②添加小黄人头发
+			③添加小黄人的身体
+			④添加小黄人眼镜
+			⑤添加小黄人的眼镜腿
+			⑥添加小黄人的眼珠
+			⑦添加小黄人的嘴巴
+			⑧添加小黄人裤子
+			⑨添加小换人的手臂
+			⑩添加小黄人的腿脚
+			给头发添加动画
+			给眼珠添加动画 
+			-->
 		<div class="wrap">
 			<div class="shr_hair">
 				<div class="xhr_hair_1"></div>
@@ -202,7 +367,7 @@
 					</div>
 				</div>
 				<!-- 嘴巴 -->
-				<div class="xhr_mouth"></div>
+				<div class="xhr_month"></div>
 				<!-- 裤子 -->
 				<div class="xhr_trousers">
 					<!-- 裤子的上部分 -->
