@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>小黄人制作</title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			/* 设置小黄人容器 */
+			.wrap {
+				width: 400px;
+				height: 600px;
+				margin: 0 auto;
+				border: 1px solid bisque;
+				position: relative;
+			}
+
+			/* 设定小黄人身体 */
+			.xhr_body {
+				width: 250px;
+				height: 400px;
+				border: 5px solid #000000;
+				border-radius: 125px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				/* 身体位置 */
+				transform: translate(-50%, -50%);
+				background: yellow;
+			}
+
+			/* 头发 */
+			.xhr_hair_1,
+			.xhr_hair_2 {
+				width: 130px;
+				height: 100px;
+				border-top: 10px solid #000000;
+				border-radius: 50%;
+				position: absolute;
+			}
+
+			.xhr_hair_1 {
+				top: 80px;
+				left: 100px;
+				transform: rotate(40deg);
+			}
+
+			.xhr_hair_2 {
+				top: 70px;
+				left: 100px;
+				transform: rotate(47deg);
+			}
+
+			/* 手臂 */
+			.xhr_hand_l,
+			.xhr_hand_r {
+				width: 100px;
+				height: 100px;
+				border: 5px solid #000000;
+				border-radius: 30px;
+				position: absolute;
+				background: yellow;
+				z-index: -1;
+			}
+
+			.xhr_hand_l {
+				left: 50px;
+				top: 300px;
+				transform: rotate(30deg);
+			}
+
+			.xhr_hand_r {
+				transform: rotate(-30deg);
+				top: 300px;
+				right: 50px;
+			}
+
+			.xhr_hand_l::after,
+			.xhr_hand_r::after {
+				content: "";
+				width: 30px;
+				height: 10px;
+				background: #000000;
+				position: absolute;
+				border-radius: 5deg;
+			}
+
+			.xhr_hand_l::after {
+				left: 6px;
+				top: 60px;
+				transform: rotate(-90deg);
+			}
+
+			.xhr_hand_r::after {
+				top: 60px;
+				right: 6px;
+				transform: rotate(-90deg);
+			}
+
+			/* 腿 */
+			.xhr_foot_l,
+			.xhr_foot_r {
+				width: 40px;
+				height: 70px;
+				background: #000000;
+				position: absolute;
+				border-radius: 20deg;
+				z-index: -1;
+			}
+
+			.xhr_foot_l {
+				left: 155px;
+				top: 490px;
+			}
+
+			.xhr_foot_r {
+				right: 155px;
+				top: 490px;
+			}
+
+			/* 制作脚 */
+			.xhr_foot_l::after,
+			.xhr_foot_r::after {
+				content: "";
+				width: 60px;
+				height: 40px;
+				background: #000000;
+				border-radius: 20px;
+				position: absolute;
+			}
+
+			.xhr_foot_l::after {
+				top: 30px;
+				left: -40px;
+			}
+
+			.xhr_foot_r::after {
+				right: -40px;
+				top: 30px;
+			}
+
+			/* 眼睛 */
+			.xhr_eyes {
+				position: absolute;
+				top: 60px;
+				left: 25px;
+			}
+			.xhr_eyes_l,.xhr_eyes_r{
+				width: 90px;
+				height: 90px;
+				border: 5px solid #000000;
+				border-radius: 50%;
+				background: #FFFDEF;
+				float: left;
+			}
+			.xhr_eyes_l::after,.xhr_eyes_r::after{
+				content: "";
+				width: 31px;
+				height: 20px;
+				background: #000000;
+				position: absolute;
+			}
+			.xhr_eyes_l::after{
+				left: -26px;
+				top: 35px;
+				transform: rotate(20deg);
+				border-radius: 2px 8px 0px 2px;
+			}
+			.xhr_eyes_r::after{
+				right: -26px;
+				top: 35px;
+				transform: rotate(-20deg);
+				border-radius: 7px 2px 0px 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 容器 、头发、身体、
+		眼睛、眼镜腿、眼珠、嘴巴、裤子、手臂、脚
+		头发和眼睛动画-->
+		<!-- 小黄人头发 -->
+		<div class="wrap">
+			<div class="shr_hair">
+				<div class="xhr_hair_1"></div>
+				<div class="xhr_hair_2"></div>
+			</div>
+			<!-- 小黄人身体 -->
+			<div class="xhr_body">
+				<!-- 眼睛 -->
+				<div class="xhr_eyes">
+					<!-- 左右眼睛 -->
+					<div class="xhr_eyes_l">
+						<div class="xhr_eyes_l_black"></div>
+						<div class="xhr_eyes_l_white"></div>
+					</div>
+					<div class="xhr_eyes_r">
+						<div class="xhr_eyes_r_black"></div>
+						<div class="xhr_eyes_r_white"></div>
+					</div>
+				</div>
+				<!-- 嘴巴 -->
+				<div class="xhr_mouth"></div>
+				<!-- 裤子 -->
+				<div class="xhr_trousers">
+					<!-- 裤子的上部分 -->
+					<div class="xhr_trousers_t">
+						<div class="t_l_belt"></div>
+						<div class="t_r_belt"></div>
+					</div>
+					<!-- 裤子的下部分 -->
+					<div class="xhr_trousers_b"></div>
+				</div>
+			</div>
+			<!-- 小黄人手臂 -->
+			<div class="xhr_hand">
+				<div class="xhr_hand_l"></div>
+				<div class="xhr_hand_r"></div>
+			</div>
+			<!-- 小黄人腿脚 -->
+			<div class="xhr_foot">
+				<div class="xhr_foot_l"></div>
+				<div class="xhr_foot_r"></div>
+			</div>
+		</div>
+	</body>
+</html>
