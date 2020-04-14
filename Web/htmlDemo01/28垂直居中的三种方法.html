@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>垂直居中的三种表现形式</title>
+		<style type="text/css">
+			/*
+			1、先让子盒子的上下边缘和父盒子的水平中心线重叠，然后再让
+			子盒子再往会移动自身的一半距离
+			2、实用表格的vertical-align:middle; display：table-cell
+			3、使用maring计算盒子的上下边距，使盒子居中
+			***/
+			/* 第一种 */
+			.t1{
+				width: 300px;
+				height: 300px;
+				border: 1px solid red;
+				position: relative;
+				margin-bottom: 20px;
+			}
+			.t11{
+				position: absolute;
+				width: 200px;
+				height: 200px;
+				border: 1px solid blue;
+				margin-top: 150px;
+				top: -101px;
+			}
+			/* 第2种 */
+			.t2{
+				width: 300px;
+				height: 300px;
+				border: 1px solid red;
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.t22{
+				width: 200px;
+				height: 200px;
+				border: 1px solid blue;
+			}
+			/* 第3种 */
+			.t3{
+				margin-top: 20px;
+				width: 300px;
+				height: 300px;
+				border: 1px solid red;
+			}
+			.t33{
+				width: 200px;
+				height: 200px;
+				border: 1px solid blue;
+				margin-top: 49px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="t1">
+			<div class="t11"></div>
+		</div>
+		<div class="t2">
+			<div class="t22"></div>
+		</div>
+		<div class="t3">
+			<div class="t33"></div>
+		</div>
+	</body>
+</html>

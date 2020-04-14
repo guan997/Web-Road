@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>多行文本溢出隐藏，显示省略号</title>
+		<style type="text/css">
+			p {
+				/* 强制一行显示 */
+				/* white-space: nowrap; */
+				/* 超出隐藏 */
+				overflow: hidden;
+				/* 省略号代表由内容未显示 */
+				/* text-overflow: ellipsis; */
+				/* 用该属性限定块元素内文本显示的函数,默认省略号代表由内容未显示*/
+				-webkit-line-clamp: 2;
+				/* 将对象作为弹性的伸缩盒子显示 */
+				display: -webkit-box;
+				/* 设置伸缩盒子对象内子对象的排列方式 */
+				-webkit-box-orient: vertical;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			多行文本溢出隐藏，显示省略号多行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号
+			多行文本溢出隐藏，显示省略号v
+			多行文本溢出隐藏，显示省略号多行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号
+			多行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号
+		</p>
+	</body>
+</html>
