@@ -1,0 +1,250 @@
+/**
+ * 首页样式
+ */
+/* 中间部分 */
+.grid{
+	height: 480px;
+	position: relative;
+}
+.ad{
+	width: 250px;
+	height: 40px;
+	position: absolute;
+	left: -250px;
+	top: 0;
+}
+.ad:hover .ad-r{/* 鼠标经过广告大盒子时,里面的ad-r的图片的宽度变成990px */
+	width: 990px;
+}
+.ad-r{
+	width: 0;
+	position: absolute;
+	left: 250px;
+	z-index: 999;
+	height: 480px;
+	background: url(../img/ad-r.jpg) no-repeat;
+	top: 0;
+	/* 添加过渡 */
+	transform:  all 0.8s;
+}
+.grid-col1{
+	width: 190px;
+	height: 100%;
+	background: #6e6568;
+}
+.grid-col1 ul{
+	font-size: 16px;
+	color: #FFFDEF;/* 给/的颜色 */
+	margin: 10px 0 ;
+}
+.grid-col1 ul a{
+	font-size: 14px;
+	margin: 0 3px;
+	color: #fff;/* 给链接文字的颜色 */
+}
+.grid-col1 ul li:hover{
+	color: #9c9698;/* 给链接文字的颜色 */
+}
+.grid-col1 ul a:hover{
+	color: #F10215;/* 给链接文字的颜色 */
+}
+.grid-col1 ul li{
+	height: 29px;
+	line-height: 26px;
+	padding-left: 12px;
+}
+.grid-col2{
+	width: 790px;
+	height: 100%;
+	margin-left: 10px;
+}
+/* banner部分 */
+.grid-col2-b div{
+	float: left;
+	margin-top: 10px;
+}
+.grid-col2-b div:nth-child(2){
+	float: right;
+	margin-top: 10px;
+}
+/* 箭头部分 */
+.grid-col2-t{
+	position: relative;
+}
+.arrow-l,
+.arrow-r{
+	position: absolute;
+	top: 50%;
+	width: 30px;
+	height: 60px;
+	background: rgba(0,0,0,0.3);
+	transform: translateY(-50%);
+	text-align: center;
+	line-height: 60px;
+	font-size: 20px;
+	color: rgba(255,255,255,0.6);
+	font-family: arial;
+	font-style: normal;
+}
+.arrow-r{
+	right: 0;
+}
+.arrow-l{
+	left: 0;
+}
+/* 小圆点 */
+.circle{
+	width: 167px;
+	height: 20px;
+	background: rgba(255,255,255,.3);
+	position: absolute;
+	bottom: 5px;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 10px;
+	padding-left: 10px;
+}
+.circle li{
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #FFF;
+	margin: 4px;
+	float: left;
+	cursor: pointer;/* 鼠标经过变成小手 */
+}
+.circle .current{
+	background: #F10215;
+}
+.grid-col3{
+	width: 190px;
+	height: 100%;
+}
+/* 右边模块 */
+.login{
+	height: 85px;
+	border-bottom: 1px solid #CCCCCC;
+	padding: 15px;
+	background: #FFF;
+}
+.login-t{
+	width: 95px;
+	height: 60px;
+	line-height: 20px;
+	font-size: 12px;
+	white-space: nowrap;/* 强制在一行内显示 */
+	overflow: hidden;/* 溢出隐藏 */
+	color: #666;
+	text-overflow: ellipsis;/* 超出显示省略号 */
+	padding-left: 60px;
+	position: relative;
+}
+.login-t a{
+	color: #666;
+}
+.login-t a:hover{
+	color: #F10215;
+}
+.user-info{
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../img/sprite_userinfo@1x.png) no-repeat -70px 0;
+	overflow: hidden;
+}
+.user-info img{
+	width: 40px;
+	border-radius: 50%;
+	margin: 5PX;
+}
+.login-b a{
+	display: inline-block;
+	width: 70px;
+	margin-right: 3px;
+	text-align: center;
+	line-height: 20px;
+	color: #F10215;
+	height: 20px;
+	border: 2px solid #F10215;
+}
+.login-b a:hover{
+	background: #F10215;
+	color: #fff;
+}
+/* 新闻 */
+.news{
+	height: 154px;
+	border-bottom: 1px solid #CCCCCC;
+	background: #fff;
+	padding: 7px 13px 0;
+	box-sizing: border-box;
+}
+.news-t{
+	position: relative;
+	height: 19px;
+	border-bottom: 1px solid #ccc
+}
+.news-t a{
+	line-height: 17px;
+	height: 17px;
+	float: left;
+}
+.news-t div{
+	height: 2px;
+	width: 28px;
+	background: #F10215;
+	position: absolute;
+	bottom: -1px;
+	left: 0px;
+}
+.news-t a:hover{
+	border-bottom: 2px solid red;
+}
+.cuxiao{
+	border: 1px solid beige;
+	width: 38px;
+}
+.gongao{
+	margin-left: 15px;
+}
+.news-t .more{
+	float: right;
+}
+.news-b{
+	padding-top: 15px ;
+}
+.news-b li{
+		line-height: 23px;
+		height: 23px;
+}
+.expand{
+	height: 209px;
+	background: #fff;
+	overflow: hidden;
+}
+.expand ul{
+	width: 195px;
+}
+.expand li{
+	width: 47px;
+	height: 69px;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	float: left;
+}
+.expand li i{
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	background: url(../img/sprite_fs@1x.png) no-repeat;
+	width: 18px;
+	height: 23px;
+	background-position: -5px -88px;
+}
+.expand li a{
+	display: block;
+	padding-top: 15px;
+	text-align: center;
+}
