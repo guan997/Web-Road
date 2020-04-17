@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			var age=19;
+			age='abc';
+			// js弱数据类型，使用时确认数据类型
+			// 十六进制0-9 a-f 前缀0x
+			var num10=0xAB;
+			console.log(num10);
+			// 八进制0-7 前缀0 
+			var num8=010;
+			console.log(num8);
+			// 浮点数 使用的科学计数法.浮点数值的最高数值是17位小数，但在进行算术计算时其精确度远远不如整数
+			var numFloat=5e-324; //5乘以10的324次方 计算机存储最大值
+			// 5/0 无穷大 5/-0无穷小
+			console.log(numFloat);
+			var result=0.1+0.2;//结果不是0.3而是0.30000000000000004
+			console.log(result)
+			console.log(0.07*100);
+			//不要判断两个浮点数是否相等
+			// 5*'abc'
+			// NaN判断是不是数字
+			// idNaN()不是一个数字 返回true
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
