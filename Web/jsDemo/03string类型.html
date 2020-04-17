@@ -5,9 +5,60 @@
 		<title>String类型</title>
 		<script type="text/javascript">
 			var a='wo shi string'
-			console.log(a)
-			var a1='wo shi string'
-			console.log(a1)
+			console.log(a);
+			var a1='你是\n黑马\t四个空格\b序\\员'
+			console.log(a1);
+			var a2='你是\'黑马\"四个空格\r序员'
+			console.log(a2);
+			var str='我是一个\"正直\"的人\n我\'很\"喜欢程序员\"'
+			console.log(str);
+			console.log(str.length);
+			// 字符串拼接
+			// 1. 两边只要有一个是字符串，那么+就是字符串拼接功能
+			// 2. 两边如果都是数字，那么就是算术功能。
+			console.log(11+11);//22
+			console.log('hello'+'world');//helloworld
+			console.log('100'+'100');//100100
+			console.log('11'+11);//1111
+			console.log('male:'+true);//male:true
+			// 获取变量的类型
+			var aaa=10;
+			console.log(typeof aaa);//'number'
+			console.log(typeof str);//'string'
+			var result =typeof aaa;
+			console.log(typeof result)
+			// boolean布尔类型，true为1，false
+			var sex=true;
+			console.log(sex);
+			// Undefined声明变量未赋值
+			var data;
+			console.log(data);
+			// null
+			var date2=null;
+			/**
+			 * 多行注释
+			 * */
+			console.log(date2);
+			// 1.转换字符串类型
+			var num=5;
+			var isRight=true;
+			console.log(num.toString())
+			console.log(typeof isRight)
+			console.log(typeof isRight.toString())
+			var aa;
+			// 错误的方式，null和undefined没有toString()
+			// console.log(typeof aa.toString())
+			// 2.String()方法
+			var nn=19;
+			var ii=true;
+			console.log(String(nn));
+			console.log(typeof String(nn));
+			console.log(String(ii));
+			// 3.字符串拼接
+			var uu=19;
+			var oo=true;
+			console.log(typeof(uu+'111'));
+			console.log(typeof(oo+''));
 		</script>
 	</head>
 	<body>
