@@ -2,7 +2,46 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>转换成数值类型</title>
+		<script type="text/javascript">
+			// 1.Number()
+			var str='abc'; //Number(str)  -->NaN
+			var isRight=true; //Number(isRight)  -->1
+			console.log(Number(str));
+			console.log(Number(isRight));
+			// 字符串转换成数值类型时有一个不是数值返回NaN
+			console.log(Number('1234'));
+			console.log(Number('1234abc'));
+			// 2 parseInt() int整数
+			var str2='123';
+			var isRight2=false;
+			console.log(parseInt(str2));
+			// parseInt()无法把布尔类型转换为数值类型-->NaN
+			console.log(parseInt(isRight2));
+			var s1='123abc';
+			console.log(parseInt(s1));
+			// parseInt()在转换字符串时，如果第一个字符遇到数值
+			// 就会转换数字，如果遇到非数字就会返回NaN
+			var s2='abc123';
+			console.log(parseInt(s2));
+			//3.parseFloat()把字符串转换成浮点数,无法转换布尔类型如果第一个字符遇到数值
+			// 就会转换数字，如果遇到非数字就会返回NaN
+			var s3='1234.88';
+			console.log(parseFloat(s3));
+			var s4='12453264.1232sasf';
+			console.log(parseFloat(s4));
+			var s5=false;
+			console.log(parseFloat(s5));
+			//4.取正或者取负,有非数值返回NaN
+			var num=-5.124;
+			console.log(num);
+			var num2='123';
+			console.log(-num2);
+			var num3='abc123';
+			console.log(-num3);
+			var num5='123ab'
+			console.log(-num5);
+		</script>
 	</head>
 	<body>
 	</body>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>转换成布尔类型</title>
+		<script type="text/javascript">
+			//+-运算
+			var str='123435';
+			//-如果一边是数值类型一边是字符串，会先把字符串转换成数值类型在进行数值的减法
+			// 如果转换失败返回NaN
+			console.log(str-0);
+			//+如果一边是数值类型一边是字符串，会先把数值转换成字符串类型在进行数值的减法
+			console.log(str+0);
+			//转换成布尔类型,转换成false的情况：null undefined ''空字符串 0 NaN
+			var a='abc';
+			var b=123;
+			var c=null;
+			var d//默认值undefined
+			var e='';
+			var f=0;
+			var g=NaN;
+			console.log(Boolean(a));//true
+			console.log(Boolean(b));//true
+			console.log(Boolean(c));//false
+			console.log(Boolean(d));//false
+			console.log(Boolean(e));//false
+			console.log(Boolean(f));//false
+			console.log(Boolean(g));//false
+			console.log(Boolean(-1));//false
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
