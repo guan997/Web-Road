@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>09赋值运算符和运算符的优先级</title>
+		<script type="text/javascript">
+			//赋值运算符的缩写+= -= *= /= %=
+			var num=5;
+			var num1=num+5;
+			num1+=5;//num1=num1+5;
+			//num-=5;num=num-5;
+			console.log(num1);
+			//运算符的优先级
+			//()>一元(++ -- !)>算数（*/% + -）>关系（>= <= > <）
+			//>相等 (> >= < <=) >逻辑运算符 ()先&& 后||) >赋值== ===
+			console.log(4>=6||'人'!='阿凡达'&&!(12*2==144)&&true);//true
+			console.log((4>=6)||('人'!='阿凡达')&&(!(12*2==144))&&true)
+			var num=10;
+			console.log(5==num/2&&(2+2*num).toString()==='22');
+			console.log((5==num/2)&&(2+2*num).toString()==='22');
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

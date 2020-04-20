@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>一元运算符</title>
+		<script type="text/javascript">
+			// -- ++前置	 先执行自身+1，在返回表达式
+			// 后置++ -- 先返回表达式的结果，后执行自身+1
+			var a=1;
+			a++;
+			var b;
+			console.log(a++ + a++);//2+3
+			var c=1;
+			var d=++c + c++;
+			console.log(d);//2+2
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
