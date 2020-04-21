@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>正方形九九乘法表</title>
+		<script type="text/javascript">
+			console.log('控制台打印正方形');
+			//控制台打印正方形
+			var str='';
+			for(var i=1;i<10;i++){
+				//控制一层输出10个*
+				for(var j=0;j<10;j++){
+					str=str+'* ';
+				}
+				str=str+'\n';
+			}
+			console.log(str);
+			console.log('控制台打印三角形');
+			//控制台打印三角形
+			var str1='';
+			for(var ii=1;ii<10;ii++){
+				//控制一层输出*
+				for(var jj=ii;jj<10;jj++){
+					str1=str1+'-- ';
+				}
+				str1=str1+'\n';
+			}
+			console.log(str1);
+			//控制台打印九九乘法表
+			console.log('九九乘法表');
+			var str2='';
+			for(var iii=1;iii<=9;iii++){
+				for(var jjj=iii;jjj<=9;jjj++){
+					str2=str2+iii+'*'+jjj+'='+iii*jjj+'\t';
+				}
+				str2=str2+'\n';
+			}
+			console.log(str2);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

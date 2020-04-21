@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>布尔隐形类型转换</title>
+		<script type="text/javascript">
+			console.log('布尔隐形类型转换');
+			var num ;
+			console.log(Boolean(num));
+			//转换成false的情况 0 null undefined ''  NaN
+			//1.布尔隐形类型转换
+			if(num){
+				console.log(Boolean(num));
+			}else{
+				console.log(Boolean(num));
+			}
+			//2.布尔隐形类型转换
+			var str='123';
+			var isOk=!str;//str转换成布尔类型为true，！取反的false
+			console.log(isOk);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

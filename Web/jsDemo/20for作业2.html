@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>for作业2</title>
+		<script type="text/javascript">
+			var proit=10000;
+			for(var i=1;i<=5;i++){
+				proit+=proit*0.003;
+			}
+			console.log('获得：',proit);
+			var sum1=1;
+			var sum2=1;
+			var sum3;
+			for(var j=3;j<=5;j++){
+				sum3=sum2+sum1;
+				sum1=sum2;
+				sum2=sum3;
+			}
+			console.log(sum3);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

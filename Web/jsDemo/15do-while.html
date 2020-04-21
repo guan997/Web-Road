@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>do-while</title>
+		<script type="text/javascript">
+			var num=1;
+			var sum=0;
+			do{
+				// prompt('提示','提示用户输入1/2')
+				var msg=prompt('你到底爱不爱我','请输入yes/no');	
+			}while(msg!=='yes'){
+				console.log('亲亲我的宝贝！')
+			}
+			do{
+				if(num%3==0){
+					sum+=num;
+				}
+				num++;
+			}while(num<100){
+				console.log(sum);
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
