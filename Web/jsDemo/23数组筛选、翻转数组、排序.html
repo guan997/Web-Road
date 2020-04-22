@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组筛选、翻转数组、排序</title>
+    <script>
+        //去掉为0的项，生成一个新的数组
+        var num = [1, 2, 4, 0, 3215, 0, 35, 0];
+        var numArray = [];
+        //1遍历数组
+        for (var i = 0; i <= num.length - 1; i++) {
+            if (num[i] !== 0) {
+                //2.生成新的数组
+                numArray[numArray.length] = num[i];
+            }
+        }
+        console.log('数组筛选', numArray);
+        //翻转数组
+        var numArray2 = [];
+        for (var j = num.length - 1; j >= 0; j--) {
+            if (num[j] !== 0) {
+                numArray2[numArray2.length] = num[j];
+            }
+        }
+        console.log('翻转数组', numArray2);
+        //冒泡排序
+        //外层循环控制层数
+        for(var a=0;a<num.length-1;a++){
+            //内层循环，控制次数
+            for(var aa=0;aa<num.length-1-a;aa++){
+                 //判断大小进行排序
+                if(num[aa]>num[aa+1]){
+                    //交换位置
+                    var tmp=num[aa];
+                    num[aa]=num[aa+1];
+                    num[aa+1]=tmp;
+                }
+            }
+        }
+        console.log('翻转数组', num);
+        //冒泡排序优化
+        var numNew = [1231, 22, 34, 124, 3215, 24, 35, 224];
+        var count=0;//记录循环次数
+        //外层循环，控制次数
+        for (var c=0;c<numNew.length;c++){
+            count++;
+            //假设数据排好了顺序
+            var isSort=true;
+            //内层循环，控制次数
+            for(var cc=0;cc<numNew.length-1-c;cc++){
+                //判断大小排序
+                if(numNew[cc]>numNew[cc+1]){
+                    isSort=false;
+                    var tempNew=numNew[cc];
+                    numNew[cc]=numNew[cc+1];
+                    numNew[cc+1]=tempNew;
+                }
+            }
+            //排序好之后推出循环
+            if(isSort){
+                break
+            }
+        }
+        console.log('冒泡排序优化', numNew);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
