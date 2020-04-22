@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数的返回值</title>
+    <script>
+        // - 求一组数中的最大值
+        function getMax(arr){
+            var max=arr[0];
+            for(var i=1;i<arr.length;i++){
+                if(max<arr[i]){
+                    max=arr[i];
+                }
+            }
+            console.log(arr);
+            return max;
+        }
+        var array=[1,24,53,36]
+        var num=5;
+        console.log(num+getMax(array));
+        // - 求一组数中的最小值
+        function minNum(n){
+            var min=n[0];
+            for(var j=1;j<n.length;j++){
+                if(min>n[j]){
+                    min=n[j];
+                }
+            }
+            return min;
+        }
+        var n2=[124,123,24132,5232,24];
+        console.log(minNum(n2));
+        // - 求阶乘
+        function getJieCheng(n){
+            var result=1;
+            for(var i=1;i<=n;i++){
+                result*=i;
+            }
+            return result;
+        }
+        console.log(getJieCheng(2));
+        // - 求1!+2!+3!+....+n!
+        function getJieChengSum(n){
+            var sum=0;
+            for(var i=1;i<=n;i++){
+                sum+=getJieCheng(i);
+            }
+            return sum;
+        }
+        console.log(getJieChengSum(2));
+        //不写return或者return后面什么都不跟，返回undefined
+        //return后的语句不执行
+        function test(a,b){
+            return;
+            console.log(a,b);
+        }
+        console.log(test(2,3));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

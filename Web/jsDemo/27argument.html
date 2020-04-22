@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arguments</title>
+    <script>
+        // //通过argument可以获取函数调用的实参
+        // //argument像数组，但不是数组
+        // //grguments对象中存储了传递的所有的实参。arguments是一个伪数组，因此及可以进行遍历
+        // var a=12;
+        // var b=23;
+        // var c=124;
+        // console.log(a,b,c);
+        // function test(a,b,c){
+        //     console.log(arguments);
+        //     console.log(1);
+        // }
+        // test(3,53,214);
+        // //求任意个数的最大值
+        // function getMax(){
+        //     var max=arguments[0];
+        //     for(var i=1;i<arguments.length;i++){
+        //         if(max<arguments[i]){
+        //             max=arguments[i];
+        //         }
+        //     }
+        //     return max;
+        // }
+        // var max=getMax(5,12,513,35);
+        // console.log(max);
+        // 求任意个数的和
+        function getSum() {
+            var sum = 0;
+            for (var i = 0; i < arguments.length; i++) {
+                sum += arguments[i];
+            }
+            return sum;
+        }
+        console.log(getSum(214, 12, 513, 35));
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

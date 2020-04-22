@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>参数案例</title>
+    <script>
+        // - 求1-n之间所有数的和
+        function getSum(n){
+            var sum=0;
+            for(var i=0;i<=n.length-1;i++){
+                sum+=n[i];
+            }
+            return sum;
+        }
+        var num=[3,4,5,5,6,1];
+        console.log(getSum(num));
+        // - 求n-m之间所有数的和
+        // - 圆的面积
+        function getArea(r){
+            var pi=3.1415926;
+            console.log(pi*r*r);
+        }
+        getArea(7);
+        // - 求2个数中的最大值
+        function maxNum(a,b){
+            var max;
+            if(a>b){
+                max=a;
+            }else{
+                max=b;
+            }
+            console.log(max);
+        }
+        maxNum(3,6);
+        // - 求3个数中的最大值
+        function maxNum2(a,b,c){
+            var max;
+            if(a>b&&a>c){
+                max=a;
+            }else if(b>a&&b>c){
+                max=b;
+            }else{
+                max=c;
+            }
+            console.log(max);
+        }
+        maxNum2(31,61,5);
+         // 求n个数的最大值？
+
+         function maxNum3(arr){
+            var max=arr[0];
+            for(var i=1;i<arr.length;i++){
+                //max和数组中每个元素进行比较
+                if(max<arr[i]){
+                    max=arr[i]
+                }
+            }
+            console.log(max);
+        }
+        var array=[142,24421,15,135,513];
+        maxNum3(array);
+        // - 判断一个数是否是素数(又叫质数，只能被1和自身整数的数)
+        function jdugePrimeNumber(number){
+            //假设是质数
+            var isPrime=true;
+            for(var i=2;i<number;i++){
+                //判断是否有能被number整除的数
+                if(number%i===0){
+                    //能被整除，说明是素数
+                    isPrime=false;
+                    break;
+                }
+            }
+            if(isPrime){
+                console.log('质数');
+            }else{
+                console.log('素数');
+            }
+        }
+        jdugePrimeNumber(13);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
