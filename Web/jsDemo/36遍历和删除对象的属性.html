@@ -23,13 +23,28 @@
         // for(var key in obj) {
         //     console.log(key+'---'+obj['name']);
         // }
-        var o={};
-        for(var i=0;i<10;i++) {
-            o['a'+i] = i * 2;
+        // var o={};
+        // for(var i=0;i<10;i++) {
+        //     o['a'+i] = i * 2;
+        // }
+        // for(var key in o) {
+        //     console.log(key+'---'+o[key]);
+        // }
+        // console.log(o);
+        // 删除对象中的属性 delete删除对象中的成员
+        var o = {
+            name: 'abc',
+            say: function () {
+
+            }
         }
-        for(var key in o) {
-            console.log(key+'---'+o[key]);
-        }
+        // console.log(o.name);
+        // delete o.name;
+        // console.log(o.name);
+        console.log(o.say);
+        delete o.say;
+        console.log(o.say);
+
     </script>
 </head>
 <body>
