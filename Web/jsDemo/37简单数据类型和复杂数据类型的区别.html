@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型</title>
+    <script>
+        // 堆栈空间分配区别：
+        // 　　1、栈（操作系统）：由操作系统自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈；
+        // 　　2、堆（操作系统）： 存储复杂类型(对象)，一般由程序员分配释放， 若程序员不释放，由垃圾回收机制回收，分配方式倒是类似于链表。
+
+        // 复杂类型object，所有的对象都基于Object
+        // function Person(name,age) {
+        //     this.name = name;
+        //     this.age = age;
+        //     this.sayHi = function () {
+        //         console.log(this.name + ':hello');
+        //     }
+        // }
+        // var person = new Person('黄忠',78);
+        // var person2 = person;
+        // person.name='aa';
+        // console.log(person2.name);
+        // person2.name='dd';
+        // console.log(person.name);
+
+        // 简单类型 简单函数的参数其实就是函数内部的局部变量
+        // function fn(a, b) {
+        //     a = a + 1;
+        //     b = a + 1;
+        //     console.log(a);
+        //     console.log(b);
+        // }
+        // var x =10;
+        // var y = 20;
+        // fn(x, y);
+        // console.log(x);
+        // console.log(y);
+
+        // 复杂类型 
+        // 指向同一个对象，影响外部的值
+        // function Person(a, b) {
+        //    this.a=a;
+        //    this.b=b;
+        //    this.sayHi = function () {
+        //        console.log(this.a + ':hello');
+        //    }
+           
+        // }
+        // var p = new Person('黄忠',78);
+        // function fn(person) {
+        //     person.a='ds';
+        //     // 在内存中新创建一个对象
+        //     person= new Person('黄忠',78);
+        //     console.log(person.a)
+        // }
+        // fn(p);
+        // console.log(p.a);
+
+        // 简单类型 字符串，数值，NaN boolean undfined
+        // Object 数组也是复杂类型    
+        // 对数组排序，从小到大
+        function sort(array){
+            //控制层数
+            for(var i=0;i<array.length-1;i++){
+                //假设排序ok
+                var isSort=true;
+                //比较
+                for(var j=0;j<array.length-1-i;j++){
+                    if(array[j]>array[j+1]){
+                        //没有排好序
+                        isSort=false;
+                        var tmp=array[j];
+                        array[j]=array[j+1];
+                        array[j+1]=tmp;
+                    }
+                }
+                //判断是否排好序
+                if(isSort){
+                    console.log('排好序了！');
+                    break;
+                }
+            }
+            // return array;
+        }
+
+        var num=[824124,1253,153326,153624];
+        console.log(sort(num));// 返回值NaN
+        console.log(num);// 利用复杂函数对象特点，改变内存中的值
+        // function fn(arr) {
+        //     arr[0] = -1;
+        // }
+        // fn(num);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
