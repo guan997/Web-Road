@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象</title>
+    <script>
+        // function printPerson(name,age,sex,salary){
+        //     var age=19;
+        // }
+        // function printPerson(person){
+        //     console.log(person.age);
+        // }
+        // 程序中的对象，是对现实生活中的集合
+        // 对象具有属性：特征和方法：行为
+        // 函数可以封装一段代码
+        // 对象可以封装一组属性和方法
+        // person对象
+        // var person = {
+        //     name : 'jack',
+        //     age : 19,
+        //     sex : '男',
+        //     salary : function () {
+        //         //通过this在方法中代表的是当前对象person
+        //         console.log(this.name+' hello');
+        //     },
+        //     eat : function () {
+        //         console.log(this.name+' 米饭');
+        //     }
+        // };
+
+    //     //访问属性
+    //     console.log(person.name);
+    //     console.log(person.age);
+    //     //访问方法
+    //    person.salary();
+    //    person.eat();
+    //     //属性的另一种访问
+    //     //访问数组中的某个元素array[0]
+    //     console.log(person['name']);
+    //     //函数独立存在的函数
+    //     function fn() {
+
+    //     }
+    //     fn();
+
+        // 方法：属于对象的函数
+        // person.eat();//方法的调用
+        // 1、var 对象名={}
+        // var hero = {
+        //     name: '刘备',
+        //     zhuanBei: ['jian','dao','fu'],
+        //     blood: 100,
+        //     attack: function () {
+        //         console.log(this.name+'用'+this.zhuanBei[2]+'打掉小怪10血');
+        //     },
+        //     run: function() {
+        //         console.log(this.name+'在奔跑');
+        //     }
+        // }
+        // console.log(hero.zhuanBei);
+        // console.log(hero.name);
+        // hero.attack();
+
+        // 2、new Object()
+        // Object是一个构造函数，会在内存中创造一个对象
+        // new 的方法来调用函数
+        // var hero = new Object();// 创造一个孔的对象
+        // 打印一个不存在的属性，输出undefined
+        // console.log(hero.name);
+        // //属性
+        // hero.name='黄忠';
+        // hero.age=78;
+        // hero.equipment=['头盔', '战靴', '盔甲'];
+        // hero.blood=100;
+        // //方法
+        // hero.attack = function () {
+        //     console.log(this.name+'射箭');
+        // };
+        // hero.run = function () {
+        //     console.log(this.name+'加速跑');
+        // };
+        // hero.attack();
+        // hero.run();
+
+
+        // 3工厂方法 可复用
+        // function createHero(name, age, equipment, blood) {
+        //     var hero = new Object();//返回一个空对象
+        //     //属性
+        //     hero.name = name;
+        //     hero.age = age;
+        //     hero.equipment = equipment;
+        //     hero.blood = blood;
+        //     //方法
+        //     hero.attack = function () {
+        //         console.log(this.name+'射箭');
+        //     };
+        //     hero.run = function () {
+        //         console.log(this.name + '加速跑');
+        //     }
+        //     return hero;
+        // }
+        // var hero1=createHero('黄忠','78',['头盔','战靴'],100);
+        // var hero2=createHero('刘备','67',['头盔','战靴'],100);
+        // console.log(hero1.name);
+        // hero1.attack();
+        // hero2.attack();
+
+        // 4、自定义构造函数
+        // new Object new Hero();
+        //帕斯卡命名，队形的第一个单词的首字符大写，后续的每一个单词的首字符也大写
+        function Hero(name,age,equipment) {
+            // this动态的给对象添加成员
+            // this指向当前对象
+            this.name = name;
+            this.age = age;
+            this.equipment = equipment;
+            this.attrack = function() {
+                console.log(this.name + ':攻击');
+            };
+            this.nianLin = function() {
+                console.log(this.name + '年龄'+this.age);
+            };
+        }
+           var hero1 = new Hero('黄忠', 78, ['asf','saf','ag']);
+            hero1.attrack();
+            hero1.nianLin();
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

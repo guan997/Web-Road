@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预解析</title>
+    <!-- JavaScript代码的执行是由浏览器中的JavaScript解析器来执行的。
+        JavaScript解析器执行JavaScript代码的时候，分为两个过程：预解析过程和代码执行过程 -->
+    <script>
+        // 预解析过程：
+        // 1. 把变量的声明提升到当前作用域的最前面，只会提升声明，不会提升赋值。
+        // 2. 把函数的声明提升到当前作用域的最前面，只会提升声明，不会提升调用。
+        // 3. 先提升var，在提升function。
+        // 案例1
+        // var a = 25;
+        // function abc() {
+        //     alert(a);
+        //     var a = 10;
+        // }
+        // abc();//undefined
+
+        // var a;
+        // function abc(){
+        //     var a;
+        //     alert(a);
+        //     a=10;
+        // }
+        // a=25
+
+        // 案例2
+//      预解析过程中如果函数和变量的名字相同，此时函数优先
+
+        // console.log(b);
+        // function b() {
+        //     console.log('aaaaa');
+        // }
+        // var b = 1;
+        // console.log(b);
+
+        // var a;
+        // function a() {
+        //     console.log('aaaa');
+        // }
+        // console.log(a);//f a(){consolo.log('aaa');}
+        // a=1;
+        // console.log(a);//1
+
+        // 1、-----------------------------------
+        // var num = 10;
+        // fun();
+        // function fun() {
+        //     console.log(num);;//undefined
+        //     var num = 20;
+        // }
+
+        // var num;
+        // fun();
+        // function fun() {
+        //     var num;
+        //     console.log(num);//undefined
+        //     num = 20;
+        // }
+        // num=10;
+
+        //2、-----------------------------------
+        // var a = 18;
+        // f1();
+        // function f1() {
+        //     var b = 9;
+        //     console.log(a);//undefined
+        //     console.log(b);//9
+        //     var a = '123';
+        // }
+
+
+        // var a;
+        // function f1() {
+        //     var b;
+        //     var a;
+        //     b = 9;
+        //     console.log(a);
+        //     console.log(b);//9
+        //     a = '123';
+        // }
+        // a = 18;
+        // f1();
+        // // 3、-----------------------------------
+        f1();
+        console.log(c);//9
+        console.log(b);//9
+        console.log(a);//a是局部变量w未定义
+        function f1() {
+            var a = b = c = 9;
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+        // f1();
+        // function f1(){
+        //     var a;//局部变量
+        //     a=b=c=9;
+        //      a=9;
+        //      b=9;
+        //      c=9;
+        //     console.log(a);//9
+        //     console.log(b);//9
+        //     console.log(c);//9
+        // }
+        // console.log(c);
+        // console.log(b);
+        // console.log(a);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

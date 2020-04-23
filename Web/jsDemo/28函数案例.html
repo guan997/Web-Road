@@ -60,8 +60,47 @@
         console.log(sort(num));
 
         // 输入一个年份，判断是否是闰年[闰年：能被4整数并且不能被100整数，或者能被400整数]
+        function isRun(year){
+            //假设不是闰年
+            var result=false;
+            if((year%4===0&&year%100!==0) || (year%400===0)){
+                result=true;
+            }
+            return result;
+        }
+        console.log(isRun(2010));
         // 输入某年某月某日，判断这一天是这一年的第几天？
+        function getDay(year,month,day){
+            var day1=day;//当前月份的天数
+            for(var i=1;i<month;i++){
+                switch(i){
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        day1+=31;
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        day1+=30;
+                        break;
+                    case 2:
+                    if(isRun(year)){
+                        day1+=29;
+                    }else{
+                        day1+=28;
+                    }
 
+                }
+                
+            }
+            return day1;
+        }console.log(getDay(2020,4,23));
     </script>
 </head>
 <body>

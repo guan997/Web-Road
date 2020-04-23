@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域</title>
+    <script>
+        // 作用域：变量或者函数可以起作用的访问
+        // 全局作用域，在script或者独立的js中，在全局作用域中定义的变量
+        // 全局作用域，在任何位置都可以以访问
+   
+        var num = 2;
+        function fn() {
+            // 全局变量，但不建议这样写
+            str = '123';
+            console.log(num);
+        }
+        fn();
+        console.log(str);
+         // 局部作用域 函数内部的局部作用域，局部变量只在定义该变量的函数中可以访问
+        //  function fn1() {
+        //      // 局部变量
+        //      var num1 = 5;
+        //  }
+        //  console.log(num1);
+         // 块级作用越 ECMScript中没有块级作用域
+         // 代码块
+         {
+             var num2 = 6;
+             console.log(num2);
+         }
+         console.log(num2);
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遍历和删除对象的属性</title>
+    <script>
+        //  var obj = {// 2对象
+        //     name: 'af',
+        //     age: 14,
+        //     sex: '男',
+        //     fn:function() {
+        //         console.log(this.name);
+        //     }
+        // };
+        // // obj.fn();
+        // // obj.fn();
+        // // 如何访问对象的属性
+        // // obj.name;
+        // // obj['name'];
+
+        // // for in可以遍历对象的成员
+        // for(var key in obj) {
+        //     console.log(key+'---'+obj['name']);
+        // }
+        var o={};
+        for(var i=0;i<10;i++) {
+            o['a'+i] = i * 2;
+        }
+        for(var key in o) {
+            console.log(key+'---'+o[key]);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

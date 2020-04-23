@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域链</title>
+    <script>
+        // 全局作用域，--0级作用域
+        var num = 124;
+        // 1级作用域
+        function fn() {
+            var num = 5;
+            // 2级作用域
+            function fn2() {
+                console.log(num);
+            }
+            fn2();
+        }
+        fn();
+        //当在某个环境中为了读取或写入而引入一个标识符时，必须通过搜索来确定该标识符实际代表什么。
+        // 特点
+        // （1）搜索过程从作用域链前端开始，向上逐级查询与给定名字匹配的标识符。
+        // （2）如果在局部环境找到，搜索过程就停止，否则一直搜索直到全局环境的变量对象。如果还没找到，则意味着该变量未声明
+        // 例如：
+        // （1）局部环境没有color变量
+        var color = 'blue';
+        function getColor() {
+            return color;
+        }
+        console.log(getColor());//blue
+        //  分析：getColor()局部环境找不到color，则沿着作用域链搜索到全局环境，此时发现有color变量，则结束搜索
+        // （2）局部环境有color变量
+        var color1 = 'blue';
+        function getColor1() {
+            var color1 = 'red';
+            return color1;
+        }
+        console.log(getColor1());//red
+        //  分析：getColor()局部环境找到color，结束搜索，此时任何位于局部变量color的声明之后的代码，如果不使用window.color，都无法访问全局color变量
+
+        // （3）访问局部变量要比访问全局变量更快，因为不用向上搜索作用域链
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
