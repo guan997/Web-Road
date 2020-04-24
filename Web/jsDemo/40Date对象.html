@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>date对象</title>
+    <script>
+        // date对象 new Date()来创建日期实例
+        // GMT 格林威治时间，世界标准时间
+        // GMT + 0800 中国标准时间
+        // 距离1970-1-1相差的时间
+        // 1、空构造函数，获取当前时间对象
+        // var date = new Date();
+        // console.log(date); 
+        // console.log(date.valueOf());
+        // // 2\构造函数传入毫秒值
+        // var date2 = new Date(1502088177998);
+        // console.log(date2);
+        // console.log(date2.valueOf());
+        // // 3、日期形式的字符串
+        // var date3 = new Date('1998-1-1 12:12:12');
+        // console.log(date3);
+        // console.log(date3.valueOf());
+        //  // 4、可以传入数字
+        //  var date4 = new Date(1928,8,8);
+        // console.log(date4);
+        // console.log(date4.valueOf());
+        // // 获取毫秒值
+        // console.log(date.getTime());
+
+        // // 获取当前时间的毫秒值 c静态成员
+        // var num =Date.now();
+        // console.log(num);
+
+        //  // 获取当前时间的毫秒值 +这里是取正
+        //  var num2 = + new Date(); //Number(Date.now());
+        // console.log(num2);
+        //2020-10-10 10:10:10
+        // var d = new Date();
+        // console.log(d);
+        // console.log(d.toString());
+        // console.log(d.toDateString());
+        // console.log(d.toTimeString());
+        // console.log(d.toLocaleTimeString());
+        // ->
+        // Fri Apr 24 2020 17:54:14 GMT+0800 (中国标准时间)
+        // 40Date对象.html:41 Fri Apr 24 2020 17:54:14 GMT+0800 (中国标准时间)
+        // 40Date对象.html:42 Fri Apr 24 2020
+        // 40Date对象.html:43 17:54:14 GMT+0800 (中国标准时间)
+        // 下午5:56:02
+
+        // 中国时间
+        // var d=new Date();
+        // console.log(d.getFullYear());
+        // // 月份从0开始
+        // console.log(d.getMonth() + 1);
+        // console.log(d.getDate());
+        // console.log(d.getHours());
+        // console.log(d.getMinutes());
+        // console.log(d.getSeconds());
+
+        // 格式化时间
+        function formDate(d) {
+            // 判断参数date是否是日期对象
+            // instanceof instance实例对象 of的
+            // console.log(d.instanceof Date);
+            if (!(d instanceof Date)) {
+                console.error('date不是日期对象');
+                return;
+            }
+            var year = d.getFullYear(),
+                // 月份从0开始
+                month = d.getMonth() + 1,
+                day = d.getDate(),
+                hour = d.getHours(),
+                minute = d.getMinutes(),
+                second = d.getSeconds();
+            //  if (month<10) {
+            //      month = '0' + month;
+            //  }=
+            month = month < 10 ? '0' + month : month;
+            day = day < 10 ? '0' +day : day;
+            hour = hour < 10 ? '0' +hour : hour;
+            minute = minute < 10 ? '0' +minute : minute;
+            second = second < 10 ? '0' +second : second;
+            return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ":" + second;
+        }
+        var d = new Date();
+        var dateStr = formDate(d);
+        console.log(dateStr);
+        d = new Date(2020, 4, 10);
+        console.log(formDate(d));
+        
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
