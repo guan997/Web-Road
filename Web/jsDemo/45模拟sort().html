@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>45模拟sort()</title>
+    <script>
+        // 对数组排序，从小到大
+        function sort(array, fnCompare) {
+            //控制层数
+            for (var i = 0; i < array.length - 1; i++) {
+                //假设排序ok
+                var isSort = true;
+                //比较
+                for (var j = 0; j < array.length - 1 - i; j++) {
+                    if (fnCompare(array[j], array[j + 1]) > 0) {
+                        //没有排好序
+                        isSort = false;
+                        var tmp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = tmp;
+                    }
+                }
+                //判断是否排好序
+                if (isSort) {
+                    break;
+                }
+            }
+            return array;
+        }
+        var num = [4, 3, 5, 2, 1];
+        sort(num, function (a, b) {
+            return a - b;
+        })
+        console.log(num);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

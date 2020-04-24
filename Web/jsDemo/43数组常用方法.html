@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>43数组常用方法</title>
+    <script>
+        // 1 栈操作(先进后出)
+        // push()
+        // pop()       //取出数组中的最后一项，修改length属性
+        // 2 队列操作(先进先出)
+        // push()
+        // shift()     //取出数组中的第一个元素，修改length属性
+        // unshift()   //在数组最前面插入项，返回数组的长度
+         // // 3 排序方法
+        // reverse()	//翻转数组
+        // sort(); 	//即使是数组sort也是根据字符，从小到大排序
+        // // 带参数的sort是如何实现的？
+        // // 4 操作方法
+        // concat()  	//把参数拼接到当前数组
+        // slice() 	//从当前数组中截取一个新的数组，不影响原来的数组，参数start从0开始,end从1开始
+        // splice()	//删除或替换当前数组的某些项目，参数start, deleteCount, options(要替换的项目)
+        // // 5 位置方法
+        // indexOf()、lastIndexOf()   //如果没找到返回-1
+        // // 6 迭代方法 不会修改原数组(可选)  html5
+        // every()、filter()、forEach()、map()、some()
+        // // 7 方法将数组的所有元素连接到一个字符串中。
+
+
+         // toString()/valueOf()每一个对象都有这两个方法
+        // var arr=[1,2,3];
+        // console.log(arr);
+        // // toString()把数组转换成字符串，并且使用分割每一项
+        // console.log(arr.toString());
+        // // valueOf()返回数组本身
+        // console.log(arr.valueOf());
+
+
+        // 1 栈操作(先进后出)
+        // push()       //添加 
+        // pop() 		//返回数组中的最后一项之后取出数组中的最后一项，修改length属性
+
+        // var arr=[1,2,3];
+        // arr.push(4);
+        // var r = arr.push(5,6,7);
+        // console.log(r);
+        // console.log(arr);
+        // var last = arr.pop();
+        // console.log(last);
+        // console.log(arr.length);
+        // console.log(arr);
+
+        // // 2 队列操作(先进先出)
+        // push()
+        // shift()		//取出数组中的第一个元素，修改length属性
+        // unshift() 	//在数组最前面插入项，返回数组的长度
+        // var arr = [1, 2, 3];
+        // arr.push(4);
+        // var first = arr.shift();
+        // console.log(first);
+        // console.log(arr);
+        // arr.unshift(0);
+        // console.log(arr);
+
+        // // 3 排序方法
+        // reverse()	//翻转数组
+        // sort(); 	//即使是数组sort也是根据字符，从小到大排序
+        // // 带参数的sort是如何实现的？
+        var arr = ['abaaa','aa','cc'];
+        // 翻转reverse()
+        // var newArray = arr.reverse();
+        // console.log(newArray);
+        // sort()直接在原数组上面进行排序
+        console.log(arr.sort());
+
+
+
+        // // 4 操作方法
+        // concat()  	//把参数拼接到当前数组
+        // slice() 	//从当前数组中截取一个新的数组，不影响原来的数组，参数start从0开始,end从1开始
+        // splice()	//删除或替换当前数组的某些项目，参数start, deleteCount, options(要替换的项目)
+        // // 5 位置方法
+        // indexOf()、lastIndexOf()   //如果没找到返回-1
+        // // 6 迭代方法 不会修改原数组(可选)  html5
+        // every()、filter()、forEach()、map()、some()
+        // // 7 方法将数组的所有元素连接到一个字符串中。
+        // join()
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
