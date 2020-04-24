@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>41计算时间差</title>
     <script>
         // 1、两个日期相减
-         var d = new Date(2018.5,19);
-         var d1 = new Date();
+        //  var d = new Date(2018.5,19);
+        //  var d1 = new Date();
         //  d1.valueOf()-d.valueOf();
-        console.log(d1-d);// 相差的毫秒数 调用的是valueOf()
+        // console.log(d1 - d);// 相差的毫秒数 调用的是valueOf()
         // 2、函数如何返回多个值
         function fn() {
             return {
-                year :1,
-                day :2,
-                hour:3
+                year: 1,
+                day: 2,
+                hour: 3
             };
         }
-        
+        console.log(fn());
+        // 3如何计算相差的天/时/分/秒
+        // 23142435898相差总的毫秒值
+        // 23142435898/1000相差总的秒数
+        // 23142435898/1000/60/60/24相差的天数
+        // 23142435898/1000/60/60%24 相差的小时
+        // 23142435898/1000/60%60相差的分钟
+        // 23142435898/1000%60相差的秒数
+        function getInterval(start, end) {
+            //两个日期对象，相差的毫秒数
+            var interval = end - start;
+            // 相差的天/时/分/秒
+            var day, hour, minute, second;
+            //两个日期对象相差的秒数
+            interval /= 1000;
+            day = Math.round(interval / 60 / 60 / 24);
+            hour = Math.round(interval / 60 / 60 % 24);
+            minute = Math.round(interval / 60 % 60);
+            second = Math.round(interval % 60);
+            return {
+                day: day,
+                hour: hour,
+                minute: minute,
+                second: second
+            }
+        }
+        var d = new Date(2018.5, 19);
+        var d1 = new Date();
+        var o = getInterval(d, d1);
+        console.log(o);
     </script>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>
