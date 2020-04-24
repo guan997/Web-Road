@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组</title>
+    <script>
+        // 如何创建数组
+        // 1、数组字面量[]
+        var str = [];
+        var str1 = ['a', 'b', 'c'];
+        console.log(str1);
+
+        // 2、属猪的构造函数Aray
+        var array = new Array();// 空数组
+        var number = new Array(1, 2, 3);
+        console.log(number);
+        console.log(number.length);
+
+        // 判断参数是否是数组变量
+        // 方法1、参数(变量) instanceof 类型（构造函数）
+        function fn(arr) {
+            // if(!(arr instanceof Array)) {
+            //      console.log(arr instanceof Array);
+            //     console.log('参数arr，不是数组类型');
+            //     return;
+            // }
+            // console.log('参数arr，是数组类型');
+            // 方式 2 自带函数 浏览器兼容性问题，需支持html5
+            // console.log(Array.isArray(arr));
+            // console.log('参数arr，是数组类型');
+            if(!(Array.isArray(arr))) {
+                console.log('参数arr，不是数组类型');
+                return;
+            }
+            console.log('参数arr，是数组类型');;
+        }
+        var d = [];
+        fn(d);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
