@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>48基本包装类型</title>
+    <script>
+        // 简单类型没有属性和方法
+        // 对象才有属性和方法
+        var s1 = 'abc';
+        var len = s1.length;
+        console.log(len);
+        // s1.length执行过程
+        // 把基本类型变成基本包装类型，会创建一个对应的临时对象
+        var s11 = new String('abc');
+        var len1 = s11.length;
+        s11 = null;// 销毁对象
+        console.log(s11);
+        console.log(len1);
+
+        // 基本包装类型，基本类型包装成复杂类型
+        // String Number Boolean
+        // PrimitiveValue 原始值 '123abc'
+        var s = new String('123abc');
+        console.log(s);
+        console.log(s1);
+
+        // 一般情况下我们不会使用Number Boolean基本包装类型 
+        // PrimitiveValue 16
+        // 创建Number的对象
+        var n1 = new Number('16');
+        // 类型转换
+        var n2 = Number('15');
+        console.log(n1);
+        console.log(n2);
+
+        // PrimitiveValue false
+        // 创建Boolean的对象
+        var b1 = new Boolean(false);
+        // 类型转换
+        var b2 = Boolean('15');
+        console.log(b1);
+        console.log(b2);
+
+        var b11 = new Boolean(false);
+        var b22 = b11 && true; // 转换成false的五种情况 ‘’ null NaN unfined 0
+        console.log(b22);
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
