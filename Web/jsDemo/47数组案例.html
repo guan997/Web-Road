@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>47数组案例</title>
     <script>
         // 47数组案例
-         // join()
-        
+        // join()
+
         //  var arr = ['abaaa','aa','cc'];
         // 将一个字符串数组输出为|分割的形式，比如“刘备|张飞|关羽”利用两种方法实习
         // arr.toString();//-->abaaa,aa,aa
@@ -41,16 +42,42 @@
         // while do while
         var index = -1;
         do {
-            index = arr.indexOf('a',index + 1);
-            if(index !== -1) {
+            index = arr.indexOf('a', index + 1);
+            if (index !== -1) {
                 console.log(index);
             }
-        }while (index !== -1) ;
+        } while (index !== -1);
 
         // 编写一个方法去掉一个数组的重复元素
+        var array = ["c", "a", "z", "a", "x", "a"];
+        function clear() {
+            var o = {};
+            for (var i = 0; i < array.length; i++) {
+                var item = array[i];
+                if (o[item]) {
+                    o[item]++;
+                } else {
+                    o[item] = 1;
+                }
+            }
+            var tmpArray = [];
+            for (var key in o) {
+                if (o[key] == 1) {
+                    tmpArray.push(key);
+                } else {
+                    if (tmpArray.indexOf(key) == -1) {
+                        tmpArray.push(key);
+                    }
+                }
+            }
+            return tmpArray
+        }
+
     </script>
+
 </head>
+
 <body>
-    
 </body>
+
 </html>

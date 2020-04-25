@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串对象的方法</title>
+    <script>
+        // 字符串的所有方法都不会改变原字符串，不可改变性，都会返回一个新的字符串
+        // // 1 字符方法
+        // charAt()    	//获取指定位置处字符
+        // charCodeAt()  	//获取指定位置处字符的ASCII码
+        // str[0]   		//HTML5，IE8+支持 和charAt()等效
+
+        // var s = 'afsag';
+        // console.log(s.charAt(0));// 指定位置 
+        // for ( var i = 0; i<s.length;i++) {
+        //     console.log(s.charAt(i));
+        // }
+        // console.log(s.charCodeAt(0));
+        // for ( var i = 0; i<s.length;i++) {
+        //     console.log(s[i]);
+        // }
+        // console.log(s[0]);
+
+        // 判断一个字符串中出现次数最多的字符，统计这个次数
+        // 统计每一个字符串许仙的次数
+        // 求最大值
+        var s = 'abcoefoxyozzopp';
+        var o = {};
+        // 此字符次数
+        var count;
+        // 记录字符串中每个字符串出现的次数
+        var o = {};
+        for (var i = 0; i<s.length; i++) {
+            var item = s.charAt(i);// s.[i]
+            // 判断是否有该属性
+            if(o[item]){
+                o[item]++;//次数++
+            }else{
+                o[item]=1;
+            }
+        }
+        // 求最大值，并且找到次数最多的字符
+        // 假设最大值是1
+        num = 1;
+        for (var key in o) {
+            if(num < o[key]) {// 找最大值
+            // 最多的次数
+                num = o[key];
+                // 次数最多的字符
+                ch = key;
+            }
+        }
+        console.log(num,ch);
+
+        // // 2 字符串操作方法
+        // concat()   		//拼接字符串，等效于+，+更常用
+        // slice()    		//从start位置开始，截取到end位置，end取不到
+        // substring() 	//从start位置开始，截取到end位置，  end取不到
+        // substr()   		//从start位置开始，截取length个字符
+
+        var a = 'abc';
+        var b = 'asfgsa';
+        // a+b
+        console.log(a.concat(b));
+
+        // 截取字符串"我爱中华人民共和国"，中的"中华"
+        // var s = '我爱中华人民共和国';
+        // // 第一个参数开始位置，第二个参数截取的长度
+        // var newS = s.substr(2, 2);
+        // console.log(newS);
+
+        // // 3 位置方法
+        // indexOf()   	//返回指定内容在元字符串中的位置 只找第一个匹配的
+        // lastIndexOf() 	//从后往前找，只找第一个匹配的
+
+        // "abcoefoxyozzopp"查找字符串中所有o出现的位置
+        // var s1 = 'abcoefoxyozzopp';
+        // // // 查找不到是返回-1
+        // // var newS2 = s1.indexOf('o',4);
+        // // console.log(newS2);
+        // var index = -1;
+        // do {
+        //     index = s1.indexOf('o', index + 1);
+        //     if (index !== -1) {
+        //         console.log(index);
+        //     }
+        // } while (index !== -1);
+
+        // // 4 去除空白   
+        // trim()  		//只能去除字符串前后的空白
+
+        // 把字符串中的所有空白去掉'   abc       xyz  a    123   '
+        // var s = '   abc       xyz  a    123   ';
+        // s=s.trim();
+        // console.log('==='+s+'====');
+        // 去掉全部空格
+        // 思路1把字符串中的所有空格替换成‘’空字符串
+        // do {
+        //     var index = s.indexOf(' ',index + 1);
+        //     if( index !== -1){
+        //         s = s.replace(' ','');
+        //     }
+        // }while(index !==-1);
+        // console.log('==='+s+'====');
+        // 思路2 使用split简化
+        // s = s.split(' ');
+        // console.log(s.join(''));
+
+        // // 5 大小写转换方法
+        // to(Locale)UpperCase() 	//转换大写
+        // to(Locale)LowerCase() 	//转换小写
+
+        // // 6 其它
+        // search() 查找指定字符串
+        // replace() 替换
+        // split()
+
+        // 把字符串中所有的o替换成!
+        // var s2 = 'abcoefoxyozzopp';
+        // do {
+        //     var index = s2.indexOf('o', index + 1);
+        //     if (index !== -1) {
+        //        s2 = s2.replace('o','|'); //字符串不可变性，不会改变源字符串的值，需要接受一下
+        //     }
+        // } while (index !== -1);
+        // console.log(s2);
+
+        // split（）替换
+        var str = '   1abc       xyz  a    123   ';
+        var arr = str.split(' ');// 分隔字符串
+        // console.log(arr);
+        console.log(arr.join(''));// 拼接字符串
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

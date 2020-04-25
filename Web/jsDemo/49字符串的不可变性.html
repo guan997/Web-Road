@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串的不可变性</title>
+    <script>
+        // 字符串的不可变性 字符串重新赋值会开辟新的空间并且指向
+        // var s = 'abc';
+        // s = 'xxxxx';
+        // 当拼接大量字符串时，会出现性能问题
+        var s = '';
+        for (var i = 0; i< 100 ;i++) {
+            // s += i;
+            s = s + i;
+        }
+        console.log(s);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
