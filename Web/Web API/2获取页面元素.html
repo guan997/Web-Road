@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2获取页面元素</title>
+
+</head>
+
+<body>
+    <div id="main"></div>
+    <div name='main'></div>
+    <div class="a"></div>
+    <div class="a"></div>
+    <p class="a"></p>
+    <script>
+        // 根据标签的name属性获取元素
+        //  document.getElementsByName()
+        var divs = document.getElementsByName('main');
+        // NodeList [div]
+        console.log(divs);
+
+        // 根据标签的class属性获取元素
+        // 浏览器兼容性  IE9以后才支持的
+        // document.getElementsByClassName();
+        var classDiv = document.getElementsByClassName('a');
+        console.log(classDiv);
+
+        // query  查询
+        // Selector  选择器
+        // 根据选择器来查找元素
+        // document.querySelector();
+        var main = document.querySelector('#main');
+        console.log(main);
+
+        // 都是根据选择器来获取元素
+        // 浏览器兼容性问题   IE8以后才执行
+        // 
+        // 只会返回第一个匹配到的元素
+        // querySelector()
+        // 返回所有匹配到的元素
+        // querySelectorAll()
+
+        // 只能获取到一个元素
+        var element = document.querySelector('.a');
+        console.log(element);
+
+        // 获取全部元素
+        var elements = document.querySelectorAll('.a');
+        console.log(elements);
+    </script>
+
+</body>
+
+</html>

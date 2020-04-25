@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1获取页面元素</title>
+    <script>
+        // document  文档对象
+        // get 获取 Element  元素  By  根据  Id  标示
+        // 如果页面上没有对应的id，此时返回null
+        // var main = document.getElementById('p');
+        // console.log(main);
+        // // 打印对象
+        // console.dir(main);
+        // // 对象是有类型的
+        // var arr = new Array();
+        // console.dir(arr);
+
+        var divs = document.getElementsByTagName('div');
+        console.log(divs.length);
+    </script>
+</head>
+
+<body>
+    <div id="main">main</div>
+    <div id="hello">
+        <div></div>
+        <div></div>
+    </div>
+    <p id="p">p</p>
+    <script>
+        //    HTMLParagraphElement
+        // var main = document.getElementById('p');
+        // console.log(main);
+        // 打印对象
+        // console.dir(main);
+        // 对象是有类型的
+        // var arr = new Array();
+        // console.dir(arr);
+
+        // 动态刷新
+        // 注意：getElementsByTagName() 获取到的集合是动态集合
+        console.log(divs.length);
+
+
+        var divs = document.getElementsByTagName('div');
+        // HTMLCollection  集合   伪数组
+        console.log(divs);
+
+        for (var i = 0; i < divs.length; i++) {
+            console.log(divs[i]);
+        }
+        //   // divs 中的每一个元素都是对象  都是 HTMLDivElemen
+        var spans = document.getElementsByTagName('p');
+        console.log(spans);
+
+        var hello = document.getElementById('hello');
+        console.log(hello);
+        var divss = hello.getElementsByTagName('div');
+        console.log(divss);
+    </script>
+    </script>
+</body>
+
+</html>
