@@ -5,12 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3事件</title>
-
+    <style>
+        img {
+            width: 600px;
+            height: 200px;
+        }
+    </style>
 </head>
 
 <body>
     <input type="button" id="btn" value="点我">
     <div id="main">1111</div>
+    <img id="mv" src="img/01.jpg" alt="">
     <script>
         // 事件：当什么时候做什么事情
         //      触发-响应
@@ -26,7 +32,20 @@
         // 给div注册事件
         var div = document.getElementById('main');
         div.onclick = function () {
-            alert('我是div') ;
+            alert('我是div');
+        }
+        // 注册事件
+        var img = document.getElementById('mv');
+        // 当flag是1时，对应01.jpg，2时对应02.jpg
+        var flag = 1;
+        img.onclick = function () {
+            if (flag == 1) {
+                img.src = 'img/01.jpg';
+                flag = 2;
+            } else {
+                img.src = 'img/02.jpg';
+                flag = 1;
+            }
         }
     </script>
 </body>
