@@ -12,12 +12,18 @@
     <script>
         var link = document.getElementById('link')
         var mv = document.getElementById('mv');
+        // 获取DOM对象的属性值
         console.log(link.id);
         console.log(link.href);
         console.log(link.title);
         console.log(mv.id);
         console.log(mv.src);
         console.log(mv.alt);
+        // 设置DOM的属性
+        link.href = 'http//:www.google.com';
+        link.title = 'google';
+        console.log(link.href);
+        console.log(link.title);
     </script>
 </body>
 </html>
