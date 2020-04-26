@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6a标签的点击事件</title>
+
+</head>
+<body>
+    <a href="http://www.baidu.con" id="link">百度</a>
+    <script>
+        var link = document.getElementById('link');
+        link.onclick = function () {
+            alert('点我干嘛');
+            // 取消a标签的默认行为（跳转到href）
+            return false;
+        }
+    </script>
+</body>
+</html>
