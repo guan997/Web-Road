@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7innerHTML和innerText</title>
+</head>
+<body>
+    <div id="box">
+        我是一个div
+        <span>这是一个span</span><br>
+        <b>123</b><br>
+        <!-- 转义符 &quot 引号 &nbsp空格 -->
+        &ltb&gt123 &lt/b&gt
+    </div>
+    <script>
+        var box = document.getElementById('box');
+        // box.id
+        console.dir(box);
+        // innerHTML innerText
+        // 获取开始标签和结束标签之间的内容
+        // innerHTML获取内容包括标签
+        console.log(box.innerHTML);
+        // innerText只获取标签内容，过滤标签
+        console.log(box.innerText);
+        // 设置标签的内容
+        // innerHTML会生成标签
+        box.innerHTML = '<b>前端1</b>';// 清空内容
+        // console.log(box.innerHTML);
+        // // innerText不会生成标签
+        // box.innerText = '<b>前端</b>';
+        console.log(box.innerText);// 获取内部文本
+        console.log(box.textContent); // 获取内部文本
+        // box.innerText textContent
+        // 谷歌 两个都支持
+        // 新版的FF 两个都支持
+        // 新版的IE 两个都支持
+        // 旧版的FF 只支持textContent
+        // 旧版的IE 只支持innerText
+        // 设置内容的时候
+        box.innerHTML = 'hello';// 效率低
+        // innerText(textContent)// 但不含标签时应该使用innerText
+        // textContent
+    </script>
+</body>
+</html>

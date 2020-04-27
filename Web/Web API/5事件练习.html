@@ -24,18 +24,19 @@
 
 <body>
     <input type="button" id="btn" value="隐藏">
-    <div id="box">12</div>
+    <br>
+    <div id="box"></div>
     <script>
         var btn = document.getElementById('btn');
-        btn.onclick = function () {
             // isShow记录了box的状态，true 显示 ，false 隐藏
             var isShow = true;
+        btn.onclick = function () {
             // 控制div的显示隐藏
             var box = document.getElementById('box');
             if (isShow) {
                 // class为关键字，所以DOM对象的对应的标签的class为className
                 box.className = 'hidden';
-                btn.value = '显示';
+                this.value = '显示';
                 isShow = false;
             }else {
                 box.className = 'show';

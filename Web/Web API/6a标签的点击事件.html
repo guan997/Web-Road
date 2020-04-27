@@ -1,20 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>6a标签的点击事件</title>
-
-</head>
-<body>
-    <a href="http://www.baidu.con" id="link">百度</a>
-    <script>
-        var link = document.getElementById('link');
-        link.onclick = function () {
-            alert('点我干嘛');
-            // 取消a标签的默认行为（跳转到href）
-            return false;
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+            background-color: #ccc;
+            margin: 1em 10%;
         }
+
+        h1 {
+            color: #333;
+            background-color: transparent;
+        }
+
+        a {
+            color: #c60;
+            background-color: transparent;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            float: left;
+            padding: 1em;
+            list-style: none;
+        }
+
+        #imagegallery {}
+
+        #imagegallery a {
+            margin: 0px 20px 20px 0px;
+            padding: 0px;
+            display: inline;
+        }
+
+        #imagegallery a img {
+            border: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>图片长廊</h2>
+    <div id="imagegallery" >
+        <a href="img/1.jpg" title="1">
+            <img src="img/1-small.jpg" width="100px" alt="图片1">
+        </a>
+        <a href="img/2.jpg"title="2">
+            <img src="img/2-small.jpg" width="100px" alt="图片2">
+        </a>
+        <a href="img/3.jpg"title="3">
+            <img src="img/3-small.jpg" width="100px" alt="图片3">
+        </a>
+        <a href="img/4.jpg"title="4">
+            <img src="img/4-small.jpg" width="100px" alt="图片4">
+        </a>
+
+    </div>
+    <div style="clear: both"></div>
+    <img src="img/placeholder.png" width='450px' id="image" alt="">
+    <p id="des">选择一个图片</p>
+    <script>
+        var imagegallery = document.getElementById('imagegallery');
+        var links = document.getElementsByTagName('a');
+        // 1 获取div中的所有a标签
+        for (var i = 0; i < links.length; i++) {
+            // 2 给所有a标签注册事件
+            var link = links[i];
+            link.onclick = function () {
+                // 切换图片
+                var image = document.getElementById('image');
+                image.src = this.href;
+                // 设置p标签的内容
+                var des = document.getElementById('des');
+                // 内容
+                des.innerText=this.title;
+                // console.dir(des);
+                // 5 事件处理函数中的this所指向的位置
+                // 3 取消a标签的默认行为（跳转到href）
+                return false;
+            }
+        }
+        // console.log(link);
     </script>
 </body>
+
 </html>

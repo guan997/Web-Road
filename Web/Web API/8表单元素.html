@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8表单元素</title>
+</head>
+<body>
+    <input type="button" value="按钮" id="btn">
+    <input type="button" value="设置文本的值" id="btn1">
+    <br>
+    <input id="txt" value="123" type="text">
+    <script>
+        var btn = document.getElementById('btn');
+        // 注册事件
+        btn.onclick = function () {
+            var txt = document.getElementById('txt');
+            console.log(txt.value);
+            console.log(txt.type);
+            // 当html中的标签的属性，只有一个值的时候
+            // DOM中对应的元素的属性值是布尔类型
+            console.log(txt.disabled);
+            txt.disabled = true;
+        }
+        var btn1 = document.getElementById('btn1');
+        // 注册事件
+        btn1.onclick = function () {
+            var txt1 = document.getElementById('txt');
+            // 设置文本框的值
+            txt1.value = 'hello';
+            console.log(txt1.value);
+        }
+    </script>
+</body>
+</html>

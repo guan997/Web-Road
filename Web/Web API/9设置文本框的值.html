@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置文本框的值</title>
+</head>
+<body>
+    <input type="text"><br>
+    <input type="text"><br>
+    <input type="text"><br>
+    <input type="text"><br>
+    <input type="text"><br>
+    <input type="text"><br>
+    <input type="button" value="获取文本框的值" id="btn">
+    <script>
+        // 当页面加载完毕，给所有的文本框赋值
+        var inputs = document.getElementsByTagName('input');
+        for (var i =0;i<inputs.length;i++) {
+            var input = inputs[i];
+            // 根据type属性 判断是否是文本框
+            if ( input.type === 'text') {
+                input.value = i;
+            }
+        }
+        // 2、当点击按钮的时候，获取所有文本框，并使用|分割输出
+        var btn = document.getElementById('btn');
+        btn.onclick = function () {
+            var s = '';
+            for (var i = 0; i< inputs.length; i++) {
+                var input = inputs[i];
+                // 判断是否是文本框
+                if (input.type === 'text') {
+                    s +=input.value + '|';
+                }
+            }
+            // 把最后一个|去掉
+            s = s.substr(0,s.length-1);
+            console.log(s);
+        }
+    </script>
+</body>
+</html>
