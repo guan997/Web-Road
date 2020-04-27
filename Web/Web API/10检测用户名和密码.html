@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10检测用户名和密码</title>
+    <style>
+        .bg {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="text"><br>
+    <input type="password" id="password"><br>
+    <input type="button" value="登录" id="btn">
+    <script>
+        var btn = document.getElementById('btn');
+        var text = document.getElementById('text');
+        var password = document.getElementById('password');
+        btn.onclick = function () {
+            // 检测用户名和密码长度
+            if (text.value.length < 3 || text.value.length > 6) {
+                text.className = 'bg';
+                return;
+            } else {
+                text.className = '';
+            }
+            // 密码是否是6位
+            if (password.value.length < 6 || password.value.length > 8) {
+                password.className = 'bg';
+                return;
+            } else {
+                password.className = '';
+            }
+            alert('登录');
+        }
+
+    </script>
+</body>
+
+</html>
