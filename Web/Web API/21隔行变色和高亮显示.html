@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21隔行变色和高亮显示</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="mv">
+        <li>西施</li>
+        <li>貂蝉</li>
+        <li>王昭君</li>
+        <li>杨玉环</li>
+    </ul>
+    <script>
+        // 隔行变色
+        // 获取到所有的li，判断奇数行和偶数行
+        var mv = document.getElementById('mv');
+        var lists = mv.getElementsByTagName('li');
+
+        for (var i = 0; i < lists.length; i++) {
+            var li = lists[i];
+            // 判断当前的li是奇数行，还是偶数行
+            if (i % 2 === 0) {
+                // i 是偶数 ，但是当前是奇数行
+                // 设置奇数行的背景颜色
+                li.style.backgroundColor = 'red';
+            } else {
+                // 设置偶数行的背景颜色
+                li.style.backgroundColor = 'green';
+            }
+        }
+
+        // 鼠标放上高亮显示
+        // 给所有的li注册事件 鼠标经过和鼠标离开的两个事件
+        for (var i = 0; i < lists.length; i++) {
+            var li = lists[i];
+            // 鼠标放到li上，高亮显示当前的li
+            var bg;
+            li.onmouseover = function () {
+                // 鼠标放到li上的时候，应该记录li当前的颜色
+                bg = this.style.backgroundColor;
+                this.style.backgroundColor = 'yellow';
+            }
+            // 鼠标离开li，还原原来的颜色
+            li.onmouseout = function () {
+                // 鼠标离开，还原原来的颜色
+                this.style.backgroundColor = bg;
+            }
+        }
+    </script>
+</body>
+
+</html>

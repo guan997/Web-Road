@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20设置div的大小和位置</title>
+    <style>
+        #box{
+            width:100px;
+            height: 100px;
+            background-color: pink;
+        }
+        .cls {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="点我" id="btn">
+    <br>
+    <div id="box"></div>
+    <script>
+        var btn =document.getElementById('btn');
+        var box =document.getElementById('box');
+        btn.onclick = function () {
+                // 改变box的大小和位置
+                // 使用class
+                // box.className = 'cls';
+                // 使用style设置大小和位置的时候，数字必须带单位
+                box.style.width = '200px';
+                box.style.height = '200px';
+                box.style.position = 'absolute';
+                box.style.left = '200px';
+                box.style.top = '200px';
+                console.log(box.style);
+        }
+       
+    </script>
+</body>
+</html>
