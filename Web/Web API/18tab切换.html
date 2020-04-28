@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18tab切换</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 376px;
+            height: 300px;
+            border: 1px solid #ccc;
+            margin:  100px auto;
+            overflow: hidden;
+        }
+        .hd{
+            height: 45px;
+        }
+        .hd span{
+            display: inline-block;
+            width: 90px;
+            background-color: pink;
+            line-height: 45px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .hd span.current{
+            background-color: purple;
+        }
+        .bd div {
+            height: 255px;
+            background-color: purple;
+            display: none;
+        }
+        .bd div.current {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="hd" id="hd">
+            <span class="current">体育</span>
+            <span>娱乐</span>
+            <span>新闻</span>
+            <span>综合</span>
+        </div>
+        <div class="bd" id="bd">
+            <div class="current">我是体育模块</div>
+            <div>我是娱乐模块</div>
+            <div>我是新闻模块</div>
+            <div>我是综合模块</div>
+        </div>
+    </div>
+    <script >
+        var hd = document.getElementById('hd');
+        // 获取所有的span
+        var spans = hd.getElementsByTagName('span');
+        // 给head注册事件
+        for (var i = 0; i<spans.length; i++) {
+            var span = spans[i];
+            span.onmouseover = fn;
+        }
+        function fn () {
+            // 点击head
+            // 把其他head中的span的cuurrent移除，把当前点击的span的类
+            // 样式设置为current
+            // 移除所有span的类样式
+            for (var i = 0; i< spans.length; i++) {
+                var span = spans[i];
+                // 设置自定义属性
+                span.setAttribute('index',i);
+                // 移除类样式
+                span.removeAttribute('class');
+            }
+            // 让当前的span的类样式为current
+            this.setAttribute('class','current');
+
+            // 设置当前对应的div显示，其他div隐藏
+            // 获取所有的li
+            var bd = document.getElementById('bd');
+            var divs = bd.getElementsByTagName('div');
+            for (var i=0; i<divs.length; i++) {
+                // 移除所有的li的class属性
+                var div = divs[i];
+                div.removeAttribute('class');
+            }
+            // 让和点击的span对应的li显示
+            // 如何获取当前的span的索引
+            var index = parseInt(this.getAttribute('index'));
+            // 通过自定义属性获取到的值，都是string
+            // 获取对应的div
+            divs[index].setAttribute('class','current');
+        }
+    </script>
+</body>
+</html>
