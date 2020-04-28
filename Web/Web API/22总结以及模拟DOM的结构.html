@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22总结以及模拟DOM的结构</title>
+</head>
+
+<body>
+    <div id="box" class="cls">hello</div>
+    <p id="p">1243</p>
+    <!-- 这是注释 -->
+    <script>
+
+    // 常见的DOM操作
+    //    获取元素   getElementById()  getElementsByTagName()
+    //    给元素注册事件    onclick   onmouseover  onmouseout  onfocus  onblur
+    //    操作元素的属性
+    //        非表单元素   href  title  src alt等
+    //        表单元素     type  value  checked  disabled  selected
+    //        公共属性     id   className style
+    //        样式操作     className  style
+    //        自定义属性   setAttribute()   getAttribute()   removeAttribute()
+
+     // DOM  文档对象模拟
+    // 文档树
+    //   节点
+    //      元素节点
+    //      属性节点
+    //      文本节点
+    //      注释节点
+    
+    // var box = document.getElementById('box');
+    // console.dir(box);
+    // var p = document.getElementById('p');
+    // console.dir(p);
+
+    // 创建一系列具有相同属性的对象，构造函数传递参数
+    // 获取对象没有的属性的值是undefined
+        function Node(options) {
+            // this.className = options.className;
+            // if (options.className){ 
+            //     this.className = options.className;
+            // }else {
+            //     this.className = '';
+            // }
+          
+            // 设置属性的默认值
+            // this.className = options.className ? options.className : '';
+            this.className = options.className || '';
+        }
+            // ||或 options.className转换为布尔类型，如果是true就返回true
+            // ||布尔类型的运算符，如果有一边是true就返回true，如果两边同时为false返回false
+            // || 两边也可以是其他类型，会想转换布尔类型
+            // 如果第一个运算数转换成布尔类型，是true，直接返回这个运算数
+            // 如果第一个运算数 转换成布尔类型 是false， 返回第二个运算数
+        var o = new Node({
+            // className:'cls'
+        });
+        console.log(o);
+    </script>
+</body>
+
+</html>
