@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15样式操作</title>
+</head>
+
+<body>
+    <input type="button" id="btn" value="按钮">
+    <img src="img/1.jpg" height="200" id="img" width='400' alt="">
+    <script>
+        // 当什么时候做什么事情
+        // 获取按钮
+        var btn = document.getElementById('btn');
+        // 给按钮注册事件
+        // 事件：
+        // 事件名称：onclick
+        // 事件源：谁触发的事件
+        // 事件处理函数：
+        // 当flag=1时对应的是1.jpg，2时对应的是2.jpg
+        var flag = 1;
+        btn.onclick = function () {
+            // alert('你好！');
+            var img = document.getElementById('img');
+            if (flag === 1) {
+                img.src = 'img/2.jpg';
+                flag = 2;
+            } else if (flag === 2) {
+                img.src = 'img/1.jpg';
+                flag = 1;
+            }
+            console.log(img.src);
+
+        }
+    </script>
+</body>
+
+</html>
