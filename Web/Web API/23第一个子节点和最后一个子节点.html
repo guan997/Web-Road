@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23第一个子节点和最后一个子节点</title>
+</head>
+<body>
+    <div id="box">
+        <div>这是一个广告图片</div>
+        <ul>
+            <li>这是一个列表</li>
+        </ul>
+        <span>说明性文字</span>
+    </div>
+    <script>
+        // firstChild 只读属性返回树中节点的第一个子节点，如果节点是无子节点，则返回 null。
+        // firstElementChild获取第一个子元素，有兼容性，从IE9以后支持
+        // lastChild 是一个只读属性，返回当前节点的最后一个子节点
+        // 。如果父节点为一个元素节点，则子节点通常为一个元素节点，或一个文本节点，或一个注释节点。如果没有子节点，则返回 null。
+        // lastElementChild 获取最后一个子元素 有兼容性，从IE9以后支持
+        var box = document.getElementById('box');
+        // console.log( box.firstChild);
+        // console.log( box.firstElementChild);
+
+        var ele = getElementById(box);
+        console.log(ele);
+
+        // 处理浏览器兼容性
+        function getElementById (element) {
+            var node, nodes = element.childNodes, i = 0;
+            while (node = nodes[i++]) {
+                if (Node.nodeType === 1) {
+                    return node;
+                }
+            }
+            return null;
+        }
+    </script>
+</body>
+</html>

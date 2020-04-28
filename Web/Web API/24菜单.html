@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24菜单</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul li{
+            float: left;
+            margin-left: 4px;
+            background-color: goldenrod;
+            color: blueviolet;
+            height: 32px;
+            text-align: center;
+            line-height: 32px;
+            width: 50px;
+        }
+        .current{
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <ul>
+            <li class="current"><a href="javascript:void(0)">首页</a></li>
+            <li><a href="javascript:undefined">博客</a></li>
+            <li><a href="javascript:void(0)">播客</a></li>
+            <li><a href="javascript:void(0)">相册</a></li>
+            <li><a href="javascript:void(0)">关于</a></li>
+            <li><a href="javascript:void(0)">帮助</a></li>
+        </ul>
+    </div>
+    <script src="js/common.js"></script>
+    <script>
+        // void是运算符
+        // 执行void后面的表达式，并始终返回undefined
+
+        var menu = my$('menu');
+        // 获取menu中的ul
+        var ul = getFirstElementChild(menu);
+
+        console.log(ul);
+        for (var i = 0; i< ul.children.length; i++) {
+            var li = ul.children[i];
+            // 获取li中的a标签
+            var link = getFirstElementChild(li);
+            // 注意，此时把函数赋给onclick 而不是函数的调用
+            link.onmouseover = linkClick;
+        }
+        function linkClick () {
+            // 所有的li高亮显示
+            for (var i = 0; i<ul.children.length;i++) {
+                var li = ul.children[i];
+                li.className = '';
+            }
+            // 让当前的a标签的li高亮显示
+            // this是当前点击的a标签对应的元素
+            this.parentNode.className = 'current';
+            // 取消后续内容的执行
+            return false;
+        }
+        
+    </script>
+</body>
+</html>
