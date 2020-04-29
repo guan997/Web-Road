@@ -16,7 +16,7 @@ function getFirstElementChild(element) {
 }
 // 获取下一个兄弟元素
 function getElementSibling(element) {
-    var el =element;
+    var el = element;
     while (el = el.nextSibling) {
         if (el.nodeType === 1) {
             return el;
@@ -31,12 +31,12 @@ function setInnerText(element, content) {
     // 判断当前浏览器是否支持 innerText
     if (typeof element.innerText === 'string') {
         element.innerText = content;
-    }else {
+    } else {
         element.textContent = content;
     }
 }
 
-function liMouseOver () {
+function liMouseOver() {
     // 鼠标经过高亮显示
     this.style.backgroundColor = 'yellow';
 }
@@ -44,3 +44,4 @@ function liMouseOut() {
     // 鼠标离开高亮显示
     this.style.backgroundColor = '';
 }
+

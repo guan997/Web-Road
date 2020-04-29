@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>31选择水果</title>
+    <style>
+        select {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <select id="all" multiple='multiple'>
+        <option>苹果</option>
+        <option>橘子</option>
+        <option>榴莲</option>
+        <option>香蕉</option>
+        <option>蓝莓</option>
+    </select>
+    <input type="button" value=">>" id="btn1">
+    <input type="button" value="<<" id="btn2">
+    <input type="button" value=">" id="btn3">
+    <input type="button" value="<" id="btn4">
+    <select id="select" multiple='multiple'></select>
+    <script src="js/common.js"></script>
+    <script>
+        var all = my$('all');
+        var section = my$('select');
+
+        all.children[0].onclick = function () {
+            alert('hello');
+        }
+        // 全部选择
+        var btn1 = document.getElementById('btn1');
+        // 全选
+        btn1.onclick = allXuan;
+        // 移动选中的苹果
+        var btn3 = document.getElementById('btn3');
+        btn3.onclick = function () {
+            // 找到所有选中的option
+            var arrray = [];// 存储选中的option
+            for (var i = 0; i < all.children.length; i++) {
+                var option = all.children[i];
+                if (option.selected) {
+                    arrray.push(option);
+                    // 去掉当前option的选中效果
+                    option.selected = false;
+                }
+            }
+            // 把数组中的option移动到第二个select中
+            for (var i = 0; i < arrray.length; i++) {
+                var option = arrray[i];
+                select.appendChild(option);
+            }
+        };
+        function allXuan() {
+            // 错误，因为children中的项被移走之后，索引会重新排列
+            // for (var i = 0;i<all.children.length;i++) {
+            //     var option = all.children[i];
+            //     select.appendChild(option);
+            // }
+            // 水果的顺序发生变化
+            // for (var i=all.children.length-1;i>=0;i--) {
+            //     var option = all.children[i];
+            //     select.appendChild(option);
+            // }
+            // 先获取子元素的个数，将来再发生变化时不会受到影响
+            // 现在len的值始终都是当前获取到的all.children.length
+            // var len = all.children.length;
+            // for (var i = 0; i < len; i++) {
+            //     var option = all.children[0];
+            //     select.appendChild(option);
+            // }
+
+            // innerHTML的问题
+            // 使用这种方式移动子元素的话，如果子元素有事件，移动之后元素的事件丢失
+            select.innerHTML = all.innerHTML;
+            // 当我们是用innerHTML 清空子元素的时候
+             // 如果子元素有事件，此时会发生内存泄漏  （事件还在内存中）
+            all.innerHTML = '';// 清空标签之间的内容
+        }
+    </script>
+</body>
+
+</html>
