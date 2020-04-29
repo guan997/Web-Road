@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29动态创建表格</title>
+    <style>
+        #box table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+
+    </div>
+    <script src="js/common.js"></script>
+    <script>
+        // 模拟数据
+        var datas = [
+            { name: 'sp', subjet: '语文', score: 90 },
+            { name: 's2p', subjet: '语文', score: 50 },
+            { name: 's3p', subjet: '语文', score: 60 },
+            { name: 'sp4', subjet: '语文', score: 90 },
+            { name: 's241p', subjet: '语文', score: 30 },
+            { name: 'sp24', subjet: '语文', score: 90 }
+        ];
+        // 表头数据
+        var headDates = ['姓名', '科目', '成绩', '操作'];
+
+        // 创建table元素
+        var table = document.createElement('table');
+        my$('box').appendChild(table);
+        table.border = '1px';
+        table.width = '400px';
+
+        // 创建表头
+        var thead = document.createElement('thead');
+        table.appendChild(thead);
+        var tr = document.createElement('tr');
+        thead.appendChild(tr);
+        tr.style.height = '48px';
+        tr.style.backgroundColor = 'lightgray';
+
+        // 遍历数组，生成表头
+        for (var i = 0; i < headDates.length; i++) {
+            var th = document.createElement('th');
+            tr.appendChild(th);
+            setInnerText(th, headDates[i]);
+        }
+
+        // 创建数据行
+        var tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+        tbody.style.textAlign = 'center';
+        for (var i = 0; i < datas.length; i++) {
+            // 一个学生的成绩
+            var data = datas[i];
+            tr = document.createElement('tr');
+            tbody.appendChild(tr);
+            // 遍历对象
+            for (var key in data) {
+                var td = document.createElement('td');
+                tr.appendChild(td);
+                setInnerText(td, data[key]);
+            }
+            // 生成删除对应的列
+            var td = document.createElement('td');
+            tr.appendChild(td);
+            // 删除超链接
+            var link = document.createElement('a');
+            td.appendChild(link);
+            link.href = 'javascript:void(0)';
+            setInnerText(link, '删除');
+            link.onclick = linkDelete;
+
+        }
+        function linkDelete () {
+            // removeChild()
+            // 获取父元素的父元素this.parentNode.parentNode，既a标签的单元格上的行
+            var tr = this.parentNode.parentNode;
+            tbody.removeChild(tr);
+            return false;
+        }
+
+    </script>
+</body>
+
+</html>

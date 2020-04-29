@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态创建元素2</title>
+</head>
+<body>
+    <div id="box">
+        <div>111</div>
+    </div>
+    <script>
+        
+        // 动态创建元素
+        // document.write()
+        // element.innerHTML
+        // document.createElement()
+        // 在内存中创建一个对象 一次性
+        var p = document.createElement('p');
+        // 设置对象的属性
+        p.innerText = 'Hello';
+        p.style.color = 'red';
+
+        // 把p元素，放到DOM树上
+        var box = document.getElementById('box');
+        box.appendChild(p);
+    </script>
+</body>
+</html>

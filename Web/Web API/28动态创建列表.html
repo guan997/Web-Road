@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>28动态创建列表</title>
+</head>
+<body>
+    <input type="button" value="按钮"id='btn'>
+    <div id="box"></div>
+    <script src="js/common.js"></script>
+    <script>
+        var datas = ['西施', '貂蝉', '凤姐', '杨玉环'];
+        // 点击按钮 动态创建列表 ，鼠标放上高亮显示
+        my$('btn').onclick = function () {
+            // 动态创建ul， 内存中创建对象
+            var ul = document.createElement('ul');
+            // 把ul放到页面上 把ul放到DOM树上，并且会重新绘制
+            my$('box').appendChild(ul);
+            for (var i = 0; i < datas.length; i++) {
+                var data = datas[i];
+                // 在内存中创建li
+                var li = document.createElement('li');
+                // 把li添加到DOM树，并且会重新绘制
+                ul.appendChild(li);
+                // 设置li中显示的兼容性
+                setInnerText(li,data);
+                // 给li注册事件
+                li.onmouseover = liMouseOver;
+                li.onpointerout = liMouseOut;
+            }
+        }
+    </script>
+</body>
+</html>

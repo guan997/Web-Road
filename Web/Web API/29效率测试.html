@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29效率测试</title>
+</head>
+<body>
+    <script>
+        // 1、innerHTML
+        // function fn () {
+        //     var d1 = +new Date();
+        //     var array = [];
+        //     for (var i = 0; i <1000; i++) {
+        //         document.body.innerHTML += '<div style="width:100px; height:2px;border:1px solid blue;"></div>';
+        //     }
+        //     // +取正
+        //     var d2 = +new Date();
+        //     console.log(d2 -d1);
+        // }
+        // fn();
+        // 2、借用数组
+        // function fn () {
+        //     var d1 = +new Date();
+        //     var array = [];
+        //     for (var i = 0; i <1000; i++) {
+        //         array.push('<div style="width:100px; height:2px;border:1px solid blue;"></div>')
+        //     }
+        //     document.body.innerHTML = array.join('');
+        //     var d2 = +new Date();
+        //     console.log(d2 -d1);
+        // }
+        // fn();
+
+        // 3、createElement 结构好 适合复杂 比借用数组慢一点点
+        function fn () {
+            var d1 = +new Date();
+            for (var i = 0; i <1000; i++) {
+                var div = document.createElement('div');
+                div.style.width = '100px';
+                div.style.height = '2px';
+                div.style.border = '1px solid red';
+                document.body.appendChild(div);
+            }
+            // +取正
+            var d2 = +new Date();
+            console.log(d2 -d1);
+        }
+        fn();
+    </script>
+</body>
+</html>
