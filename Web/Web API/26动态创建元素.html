@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态创建元素</title>
+</head>
+
+<body>
+    <h1>标题</h1>
+    <img src="" alt="">
+    <input type="button" value="按钮" id='btn'>
+    <div id="box"></div>
+    <script>
+        // 动态创建元素
+        // document.write()
+        // element.innerHTML
+        // document.createElement()
+        // var btn = document.getElementById('btn');
+        // btn.onclick = function () {
+        // 1、document.write()当点击按钮的时候使用document.write()输出内容，会把之前的整个页面覆盖
+        // document.write('标签<p>ppp</p>');
+
+        // 2、element.innerHTML
+        // var box =document.getElementById('box');
+        // box.innerHTML = 'Hello <p>World</p>';
+
+        // }
+        // 点击按钮 生成列表，鼠标放上去高亮显示
+        // 模拟数据
+        // var datas = ['西施', '貂蝉', '凤姐', '芙蓉姐姐'];
+        // var btn = document.getElementById('btn');
+        // btn.onclick = function () {
+        //     var box = document.getElementById('box');
+        //     box.innerHTML = '<ul>';// 重新绘制 效率问题 重绘
+        //     // 遍历数据
+        //     for (var i = 0; i <datas.length; i++) {
+        //         var date = datas[i]
+        //         box.innerHTML += '<li>'+date+'</li>';
+        //     }
+        //     box.innerHTML += '</ul>';
+        // }
+            // 优化1
+        var datas = ['西施', '貂蝉', '凤姐', '芙蓉姐姐'];
+        var btn = document.getElementById('btn');
+        btn.onclick = function () {
+            var box = document.getElementById('box');
+            // 使用数组 代替字符串拼接
+            var array = [];
+            array.push('<ul>')
+            // var html = '<ul>';// 重新开辟内存 需要耗费时间
+            // 遍历数据
+            for (var i = 0; i < datas.length; i++) {
+                var date = datas[i]
+                array.push ('<li>' + date + '</li>');
+            }
+            array.push('</ul>');
+            box.innerHTML = array.join(''); 
+        }
+    </script>
+    <!-- 在线客服代码 -->
+    <!-- <script>
+        (function(){
+            var st = document.createElement("script");
+            st.src = "https://c.ibangkf.com/i/c-QQ.js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(st, s);
+        })();
+        </script> -->
+</body>
+
+</html>
