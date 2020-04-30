@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>32addEventListener监听器</title>
+</head>
+<body>
+    <input type="button" value="按钮" id="btn">
+    <!-- 后引用和赋值的最新 -->
+    <!-- <script src="js/user1.js"></script>
+    <script src="js/user2.js"></script> -->
+    <script>
+        // 注册事件
+        var btn = document.getElementById('btn');
+        var a = 10;
+        // 1、注册事件的第一种方式
+        // 无法给同一个对象的同一个事件注册多个事件处理函数
+        // btn.onclick = function () {
+        //     alert(a);
+        // }
+        // 2、EventTarget.addEventListener() 方法将指定的监听器注册到 EventTarget 上，
+        // 当该对象触发指定的事件时，指定的回调函数就会被执行。
+        btn.addEventListener('click',function(){
+            alert('hello world');
+        })
+        // addEventListener可以注册多个事件
+        btn.addEventListener('click',function(){
+            alert('你好');
+        })
+    </script>
+</body>
+</html>
