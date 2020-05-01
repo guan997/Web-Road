@@ -43,20 +43,34 @@
         // addEventListener 第三个参数为true为事件捕获，从外而内
 
         // 事件的三个阶段 捕获阶段 执行阶段（执行当前点击的元素） 冒泡阶段 
-        for (var i = 0; i < array.length; i++) {
-            array[i].addEventListener('click', function () {
-                console.log(this.id);
-            }, true);
-        }
-        document.body.addEventListener('click', function () {
-            console.log('body');
-        }, true);
+        // for (var i = 0; i < array.length; i++) {
+        //     array[i].addEventListener('click', function () {
+        //         console.log(this.id);
+        //     }, true);
+        // }
+        // document.body.addEventListener('click', function () {
+        //     console.log('body');
+        // }, true);
 
-         // 注册事件三种方式的事件
-         // box.onclick  只有事件冒泡， 只有事件冒泡
-         // attachEvent只有两个参数， 只有事件冒泡
-         // box.attachEvent('onclick', function () {
-         // });
+        // 注册事件三种方式的事件
+        // box.onclick  只有事件冒泡， 只有事件冒泡
+        // attachEvent只有两个参数， 只有事件冒泡
+        // box.attachEvent('onclick', function () {
+        // });
+        // box.onclick  只有事件冒泡， 只有事件冒泡
+        for (var i = 0; i < array.length; i++) {
+            var box = array[i];
+            box.onclick = function () {
+                console.log(this.id);
+            }
+        }
+
+        document.body.onclick = function () {
+            console.log('body');
+        }
+        document.body.onclick = function () {
+            console.log('document');
+        }
     </script>
 </body>
 
