@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>42取消默认行为</title>
+</head>
+
+<body>
+    <a href="http://www.baidu.com" id="link">百度</a>
+    <script>
+        var link = document.getElementById('link');
+        link.onclick = function (e) {
+            alert('hello');
+
+            // 取消默认行为执行
+            // return false;   
+
+            // DOM标准方法
+            // e.preventDefault();
+
+            // IE的老版本，非标准方式
+            // e.returnValue = false;
+        }
+    </script>
+</body>
+
+</html>
