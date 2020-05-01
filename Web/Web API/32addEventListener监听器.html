@@ -21,6 +21,7 @@
         // }
         // 2、EventTarget.addEventListener() 方法将指定的监听器注册到 EventTarget 上，
         // 当该对象触发指定的事件时，指定的回调函数就会被执行。
+        // 浏览器兼容性问题 IE9以后支持
         // btn.addEventListener('click',function(){
             // alert('hello world');
         // })
@@ -30,7 +31,7 @@
         // })
 
         // 注册事件的第三种方式
-        // 浏览器兼容性问题 IE的老版本特有的方法 IE6-10支持
+        // 浏览器兼容性问题 IE的老版本特有的方法！！！ IE6-10支持
         
         // 第一个参数，事件的名称前要加on
         btn.attachEvent('onclick', function (){
