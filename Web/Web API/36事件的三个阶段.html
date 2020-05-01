@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>36事件的三个阶段（事件捕获/执行/冒泡）</title>
     <style>
-        #box1{
+        #box1 {
             width: 200px;
             height: 200px;
             background-color: bisque;
         }
-        #box2{
+
+        #box2 {
             width: 100px;
             height: 100px;
             background-color: blue;
         }
-        #box3{
+
+        #box3 {
             height: 50px;
             width: 50px;
             background-color: burlywood;
         }
     </style>
 </head>
+
 <body>
     <div id="box1">
         <div id="box2">
@@ -33,20 +37,27 @@
         var box1 = document.getElementById('box1');
         var box2 = document.getElementById('box2');
         var box3 = document.getElementById('box3');
-        var array = [box1,box2,box3];
-        
+        var array = [box1, box2, box3];
+
         // addEventListener 第三个参数为false时 是事件冒泡，从内到外
         // addEventListener 第三个参数为true为事件捕获，从外而内
 
         // 事件的三个阶段 捕获阶段 执行阶段（执行当前点击的元素） 冒泡阶段 
-        for (var i = 0; i<array.length; i++) {
+        for (var i = 0; i < array.length; i++) {
             array[i].addEventListener('click', function () {
                 console.log(this.id);
-            },true);
+            }, true);
         }
         document.body.addEventListener('click', function () {
-                console.log('body');
-            },true);
+            console.log('body');
+        }, true);
+
+         // 注册事件三种方式的事件
+         // box.onclick  只有事件冒泡， 只有事件冒泡
+         // attachEvent只有两个参数， 只有事件冒泡
+         // box.attachEvent('onclick', function () {
+         // });
     </script>
 </body>
+
 </html>
