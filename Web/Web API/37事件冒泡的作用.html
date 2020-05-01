@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>37事件冒泡的作用</title>
+</head>
+
+<body>
+    <ul id="ul">
+        <li>西施</li>
+        <li>杨幂</li>
+        <li>刘亦菲</li>
+        <li>貂蝉</li>
+        <li>古力娜扎</li>
+    </ul>
+    <script>
+        // 事件委托 原理事件冒泡
+        var ul = document.getElementById('ul');
+        ul.onclick = function (e) {
+            // e 事件参数 但时间发生的时候 可以获取一些和事件相关的数据
+            // 获取到当前点击的li
+            // e.target是真正触发事件的对象
+            console.log(e.target);
+            // 让当前点击的对象高亮显示
+            e.target.style.backgroundColor = 'red';
+        }
+        ul.onmouseout = function (e) {
+            e.target.style.backgroundColor = '';
+        }
+    </script>
+</body>
+
+</html>
