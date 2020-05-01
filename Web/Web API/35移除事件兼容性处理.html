@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>35移除事件兼容性处理</title>
+</head>
+<body>
+    <input type="button" value="按钮" id="btn">
+    <script src="js/common.js"></script>
+    <script>
+        var btn = my$('btn');
+        function btnClick () {
+            alert('hello');
+            // 移除事件
+            removeEventListener(btn,'click',btnClick);
+        } 
+        addEventListener(btn,'click',btnClick);
+    </script>
+</body>
+</html>

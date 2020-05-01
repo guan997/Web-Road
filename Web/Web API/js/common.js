@@ -44,4 +44,31 @@ function liMouseOut() {
     // 鼠标离开高亮显示
     this.style.backgroundColor = '';
 }
+// 处理注册事件的兼容性问题
+// eventName, 不带on， click mouseover  mouserout
+function addEventListener(element, eventName, fn) {
+    // 判断当前浏览器是否支持addEventListener 方法
+    if (element.addEventListener) {
+        element.addEventListener(eventName, fn);
+        // 第三个参数 默认是false
+    } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, fn);
+    } else {
+        // 相当于element.onclick = fn;
+        element['on' + eventName] = fn;
+    }
+}
 
+// 处理移除事件的兼容性问题
+function removeEventListener(element, eventName, fn) {
+    // 判断当前浏览器是否支持addEventListener 方法
+    if (element.removeEventListener) {
+        element.removeEventListener(eventName, fn);
+        // 第三个参数 默认是false
+    } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, fn);
+    } else {
+        // 相当于element.onclick = null;
+        element['on' + eventName] = null;
+    }
+}
