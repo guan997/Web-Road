@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3js中的加载</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    // <!-- BOM onload 页面加载完成之后执行
+    // 页面卸载之后 页面上所有的元素创建完毕，并且应用的外部资源下载完毕 -->
+    // <!-- window.onload -->
+    onload = function (){
+        var box = document.getElementById('box');
+        console.dir(box);
+    }
+    // 页面卸载的时候执行
+    // window.unload
+    onunload = function (){
+         // 在onunload中所有的对话框都无法使用 window 对象被冻结
+      // Blocked alert('欢迎下次再来') during unload.
+      // alert('欢迎下次再来');
+        console.log('bye bye');
+    }
+    </script>
+</body>
+</html>

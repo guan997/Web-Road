@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM</title>
+
+</head>
+
+<body>
+    <script>
+        // 当我们是用window的成员的时候，window可以省略
+        // window.document
+        // 定义的全局变量都属于window，都是window对象的属性
+        var age = 18;
+        console.log(window.age);
+        window.console.log('hello');
+        // name是window得双属性，是字符串类型
+        var name = 123;
+        console.log(name);
+        // top是window的属性，只能获取不能赋值 Window
+        var top = 12;
+        console.log(top);
+    </script>
+</body>
+
+</html>
