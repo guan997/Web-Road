@@ -7,7 +7,7 @@
 </head>
 <body>
     <input type="button" value="跳转" id="btn">
-
+    <input type="button" value="前进" id="btn2">
     <script>
         var btn =document.getElementById('btn');
         btn.onclick =function () {
@@ -25,6 +25,12 @@
             location.reload(true);
             // f5  刷新页面，可能从缓存中加载  
             //  control+f5 强制刷新  从服务器获取页面
+
+            var btn2 = document.getElementById('btn2');
+            btn2.onclick = function() {
+                // history.back();
+                history.go(-1);
+            }
         }
     </script>
 </body>
