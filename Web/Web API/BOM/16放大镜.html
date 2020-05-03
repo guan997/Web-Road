@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16放大镜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 350px;
+            height: 350px;
+            margin: 100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+
+        .big img {
+            position: absolute;
+        }
+
+        .mask {
+            width: 175px;
+            height: 175px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            cursor: move;
+            display: none;
+        }
+
+        .small {
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="small">
+        <img src="img/small.webp" width='350' alt="">
+        <div class="mask"></div>
+    </div>
+    <div class="big">
+        <img src="img/big.jpg" width="800" alt="">
+    </div>
+</div>
+<script src="js/common.js"></script>
+<script>
+    var box = my$('box');
+    var smallBox = box.children[0];
+    var bigBox = box.children[1];
+    var smallImage = smallBox.children[0];
+    var mask = smallBox.children[1];
+    var bigImage = bigBox.children[0];
+
+    // 鼠标经过的时候 显示mask和bigBox
+    // 但鼠标离开box的时候隐藏mask和bigBox
+    box.onmouseover = function (){
+        // 显示mask和bigBox
+        mask.style.display = 'block';
+        migBox.style.display = 'block';
+    }
+    box.onmouseout = function (){
+        // 隐藏mask和bigBox
+        mask.style.display = 'none';
+        migBox.style.display = 'none';
+    }
+</script>
+</body>
+</html>
