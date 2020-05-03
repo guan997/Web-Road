@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17mouseenter和mouseover的区别</title>
+    <style>
+        #box1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background-color: royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1">
+        <div id="box2"></div>
+    </div>
+    <script>
+        // 17mouseenter和mouseover的区别
+        var box1 = document.getElementById('box1');
+        var box2 = document.getElementById('box2');
+
+        var i = 0;
+        // 触发子元素的mouseover，会冒泡到父元素
+        // box1.onmouseover = function () {
+        //     i++;
+        //     console.log(i);
+        // }
+        // mouseenter   mouseleave     不会触发事件冒泡
+        // mouseover   mouseout        会触发事件冒泡
+        // 此事件不触发事件冒泡
+        box1.onmouseenter = function () {
+            i++;
+            console.log(i);
+        }
+    </script>
+</body>
+
+</html>

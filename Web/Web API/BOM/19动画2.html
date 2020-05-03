@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19简单动画2</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #box {
+            position: relative;
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="动画 800" id="btn">
+    <input type="button" value="动画 400" id="btn1">
+    <div id="box"></div>
+    <script>
+        var btn = document.getElementById('btn');
+        var box = document.getElementById('box');
+        var timerId = null;
+        btn.onclick = function () {
+            animate(box,800);
+        }
+        var btn1 = document.getElementById('btn1');
+        btn1.onclick = function () {
+            animate(box,400);
+        }
+        // 封装动画的函数
+        function animate(element,target) {
+            // 通过判断，保证页面上只有一个定时器在执行动画
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+            }
+            timerId = setInterval(function () {
+                // 步进
+                var step = 10;
+                // 盒子当前的位置
+                var current = element.offsetLeft ;
+                if (current >= target) {
+                    // 停止定时器
+                    clearInterval(timerId);
+                    // 设置横坐标为500
+                    element.style.left = target + 'px';
+                    // 退出函数
+                    return;
+                }
+                // 移动盒子
+                current += step;
+                element.style.left = current + 'px';
+            }, 30);
+        }
+    </script>
+</body>
+
+</html>
