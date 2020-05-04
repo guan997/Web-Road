@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>19简单动画2</title>
     <style>
+        /* 消除边距，解决速度不同问题 */
         body {
             margin: 0;
         }
@@ -16,6 +17,12 @@
             width: 100px;
             height: 100px;
         }
+        #box1 {
+            position: relative;
+            background-color: blue;
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 
@@ -23,42 +30,24 @@
     <input type="button" value="动画 800" id="btn">
     <input type="button" value="动画 400" id="btn1">
     <div id="box"></div>
+    <div id="box1"></div>
+    <script src="js/animate.js"></script>
     <script>
         var btn = document.getElementById('btn');
         var box = document.getElementById('box');
-        var timerId = null;
+        var box1 = document.getElementById('box1');
+        // var timerId = null;
         btn.onclick = function () {
             animate(box,800);
+            animate(box1,800);
+
         }
         var btn1 = document.getElementById('btn1');
         btn1.onclick = function () {
             animate(box,400);
+            animate(box1,400);
         }
-        // 封装动画的函数
-        function animate(element,target) {
-            // 通过判断，保证页面上只有一个定时器在执行动画
-            if (timerId) {
-                clearInterval(timerId);
-                timerId = null;
-            }
-            timerId = setInterval(function () {
-                // 步进
-                var step = 10;
-                // 盒子当前的位置
-                var current = element.offsetLeft ;
-                if (current >= target) {
-                    // 停止定时器
-                    clearInterval(timerId);
-                    // 设置横坐标为500
-                    element.style.left = target + 'px';
-                    // 退出函数
-                    return;
-                }
-                // 移动盒子
-                current += step;
-                element.style.left = current + 'px';
-            }, 30);
-        }
+       
     </script>
 </body>
 
