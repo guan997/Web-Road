@@ -1,4 +1,4 @@
- // 封装动画的函数
+ // 封装动画的函数(盒子，距离)
  function animate(element,target) {
     // 通过判断，保证页面上只有一个定时器在执行动画
     if (element.timerId) {
