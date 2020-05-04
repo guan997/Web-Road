@@ -173,24 +173,55 @@
         // 下一张
         var index = 0;// 第一张图片的索引
         arrRight.onclick = function () {
-            // 如果是最后一张图片，不然index++
-            if (index < count -1){
-                index++;
+            // 判断是否是克隆的第一张图片，如果是克隆的第一张图片，此时修改ul
+            // 的坐标，显示真正的第一张图片
+            if (index === count) {
+                ul.style.left = '0px';
+                index = 0;
+            }
+            // 总共有5张图片，但是还有一张克隆的图片  克隆的图片的索引是5
+            // 4 < 5
+            index++;
+            if (index < count) {
                 // animate(ul,-i * imgWidth);
                 // 获取图片对应的序号，让序号点击
                 ol.children[index].click();
+            } else {
+                // 如果是最后一张图片以动画的方式，移动到克隆的第一张图片
+                animate(ul, -index * imgWidth);
+                // 取消所有的高亮显示，让第一序号高亮显示
+                for (var i = 0; i < ol.children.length; i++) {
+                    var li = ol.children[i];
+                    li.className = '';
+                }
+                ol.children[0].className = 'current';
             }
         }
         // 上一张
         arrLeft.onclick = function () {
-            // 如果不是第一张的话，index--
-            if (index > 0){
-                index --;
-                // animate(ul,-i * imgWidth);
-                ol.children[index].click();
+            // 如果当前是第一张图片，此事要偷偷的切换到最后一张图片的位置
+            // （克隆第一张图片）
+            if (index === 0) {
+                index = count;
+                ul.style.left = - index * imgWidth + 'px';
             }
+            index--;
+            ol.children[index].click();
+            // // 如果不是第一张的话，index--
+            // if (index > 0) {
+            //     index--;
+            //     // animate(ul,-i * imgWidth);
+            //     ol.children[index].click();
+            // }
         }
-
+        // 无缝滚动
+        // 获取ul中的第一个li
+        var firstLi = ul.children[0];
+        // 克隆li cloneNode() 复制节点
+        // 参数 true 复制节点中的内容
+        // false只复制当前节点，不复制里面的内容
+        var cloneLi = firstLi.cloneNode(true);
+        ul.appendChild(cloneLi);
     </script>
 </body>
 

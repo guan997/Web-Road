@@ -29,5 +29,5 @@
         // 移动盒子
         current += step;
         element.style.left = current + 'px';
-    }, 30);
+    }, 5);
 }
