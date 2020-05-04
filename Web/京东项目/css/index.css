@@ -215,6 +215,12 @@
 .news-b{
 	padding-top: 15px ;
 }
+.hide{
+	display: none;
+}
+.show{
+	display: block;
+}
 .news-b li{
 		line-height: 23px;
 		height: 23px;
