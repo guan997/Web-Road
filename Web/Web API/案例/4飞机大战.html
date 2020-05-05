@@ -145,7 +145,7 @@
                 for (var i = 0; i < objF.arr.length; i++) {
                     var newArr = objF.arr[i].split('|');
                     var eleB = document.getElementById(newArr[0]);
-                    newArr[1] = parseInt(newArr[1]) - 1;
+                    newArr[1] = parseInt(newArr[1]) + 1;
                     eleB.style.top = newArr[1] + 'px';
                     objF.arr[i] = newArr[0] + '|' + newArr[1] + '|' + newArr[2];
                     if (newArr[1] > view.offsetHeight - 24) {
@@ -161,6 +161,29 @@
             moveBullet();
             // 让敌机运动起来
             moveFoe();
+            // 让子弹和敌机相遇消失
+            for (var i =0 ;i < objF.arr.length; i++) {
+                var newArr = objF.arr[i].split('|');
+                var eleF = document.getElementById(newArr[0]);
+                var xFS = parseInt(newArr[2]);
+                var xFE = parseInt(newArr[2]) + 34;
+                var yFS = parseInt(newArr[1]);
+                var yFE = parseInt(newArr[1]) +24;
+                for (var j = 0; j < objB.arr.length; j++) {
+                    var newArrl = objB.arr[j].split('|');
+                    var eleB =document.getElementById(newArrl[0]);
+                    var xB =parseInt(newArrl[2]);
+                    var yB =parseInt(newArrl[1]);
+                    var xCheck = xB > xFS && xB < xFE;
+                    var yCheck = yB > yFS && yB < yFE;
+                    if(xCheck && yCheck) {
+                        objF.arr.splice(i, 1);
+                        eleF.parentNode.removeChild(eleF);
+                        objB.arr.splice(j, 1);
+                        eleB.parentNode.removeChild(eleB);
+                    }
+                } 
+            }
         },10)
     </script>
 </body>
