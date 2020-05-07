@@ -18,10 +18,25 @@
             console.log(this.name + this.blood + this.weapon);
         }
         var hero = new Hero('zd', 100, 'jian');
-        hero.attack();
+        // hero.attack();
         var hero1 = new Hero('z32d', 2770, 'jian');
-        hero1.attack();
-        console.log(hero.attack === hero1.attack);
+        // hero1.attack();
+        // console.log(hero.attack === hero1.attack);
+        // console.dir(hero);
+        // 当调用对象的属性或者方法的时候，先去找对象本身的属性/方法
+        // 如果对象没有该属性或者方法，此时去调用原型中的属性/方法
+        // 如果对象本身没有该属性/方法，原型中也没有该属性或者方法，此时会报错
+        // hero对象的.__proto__ 等于 构造函数的 Hero.prototype
+        //  __proto__属性是非标准的属性
+        console.log(hero.__proto__ === Hero.prototype);
+        console.dir(Hero.__proto__);
+        console.dir(Hero.prototype);
+        // 在原型对象中有一个属性constructor 构造函数
+        // constructor 作用记录了创建该对象的构造函数，记录了创建该对象的构造函数
+        console.log(hero.constructor === Hero);
+        var arr = [];
+        // Array.prototype.constructor
+        console.log(arr.constructor === Array);
     </script>
 </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7原型链</title>
+</head>
+<body>
+    <img src="image/yuanxinglian.jpg" height="400" width="600" alt="">
+<script>
+// 构造函数 原型对象 实例/对象hero.__proto__之间的关系
+ // 当调用对象的属性或者方法的时候，先去找对象本身的属性/方法
+        // 如果对象没有该属性或者方法，此时去调用原型中的属性/方法
+        // 如果对象本身没有该属性/方法，原型中也没有该属性或者方法，此时会报错
+function Student(name, blood, weapon) {
+        this.name = name;
+        this.blood = blood;
+        this.weapon = weapon;
+        this.attack = function() {
+            console.log('test');
+        }
+    }
+    Student.prototype.attack = function () {
+        console.log(this.name + this.blood + this.weapon);
+    }
+    // Student.prototype中的对象
+    var s1 = new Student('zd', 100, 'jian');
+    s1.attack();// 就近原则，在对象本身查找到就不在原型链上查找
+    // o(s1.__proto__)对象=Student原型对象  Object
+    var o = s1.__proto__;
+    console.dir(o.__proto__);
+    // o1原型对象o1.__proto__ = Object原型对象
+    var o1 = o.__proto__;
+    // Object原型对象为null
+    console.dir(o1.__proto__);
+</script>
+</body>
+</html>
