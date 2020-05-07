@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1面向对象</title>
+</head>
+
+<body>
+    <script>
+        // 打印学生成绩
+        // 1 面向过程
+        // 1.1 记录学生的成绩
+        var stu1 = { name: 'zj', subject: '语文', score: '90' };
+        var stu2 = { name: 'sg', subject: '语文', score: '70' };
+        // 1.2 打印学生的成绩
+        console.log(stu1.name, stu1.subject, stu1.score);
+        console.log(stu2.name, stu2.subject, stu2.score);
+        // 2面向对象
+        // 创建一个模板，用于创建对象（实例instance）
+        // 在JavaScript中出创建对象的模板是构造函数
+        // 而在其他语言中创建对象的模板是类、
+        function Student(name, subject, score) {
+            this.name = name;
+            this.score = score;
+            this.subject = subject;
+            this.printScore = function () {
+                console.log(this.name, this.subject,this.score);
+            }
+        }
+        var stu11 = new Student('ss','数学','123');
+        
+        var stu22 = new Student('tt','数学','93');
+        stu11.printScore();
+        stu22.printScore();
+    </script>
+</body>
+
+</html>
