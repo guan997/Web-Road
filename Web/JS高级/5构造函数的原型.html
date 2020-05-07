@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5构造函数的原型</title>
+</head>
+
+<body>
+    <script>
+        // function Hero(name, blood, weapon) {
+        //     this.name = name;
+        //     this.blood = blood;
+        //     this.weapon = weapon;
+        //     //    多个对象，会存储多个attack方法
+        //     this.attack = function () {
+        //         console.log(this.name + this.blood + this.weapon);
+        //     }
+        // }
+        // var hero = new Hero('zd', 100, 'jian');
+        // hero.attack();
+        // var hero1 = new Hero('z32d', 2770, 'jian');
+        // hero1.attack();
+        // console.log(hero.attack === hero1.attack);
+
+        // 解决attack存储多份的问题
+        function Hero(name, blood, weapon) {
+            this.name = name;
+            this.blood = blood;
+            this.weapon = weapon;
+            //多个对象，会存储多个attack方法 重名
+            this.attack = attack;
+            function attack() {
+                console.log(this.name + this.blood + this.weapon);
+            }
+        }
+        var hero = new Hero('zd', 100, 'jian');
+        hero.attack();
+        var hero1 = new Hero('z32d', 2770, 'jian');
+        hero1.attack();
+        // 多个对象，会存储多个attack方法 内存地址不同 内存浪费
+        console.log(hero.attack === hero1.attack);
+    </script>
+</body>
+
+</html>

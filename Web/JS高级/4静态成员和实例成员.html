@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4静态成员和实例成员</title>
+</head>
+<body>
+    <script>
+        var MyMath = {
+            PI: 3.1415926,
+            max: function () {
+            },
+            min: function () {
+            }
+        }
+        // 工具中使用静态成员
+        // 静态成员 直接使用对象来调用
+        // MyMath.PI;
+        // MyMath.max();
+
+        // 当有多个对象的时候，使用构造函数的形式来创建对象
+        // 实例成员:构造函数中的成员就是实例成员
+        // 实例:对象的另一种方法
+        function Hero(name, blood, weapon) {
+               this.name = name;
+               this.blood = blood;
+               this.weapon = weapon;
+               this.attack = function () {
+                   console.log(this.name + this.blood);
+               }
+        }
+        var hero = new Hero('zd',100,'jian');
+        hero.attack();
+    </script>
+</body>
+</html>

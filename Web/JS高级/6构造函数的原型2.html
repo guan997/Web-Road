@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6构造函数的原型2</title>
+</head>
+<body>
+    <script>
+         // 解决attack存储多份的问题
+        //  每一个构造函数都有一个属性 原型 / 原型对象
+         function Hero(name, blood, weapon) {
+            this.name = name;
+            this.blood = blood;
+            this.weapon = weapon;
+        }
+        Hero.prototype.attack = function () {
+            console.log(this.name + this.blood + this.weapon);
+        }
+        var hero = new Hero('zd', 100, 'jian');
+        hero.attack();
+        var hero1 = new Hero('z32d', 2770, 'jian');
+        hero1.attack();
+        console.log(hero.attack === hero1.attack);
+    </script>
+</body>
+</html>
