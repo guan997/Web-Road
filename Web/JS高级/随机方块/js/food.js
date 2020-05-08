@@ -29,10 +29,10 @@
     // 随机变换坐标的方法，当蛇吃到食物了，让食物的坐标随机改变一下
     Food.prototype.render = function () {
         var div = this.element;
-        this.x = util.getRandom(0, map.offsetWidth / this.width) 
-        * this.width;
-        this.y = util.getRandom(0, map.offsetHeight / this.height) 
-        * this.height;
+        this.x = util.getRandom(0, map.offsetWidth / this.width)
+            * this.width;
+        this.y = util.getRandom(0, map.offsetHeight / this.height)
+            * this.height;
         div.style.left = this.x + 'px';
         div.style.top = this.y + 'px';
     }
