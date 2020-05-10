@@ -7,6 +7,7 @@
 // fn();
 
 // 自调用函数  开启一个新的作用域， 避免命名冲突
+// 3、自调用函数== 当函数书写完成后立即调用
 (function () {
     // 局部作用域
     var position = 'absolute';
@@ -38,7 +39,7 @@
         div.style.position = position;
         div.style.left = this.x + 'px';
         div.style.top = this.y + 'px';
-        div.style.width = this.width + 'px';
+        div.style.width = this.width + 'px' ;
         div.style.height = this.height + 'px';
         div.style.backgroundColor = this.color;
     }
@@ -46,6 +47,7 @@
         for (var i = elements.length - 1; i >= 0; i --) {
             // 删除div
             elements[i].parentNode.removeChild(elements[i]);
+
             // 删除数组中的元素
             // 删除数组元素
             // 第一个参数，从哪个元素开始删除
