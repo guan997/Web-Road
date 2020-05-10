@@ -12,7 +12,7 @@
         this.height = options.height || 20;
         this.x = 0;
         this.y = 0;
-        this.color = options.color || 'hotpink';
+        this.color = options.color || 'hotlink';
         this.element = document.createElement('div');
         this.init();
     }
@@ -22,6 +22,7 @@
         div.style.width = this.width + 'px';
         div.style.height = this.height + 'px';
         div.style.backgroundColor = this.color;
+        // 脱离文档流
         div.style.position = 'absolute';
         this.render(); // 第一次初始化的时候先设置一个随机坐标
         map.appendChild(div);

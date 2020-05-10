@@ -8,6 +8,7 @@
 <body>
     <script>
         var array = [5, 4, 1, 8];
+        // 给数组对象新增方法
         Array.prototype.getSum = function () {
             // 求数组中所有偶数的和
             var sum = 0;
@@ -31,6 +32,7 @@
         //         return sum;
         //     }
         // }
+        console.log(array.prototype);
         console.log(array.getSum());
     </script>
 </body>

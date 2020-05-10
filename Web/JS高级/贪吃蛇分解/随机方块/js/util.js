@@ -6,7 +6,7 @@
 (function (window) {
     var util = {
         getRandom: function (min, max) {
-            return Math.floor(Math.random() * (max - min) + min);
+            return Math.floor(Math.random() * (max - min + 1) + min);
         }
     }
     // 将内部的util提升到window，外部就可以访问到了
