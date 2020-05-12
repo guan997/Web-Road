@@ -8,11 +8,7 @@
     Game.prototype.start = function () {
         // 1.把蛇和食物对象，渲染到地图上
         this.food.render(this.map);
-        this.snake.move(this.map);
-        this.snake.render(this.map);
-        this.snake.move(this.map);
-        this.snake.render(this.map);
-        this.snake.move(this.map);
+        // this.snake.move(this.map);
         this.snake.render(this.map);
         // 2.开始游戏的逻辑
     }
