@@ -2,7 +2,9 @@
 // 1.减少作用于查找范围
 // 2.在代码压缩的时候可以减少文件体积
 // 3.声明依赖
-; (function () {
+// 自调用函数传入window的目的 ，让变量名可以被压缩
+// 在老版本的浏览器中undefined可以被重新赋值
+; (function (window, undefined) {
     var Tools = {
         getRandom: function (min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -10,7 +12,7 @@
     }
     // 将内部的util提升到window，外部就可以访问到了
     window.Tools = Tools;
-})()
+})(window, undefined)
     // 或者
     // var Tools = {
     //     getRandom: function (min, max) {
@@ -27,7 +29,7 @@
     // fn();
 
     // 自调用函数  开启一个新的作用域， 避免命名冲突
-    ; (function () {
+    ; (function (window, undefined) {
         // 局部作用域
         var position = 'absolute';
         // 记录上一次创建的食物，为删除做准备
@@ -75,10 +77,10 @@
         }
         // 把Food构造函数 让外部可以访问
         window.Food = Food;
-    })()
+    })(window, undefined)
     // --------------snake--------------------
     // 自调用函数，开启一个新的局部作用域，防止命名冲突
-    ; (function () {
+    ; (function (window, undefined) {
         var position = 'absolute';
         // 记录之前创建的蛇
         var elements = [];
@@ -169,11 +171,11 @@
         }
         // 暴露构造函数给外部
         window.Snake = Snake;
-    })()
+    })(window, undefined)
 
     // -----game--------
     // 使用自调用函数，创建一个新的局部作用域，防止命名冲突
-    ; (function () {
+    ; (function (window, undefined) {
         // 记录游戏对象
         var that;
         function Game(map) {
@@ -247,11 +249,11 @@
         }
         // 暴露构造函数给外部
         window.Game = Game;
-    })()
+    })(window, undefined)
     // -------- main调用---------------
-    ; (function () {
+    ; (function (window, undefined) {
         // 运行
         var map = document.getElementById('map');
         var game = new Game(map);
         game.start(map);
-    })()
+    })(window, undefined)
