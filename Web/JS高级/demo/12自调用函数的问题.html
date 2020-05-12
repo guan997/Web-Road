@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12自调用函数的问题</title>
+</head>
+<body>
+    <script>
+        // 多个自调用函数时自调用函数应该有结束否则会报错
+        // 第一个自调用函数执行完会返回一个undefined
+        // (function () {
+        //     console.log(1);
+        // })() //undefined(
+        // // TypeError: (intermediate value)(...) is
+        // (function () {
+        //     console.log(2);
+        // })()
+        // --------
+        // 在自调用函数前使用‘;’结束语句
+        // var fn = function() {
+        //     console.log(1);
+        // }
+        // (function () {
+        //     console.log(2);
+        // })();// 1
+        // 等同于
+        // var fn = function() {
+        //     console.log(1);
+        // }(function () {
+        //     console.log(2);
+        // })
+        // ()
+        // ---代码规范在自调用函数前加上';'号
+        ;(function () {
+            console.log(1);
+        })() 
+        ;(function () {
+            console.log(2);
+        })()
+    </script>
+</body>
+</html>
