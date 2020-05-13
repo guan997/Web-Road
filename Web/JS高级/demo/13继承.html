@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13继承</title>
+</head>
+
+<body>
+    <script>
+        var wjl = {
+            name: '王健林',
+            age: 56,
+            money: 1000000000000000,
+            house: ['大别墅', '别墅'],
+            car: ['迈巴赫', '劳特莱斯'],
+            play: function () {
+                console.log('高尔夫');
+            }
+        }
+        var wsc = {
+            name: '王思聪'
+        }
+        // for in 遍历数组的对象
+        // 赋值对象的成员给另一个对象
+        // for (var key in wjl) {
+        //     // 不能给wsc赋值同名的属性
+        //     if (wsc[key]) {
+        //     console.log(key)
+        //         continue;
+        //     }
+        //     wsc[key] = wjl[key];
+        // }
+        // console.dir(wsc);
+        // ---
+        // 对象之间的拷贝
+        // 赋值对象的成员给另一个对象
+        function extend(parent, child) {
+            for (var key in parent) {
+                // 不能给wsc赋值同名的属性
+                if (child[key]) {
+                    console.log(key)
+                    continue;
+                }
+                child[key] = parent[key];
+            }
+            console.dir(child);
+        }
+        extend(wjl, wsc);
+    </script>
+</body>
+
+</html>
