@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16借用构造函数</title>
+</head>
+<body>
+    <script>
+        // 16借用构造函数 不能继承方法
+        // 父类型
+        function Person(name, age, sex){
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+            // this.sayHi = function(){}
+        }
+        Person.prototype.sayHi = function() {
+            console.log('nihao');
+        }
+        function Student(name, age, sex, score) {
+            // 借用构造函数，this指向student对象
+            Person.call(this, name, age, sex);
+            this.score = score;
+        }
+        var s1 = new Student('ax',19,'nan',100);
+        console.log(s1);
+        console.dir(s1);
+    </script>
+</body>
+</html>

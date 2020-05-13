@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15call</title>
+</head>
+<body>
+    <script>
+        function fn (x,y) {
+            console.log(this);
+            console.log(x + y);
+        }
+        // window.fn(5,6);
+        var o = {
+            name : 'ax',
+        }
+        // bind() 改变函数的this，并且返回一个新的函数（不调用函数）
+        // var f = fn.bind(o, 1, 2);
+        // f();
+        // call() 改变函数中的this，直接调用函数
+        fn.call(o, 2, 3);
+    </script>
+</body>
+</html>
