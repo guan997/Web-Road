@@ -1,11 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>19函数的定义方式</title>
 </head>
+
 <body>
-    
+    <script>
+        // 1 函数声明
+        // function fn () {
+        //     console.log(1);
+        // }
+        // fn();
+        // // 2 函数的表达式
+        // var fn1 = function () {
+        //     console.log(2);
+        // }
+        // fn1();
+
+        // 函数声明和函数表达式的区别
+        // fn(); //0 
+        // // 函数,变量声明会进行与解析，函数提前
+        // function fn() {
+        //     console.log(0);
+        // }
+        // var fn1; // undefined;
+        // fn1();// TypeError: fn1 is not a function
+        // var fn1 = function () {
+        //     console.log(2);
+        // }
+        // 3 根据条件声明函数
+        // 现代浏览器中，if语句中的函数声明不会提升
+        // 在老的Ie版本中，if语句中的函数声明也会提升
+        if (true) {
+            var fn1 = function () {
+                console.log('fn1 - true');
+            }
+        } else {
+            var fn1 = function () {
+                console.log('fn1 - false');
+            }
+        }
+        fn1();
+    </script>
 </body>
+
 </html>
