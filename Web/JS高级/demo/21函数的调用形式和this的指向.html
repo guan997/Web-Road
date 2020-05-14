@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21函数的调用形式和this的指向</title>
+</head>
+
+<body>
+    <script>
+        // 普通函数调用 this指向window
+        // function fn() {
+        //     console.log(this);
+        // }
+        // window.fn();
+        // 2 方法调用 this指向调用该方法的对象
+        // var obj = {
+        //     fn : function () {
+        //         console.log(this);
+        //     }
+        // }
+        // obj.fn();
+        // // 3 作为构造函数调用
+        // // 构造函数内部的this指向该构造函数创建的对象
+
+        // // 4 作为事件的处理函数 触发该事件的对象
+        // btn.onclick = function () {
+        //     console.log(this)
+        //     }
+
+        //     // 5 。作为定时器的参数 this指向window
+        //     setInterval(function() {
+        //         console.log(this);
+        //     },1000);
+
+        //     // 总结 ： 函数内部的this，室友函数调用的时候来确定其指向的
+        //     function fn () {
+        //         console.log(this);
+        //     }
+        //     fn(); //this - window
+
+        //     var obj = {
+        //         name:'aa',
+        //         fn: fn
+        //     }
+        //     obj.fn();
+
+            var obj = {
+                name : 'ss',
+                fn: function() {
+                    console.log(this);
+                }
+            }
+            // var fn = obj.fn;
+            // fn(); // this-> window
+            obj.fn(); // this -> obj
+
+    </script>
+</body>
+
+</html>
