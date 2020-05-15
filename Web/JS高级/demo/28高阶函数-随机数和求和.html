@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>27高阶函数</title>
+    <title>28高阶函数-随机数和求和</title>
 </head>
 
 <body>
@@ -52,7 +52,45 @@
         //     return b - a;
         // })
         // console.log(arr);
+
         // 2 函数作为返回值的时候
+        // 写一个函数 生成1-10之间的随机整数
+        // function getRandom() {
+        //   return parseInt(Math.random() * 10) + 1;
+        // }
+        // console.log(getRandom());
+
+        // 写一个函数，生成1-10之间的随机整数
+        // 第一次调用生成随机数，以后每次调用都返回第一次的随机值F
+        // function getRandom() {
+        //     var random = parseInt(Math.random() * 10) + 1;
+        //     return function () {
+        //         return random;
+        //     }
+        // }
+        // var fn = getRandom();
+        // console.log(fn());
+        // console.log(fn());
+
+         // 求两个数的和
+        // 100 + m
+        // 1000 + m
+        // 10000 + m
+        function getFun(n) {// n为固定的值(传入的100 ，1000)
+            return function (m) {// fn100(1) m为1
+                return n + m;
+            } 
+        }
+
+        // 求100+m
+        var fn100 = getFun(100);
+        // 求1000+m
+        var fn1000 = getFun(1000);
+        // 求1000+m
+        var fn10000 = getFun(10000);
+        console.log(fn100(1));
+        console.log(fn1000(1));
+        console.log(fn10000(1));
     </script>
 </body>
 
