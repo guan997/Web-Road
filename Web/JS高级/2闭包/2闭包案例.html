@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2闭包案例</title>
+</head>
+<body>
+    <script>
+         // 生成随机数，以后每次调用都返回第一次的随机值
+        // function getRandom() {
+        //     var random = parseInt(Math.random() * 10) + 1;
+        //     return function () {
+        //         return random; // random闭包
+        //     }
+        // }
+        // var fn = getRandom();
+        // console.log(fn());
+
+          // 求两个数的和
+        // 100 + m
+        // 1000 + m
+        // 10000 + m
+        function getFun(n) {// n为固定的值(传入的100 ，1000)
+            return function (m) {// fn100(1) m为1
+                return n + m; // n闭包
+            } 
+        }
+
+        // 求100+m
+        var fn100 = getFun(100);
+        console.log(fn100(11));
+    </script>
+</body>
+</html>
