@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>27高阶函数</title>
+</head>
+<body>
+    <script>
+        // 高阶函数
+        // 1 函数作为参数
+        function eat(fn) {
+            setInterval(() => {
+                console.log('吃午饭');
+                // 之后的事情
+                fn();_
+            }, 2000);
+        }
+        eat(function() {
+            console.log('看电影');
+        });
+        // 模拟sort的内部实现
+        arr.sort(function(a,b) {
+            return a - b;
+        });
+        console.log(arr);
+        arr.mySort();
+        Array.prototype.mySort = function (fn) {
+            for (var i = 0; i < this.length - 1; i++) {
+               
+            }
+        } 
+        var arr = [123,4214,21,53];
+        arr.mySort(function (a,b) {
+            return b - a;
+        })
+        console.log(arr);
+    </script>
+</body>
+</html>

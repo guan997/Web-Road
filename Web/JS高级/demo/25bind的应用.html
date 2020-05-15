@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25bind的应用</title>
+</head>
+<body>
+    <input type="button" name="" id="btn" value="按钮">
+    <script>
+        var btn = document.getElementById('btn');
+        // 25bind的应用
+        var obj = {
+            name: 'aa',
+            fun: function() {
+                setInterval(function() {
+                    console.log(this.name);
+                }.bind(this), 1000);
+            }
+        }
+        obj.fun();
+        btn.onclick = function() {
+            // 事件处理函数中的this，触发该事件的对象
+            // 通过bind 改变事件处理函数中this的指向
+        }.bind(obj);
+    </script>
+</body>
+</html>

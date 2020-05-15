@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22call、apply和bind</title>
+</head>
+<body>
+    <script>
+        // 22call、apply和bind中的this
+        // 函数也是一个对象
+        // var fn = new Function();
+        // function fn(){
+        // }
+        // // 证明fn是Function的实例（对象）
+        // console.log(fn.__proto__ === Function.prototype);
+        // console.dir(fn);
+
+        function fn(x, y) {
+            console.log(this);
+            console.log(x + y);
+        }
+        // fn(5, 6); //this->window
+
+        // call  改变函数中的this，直接调用函数
+        // 1 调用函数，改变函数中的this
+        // 2 第一个参数 设置函数内部this的指向
+                // 其他参数，对应函数的参数
+        // 3 函数的返回值， call的返回值就是函数的返回值
+        // 4 测试
+        // var obj = {
+        //     name: 'zz'
+        // }
+        // fn.call(obj, 5,7); this->{name: "zz"}
+
+        // apply 只有两个参数
+        //  1 调用函数，改变函数中的this
+        // 2 第一个参数 设置函数内部this的指向
+            //  第二个参数 数组
+        // 3 函数的返回值  call的返回值就是函数的返回值
+        // 4 测试
+        // var obj = {
+        //     name: 'zz'
+        // }
+        // fn.apply(obj, [2,3]);
+
+        // bind 只有两个参数
+        //  1 改变函数中的this,不会调用函数，二十八函数赋值一份
+        // 2 第一个参数 设置函数内部this的指向
+            // 其他参数，对应函数的参数
+        // 3 函数的返回值  call的返回值就是函数的返回值
+        // 4 测试
+        var obj = {
+            name: 'zz'
+        }
+        var f = fn.bind(obj, 5, 5); //不会调用函数，
+        f();
+    </script>
+</body>
+</html>

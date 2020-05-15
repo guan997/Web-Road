@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24apply的应用</title>
+</head>
+<body>
+    <script>
+        // 24apply的应用
+        // fn.apply(,[]);
+        // Math.max(3,4,5);
+        var arr = [3,54,45,1];
+        // Math.max不能求数组中的最大值
+        // console.log(Math.max(arr));
+        console.log(Math.max.apply(null,arr));
+        console.log(Math.max.apply(Math,arr));
+
+        console.log(1,2,3);
+        console.log(arr);
+        console.log.apply(console,arr);
+    </script>
+</body>
+</html>
