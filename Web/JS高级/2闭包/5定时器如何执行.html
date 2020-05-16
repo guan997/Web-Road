@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5定时器如何执行</title>
+</head>
+<body>
+    <script>
+        // 5定时器如何执行
+        console.log('start');
+        // setTimeout先把事件放在任务队列
+        // 先执行执行栈，在执行任务队列的函数
+        setTimeout(() => {
+            console.log('setTimeout');
+        }, 0);
+        console.log('over');
+    </script>
+</body>
+</html>

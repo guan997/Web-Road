@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    我是字体的演示
+    <div id="box">
+        <button size="12">按钮1</button>
+        <button size="14">按钮2</button>
+        <button size="16">按钮3</button>
+    </div>
+
+
+    <script>
+
+        // 创建一个函数，设置body的字体大小
+        function makeFun(size) {
+            return function () {
+                document.body.style.fontSize = size + 'px';
+            }
+        }
+
+        var box = document.getElementById('box');
+        var buttons = box.children;
+
+        for (var i = 0; i < buttons.length; i++) {
+            var btn = buttons[i];
+            // 获取标签的自定义属性
+            var size = btn.getAttribute('size');
+            btn.onclick = makeFun(size);
+        }
+
+    </script>
+</body>
+
+</html>

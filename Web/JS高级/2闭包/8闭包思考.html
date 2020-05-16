@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8闭包思考</title>
+</head>
+
+<body>
+    <script>
+        // 思考1：
+        var name = "The Window";
+        var object = {
+            name: "My Object",
+            getNameFunc: function () {
+                return function () {
+                    return this.name;//this指向调用的对象window
+                };
+            }
+        };
+        // object.getNameFunc()() //调用getNameFunc()中的return
+        console.log(object.getNameFunc()());
+
+        var fn = object.getNameFunc();
+        fn();
+
+
+        // 思考2：
+        var name = "The Window";
+        var object = {
+            name: "My Object",
+            getNameFunc: function () {
+                var that = this;
+                return function () {
+                    return that.name;//闭包 内部调用that My Object
+                };
+            }
+        };
+        console.log(object.getNameFunc()());
+    </script>
+</body>
+
+</html>

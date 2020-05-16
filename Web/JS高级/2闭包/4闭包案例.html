@@ -15,21 +15,36 @@
         <li>4</li>
     </ul>
     <script>
-        // 方式1 
+        // 点击li的时候输出当前li对应的索引
+        // 方式1 函数使用完立即释放 方式 2 闭包延展了作用域影响性能
+        // // 方式1 
+        // //  1 给li注册点击事件
+        // var heros = document.getElementById('heros');
+        // var list = heros.children;
+        // for (var i = 0; i < list.length; i++) {
+        //     var li = list[i];
+        //     // 2 点击li的时候输出当前li对应的索引
+        //     // 当点击事件触发时，for循环已经结束，i++故输入的为4
+        //     // li.onclick = function() {
+        //     //     console.log(i);//4
+        //     // }
+        //     li.index = i;
+        //     li.onclick = function() {
+        //         console.log(this.index); //list[i]
+        //     }
+        // }
+         // 方式 2
         //  1 给li注册点击事件
         var heros = document.getElementById('heros');
-        var list = heros.childNodes;
+        var list = heros.children;
         for (var i = 0; i < list.length; i++) {
             var li = list[i];
             // 2 点击li的时候输出当前li对应的索引
-            // 当点击事件触发时，for循环已经结束，i++故输入的为4
-            li.onclick = function() {
-                console.log(i);//4
-            }
-            // li.index = i;
-            // li.onclick = function() {
-            //     console.log(this.index); //list[i]
-            // }
+            (function(i) {
+                li.onclick =function() {
+                    console.log(i);
+                }
+            })(i);
         }
     </script>
 </body>
