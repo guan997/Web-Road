@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-浅拷贝</title>
+</head>
+
+<body>
+    <script>
+        // 浅拷贝 只复制对象的第一层
+        obj1 = {
+            name: 'aa',
+            age: 19,
+            sex: '男',
+            dog: {
+                color:'yellow',
+                name:'金毛'
+            }
+        };
+        obj2 = {};
+        // 封装函数 o1复制到o2
+        // 浅拷贝 只拷贝变量的第一层，第二层对象（dog）只拷贝地址
+        // 修改被拷贝对象第一层的值时，o2不受影响
+        // 修改被拷贝对象第二层的值时，o2随之改变 因为第二层是另外一个对象
+        function copy(o1, o2) {
+            for (var key in o1) {
+                o2[key] = o1[key];
+            }
+        }
+        copy(obj1,obj2);
+        obj1.name = 'xxxx';
+        obj1.dog.name = '小白';
+        console.dir(obj2);
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Fibonacci斐波那契数列</title>
+</head>
+<body>
+    <script>
+        // 3-Fibonacci斐波那契数列 1，1，2,3,5,8,13,21
+        // fn(3-1) + fn(3-2)
+        //fn(2) + 1 
+        // 1+1
+
+        // fn(4)
+        // fn(4-1) + fn(4-2)
+        // 2+1=3
+        //fn(4-1) - > fn(3-1) + fn(3-2) -> fn(2)+f(1)->1+1
+        // fn(4-1) -> 2
+        //fn(4-2) -> fn(2) ->1
+
+        // fn(5)
+        // fn(5-1) + fn(5-2)
+        // 2+1=3
+        //fn(5-1) - > fn(4-1) + fn(4-2) ->  2+1
+        // fn(4-1) - >fn(3-1) + fn(3-2) -> fn(2)+f(1)->1+1
+        // fn(4-2)->fn(2) ->1
+
+        // fn(5-2) ->  fn(3-1) + fn(3-2)->fn(2) +fn(1) -> 1+1 
+        function fn(n) {
+            if(n === 1 || n === 2) {
+                return 1;
+            }
+            return fn(n -1) + fn(n -2);
+        }
+        //console.log(fn(3));
+        console.log(fn(5));
+    </script>
+</body>
+</html>

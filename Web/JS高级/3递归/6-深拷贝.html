@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6-深拷贝</title>
+</head>
+
+<body>
+    <script>
+        // 深拷贝 ：多层拷贝 对象和数组也进行拷贝
+        obj1 = {
+            name: 'aa',
+            age: 19,
+            sex: '男',
+            dog: {
+                color:'yellow',
+                name:'金毛'
+            },
+            friends: ['es','swe']
+        };
+        function deepCopy(o1, o2) {
+            for (var key in o1) {
+                // 获取key属性对应的值
+                var item = o1[key];
+                // 如果item是对象
+                // var o2 = {};
+                if (item instanceof Object) {
+                    o2[key] = {};
+                    deepCopy(item,o2[key]);
+                }else if (item instanceof Array) {
+                    o2[key] = [];
+                    deepCopy(item,o2[key]);
+                }else{
+                // 如果item是简单类型
+                o2[key] = o1[key];
+                }
+            }
+        }
+        var obj2 = {};
+        deepCopy(obj1,obj2);
+        // 修改obj1的值不会影响obj2
+        // obj2把obj1中的属性和对象以及数组都进行了拷贝
+        obj1.friends[0] = 'xx';
+        obj1.dog.name = '小白';
+        console.dir(obj2);
+        
+    </script>
+</body>
+
+</html>

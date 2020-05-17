@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-对象的拷贝</title>
+</head>
+
+<body>
+    <script>
+        // 4-对象的拷贝
+        obj1 = {
+            name: 'aa',
+            age: 19,
+            sex: '男'
+        };
+        obj2 = {};
+        // 遍历对象
+        // for (var key in obj1) {
+        //     obj2[key] = obj1[key];
+        // }
+        // obj1和obj2对象分别开辟一块内存，值不会互相影响
+        // 封装函数 o1复制到o2
+        function copy(o1, o2) {
+            for (var key in o1) {
+                o2[key] = o1[key];
+            }
+        }
+        copy(obj1,obj2);
+        console.dir(obj2);
+        // obj2['name'] = 'ss';
+        obj2.name = 'ss';
+        obj1['name'] = 'dd';
+        console.dir(obj2);
+        console.dir(obj1);
+    </script>
+</body>
+
+</html>
