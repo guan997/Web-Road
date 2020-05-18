@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2RegExp</title>
+</head>
+<body>
+    <script>
+        // 内置对象RegExp
+        // 第一个参数 模式 pattern 字符串类型
+        // 第二个参数flag i忽略大小写 g全局匹配 字符串
+        var regular = new RegExp('ab[a-z]', 'i');
+        var str ='aSd';
+        console.log(regular.text(str));
+
+        // 表达方式匹配 提取 替换
+        // new Object()
+        var regular2 = /ab[a-z]/;
+        var str1 = 'aSb';
+        console.log(regular2.test(str1));
+    </script>
+</body>
+</html>
