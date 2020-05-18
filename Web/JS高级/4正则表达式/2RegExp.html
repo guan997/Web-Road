@@ -11,13 +11,13 @@
         // 第一个参数 模式 pattern 字符串类型
         // 第二个参数flag i忽略大小写 g全局匹配 字符串
         var regular = new RegExp('ab[a-z]', 'i');
-        var str ='aSd';
-        console.log(regular.text(str));
+        var str ='abD';
+        console.log(regular.test(str));
 
         // 表达方式匹配 提取 替换
         // new Object()
-        var regular2 = /ab[a-z]/;
-        var str1 = 'aSb';
+        var regular2 = /ab[a-z]/i;
+        var str1 = 'aaS';
         console.log(regular2.test(str1));
     </script>
 </body>
