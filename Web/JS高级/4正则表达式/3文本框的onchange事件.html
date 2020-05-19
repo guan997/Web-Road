@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3文本框的onchange事件</title>
+</head>
+<body>
+    QQ号：<input type="text" id="txtQQ"><span></span><br>
+    邮箱：<input type="text" id="txtEMail"><span></span><br>
+    手机：<input type="text" id="txtPhone"><span></span><br>
+    生日：<input type="text" id="txtBirthday"><span></span><br>
+    姓名：<input type="text" id="txtName"><span></span><br>
+    <script>
+        var txtQQ = document.getElementById('txtQQ');
+        // onchcange事件 当文本改变并且失去焦点
+        // txtQQ.onchange = function() {
+        //     console.log(this.value);
+        // }
+         // onkeyup 当用户输入的时候验证文本框内的内容是否合法
+         txtQQ.onkeyup= function() {
+            console.log(this.value);
+        }
+    </script>
+</body>
+</html>
