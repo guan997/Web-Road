@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>面向过程实现</title>
+    <title>面向对象实现</title>
     <style>
         #ctn {
             margin: 50px auto;
@@ -49,8 +49,24 @@
             { name: '钱八', age: 26, num: 4, score: 97 },
             { name: '张三', age: 22, num: 2, score: 99 }
         ];
+        function TableSort(id, data) {
+            this.ctn = document.getElementById(id);
+            this.data = data;
+        }
+        TableSort.prototype.init = function () {
+            // 初始化标题
+            var thead = this.initTitle();
+            // 初始化数据
+            var tbody = this.initTbody(this.data);
+            // 把主体和数据追加到页面
+            // 将thead和tbody追加到页面
+            this.ctn.appendChild(thead);
+            this.ctn.appendChild(tbody);
+            // 绑定事件（排序）
+            this.addEvent(this.data);
+        }
         // 初始化主题
-        function initTitle() {
+        TableSort.prototype.initTitle = function () {
             var thead = document.createElement('thead');
             var tag = '<tr>'
                 + '<th type="name">姓名</th>'
@@ -63,7 +79,7 @@
         }
 
         // 初始化数据
-        function initTbody(data) {
+        TableSort.prototype.initTbody = function (data) {
             var tbody = document.createElement('tbody');
             var tag = '';
             for (var i = 0; i < data.length; i++) {
@@ -77,35 +93,34 @@
             tbody.innerHTML = tag;
             return tbody;
         }
-        // 把主体和数据追加到页面
-        var ctn = document.getElementById('ctn');
-        var thead = initTitle();
-        var tbody = initTbody(data);
-        ctn.appendChild(thead);
-        ctn.appendChild(tbody);
-        // 给th添加点击事件(需要重新渲染)
-        var ths = document.getElementsByTagName('th');
-        for (var i = 0; i < ths.length; i++) {
-            ths[i].onclick = function () {
-                var sortName = this.getAttribute('type');
-                this.flag = this.flag == -1 ? 1 : -1;
-                var _this = this;
-                data.sort(function (o1, o2) {
-                    var n1 = o1[sortName];
-                    var n2 = o2[sortName];
-                    if (n1 > n2) {
-                        return _this.flag;
-                    } else if (n1 < n2) {
-                        return -_this.flag;
-                    } else {
-                        return 0;
-                    }
-                });
-                var newTbody = initTbody(data);
-                var oldTbody = document.getElementsByTagName('tbody')[0];
-                ctn.replaceChild(newTbody, oldTbody);
+        TableSort.prototype.addEvent = function () {
+            var that = this;
+            // 给th添加点击事件(需要重新渲染)
+            var ths = document.getElementsByTagName('th');
+            for (var i = 0; i < ths.length; i++) {
+                ths[i].onclick = function () {
+                    var sortName = this.getAttribute('type');
+                    this.flag = this.flag == -1 ? 1 : -1;
+                    var _this = this;
+                    data.sort(function (o1, o2) {
+                        var n1 = o1[sortName];
+                        var n2 = o2[sortName];
+                        if (n1 > n2) {
+                            return _this.flag;
+                        } else if (n1 < n2) {
+                            return -_this.flag;
+                        } else {
+                            return 0;
+                        }
+                    });
+                    var newTbody = that.initTbody(data);
+                    var oldTbody = document.getElementsByTagName('tbody')[0];
+                    ctn.replaceChild(newTbody, oldTbody);
+                }
             }
         }
+        var ts = new TableSort('ctn', data);
+        ts.init();
     </script>
 </body>
 
