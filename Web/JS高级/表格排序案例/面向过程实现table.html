@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面向过程实现</title>
+    <style>
+        #ctn {
+            margin: 50px auto;
+            border: 1px solid #ccc;
+        }
+
+        td,
+        th {
+            border: 1px solid #ccc;
+            width: 100px;
+            height: 60px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="ctn">
+        <!-- <thead>
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>学号</th>
+                <th>分数</th>
+            </tr>
+        </thead> -->
+        <tbody>
+            <tr>
+                <td>赵四</td>
+                <td>22</td>
+                <td>3</td>
+                <td>90</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        // 数据
+        var data = [
+            { name: '赵六', age: 29, num: 3, score: 91 },
+            { name: '李四', age: 24, num: 1, score: 93 },
+            { name: '王五', age: 21, num: 5, score: 96 },
+            { name: '钱八', age: 26, num: 4, score: 97 },
+            { name: '张三', age: 22, num: 2, score: 99 }
+        ];
+        // 初始化主题
+        function initTitle() {
+            var thead = document.createElement('thead');
+            var tag = '<tr>'
+                +'<th>姓名</th>'
+                +'<th>年龄</th>'
+                +'<th>学号</th>'
+                +'<th>分数</th>'
+                +'</tr>';
+            thead.innerHTML = tag;
+            return thead;
+        }  
+        // 初始化数据
+        function initTbody(data) {
+            var tbody = document.createElement('tbody');
+            var tag = '';
+            for (var i = 0; i < data.length; i++) {
+                tag += '<tr>'
+                +'<th>姓名</th>'
+                +'<th>年龄</th>'
+                +'<th>学号</th>'
+                +'<th>分数</th>'
+                +'</tr>';
+            }
+            tbody.innerHTML = tag;
+            return tbody;
+        }
+        // 把主题和数据追加到页面
+        var ctn = document.getElementById('ctn');
+        var thead = initTitle();
+        var tbody = initTitle(data);
+        ctn.appendChild(thead);
+        ctn.appendChild(tbody);
+        // 给th添加点击事件（需要重新渲染tbody）
+        var ths = document.getElementById('th');
+        for (var i = 0; i <ths.length; i++) {
+            ths[i].onclick = function () {
+                var sortName = this.getAttribute('type');
+                this.flag = this.flag == -1 ? 1 : -1;
+                var _this = this;
+                data.sort(function (o1, o2) {
+                    var n1 = o1[sortName];
+                    var n2 = o2[sortName];
+                    if (n1 > n2) {
+                        return - _this.flag;
+                    } else if (n1 < n2) {
+                        return -_this.flag;
+                    } else{
+                        return 0;
+                    }
+                });
+                var newTbody = initTbody(data);
+                var oldTbody = document.getElementsByName('tbody')[0];
+                ctn.replaceChild(newTbody, oldTbody);
+            }
+        }
+    </script>
+</body>
+
+</html>
