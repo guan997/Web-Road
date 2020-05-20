@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6s</title>
+    <title>6exec方法</title>
 </head>
 
 <body>
@@ -18,11 +18,11 @@
         // match()  提取 可以提取多个内容
         // replace()   替换
         // split()     切割
-        // search()
+        // search() 查找
 
         var str = '张三：2500，李四：3000，王五：50000';
         // var reg = /\d+/gi;    // gi 全局匹配并且忽略大小写
-        var reg = /\d+/g;
+        var reg = /\d+/g;       // g 全局匹配
 
 
         // exec() 只返回一个匹配到的结果    如果没有匹配的内容返回null
@@ -40,9 +40,9 @@
 
         do {
             var content = reg.exec(str);
-            // } while(content != null);
+            // } while(content != null)
             if (content) {
-                console.log(content[0]);
+                console.log(content[0]); //获取数组第一个元素
             }
         } while (content);
     </script>

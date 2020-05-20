@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9替换</title>
+</head>
+<body>
+    <script>
+        // 9替换
+        // 替换所有空白
+        var str = "   123ad asfafs asgdw ttt   ";
+        // trim() 去除前后的空格
+        // console.log(str.trim());
+        // replace() 只能替换掉第一个查找到的内容
+        // console.log(str.replace('a','x'));
+
+        // 两种替换所有空白的方式
+        // console.log(str.replace(/\s/g, ''));
+        // split分割 join连接
+        console.log(str.split(' ').join(''))
+
+        // 2 把所有1和,替换为.
+        var str2 = 'aba,fs123,asf,22,a';
+        console.log(str2.replace(/,|1/g,'.'));
+    </script>
+</body>
+</html>

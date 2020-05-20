@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7提取</title>
+</head>
+<body>
+    <script>
+        // match提取多个内容 提取时必须是全局对象
+        // 1 提取工资
+        var str = '张三：1000,李四：5000,王五:4000。';
+        var reg = /\d+/g;
+        // 提取多个内容
+        console.log(str.match(reg));
+
+        // 2 提取email邮箱
+        var str1 = '123451@xx.com,fangh@asgdg.cn,asgqqw@qq.com';
+        var reg1 = /\w+@\w+(\.\w+)+/g;
+        console.log(str1.match(reg1));
+
+        // 3 分组提取
+        // 提取日其中的年部分 2020-01-01
+        var dateStr = '2020-01-01';
+        var reg2 = /(\d{4})-(\d{2})-(\d{2})/;
+        reg2.test(dateStr);
+        reg2.exec(dateStr);
+        dateStr.match(reg2);
+        console.log(RegExp.$1);
+        console.log(RegExp.$2);
+        console.log(RegExp.$3);
+
+        // 4 提取邮件中的每一部分
+        var str4 = 'xxxx@aili.com';
+        var reg4 = /(\w+)@(\w+)\.(\w+)/;
+        reg4.test(str4);
+        console.log(RegExp.$1);
+        console.log(RegExp.$2);
+        console.log(RegExp.$3);
+    </script>
+</body>
+</html>

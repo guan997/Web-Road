@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8split</title>
+</head>
+
+<body>
+    <script>
+        // 8split
+        // 1. 提取日期中的年部分  2015-5-10
+        var dateStr = '2020-01-01';
+        console.log(dateStr.split('-'));
+
+        var dateStr1 = '2020/1-5';
+        console.log(dateStr1.split(/[/-]/));
+
+
+        // 2. 提取邮件中的每一部分
+        var str = 'xxxx@itcast.com';
+        console.log(str.split(/[@\.]/));
+    </script>
+</body>
+
+</html>
