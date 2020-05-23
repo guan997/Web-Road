@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签+类</title>
+    <style>
+        .cls{
+            background-color: red;
+        }
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        // 点击按钮设置页面上应用cls类样式li标签的背景颜色
+        $(function() {
+            $('#btn2').click(function() {
+                // 获取应用cls类样式的li标签
+                // 标签+类样式的选择器
+                $('li.cls').css('backgroundColor','yellow');
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="标签+类选择器" id='btn2'>
+    <ul>
+        <li class="cls">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li class="cls">4</li>
+    </ul>
+</body>
+</html>
