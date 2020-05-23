@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5jQuery中的选择器</title>
+</head>
+
+<body>
+    <script src="js/jquery-1.12.2.min.js"></script>
+    <script>
+        /*
+       *
+       * DOM中获取元素的方式:
+       * document.getElementById("id的值");根据id获取元素,一个
+       * document.getElementsByTagName("标签的名字");根据标签的名字获取元素,多个
+       * document.getElementsByName("name属性的值");根据name属性的值获取元素,多个
+       * document.getElementsByClassName("类样式的名字");根据的是类样式的名字来获取元素,多个
+       *
+       * */
+        /*
+        *
+        * jQuery获取元素的方式:通过各种选择器来获取元素
+        * 1.根据id来获取--->id选择器  ---->$("#id的值");一个
+        * 2.根据标签的名字来获取---标签选择器--->$("标签的名字");多个
+        * 3.根据类样式的名字获取--->类选择器--->$(".类样式的名字");多个
+        *
+        *
+        * */
+
+
+        //点击按钮,设置层中的显示内容为:这是一个层,同时设置这个层的背景颜色(id选择器)
+        //页面加载的事件
+        $(function () {
+            //获取按钮--根据id选择器获取,调用点击事件的方法
+            $('#btn').click(function () {
+                //设置div中的显示内容
+                //相当于DOM中的innerText或者是textContent
+                $('#dv').text('这是一个有颜色的div');
+                //设置元素的样式
+                $('#dv').css('backgroundColor', 'yellow');
+            });
+        });
+
+        //页面加载的事件
+        //点击按钮,设置多个p标签中显示内容为:我们都是p(标签选择器
+        $(function () {
+            $('#btn2').click(function () {
+                //获取按钮,调用点击事件,获取所有的p,设置内容
+                //获取所有的p--->标签选择器
+                $('p').text('这是所有的p');
+            });
+        });
+    </script>
+    <input type="button" value="根据id选择器获取,显示效果" id="btn"><br>
+    <div id="dv"></div>
+    <input type="button" value="根据标签选择器显示效果" id="btn2"><br>
+    <p>这是一个p标签</p>
+    <p>这是一个p标签</p>
+    <p>这是一个p标签</p>
+    
+</body>
+
+</html>

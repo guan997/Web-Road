@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6jQuery类选择器</title>
+    <style>
+        .cls{
+            background-color: pink;
+        }
+    </style>
+    <script src="js/jquery-1.12.2.min.js.js"></script>
+    <script>
+        //点击按钮,设置页面上应用cls类样式的元素的背景颜色(类选择器)
+        //页面加载的事件
+        $(function () {
+            //获取按钮,调用点击事件,获取所有应用了cls类样式的元素
+            $("#btn").click(function () {
+                //类选择器来获取元素
+                $(".cls").css("backgroundColor","green");
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="显示效果" id="btn"><br>
+    <span class="cls">这是一个span</span>
+    <p class="cls">这是一个p</p>
+</body>
+</html>
