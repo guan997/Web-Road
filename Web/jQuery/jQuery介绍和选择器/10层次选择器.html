@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10层次选择器</title>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function () {
+            $('#btn').click(function () {
+                 //获取的是div中所有的p标签元素
+                // $('#dv p').css('backgroundColor','red');
+                //获取的是div中直接的子元素
+                // $('#dv>p').css('backgroundColor','blue');
+                //获取的是div后面的第一个p标签元素
+                // $('#dv+p').css('backgroundColor','red');
+                 //获取的是div后面所有直接的兄弟元素p标签元素
+                $('#dv~p').css('backgroundColor','blue');
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="button" value="显示效果" id="btn">
+    <div id="dv">
+        <p>这是一个div中的p标签</p>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <p>这是div中的第二个p标签</p>
+    </div>
+    <p>这是div后的第一个p标签</p>
+    <p>这是div后的第二个p标签</p>
+    <p>这是div后的第三个p标签</p>
+</body>
+</html>

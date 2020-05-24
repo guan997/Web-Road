@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11层次选择器案例</title>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        // 页面加载后获取ul标签中的所有的li标签
+        $(function () {
+            // 根据层次选择器获取li
+            $('#uu>li').mousemove(function() {
+                // 鼠标进入
+               $(this).css('backgroundColor','red');
+            });
+            $('#uu>li').mouseout(function() {
+                // 鼠标离开
+               $(this).css('backgroundColor','');
+            });
+            $(function () {
+                $('#btn').click(function() {
+                    // *所有的元素
+                    $('#dv *').css('backgroundColor','yellow');
+                })
+            })
+        });
+    </script>
+</head>
+<body>
+    <input type="button" name="" value="显示效果" id="btn">
+    <div id="dv">
+        <p>这是一个p</p>
+        <span>这是一个span</span>
+    </div>
+    <ul id="uu">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</body>
+</html>

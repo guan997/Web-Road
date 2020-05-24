@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8多条件选择器</title>
-    <script src="js/jquery-1.12.2.js"></script>
     <style>
         div{
             width:200px;
@@ -12,10 +11,12 @@
             background-color: blue;
         }
     </style>
+    <script src="js/jquery-1.12.2.js"></script>
     <script>
         $(function(){
             $('#btn').click(function() {
-                $('span,p,li,div').css('backgroundColor','yellow');
+                $('span,p,li,div').css('backgroundColor','blue');
+                console.log($('span').text());
             });
         });
     </script>
