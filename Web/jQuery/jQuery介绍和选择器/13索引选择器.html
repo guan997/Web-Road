@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12隔行变色案例</title>
+    <style>
+        ul{
+            list-style-type: none;
+            width: 200px;
+            position: absolute;
+            left: 500px;
+        }
+        ul li {
+            margin-top: 10px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function(){
+            $('#btn').click(function(){
+                // 获取ul中的说因为4的li标签元素
+                $('#uu>li:eq(4)').css('backgroundColor','yellow');
+                // 获取ul中的索引大于4的所有的li标签元素
+                $('#uu>li:gt(4)').css('backgroundColor','blue');
+                 //获取ul中的索引小于4的所有的li标签元素
+                $("#uu>li:lt(4)").css("backgroundColor","red");
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="索引选择器" id="btn">
+    <ul id="uu">
+        <li>段誉:鳞波微步</li>
+        <li>丁棚:天外流星贱</li>
+        <li>张三丰:太极掌</li>
+        <li>段飞:极乐神功</li>
+        <li>云飞扬:天馋功</li>
+        <li>杨过:黯然销魂掌</li>
+        <li>那谁谁:如来神掌</li>
+        <li>孟星魂:流星蝴蝶剑</li>
+        <li>楠哥:少女萌萌拳</li>
+    </ul>
+</body>
+</html>
