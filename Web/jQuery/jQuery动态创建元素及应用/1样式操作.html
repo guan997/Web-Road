@@ -33,13 +33,20 @@ $(function() {
         $('#dv').removeClass('cls');
         //移除div的所有的类样式,removeClass方法中什么也不写移除的是当前元素的所有的类样式
         // $('#dv').removeClass();
-    })
+    });
+    //点击第二个按钮查询这个div是否应用了cls类样式
+    $('#btn4').click(function() {
+        var result = $('#dv').hasClass('cls');
+        console.log(result);
+    });
 })
     </script>
 </head>
 <body>
-    <input type="button" value="显示效果" id="btn">
+    <input type="button" value="添加类样式" id="btn">
     <input type="button" value="移除类样式" id="btn2">
+    <input type="button" value="检测元素是否应用了类样式" id="btn4">
+    
     <div id='dv'> </div>
 </body>
 </html>
