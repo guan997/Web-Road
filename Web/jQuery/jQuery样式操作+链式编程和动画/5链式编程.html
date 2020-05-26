@@ -23,12 +23,13 @@
                 // $('#dv').html('<p>这是一段p标签</p>');
                 // $('#dv').css('backgroundColor','red');
                 //链式编程
-                $('#dv').html('<p>这是一段p标签</p>').css('backgroundColor', 'red');
-                // var obj = $('#dv').html('<p>这是一段p标签</p>');
-                var obj1 = $('#dv').html('<p>这是一段p标签</p>').css('backgroundColor', 'red');
+                // $('#dv').html('<p>这是一段p标签</p>').css('backgroundColor', 'red');
+                var obj = $('#dv').html('<p>这是一段p标签</p>');
+                // var obj1 = $('#dv').html('<p>这是一段p标签</p>').css('backgroundColor', 'red');
+                // 这行代码返回的是不是对象，是对象才能进行链式编程
                   //断链
-                var obj2 = $('#dv').html().css('backgroundColor', 'red');
-                console.log(obj2);
+                // var obj2 = $('#dv').html().css('backgroundColor', 'red');
+                console.log(obj);
             })
         })
     </script>
@@ -37,7 +38,7 @@
 <body>
     <input type="button" value="显示效果" id="btn" />
     <div id="dv">
-        <p>这是一个p</p>
+        <!-- <p>这是一个p</p> -->
     </div>
 </body>
 
