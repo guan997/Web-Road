@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6常用的动画方法</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            background-color: green;
+        }
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function () {
+            $('#btnHide').click(function () {
+                // 点击按钮 隐藏div
+                // $('#dv').hide();//隐藏
+                // hide方法中可以写参数 ：参数类型：1数字类型 2字符串类型
+                // 1数字类型 1000表示的是毫秒 ---1秒
+                // 2字符串类型 slow normal fast
+                // $('#dv').hide(1000);
+                $('#dv').hide('slow');
+            });
+            $('#btnShow').click(function () {
+                // 点击按钮 隐藏div
+                // $('#dv').show();//隐藏
+                // show方法中可以写参数 ：参数类型：1数字类型 2字符串类型
+                // 1数字类型 1000表示的是毫秒 ---1秒
+                // 2字符串类型 slow normal fast
+                $('#dv').show(1000);
+                // $('#dv').show('normal');
+            });
+
+        })
+    </script>
+</head>
+
+<body>
+    <input type="button" value="隐藏" id="btnHide" />
+    <input type="button" value="显示" id="btnShow" />
+    <div id="dv"></div>
+</body>
+
+</html>

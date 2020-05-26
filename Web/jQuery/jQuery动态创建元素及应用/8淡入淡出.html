@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8淡入淡出</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            background-color: green;
+        }
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function () {
+             //fadeIn fadeOut fadeToggle fadeTo
+            //参数:可以写数字类型  1000毫秒---1秒
+            //参数:字符串:  slow   normal  fast
+            //点击第一个按钮
+            $('#btn1').click(function () {
+                $('#dv').fadeIn('slow');
+            });
+            $('#btn2').click(function () {
+                $('#dv').fadeOut(1000);
+            });
+            $('#btn3').click(function () {
+                $('#dv').fadeToggle(1000);
+            });
+            $('#btn4').click(function () {
+                $('#dv').fadeTo(1000,0.3);
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <input type="button" value="淡入" id="btn1"/>
+    <input type="button" value="淡出" id="btn2"/>
+    <input type="button" value="切换" id="btn3"/>
+    <input type="button" value="透明度变化" id="btn4"/>
+    <div id="dv"></div>
+</body>
+
+</html>
