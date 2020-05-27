@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14关于left和top的问题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 200px;
+            height: 100px;
+            background-color: green;
+            position: absolute;
+            left: 100px;
+            top: 50px;
+        }
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function() {
+            $('#btn').click(function() {
+                //获取left和top的值--->都是数字类型
+                $('#dv').offset({'left':200,'top':200});
+                console.log($('#dv').offset().left);
+                console.log($('#dv').offset().top);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <input type="button" value="显示效果" id="btn" />
+    <div id="dv"></div>
+</body>
+
+</html>

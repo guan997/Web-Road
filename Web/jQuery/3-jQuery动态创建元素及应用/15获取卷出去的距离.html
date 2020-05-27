@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15获取卷出去的距离</title>
+    <style>
+        div{
+            width: 2000px;
+            height: 2000px;
+        }
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function() {
+            $(document).click(function() {
+                //获取的卷曲出去的距离----->数字类型
+                console.log($(this).scrollLeft()+"===="+$(this).scrollTop());
+            })
+        })
+    </script>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

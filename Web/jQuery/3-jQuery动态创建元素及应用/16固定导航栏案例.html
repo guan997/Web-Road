@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16固定导航栏案例</title>
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        /*.top {
+            height: 171px;
+        }
+        .nav {
+            height: 86px;
+        }*/
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function() {
+             //滚动条事件
+            $(window).scroll(function() {
+                //判断向上卷曲出去的距离是否大于等于 应用类样式top的div的高度
+                if($(document).scrollTop()>=$('.top').height()){
+                    //获取导航栏的元素 .nav 脱离文档流
+                    $('.nav').css('position','fixed').css('top',0);
+                    $('.main').css('marginTop',$('.nav').height());
+                }else{
+                    $('.nav').css('position','static').css('top',0);
+                    $('.main').css('marginTop,0');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="top">
+        <img src="images/top.png" />
+    </div>
+    <div class="nav">
+        <img src="images/nav.png" />
+    </div>
+    <div class="main">
+        <img src="images/main.png" />
+    </div>
+</body>
+</html>
