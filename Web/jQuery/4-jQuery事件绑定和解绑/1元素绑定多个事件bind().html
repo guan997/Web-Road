@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1元素绑定多个事件</title>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+        $(function () {
+            //鼠标进入到按钮中背景颜色为红色,离开后颜色为默认,点击按钮,弹出对话框
+
+            // $('#btn').click(function() {
+            //     alert("哈哈,我又变帅了");
+            // });
+            // $('#btn').mouseenter(function() {
+            //     $(this).css("backgroundColor","red");
+            // });
+            // $('#btn').mouseleave(function() {
+            //     $(this).css("backgroundColor","");
+            // });
+
+            //链式编程
+            // $('#btn').click(function () {
+            //     alert("哈哈,我又变帅了");
+            // }).mouseleave(function () {
+            //     $(this).css("backgroundColor", "");
+            // }).mouseenter(function () {
+            //     $(this).css("backgroundColor", "red");
+            // });
+
+            //bind()方法:第一个参数是事件名字,第二个参数是事件处理函数-匿名函数
+            // $('#btn').bind('click',function() {
+            //     alert('点了一下');
+            // });
+
+             //bind()方法可以为元素同时绑定多个事件
+            //  .bind({'click':function() {},'mouseover':function(){}})
+             $('#btn').bind({'click':function() {
+                alert('点了一下');
+             },'mouseover':function(){
+                $(this).css("backgroundColor", "red");
+             },'mouseout':function(){
+                $(this).css("backgroundColor", "");
+             }});
+        })
+    </script>
+</head>
+
+<body>
+    <input type="button" value="显示效果" id="btn">
+</body>
+
+</html>
