@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4添加元素的另一种方式</title>
+    <style>
+        div{
+            width: 200px;
+            height: 100px;
+            background-color: yellow;
+        }
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function() {
+            //需求:点击按钮把一个p标签添加到一个div中
+            $('#btn').click(function() {
+                // 创建p标签
+                var obj = $('<p></p>');
+                obj.text('p标签的内容');
+                // 被动添加、
+                // $('#dv').append(obj);
+                // 主动添加
+                //appendTo把pObj对象主动的加到div中
+                obj.appendTo($('#dv'));
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="button" value="创建元素" id="btn">
+    <div id="dv"></div>
+</body>
+</html>

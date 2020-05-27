@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5动态创建元素</title>
+    <style>
+        div{
+            width: 300px;
+            height: 200px;
+            background-color: green;
+        }
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function() {
+            // 点击按钮创建一个p标签加入到div中
+            $('#btn').click(function() {
+                $('#dv').html('<p>这是一个p标签</p>');
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="button" value="创建元素" id="btn">
+    <div id="dv"></div>
+</body>
+</html>

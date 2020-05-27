@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1动态创建元素</title>
+    <style>
+        div{
+            width:200px;
+            height: 100px;
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        // DOM中创建元素
+        // 1 document.write('标签代码');缺陷：页面加载后创建元素，吧页面中原有的内容全部干掉
+        // 2 innerHTML
+        // 3 document.createElement('标签的名字')
+
+        // jQuery中创建元素
+        // $('标签的代码')
+        // 对象.html('标签的代码')
+    </script>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        // 点击按钮创建一个超链接
+        $(function() {
+            var i=0
+            $('#btn').click(function() {
+                i++;
+                var obj =$("<a href='http://www.baidu.com'>百度"+i+"</a>");
+                // 把元素添加到div中
+                // $('#dv').append(obj);//把元素追加到div中
+                // $('#dv').prepend(obj);//把元素追加到某个元素之前
+                // $('#dv').after(obj);//把元素追加到当前元素后面（兄弟元素来添加）
+                $('#dv').before(obj);//把元素追加到当前元素之前（兄弟元素来添加）
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="button" value="创建元素" id="btn">
+    <div id="dv"></div>
+</body>
+</html>

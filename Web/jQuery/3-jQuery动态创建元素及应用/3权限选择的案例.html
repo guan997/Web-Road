@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3权限选择的案例</title>
+    <style>
+        #dv {
+            margin-left: 500px;
+            margin-top: 20px;
+            background-color: #999999;
+        }
+
+        #se1 {
+            float: left;
+            width: 60px;
+            height: 100px;
+        }
+
+        #dv2 {
+            width: 50px;
+            float: left;
+        }
+
+        #se2 {
+            float: left;
+            width: 60px;
+            height: 100px;
+
+        }
+
+        #dv2 input {
+            width: 50px;
+
+        }
+    </style>
+    <script src="js/jquery-1.12.2.js"></script>
+    <script>
+        $(function() {
+            // 第一个按钮：获取按钮添加点击事件，获取第一个下拉框中被选中的
+            // option添加到第二个下拉框
+            $('#toRight').click(function() {
+                $('#se2').append($('#se1>option:selected'));
+            });
+             // 第二个按钮
+             $('#toLeft').click(function() {
+                $('#se1').append($('#se2>option:selected'));
+            });
+             // 第三个按钮
+             $('#toAllRight').click(function() {
+                $('#se2').append($('#se1>option'));
+            });
+             // 第四个按钮
+             $('#toAllLeft').click(function() {
+                $('#se1').append($('#se2>option'));
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div id="dv">
+        <select name="name" multiple id="se1">
+            <option>添加</option>
+            <option>删除</option>
+            <option>修改</option>
+            <option>查询</option>
+            <option>打印</option>
+        </select>
+        <div id="dv2">
+            <input type="button" value=">" id="toRight">
+            <input type="button" value="<" id="toLeft">
+            <input type="button" value=">>" id="toAllRight">
+            <input type="button" value="<<" id="toAllLeft">
+        </div>
+        <select name="name" id="se2" multiple></select>
+    </div>
+</body>
+
+</html>
