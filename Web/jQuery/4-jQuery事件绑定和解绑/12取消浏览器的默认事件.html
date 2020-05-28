@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12取消浏览器的默认事件</title>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+        $(function() {
+            $('#ak').click(function() {
+                alert('超链接被点了');
+                // 取消超链接的默认点击事件
+                return false;
+            })
+        })
+    </script>
+</head>
+<body>
+    <a href="http://www.baidu.com" id="ak">百度</a>
+</body>
+</html>

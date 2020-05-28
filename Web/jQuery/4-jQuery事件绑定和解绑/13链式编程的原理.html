@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13链式编程的原理</title>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+        function Student(name){
+            this.name=name;
+            this.sayHi=function(name){
+                // name没有传值的话为undefined
+                if(name){
+                    console.log('我是'+name);
+                    return this;//把当前对象返回
+                }else{
+                    console.log('我的名字叫'+this.name);
+                }
+            };
+            this.eat=function(){
+                console.log('我就是喜欢吃大饼');
+            };
+        }
+        // 对象才能调用链式编程
+        var stu=new Student('小明');
+        stu.sayHi('小白').eat();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
