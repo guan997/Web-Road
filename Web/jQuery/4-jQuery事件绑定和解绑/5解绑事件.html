@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5解绑事件</title>
+    <style>
+        div{
+            width: 200px;
+            background-color: green;
+            height: 100px;
+        }
+    </style>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+         /*
+        *
+        * bind
+        * unbind
+        *
+        * on
+        * off
+        *
+        * delegate
+        * undelegate
+        *
+        *
+        * */
+        
+        // 1.通过on的方式绑定点击事件和解绑
+
+        // $(function() {
+        //     //第一个按钮通过on的方式绑定点击事件
+        //     $('#btn1').on('click',function() {
+        //         alert('点击了一下');
+        //     });
+        //     //第二个按钮把第一个按钮的点击事件解绑
+        //     $('#btn2').on('click',function() {
+        //          //off()参数:要解绑的事件的名字
+        //         $('#btn1').off('click');
+        //     });
+        // })
+
+        // 2.通过bind绑定事件和unbind解绑事件
+
+        // $(function() {
+        //     //第一个按钮通过on的方式绑定点击事件
+        //     $('#btn1').bind('click',function() {
+        //         alert('点击了一下');
+        //     });
+        //     //第二个按钮把第一个按钮的点击事件解绑
+        //     $('#btn2').bind('click',function() {
+        //          //off()参数:要解绑的事件的名字
+        //         $('#btn1').unbind('click');
+        //     });
+        // })
+
+        // 3.通过bind绑定事件和unbind解绑事件
+
+        $(function() {
+            //第一个按钮通过delegate的方式绑定点击事件
+            $('#btn1').click(function() {
+                $('#dv').delegate('p','click',function() {
+                    alert('点击了一下');
+                });
+            });
+             //点击第二个按钮为div中p解除绑定事件
+            $('#btn2').click(function() {
+                $("#dv").undelegate("p","click");//解绑
+            });
+        })
+    </script>
+
+</head>
+<body>
+    <input type="button" value="绑定事件" id="btn1">
+    <input type="button" value="解绑事件" id="btn2">
+    <div id="dv">
+        <p>这是一个p</p>
+    </div>
+</body>
+</html>

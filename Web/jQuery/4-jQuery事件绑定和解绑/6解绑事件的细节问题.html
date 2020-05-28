@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6解绑事件的细节问题</title>
+    <style>
+        div{
+            width: 200px;
+            background-color: green;
+            height: 100px;
+        }
+    </style>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+        $(function() {
+            // 正常情况
+            // //为div和p都绑定点击事件
+            // $('#dv>p').click(function() {
+            //         alert('点击了一下p');
+            // });
+            // $('div').click(function() {
+            //     alert('点击了一下div');
+            // });
+            // // 解绑事件
+            // $('#btn2').click(function() {
+            //     // 此时正常解绑点击div的事件
+            //     $('#dv').off('click');
+            //     //如果说父级元素和子级元素都是通过正常的方式绑定事件,
+            //     // 如果通过off解绑的时候,父级元素的事件解绑了,子级元素的事件没有解绑
+            // });
+
+
+            //异常情况：把子级元素的点击事件解绑了,父级元素的点击事件还存在
+             // //为div和p都绑定点击事件
+            $('#dv').delegate('p','click',function() {
+                    alert('点击了一下p');
+            });
+            $('div').click(function() {
+                alert('点击了一下div');
+            });
+            // 解绑事件
+            $('#btn2').click(function() {
+                // 此时异常情况：子级元素的点击事件解绑了,父级元素的点击事件还存在
+                // $('#dv').off('click','**');
+                // 子级元素是通过父级元素调用delegate的方式绑定的事件,
+                // 父级元素使用off方式解绑事件,这个时候父级元素和子级元素的相同的事件都会被解绑
+
+
+                // 2.移除级元素的点击事件,子级元素的点击事件也解绑了
+                // $('#dv').off('click');
+
+                // 移除delegate绑定的事件，必须用undelegate
+                $('#dv').undelegate("p","click");
+                
+                // /移除父级元素和子级元素的所有的事件
+                // $("#dv").off();
+            });
+
+        })
+    </script>
+
+</head>
+<body>
+    <input type="button" value="绑定事件" id="btn1">
+    <input type="button" value="解绑事件" id="btn2">
+    <div id="dv">
+        <p>这是一个p</p>
+    </div>
+</body>
+</html>
