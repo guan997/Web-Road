@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/TweenMax.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery带动画特效的圆形导航菜单特效</title>
+  <link rel="stylesheet" href="css/htmleaf-demo.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/demo.css">
+  <script src="js/jquery-1.11.0.min.js"></script>
+  <script src="js/TweenMax.min.js"></script>
+  <script src="js/demo.js"></script>
+
 </head>
+
 <body>
-    <header style="background: URL(path/to/image.jpg) no-repeat center center fixed;">
-        <ul class="navigation">
-           
-          <!-- navigation START -->
-          <li data-width="420" data-height="420">
-            <a href="#">Home</a>
-          </li>
-          ...
-          <!-- navigation END -->
-           
-          <!-- navigation:background-helper START -->
-          <div class="header-transparent"></div>
-          <!-- navigation:background-helper END -->
-           
-          <!-- navigation:trigger START -->
-          <div id="menu-trigger">
-            <div id="hamburger">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div id="close">
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-          <!-- navigation:trigger END -->
-           
-        </ul>
-      </header><header style="background: URL(path/to/image.jpg) no-repeat center center fixed;">
+ <!-- COIDEA:header START -->
+ <header class="coidea-header">
+  <div class="coidea-links">
+    <a class="coidea-icon-back" href="http://www.htmleaf.com/jQuery/Menu-Navigation/201812215464.html" title="返回下载页">C</a>
+    <a class="coidea-icon-github" href="http://www.htmleaf.com/" title="">G</a>
+  </div>
+</header>
+<!-- COIDEA:header END -->
+
+<!-- COIDEA:demo START -->
+<header style="background: url(img/bg.jpeg) no-repeat center center fixed;">
   <ul class="navigation">
-     
+    
     <!-- navigation START -->
     <li data-width="420" data-height="420">
-      <a href="#">Home</a>
+      <a href="#">家</a>
     </li>
-    ...
+    <li data-width="356" data-height="356">
+      <a href="#">团队</a>
+    </li>
+    <li data-width="292" data-height="292">
+      <a href="#">工作</a>
+    </li>
+    <li data-width="228" data-height="228">
+      <a href="#">伙伴</a>
+    </li>
+    <li data-width="164" data-height="164">
+      <a href="#">小组</a>
+    </li>
     <!-- navigation END -->
-     
+    
     <!-- navigation:background-helper START -->
     <div class="header-transparent"></div>
     <!-- navigation:background-helper END -->
-     
+    
     <!-- navigation:trigger START -->
     <div id="menu-trigger">
       <div id="hamburger">
@@ -64,8 +63,9 @@
       </div>
     </div>
     <!-- navigation:trigger END -->
-     
+    
   </ul>
-</header>
+</header>    
 </body>
+
 </html>
