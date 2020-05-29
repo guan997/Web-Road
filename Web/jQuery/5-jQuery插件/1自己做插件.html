@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1自己做插件</title>
+    <style>
+        .cls{
+            width: 200px;
+            height: 100px;
+            background-color: pink;
+            margin-top: 30px;
+            margin-right:20px ;
+            float: left;
+        }
+    </style>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+        // 注意！如果val的值是英文，谷歌翻译会把val值改为中文，则网页不能正常使用
+        $.fn.changBackgroundColor = function (color) {
+            $('.cls').css('backgroundColor',color);
+        }
+        $(function () {
+            // 点击每个按钮改变每个div的背景颜色
+            $('input[type=button]').click(function() {
+                $('.cls').changBackgroundColor($(this).val());
+                console.log($(this).val());
+                // $('.cls').css('backgroundColor',$(this).val());
+            });
+        });
+        // function changBackgroundColor(color) {
+        //     $('.cls').css('backgroundColor',color);
+        // }
+    </script>
+</head>
+<body>
+    <input type="button" value="green">
+    <input type="button" value="red">
+    <input type="button" value="blue">
+    <div id="dv">
+        <div class="cls"></div>
+        <div class="cls"></div>
+        <div class="cls"></div>
+        <div class="cls"></div>
+        <div class="cls"></div>
+    </div>
+</body>
+</html>
