@@ -5,6 +5,7 @@
     <title>page页面</title>
 </head>
 <body>
+    <!-- 1认识php -->
     <div> hello world</div>
     <!-- 所有php相关的代码都要写到这里
     echo向页面中输出字符串  -->

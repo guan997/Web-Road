@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2变量声明和定义</title>
+    <!-- 2变量声明和定义 -->
     <script>
     // js的变量声明
     var aa = 12;
