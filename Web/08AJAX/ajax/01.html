@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识Ajax</title>
+    <script>
+        window.onload = function() {
+            var btn = document.getElementById('btn');
+            btn.onclick = function() {
+                var uname = document.getElementById('username').value;
+                var pw = document.getElementById('password').value;
+                // 原生Ajax实现局部更新
+                // 使用Ajax发送请求需要如下几步
+                // 1、创建XMLHttpRequest对象
+                var xhr = new XMLHttpRequest();
+                // 2、准备发送 （true）异步
+                xhr.open('get','01check.php?username='+uname+'&password='+pw,true);
+                // 3.执行发送动作
+                xhr.send(null);
+                // 4.指定回调函数
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState == 4){
+                        if(xhr.status == 200){
+                            var data = xhr.responseText;
+                            var info = document.getElementById('info');
+                            if(data == '1'){
+                                info.innerHTML = '登陆成功';
+                            }else if(data == '2') {
+                                info.innerHTML = '用户名或者密码错误';
+                            }
+                        }
+                     }
+                }
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <form action="">
+        用户名：<input type="text" name="username" id="username"><span id="info"></span>
+        <br>
+        密码：<input type="text" name="password" id="password">
+        <input type="button" value="登录" id="btn">
+        <br>
+    </form>
+</body>
+</html>
