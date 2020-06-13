@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识Ajax开发</title>
+    <script>
+        window.onload = function() {
+            var btn = document.getElementById('btn');
+            btn.onclick = function() {
+                var uname = document.getElementById('username').value;
+                var pw = document.getElementById('password').value;
+                // 1、创建XMLHttpRequest对象
+                var xhr = null;
+                if(window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();//标准
+                }else{
+                    xhr = new ActiveXObject('Microsoft');//ie6
+                }
+                 // 2、准备发送
+                /*
+                参数一：请求方式（get获取数据；post提交数据）
+                参数二：请求地址
+                参数三：同步或者异步标志位，默认是true表示异步，false表示同步
+                
+                如果是get请求那么请求参数必须在url中传递
+                encodeURI()用来对中文参数进行编码，防止乱码
+                */
+                var param = 'username='+uname+'&password='+pw;
+                xhr.open('get','03get.php?'+encodeURI(param),true);
+                // 3.执行发送工作
+                xhr.send(null);//get请求这里需要添加null参数
+                // 4.指定回调函数
+                xhr.onreadystatechange = function(){
+                    if(xhr.readState == 4){
+                        if(xhr.status == 200){
+                            alert(xhr.responseText);
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="">
+        用户名：<input type="text" name="username" id="username"><span id="info"></span>
+        <br>
+        密码：<input type="text" name="password" id="password">
+        <input type="button" value="登录" id="btn">
+        <br>
+    </form>
+</body>
+</html>
