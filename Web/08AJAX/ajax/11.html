@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 360px;
+            min-height: 100px;
+            background-color: lightgreen;
+            position: absolute;
+            left: 50%;
+            top: 10px;
+            margin-left: -180px;
+        }
+    </style>
+    <script src="ajax.js"></script>
+    <script>
+        /*
+   功能需求：页面输入图书编号，查询服务器端的图书信息并且解析渲染
+   */
+        window.onload = function () {
+            var btn = document.getElementById('btn');
+            btn.onclick = function () {
+                var code = document.getElementById('code').value;
+                ajax('11.php', 'get', 'code=' + code, 'json', function (data) {
+                    // 解析数据并渲染页面
+                    var info = document.getElementById('info');
+                    if (data.flag == 0) {
+                        info.innerHTML = '没有这本书';
+                    } else {
+                        var tag = '<ul><li>书名：' + data.bookname + '</li><li>作者：' + data.author + '</li><li>描述：' + data.desc + '</li></ul>'
+                        info.innerHTML = tag;
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div>
+            图书编码：<input type="text" name="code" id="code">
+            <input type="button" value="查询" id="btn">
+        </div>
+        <div id="info"></div>
+    </div>
+</body>
+
+</html>
