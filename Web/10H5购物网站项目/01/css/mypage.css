@@ -12,6 +12,23 @@
 .section1 {
     background: #fadd67 url(../images/t1fpyqfltdxxaiulhh-990-600.png) no-repeat center bottom;
 }
+.fly {
+    position: absolute;
+    right: 20%;
+    top: 10%;
+}
+.shirt01 {
+    position: absolute;
+    left: 50%;
+    margin-left: -200px;
+    bottom: 335px;
+}
+.goods {
+    position: absolute;
+    left: 50%;
+    margin-left: -420px;
+    bottom: 150px;
+}
 /* 第一屏幕制作 end*/
 /* 第二屏幕制作 start*/
 .section2 {
@@ -51,3 +68,39 @@
 	background: url(../images/ksgw.png);
 }
 /* 第八屏幕制作 end*/
+/* 直接进入购物中心 start */
+.go {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    z-index: 600;
+}
+/* 直接进入购物中心 end */
+/* 动画组 */
+.updown {
+    animation: fly 3s linear infinite; /*  linear匀速  infinite无限循环播放*/
+}
+@keyframes fly {
+    0% {
+        top: 10%;
+    }
+    50% {
+        top: 20%;
+    }
+    100% {
+        top: 10%;
+    }
+
+}
+.shirt-updown {
+    animation: shirt01 2.5s linear infinite;
+}
+@keyframes shirt01 {
+    50% {
+        bottom: 360px;
+    }
+    100% {
+        bottom: 335px;
+    }
+
+}
