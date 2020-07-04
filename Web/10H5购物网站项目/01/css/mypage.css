@@ -1,0 +1,53 @@
+/* * guan
+* 2020-07-04
+* window */
+
+/* 8个背景样式 */
+/* 更改小圆标颜色 */
+#fp-nav ul li a span {
+    /*  提高层叠性 */
+    background: pink !important; 
+}
+/* 第一屏幕制作 start*/
+.section1 {
+    background: #fadd67 url(../images/t1fpyqfltdxxaiulhh-990-600.png) no-repeat center bottom;
+}
+/* 第一屏幕制作 end*/
+/* 第二屏幕制作 start*/
+.section2 {
+	background: #84a2d4 url(../images/t1zdgpfi8exxca6rfn-2000-600.png) no-repeat center bottom;
+	z-index: 2;
+}
+/* 第二屏幕制作 end*/
+/* 第三屏幕制作 start*/
+.section3 {
+	background: #ef674d;
+	z-index: 1;
+}
+/* 第三屏幕制作 end*/
+/* 第四屏幕制作 start*/
+.section4 {
+	background: #fed url(../images/t1iresfnxaxxca6rfn-2000-600.png) no-repeat center bottom;
+
+}
+/* 第四屏幕制作 end*/
+/* 第五屏幕制作 start*/
+.section5 {
+	background: #d04759 url(../images/t1yisqfa4exxa3gmkg-2000-1500.png);
+}
+/* 第五屏幕制作 end*/
+/* 第六屏幕制作 start*/
+.section6 {
+	background: #84d9ed url(../images/t1dvj.fn0gxxb0_fua-2500-600.png) no-repeat 25% 100%;
+}
+/* 第六屏幕制作 end*/
+/* 第七屏幕制作 start*/
+.section7 {
+	background: #8ac060 url(../images/t1wf1tfctaxxa3gmkg-2000-1500.png) no-repeat 50% 100%;
+}
+/* 第七屏幕制作 end*/
+/* 第八屏幕制作 start*/
+.section8 {
+	background: url(../images/ksgw.png);
+}
+/* 第八屏幕制作 end*/
