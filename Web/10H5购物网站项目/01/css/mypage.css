@@ -65,7 +65,43 @@
     bottom: 300px;
     right: 370px;
     display: none; /* 不要淡出淡入 */
+}
+.goods-02 {
+    height: 100px;
+    position: absolute;
+    bottom:217px;
+    right: 270px;
+    display: none;
+}
+.words-01,
+.words-02 {
+    position: absolute;
+    left: 50%;
+    bottom: 550px;
+    transform: translateX(-50%);
+}
+.words-02 {
+    opacity: 0;
+}
 
+/* 沙发 */
+.shirt-02 {
+    position: absolute;
+    width: 100px;
+    left: 395px;
+    bottom: 345px;
+    display: none;
+    z-index: 10;
+}
+.cover {
+    position: absolute;
+    width: 103px;
+    height: 90px;
+    right: 494px;
+    bottom: 334px;
+    z-index: 5;
+    background-color: #fff;
+    display: none;
 }
 /* 第二屏幕制作 end*/
 /* 第三屏幕制作 start*/
@@ -73,6 +109,48 @@
 	background: #ef674d;
 	z-index: 1;
 }
+.main {
+    position: absolute;
+    height: 500px;
+    width: 700px;
+    transform: translateX(-50%);
+    background: url(../images/main.png) no-repeat center center;
+    bottom: 50px;
+    left: 50%;
+}
+.select {
+    width: 300px;
+    height: 250px;
+    position: absolute;
+    bottom: 0;
+    right: 8px;
+    /* background-color: pink; */
+}
+.img {
+    position: absolute;
+    top: 0;
+}
+.img-01-a {
+    opacity: 0; /*opacity淡入淡出效果*/ 
+}
+
+.btn {
+    position: absolute;
+    bottom: 10px;
+}
+.btn-01-a {
+    opacity: 0; /*opacity淡入淡出效果*/ 
+}
+/* 沙发 */
+.shirt-03,
+.t1f {
+    position: absolute;
+    left: 115px;
+    bottom: 200px;
+    display: none;
+}
+
+
 /* 第三屏幕制作 end*/
 /* 第四屏幕制作 start*/
 .section4 {
