@@ -155,7 +155,35 @@
 /* 第四屏幕制作 start*/
 .section4 {
 	background: #fed url(../images/t1iresfnxaxxca6rfn-2000-600.png) no-repeat center bottom;
-
+}
+.cloud {
+    position: absolute;
+    left: 50%;
+    bottom: 550px;
+}
+.word {
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    bottom: 500px;
+}
+.words-4-a{
+    opacity: 0;
+}
+.car {
+    width: 500px;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.car-img {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;/*负值往下叠加*/
+    display: none;
 }
 /* 第四屏幕制作 end*/
 /* 第五屏幕制作 start*/
@@ -212,5 +240,19 @@
     100% {
         bottom: 335px;
     }
-
+}
+/* 云彩第一组 */
+.cloud-back1 {
+    animation: cloud 60s linear infinite;
+}
+@keyframes cloud {
+    0% {
+        left: 50%;
+    }
+    50% {
+        left: -10%;
+    }
+    100% {
+        left: 50%;
+    }
 }

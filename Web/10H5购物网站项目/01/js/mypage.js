@@ -44,7 +44,13 @@ $(function() {
             // 第3屏幕往第4屏幕滚动的时候
             if(index == 3 && nextIndex == 4) {
                 $(".shirt-02").hide();
-                $(".t1f").show();
+                // 沙发的距离 当前屏幕的高度 - 250 + 第3屏幕的50距离
+                $(".t1f").show().animate({"bottom": -((k - 250) + 50), "left": 260,},2000,function () {
+                    $(this).hide(); //动画完毕之后，自动隐藏
+                    $(".car-img").show();
+                    // 购物车开始往右走
+                    $(".car").animate({"left":1500},4000);
+                })
             }
         }
     }); 
