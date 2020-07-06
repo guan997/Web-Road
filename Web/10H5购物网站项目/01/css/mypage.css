@@ -185,10 +185,66 @@
     z-index: -1;/*负值往下叠加*/
     display: none;
 }
+.note {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: pink;
+    bottom: 180px;
+    display: none;
+}
+.note-img {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    opacity: 0;/* 淡入淡出用opacity*/
+}
 /* 第四屏幕制作 end*/
 /* 第五屏幕制作 start*/
 .section5 {
 	background: #d04759 url(../images/t1yisqfa4exxa3gmkg-2000-1500.png);
+}
+.words-05 {
+    position: absolute;
+    top: 0;
+    left: 20%;
+}
+.words-05-a {
+    animation: words5 3s;
+}
+@keyframes words5 {
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+.card-05 {
+    position: absolute;
+    left: 20%;
+    bottom: 200px;
+    z-index: 10;
+}
+.order-05 {
+    position: absolute;
+    left: 27%;
+    bottom: 270px;
+}
+.t1f-05 {
+    position: absolute;
+    bottom: 800px;
+    left: 25%;
+}
+.mouse {
+    position: absolute;
+    right: 20%;
+    bottom: 200px;
+}
+.mouse-05-a {
+    opacity: 0;
+}
+.hand-05 {
+    position: absolute;
+    right: 24%;
+    bottom: -375px;
 }
 /* 第五屏幕制作 end*/
 /* 第六屏幕制作 start*/

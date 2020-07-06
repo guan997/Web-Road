@@ -10,7 +10,8 @@ $(function() {
         // anchorLink 是锚链接的名称，index 是序号，从1开始计算
         afterLoad: function(anchorLink, index) {
             if(index == 2 && flag == false) {
-                $(".search").show().animate({"right": 370},1500, function() {
+                // 缓动动画要加到时间的后面，函数的前面
+                $(".search").show().animate({"right": 370},1500,"easeOutBack", function() {
                     // 方块走进来，沙发2个字显示
                     $(".search-words").animate({'opacity': 1},500, function() {
                         $(".search").hide();
@@ -49,7 +50,23 @@ $(function() {
                     $(this).hide(); //动画完毕之后，自动隐藏
                     $(".car-img").show();
                     // 购物车开始往右走
-                    $(".car").animate({"left":1500},4000);
+                    $(".car").animate({"left":1500},3000,"easeInElastic",function() {
+                        $(".note").show();
+                        $(".note-img, .words-4-a").animate({"opacity":1},1000);
+                    });
+                })
+            }
+             // 第4屏幕往第5屏幕滚动的时候
+             if(index == 4 && nextIndex == 5) {
+                //  小手上来
+                $(".hand-05").animate({"bottom":0}, 1000, function () {
+                    // 鼠标显示
+                    $(".mouse-05-a").fadeIn();
+                    // 沙发800-70
+                    $(".t1f-05").animate({"bottom":70}, 1000, function() {
+                        // 单子上来
+                        $(".order-05").animate({"bottom":390});
+                    });
                 })
             }
         }
