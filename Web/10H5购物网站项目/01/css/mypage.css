@@ -176,6 +176,7 @@
     bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 50;
 }
 .car-img {
     position: absolute;
@@ -229,6 +230,7 @@
     position: absolute;
     bottom: 800px;
     left: 25%;
+    display: none;
 }
 .mouse {
     position: absolute;
@@ -243,6 +245,14 @@
     right: 24%;
     bottom: -375px;
 }
+.overFlow { /*切掉鼠标超出的小尾巴*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 /* 第五屏幕制作 end*/
 /* 第六屏幕制作 start*/
 .section6 {
@@ -252,13 +262,54 @@
     position: absolute;
     left: 123px;
     bottom: 500px;
+    z-index: 50;
 }
 .car-06 {
+    z-index: 60;
     position: absolute;
     bottom: 0;
     right: 50%;
 }
-
+.pop-06 {
+    position: absolute;
+    bottom: 119px;
+    left: 48%;  
+    display: none;
+    z-index: 50;
+}
+.boy {
+    right: 48%;
+    bottom: 0;
+    position: absolute;
+    height: 100px;
+}
+.girl {
+    position: absolute;
+    right: 315px;
+    bottom: 116px;
+    height: 123px;
+    display: none;
+    z-index: 50;
+}
+.door {
+    position: absolute;
+    bottom: 116px;
+    opacity: 0;
+    right: 285px;
+}
+.pop-07 {
+    position: absolute;
+    bottom: 430px;
+    display: none;
+    right: 445px;
+    z-index: 40;
+}
+.words-06-a {
+    position: absolute;
+    bottom: 500px;
+    display: none;
+    left: 10%;
+}
 /* 第六屏幕制作 end*/
 /* 第七屏幕制作 start*/
 .section7 {
@@ -333,7 +384,7 @@
 .cloud-06 {
     position: absolute;
     left: 50%;
-    bottom: 550px;
+    bottom: 580px;
     animation: cloud6 30s;
 }
 @keyframes cloud6 {
