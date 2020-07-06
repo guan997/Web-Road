@@ -59,15 +59,31 @@ $(function() {
              // 第4屏幕往第5屏幕滚动的时候
              if(index == 4 && nextIndex == 5) {
                 //  小手上来
-                $(".hand-05").animate({"bottom":0}, 1000, function () {
+                $(".hand-05").animate({"bottom":0}, 2000, function () {
                     // 鼠标显示
-                    $(".mouse-05-a").fadeIn();
+                    $(".mouse-05-a").animate({"opacity": 1});
                     // 沙发800-70
                     $(".t1f-05").animate({"bottom":70}, 1000, function() {
                         // 单子上来
-                        $(".order-05").animate({"bottom":390});
+                        $(".order-05").animate({"bottom":390},function() {
+                            $(".words-05").addClass("words-05-a");
+                        });
                     });
                 })
+            }
+            // 第5屏幕往第6屏幕滚动的时候
+            if(index == 5 && nextIndex == 6) {
+                // 沙发掉进购物车
+                // 沙发的距离-当前屏幕的高度 - box的bottom 500
+                $(".t1f-05").animate({"bottom": -(k - 500), "left": "40%", "width": 65}, 1500, function() {
+                    $(".t1f-05").hide();
+                });
+                // 购物车同时移动
+                $(".box-06").animate({"left": "38%"}, 1500, function() {
+                    $(".box-06").animate({"bottom": 40}, 500, function() {
+                        $(".box-06").hide();
+                    });
+                });
             }
         }
     }); 

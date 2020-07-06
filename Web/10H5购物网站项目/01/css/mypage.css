@@ -202,20 +202,17 @@
 /* 第四屏幕制作 end*/
 /* 第五屏幕制作 start*/
 .section5 {
-	background: #d04759 url(../images/t1yisqfa4exxa3gmkg-2000-1500.png);
+    /* overflow: hidden; */
+    background: #d04759 url(../images/t1yisqfa4exxa3gmkg-2000-1500.png);
+    perspective: 500;
+    -webkit-perspective: 500;
+    z-index: 1;
 }
 .words-05 {
     position: absolute;
-    top: 0;
+    top: 10%;
     left: 20%;
-}
-.words-05-a {
-    animation: words5 3s;
-}
-@keyframes words5 {
-    100% {
-        transform: rotateY(360deg);
-    }
+    opacity: 0;
 }
 .card-05 {
     position: absolute;
@@ -251,6 +248,17 @@
 .section6 {
 	background: #84d9ed url(../images/t1dvj.fn0gxxb0_fua-2500-600.png) no-repeat 25% 100%;
 }
+.box-06 {
+    position: absolute;
+    left: 123px;
+    bottom: 500px;
+}
+.car-06 {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+}
+
 /* 第六屏幕制作 end*/
 /* 第七屏幕制作 start*/
 .section7 {
@@ -310,5 +318,26 @@
     }
     100% {
         left: 50%;
+    }
+}
+.words-05-a {
+    animation: words5 3s forwards;
+    /* animation-fill-mode: forwards;让动画保持最后一帧的效果 */
+}
+@keyframes words5 {
+    100% {
+        opacity: 1;
+        transform: translateZ(100px) rotateY(360deg);
+    }
+}
+.cloud-06 {
+    position: absolute;
+    left: 50%;
+    bottom: 550px;
+    animation: cloud6 30s;
+}
+@keyframes cloud6 {
+    50% {
+        left: 10%;
     }
 }
