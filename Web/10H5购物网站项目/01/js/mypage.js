@@ -99,11 +99,36 @@ $(function () {
                                 });
                             });
                         });
-                        $(".words-06-a").show().animate({"left": "30%"}, 300);
+                        $(".words-06-a").show().animate({ "left": "30%" }, 300);
                         $(".pop-06").show();
                     });
                 });
             }
+            // 第6屏幕往第7屏幕滚动的时候
+            if (index == 6 && nextIndex == 7) {
+                setTimeout(function () {
+                    $(".star").animate({ "width": 120 }, 500, function () {
+                        $(".good-07").show();
+                    });
+                }, 2000);
+            }
+            // 这是第8屏动画
+            // $(".benginShoping").mouseenter(function(event) {
+            //     $(".btn-08-a").show();
+            // }).mouseLeave(function(event) {
+            //     $(".btn-08-a").hide();
+            // })
+            // hover来替代更简洁
+            $(".benginShoping").hover(function() {
+                $(".btn-08-a").toggle(); //toggle显示和隐藏
+            });
+            // 大手跟随鼠标移动
+            $(document).mousemove(function(event) {
+                // 把鼠标在页面的坐标给hand大手 left top
+                var x = event.pageX - $(".hand-08").width() / 2;//获得鼠标在界面的x坐标
+                var y = event.pageY + 10;//获得鼠标在界面的x坐标
+                $(".hand-08").css({"left": x, "top": y});
+            })
         }
     });
 });
