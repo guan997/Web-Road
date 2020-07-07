@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兼容性</title>
+    <style>
+        header, footer, nav, section, article {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            background-color: red;
+            display: block;
+        }
+    </style>
+    <!-- 1.创建标签的方式解决ie低版本不兼容问题 document.createlement('header') -->
+    <script>
+        // document.createElement("header"); //创建header标签
+        // document.createElement("footer"); //创建footer标签
+    </script>
+    <!-- 2.引用一个js文件包 -->
+
+    <!-- 条件注释 ie6 7 8 能执行，其他浏览器忽略 -->
+    
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header>123</header>
+    <nav>123</nav>
+    <section>aaa</section>
+    <article>214</article>
+    <footer>abc</footer>
+</body>
+</html>
