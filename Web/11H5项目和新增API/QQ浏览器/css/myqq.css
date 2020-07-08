@@ -10,16 +10,55 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    background-color: pink;
     transform: translate(-50%, -50%); /*水平居中 垂直居中*/
 }
-.orb1 {
+.row1 .orb1, .row1 .orb2 {
     position: absolute;
     width: 60px;
     height: 60px;
-    background-color: red;
     top: 50%;
     left: 50%;
-    margin-top: -380px;
+    margin-top: -280px;
     margin-left: -30px;
+}
+.row1 .orb2 {
+    margin-top: -280px;
+    margin-left: 500px;
+}
+.row1 div,
+.row2 div,
+.row3 div {
+    /* 渐变色起始颜色和结束颜色*/
+    background: -webkit-linear-gradient(top, #fff, #dedede);
+    border-radius: 50%;
+}
+.row2 .orb1, .row2 .orb2 , .row2 .orb3{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-top: -280px;
+    margin-left: -500px;
+}
+.row2 .orb2 {
+    margin-top: -180px;
+    margin-left: 500px;
+}
+.row2 .orb3 {
+    margin-top: 50px;
+    margin-left: 0px;
+}
+.row3 .orb1, .row3 .orb2 {
+    position: absolute;
+    width: 500px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-top: 0;
+    margin-left: 0;
+}
+.row3 .orb2 {
+    margin-left: 1000px;
+    margin-top: 100px;
 }
