@@ -1,0 +1,25 @@
+/*
+    Author guan
+    Date 2020-07-08
+        window
+*/
+/* 背景圆 */
+#bg {
+    width: 1000px;
+    height: 1000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: pink;
+    transform: translate(-50%, -50%); /*水平居中 垂直居中*/
+}
+.orb1 {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    top: 50%;
+    left: 50%;
+    margin-top: -380px;
+    margin-left: -30px;
+}
