@@ -52,7 +52,7 @@
 .row3 .orb1, .row3 .orb2 {
     position: absolute;
     width: 500px;
-    height: 200px;
+    height: 500px;
     top: 50%;
     left: 50%;
     margin-top: 0;
@@ -61,4 +61,42 @@
 .row3 .orb2 {
     margin-left: 1000px;
     margin-top: 100px;
+}
+/* 第1屏幕 */
+.section1 {
+    perspective: 1000px;/*透视*/
+}
+/* 一个是起始状态 */
+.comein .p1 {
+    transform: translate(-50%, -50%) translateZ(0px) rotateY(0deg);
+}
+/* 一个是起始状态 */
+.p1 {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(500px) rotateY(-180deg);
+    width: 880px;
+    height: 320px;
+    background: url(../images/skin.gif) no-repeat;
+    transition: all 3s;/*过渡*/
+}
+/* 动画组 */
+.row1 div {
+    animation: orbmove 80s linear infinite;
+}
+.row2 div {
+    animation: orbmove 40s linear infinite;
+}
+.row3 div {
+    animation: orbmove 80s linear infinite;
+}
+@keyframes orbmove {
+    from {
+        transform: translateX(0px) rotate(0deg);
+    }
+    to {
+        /* translateX相当于相对定位，从现在的位置走 */
+        transform: translateX(-2000px) rotate(-3600deg);/*自身的位置往左走*/
+    }
 }
