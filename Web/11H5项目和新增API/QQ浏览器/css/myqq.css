@@ -86,16 +86,16 @@
 
 /* 第1屏幕 */
 .section1 {
+    /*用3d的时候需要加透视增加效果*/
     perspective: 1000px;
-    /*透视*/
 }
 
-/* 一个是起始状态 */
+/* 一个是结束状态 */
 .comein .p1 {
     transform: translate(-50%, -50%) translateZ(0px) rotateY(0deg);
 }
 
-/* 一个是结束状态 */
+/* 一个是起始状态 */
 .p1 {
     position: absolute;
     top: 45%;
@@ -104,11 +104,11 @@
     width: 880px;
     height: 320px;
     background: url(../images/skin.gif) no-repeat;
-    transition: all 3s;
+    transition: all 1s;
     /*过渡*/
 }
 /* 第二屏 */
-.section1 {
+.section2 {
     perspective: 1000px;
     /*透视*/
 }
@@ -116,11 +116,40 @@
     width: 316px;
     height: 360px;
     position: absolute;
+    text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) translateZ(-6000px) scale(0.1);
-    transition: all 3s;
     /*过渡*/
+    transition: all 2s;
+}
+/* 第3屏 */
+.section3 {
+    /*透视*/
+    perspective: 1000px;
+}
+.p3 {
+    position: absolute;
+    width: 1440px;
+    height: 760px;
+    top: 50%;
+    left: 50%;
+    margin-left: -270px;
+    margin-top: -284px;
+    background-color: pink;
+    border: 1px solid #ccc;
+    transform: translateZ(1200px) rotateX(120deg);
+    /*过渡*/
+    transition: all 4s;
+}
+.title3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -412px;
+    margin-top: -10px;
+    transform: translateZ(1200px) rotateY(-60deg);
+    transition: all 4s;
 }
 /* 动画组 */
 .row1 div {
