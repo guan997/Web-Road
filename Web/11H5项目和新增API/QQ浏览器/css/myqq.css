@@ -83,7 +83,12 @@
     margin-left: 1000px;
     margin-top: 100px;
 }
-
+/* 顶部下载 */
+#down {
+    position: fixed;
+    top: 2%;
+    left: 2%;
+}
 /* 第1屏幕 */
 .section1 {
     /*用3d的时候需要加透视增加效果*/

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视差滚动demo</title>
+    <style>
+        body {
+            font-size: 200px;
+            text-align: center;
+            color: white;
+            text-shadow: 0 1px 0 black, 0 0 5px black;
+        }
+
+        p {
+            padding: 0 0.5em;
+            margin: 0;
+        }
+
+        .content {
+            background-attachment: fixed;
+            height: 400px;
+        }
+
+        #content1 {
+            background-image: url("images/1.jpg");
+        }
+
+        #content2 {
+            background-image: url("images/2.jpg");
+        }
+
+        #content3 {
+            background-image: url("images/3.jpg");
+        }
+
+        #content4 {
+            background-image: url("images/4.jpg");
+        }
+        .slow {
+            position: absolute;
+            top: 600px;
+            left: 200px;
+        }
+        .fast {
+            position: absolute;
+            top: 600px;
+            right: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="images/big.png" class="slow" data-stellar-ratio="2"  alt="">
+    <img src="images/big-01.png" class="fast" data-stellar-ratio="0.2" alt="">
+    <div class="content" id="content1" data-stellar-background-ratio="0.03">
+        <p>TEXT HERE</p>
+    </div>
+    <div class="content" id="content2" data-stellar-background-ratio="0.03">
+        <p>TEXT HERE</p>
+    </div>
+    <div class="content" id="content3" data-stellar-background-ratio="0.03">
+        <p>TEXT HERE</p>
+    </div>
+    <div class="content" id="content4" data-stellar-background-ratio="0.03">
+        <p>TEXT HERE</p>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script>
+        $(function () {
+            // 让content的高度为当前窗口的高度
+            $(".content").height($(window).height());
+            $.stellar({
+                horizontalScrolling: false,
+                responsive: true
+            });
+        })
+    </script>
+</body>
+
+</html>
