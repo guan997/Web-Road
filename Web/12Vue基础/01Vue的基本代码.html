@@ -21,13 +21,19 @@
         <h3 v-text="mag">===========</h3>
         <!-- v-html把内容当成html输出，会覆盖元素中原本的内容 -->
         <div v-html="mag2">123</div>
+        <!-- v-bind 用于绑定属性的指令 -->
+        <!-- 注意v-bind指令可以被简写成 :要绑定的属性 -->
+        <!-- v-bind中，可以写合法的js表达式 -->
+        <input type="button" value="按钮" v-bind:title="mytitle + '123'">
+        <div v-cloak></div>
     </div>
     <script>
         var vm = new Vue({
             el : '#app',
             data: {
                 mag: 'Hello world',
-                mag2: '<h2>我是一个h2标题</h2>'
+                mag2: '<h2>我是一个h2标题</h2>',
+                mytitle: "我是一个title"
             }
         })
     </script>
