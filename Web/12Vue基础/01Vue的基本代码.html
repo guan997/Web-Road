@@ -13,19 +13,33 @@
 </head>
 <body>
     <div id="app">
+        <!-- 1. 插值表达式 -->
         <!-- 使用v-cloak 能够解决插值表达式的闪烁问题 -->
         <p v-cloak>========={{ mag }}========</p>
+
         <!-- 默认v-text没有闪烁问题 -->
+
         <!-- v-text会覆盖元素中原本的内容 但是插值表达式指挥替换自己的占位符 -->
         <!-- 不会把整个元素的内容清空 -->
         <h3 v-text="mag">===========</h3>
+
         <!-- v-html把内容当成html输出，会覆盖元素中原本的内容 -->
         <div v-html="mag2">123</div>
+
+        <!-- 2. v-bind 用于属性绑定 -->
+
         <!-- v-bind 用于绑定属性的指令 -->
         <!-- 注意v-bind指令可以被简写成 :要绑定的属性 -->
         <!-- v-bind中，可以写合法的js表达式 -->
-        <input type="button" value="按钮" v-bind:title="mytitle + '123'">
-        <div v-cloak></div>
+        <input type="button" value="绑定属性v-bind/:" :title="mytitle + '123'" ><br/>
+
+        <!-- 3.  v-on事件绑定 -->
+
+        <!-- vue中提供了v-on事件绑定 -->
+        <input type="button" value="事件绑定v-on" v-on:click="show"><br/>
+
+        <!-- v-on可以缩写为@ -->
+        <span @mouseover="show2">鼠标滑过显示</span>
     </div>
     <script>
         var vm = new Vue({
@@ -34,6 +48,14 @@
                 mag: 'Hello world',
                 mag2: '<h2>我是一个h2标题</h2>',
                 mytitle: "我是一个title"
+            },
+            methods: {//methods属性中定义了当前vue实例所有可用的方法
+                show: function() {
+                    alert("Hello");
+                },
+                show2: function() {
+                    alert("鼠标经过了");
+                }
             }
         })
     </script>
