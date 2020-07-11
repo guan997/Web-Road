@@ -14,17 +14,36 @@
         <h4>{{ msg }}</h4>
     </div>
     <script>
+        // 注意：在vue实例中如果想要获取data上的数据 或者想要调用methods中的方法，必须通过
+        // this.数据属性名 或 this.方法名来进行访问 这里的this就表示我们new出来的VM实例对象
         var vm = new Vue({
             el: "#app",
             data: {
                 msg: "猥琐发育别浪！！~~~"
             },
             methods: {
-                // 1.绑定事件
-                // 2.截取字符
+                // 1.绑定事件v-on
+                // 2.截取字符,难道mag字符串，然后调用sub截取第一个字符,后面的所有字符,然后拼接
                 // 3.设置定时器，实现自动截取的功能
                 btn() {
-                    console.log(mag);
+                    // console.log(this.msg);
+                    // var _this = this; 获取使用箭头函数
+                    setInterval( () => {
+                        // 获取到头的第一个字符
+                        var start = this.msg.substring(0, 1);
+                        // 获取到后面的所有字符
+                        var end = this.msg.substring(1);
+                        // 重新拼接得到新的字符串，并复制给this.msg
+                        this.msg = end + start;
+                    }, 400)
+
+                    // 注意： VM实例，会监听自己身上，data中所有数据的改变，只要数据一发生变化，就会自动
+                    // 把最新的数据，从data上同步到页面中去 
+                    // [好处：程序员秩序需要关心数据，不需要考虑如何重新旋绕DOM]
+
+                },
+                btn2() {
+
                 }
             }
         })
