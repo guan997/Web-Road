@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01Vue的基本代码</title>
+    <script src="lib/vue.js"></script>
+    <style>
+        [v-cloak] {
+            /* display: none; */
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用v-cloak 能够解决插值表达式的闪烁问题 -->
+        <p v-cloak>========={{ mag }}========</p>
+        <!-- 默认v-text没有闪烁问题 -->
+        <!-- v-text会覆盖元素中原本的内容 但是插值表达式指挥替换自己的占位符 -->
+        <!-- 不会把整个元素的内容清空 -->
+        <h3 v-text="mag">===========</h3>
+        <!-- v-html把内容当成html输出，会覆盖元素中原本的内容 -->
+        <div v-html="mag2">123</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el : '#app',
+            data: {
+                mag: 'Hello world',
+                mag2: '<h2>我是一个h2标题</h2>'
+            }
+        })
+    </script>
+</body>
+</html>
