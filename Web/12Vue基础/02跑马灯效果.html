@@ -10,7 +10,7 @@
 <body>
     <div id="app">
         <input type="button" value="浪起来" @click="btn">
-        <input type="button" value="猥琐发育" @click="btn2">
+        <input type="button" value="猥琐发育" @click="stop">
         <h4>{{ msg }}</h4>
     </div>
     <script>
@@ -19,7 +19,8 @@
         var vm = new Vue({
             el: "#app",
             data: {
-                msg: "猥琐发育别浪！！~~~"
+                msg: "猥琐发育别浪！！~~~",
+                intervalId: null // 在data上定义定时器Id
             },
             methods: {
                 // 1.绑定事件v-on
@@ -28,7 +29,9 @@
                 btn() {
                     // console.log(this.msg);
                     // var _this = this; 获取使用箭头函数
-                    setInterval( () => {
+                    // setInterval( () => {
+                    if (this.intervalId != null) return;
+                    this.intervalId = setInterval( () =>{
                         // 获取到头的第一个字符
                         var start = this.msg.substring(0, 1);
                         // 获取到后面的所有字符
@@ -40,10 +43,11 @@
                     // 注意： VM实例，会监听自己身上，data中所有数据的改变，只要数据一发生变化，就会自动
                     // 把最新的数据，从data上同步到页面中去 
                     // [好处：程序员秩序需要关心数据，不需要考虑如何重新旋绕DOM]
-
                 },
-                btn2() {
-
+                stop() { // 停止定时器
+                    clearInterval(this.intervalId);
+                    // 每当清除定时器之后，需要重新把intervalId置为null
+                    this.intervalId = null;
                 }
             }
         })
