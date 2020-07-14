@@ -15,7 +15,9 @@
     </div>
     <script>
         // 注意：在vue实例中如果想要获取data上的数据 或者想要调用methods中的方法，必须通过
-        // this.数据属性名 或 this.方法名来进行访问 这里的this就表示我们new出来的VM实例对象
+        // this.数据属性名 或 this.方法名来进行访问 
+        // 这里的this就表示我们new出来的VM实例对象
+        
         var vm = new Vue({
             el: "#app",
             data: {
@@ -28,7 +30,8 @@
                 // 3.设置定时器，实现自动截取的功能
                 btn() {
                     // console.log(this.msg);
-                    // var _this = this; 获取使用箭头函数
+                    // var _this = this; 
+                    // 使用箭头函数解决this指向问题
                     // setInterval( () => {
                     if (this.intervalId != null) return;
                     this.intervalId = setInterval( () =>{
