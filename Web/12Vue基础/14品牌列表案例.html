@@ -266,6 +266,8 @@
                     if (pattern.toLocaleLowerCase() === 'yyyy-mm-dd') {
                         return `${y}-${m}-${d}`;
                     } else {
+                        // padStart() 方法用另一个字符串填充当前字符串(重复，如果需要的话)，以便产生的字符串达到给定的长度。
+                        // 填充从当前字符串的开始(左侧)应用的。
                         var hh = dt.getHours().toString().padStart(2, '0');
                         var mm = dt.getMinutes().toString().padStart(2, '0');
                         var ss = dt.getSeconds().toString().padStart(2, '0');
