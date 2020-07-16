@@ -23,7 +23,7 @@
                 </label>
                 <label>
                     Name:
-                    <input type="text" class="form-control" v-model="name">
+                    <input type="text" class="form-control" v-model="name" @keyup.enter="add">
                 </label>
 
                 <!-- 在vue中，使用时间绑定机制，伪元素制定处理函数的时候，如果加了小括号，就可以给函数传参了 -->
@@ -65,8 +65,6 @@
         <h3 v-color="'pink'" v-fontweight="900" v-fontsize="50">{{ dt | dateFormat }}</h3>
     </div>
     <script>
-        // 自定义全局按键修饰符
-        // Vue.config.keywords.f2 = 113;
 
         // 自定义指令
         // 使用Vue.directive()定义全局的指令 v-focus
@@ -268,6 +266,10 @@
                     } else {
                         // padStart() 方法用另一个字符串填充当前字符串(重复，如果需要的话)，以便产生的字符串达到给定的长度。
                         // 填充从当前字符串的开始(左侧)应用的。
+
+                        // String.prototype.padStart(maxLength, fillString='') 在开始位置填充
+                        // String.prototype.padEnd(maxLength, fillString='')来尾部填充字符串；
+                        // 先传换成字符串后在首部填充2个总长度的0
                         var hh = dt.getHours().toString().padStart(2, '0');
                         var mm = dt.getMinutes().toString().padStart(2, '0');
                         var ss = dt.getSeconds().toString().padStart(2, '0');
