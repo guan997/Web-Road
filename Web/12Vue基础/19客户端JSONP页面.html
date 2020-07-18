@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19客户端JSONP页面</title>
+</head>
+<body>
+    <script>
+        function showInfo123(data) {
+            console.log(data);
+        }
+    </script>
+    <script src="http://127.0.0.1:3000/getscript?callback=showInfo123"></script>
+</body>
+</html>
