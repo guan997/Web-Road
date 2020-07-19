@@ -22,7 +22,7 @@
             methods: {
                 getInfo() { //发起get请求
                     // 在发起get请求之后，通过.then来设置成功的回调函数
-                    this.$http.get('http://vue.studyit.io/api/getlunbo').then(
+                    this.$http.get('http://localhost/PHP/da1.json').then(
                         function (result) {
                             // 通过result.body拿到服务器返回的成功的数据
                             console.log(result.body);
@@ -33,18 +33,21 @@
                     // applicationCache/x=eeee=form-utlrncoded
                     //  手动发起的 Post 请求，默认没有表单格式，所以，有的服务器处理不了
                     //  通过 post 方法的第三个参数， { emulateJSON: true } 设置 提交的内容类型 为 普通表单数据格式
-                    this.$http.post('http://vue.studyit.io/api/post', {}, {
+                    this.$http.post('http://localhost/PHP/da1.json', {}, {
                         emulateJson: true
                     }).then(result => {
                         console.log(result.body);
                     })
                 },
                 jsonpInfo() {// 发起JSONP 请求
-                    this.$http.jsonp('http://vue.studyit.io/api/jsonp').then(
-                        result => {
-                            console.log(result.body);
+                    this.$http.jsonp('http://localhost/PHP/da1.json').then(result => {
+                        var result = result.body;
+                        if(result.status === 0) {
+                            this.list = result.message;
+                        }else {
+                            alert('获取数据失败');
                         }
-                    )
+                    })
                 }
             }
         })
