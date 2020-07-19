@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23动画-使用第三方类实现动画</title>
+    <script src="lib/vue.js"></script>
+    <link rel="stylesheet" href="lib/animate.css">
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="toggle " @click="flag=!flag">
+        <!-- 点击按钮，让h3显示，再点击，让h3隐藏 -->
+        <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
+            <h3 v-if="flag">这是一个h3</h3>
+        </transition>
+        <hr>
+        
+        <!-- 使用 :duration="毫秒值" 来统一设置 入场 和 离场 时候的动画时长 -->
+        <input type="button" value="toggle" @click="flag2=!flag2">
+        <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" :duration="200">
+            <h6 v-if="flag2" class="animated">使用 :duration="毫秒值" 来统一设置 入场 和 离场 时候的动画时长</h6>
+        </transition>
+        <hr>
+        <!-- 使用  :duration="{ enter: 200, leave: 400 }"  来分别设置 入场的时长 和 离场的时长 -->
+        <input type="button" value="toggle" @click="flag3=!flag3">
+        <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" :duration="{enter: 200, leave: 400}">
+            <h6 v-if="flag3">使用  :duration="{ enter: 200, leave: 400 }"  来分别设置 入场的时长 和 离场的时长 </h6>
+        </transition>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: false,
+                flag2: false,
+                flag3: false
+            },
+            methods:{}
+        })
+    </script>
+</body>
+</html>
