@@ -69,7 +69,8 @@
                     localStorage.setItem('cmts', JSON.stringify(list));
 
                     this.user = this.content = '';
-                    // this.loadComments() // ?????
+                    // this.loadComments()
+                    // 发表评论后自动刷新
                     this.$emit('func');
                 }
             }
