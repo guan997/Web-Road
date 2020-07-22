@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>35复习-定义组件的方式</title>
+    <script src="lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用组件，直接，把组件的名称，以 HTML 标签的形式，引入到页面中，即可 -->
+        <mycom></mycom>
+        <mycom1></mycom1>
+        <login></login>
+        <login1></login1>
+        <mylogin></mylogin>
+    </div>
+    <script>
+        // 1使用 Vue.extend 来创建全局的Vue组件
+        var mycom = Vue.extend({
+            template: '<h1>1.使用 Vue.extend 来创建全局的Vue组件</h1>'
+        });
+        Vue.component("mycom", mycom)
+        // 1.2 缩写
+        // Vue.component 第一个参数:组件的名称,将来在引用组件的时候,就是一个 标签形式 来引入 它的
+        // 第二个参数: Vue.extend 创建的组件  ,其中 template 就是组件将来要展示的HTML内容
+        Vue.component('mycom1', Vue.extend({
+            template: '<h3>1.2 缩写 这是使用Vue.extend创建的组件</h3>'
+        }))
+
+        // 2.通过对象 字面量的形式，定义一个组件模板对象
+        var login = {
+            template: '<h1>2.通过Vue.component把组件模板对象，注册为一个全局的Vue</h1>'
+        };
+        // 通过Vue.component把组件模板对象，注册为一个全局的Vue
+        // 为这个组件起了一个名称，可以通过 标签形式，在页面中直接引入这个组件
+        Vue.component("login", login);
+
+        Vue.component("login1", {
+            template: '<div><h3>2.2 缩写这是使用Vue.component创建的组件</h3><span>template 属性指向的模板内容,必须有且只能有唯一的一个根元素</span></div>',
+        });
+
+        var mylogin = {
+            template: '<h1>3.定义实例内部私有组件的</h1>'
+        };
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: false
+            },
+            methods: {
+
+            },
+            components: {
+                // 定义实例内部私有组件的
+                // '组件的名称': 组件的模板对象
+                // 'mylogin': login
+                // 'mylogin':mylogin,
+                mylogin
+            }
+        })
+    </script>
+</body>
+
+</html>
