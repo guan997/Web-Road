@@ -27,7 +27,7 @@ module.exports = {
     //     contentBase: 'src', // 指定托管的根目录
     //     hot: true // 启用热更新 的 第1步
     // },
-    // mode: 'development' // 设置mode
+    // mode: 'development' ,// 设置mode
     plugins: [ // 配置插件的节点
         // new 一个热更新的 模块对象， 这是 启用热更新的第 3 步
         new webpack.HotModuleReplacementPlugin(),
@@ -45,12 +45,22 @@ module.exports = {
             //配置处理 .less 文件的第三方 loader 规则
             {test: /\.less$/, use: ['style-loader', 'css-loader','less-loader']},
             // 配置处理 .scss 文件的 第三方 loader 规则
-            {test: /\.scss$/, use: ['style-loader', 'css-loader','sass-loader']},
+            {test: /\.scss$/, use: ['style-loader', 'css-loader','sass-loader']}, 
+            // 配置处理 css中的路径 第三方 loader 规则
+            // limit给定的值是图片的大小，单位是byte 如果我们引用的图片大于或等于给定的limit值
+            // 则不会被转为base格式的字符串 如果图片小于给定的limit的值，图片转为base64的字符串
+            {test: /\.(png|jpg|jpeg|gif)$/, use: 'url-loader?limit=9999&name=[hash:8]-[name].[ext]'},
+            // 处理字体的第三方 loader 规则
+            {test: /\.(ttf|eot|svg|woff|woff2)$/, use: 'url-loader'},
+            // 使用babel处理高级JS语法
+            {test: /\.js$/, use: 'babel-loader',exclude:/node_modules/},
         ]
     }
     
 
 }
+// json中不可以写注释
+// webpack-dev-server不是内部或外部命令，cnpm i重新项目装包
 
 // 在 控制台，直接输入 webpack 命令执行的时候，webpack 做了以下几步：
 //  1. 首先，webpack 发现，我们并没有通过命令的形式，给它指定入口和出口
