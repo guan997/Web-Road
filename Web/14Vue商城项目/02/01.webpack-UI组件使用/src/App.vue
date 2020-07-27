@@ -1,11 +1,11 @@
 <template>
-
   <div>
     <header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">原生模式actionsheet</h1>
-		</header>
-    <br><br>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">原生模式actionsheet</h1>
+    </header>
+    <br />
+    <br />
     <h1>这是 App 组件</h1>
     <mt-button size="small" type="primary" @click="show">点击弹出toast</mt-button>
     <mt-button size="normal" type="primary" plain icon="back" disabled>normal</mt-button>
@@ -27,6 +27,24 @@
 </template>
 
 <script>
+var generateParenthesis = function (n) {
+  let res = [];
+  //  cur :当前字符  left：当前字符左括号 right:当前字符右括号
+  const help = (cur, left, right) => {
+    if (cur.length === 2 * n) {
+      res.push(cur);
+      return;
+    }
+    if (left < n) {
+      help(cur + "(", left + 1, right);
+    }
+    if (right < left) {
+      help(cur + ")", left, right + 1);
+    }
+  };
+  help("", 0, 0);
+  return res;
+};
 import { Toast } from "mint-ui";
 export default {
   data() {
