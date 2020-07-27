@@ -2,11 +2,10 @@
   <div>
     <!-- 这是轮播图区域 -->
     <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="item in lunbotuList" :key="item.url">
+      <!-- 解决问题：重复的keys被发现  'item.url'+i--key的值具有唯一性。-->
+      <mt-swipe-item v-for="(item, i) in lunbotuLists" :key="'item.url'+i">
         <img :src="item.img" alt />
       </mt-swipe-item>
-      <mt-swipe-item>2</mt-swipe-item>
-      <mt-swipe-item>3</mt-swipe-item>
     </mt-swipe>
 
     <!-- 九宫格到六宫格 -->
@@ -55,19 +54,19 @@ import { Toast } from "mint-ui";
 export default {
   data() {
     return {
-      lunbotuList: [], //保存轮播图的按钮
+      lunbotuLists: [], //保存轮播图的按钮
     };
   },
   created() {
-    this.getLunbotu();
+    this.getLunbotus();
   },
   methods: {
     // 获取轮播图的方法
-    getLunbotu() {
-      this.$http.get("http://vue.studyit.io/api/getlunbo").then((result) => {
-        console.log(result.body);
+    getLunbotus() {
+      this.$http.get("http://api.cms.liulongbin.top/api/getlunbo").then((result) => {
+        // console.log(result.body);
         if (result.body.status === 0) {
-          this.lunbotuList = result.body.message;
+          this.lunbotuLists = result.body.message;
         } else {
           Toast("加载轮播图失败");
         }
