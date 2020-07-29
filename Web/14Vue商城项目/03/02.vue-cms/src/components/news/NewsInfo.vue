@@ -1,7 +1,7 @@
 <template>
   <div class="newsinfo-container">
       <!-- 标题 -->
-    <h3 class="title">{{newsinfo.title}}}</h3>
+    <h3 class="title">{{newsinfo.title}}</h3>
     <!-- 次标题 -->
     <p class="subtitle">
       <span>发布人：{{newsinfo.add_time | dateFormat}}</span>

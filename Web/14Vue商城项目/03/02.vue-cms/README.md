@@ -128,5 +128,24 @@ treated as passive.
 2. 获取到所有的图片列表，然后使用 v-for 指令渲染数据
 3. 注意： img标签上的class不能去掉
 4. 注意： 每个 图片数据对象中，必须有 w 和 h 属性
+5. 在新版本的vue-preview设置样式实现小图 
+```
+.thumbs {
+    /deep/ .my-gallery {
+      //deep深层作用选择器
+      display: flex;
+      flex-wrap: wrap; //默认换行
+      figure {
+        width: 30%;
+        margin: 5px;
+        img {
+          width: 100%;
+          box-shadow: 0 0 8px #999;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+```
 
 
