@@ -125,10 +125,9 @@ treated as passive.
 ## 实现 图片详情中 缩略图的功能
 
 1. 使用 插件 vue-preview 这个缩略图插件
-2. 获取到所有的图片列表，然后使用 v-for 指令渲染数据
-3. 注意： img标签上的class不能去掉
-4. 注意： 每个 图片数据对象中，必须有 w 和 h 属性
-5. 在新版本的vue-preview设置样式实现小图 
+2.  ```<vue-preview class="imgPrev" :slides="list" @close="handleClose"></vue-preview>```
+3. 注意： 每个 图片数据对象中，必须有 w 和 h 属性
+4. 在新版本的vue-preview设置样式实现小图 
 ```
 .thumbs {
     /deep/ .my-gallery {
@@ -147,5 +146,15 @@ treated as passive.
     }
   }
 ```
+## 绘制 商品列表 页面基本结构并美化
+
+## 尝试在手机上 去进行项目的预览和测试
+
+1. 要保证自己的手机可以正常运行；
+2. 要保证 手机 和 开发项目的电脑 处于同一个 WIFI 环境中，也就是说 手机 可以 访问到 电脑的 IP
+3. 打开自己的 项目中 package.json 文件，在 dev 脚本中，添加一个 --host 指令， 把 当前 电脑的 WIFI IP地址， 设置为 --host 的指令值；
+
+- 如何查看自己电脑所处 WIFI 的IP呢， 在 cmd 终端中运行 ipconfig ， 查看 无线网的 ip 地址
+
 
 

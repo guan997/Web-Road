@@ -8,6 +8,8 @@ import NewsList from './components/news/NewsList.vue'
 import NewsInfo from './components/news/NewsInfo.vue'
 import PhotoInfo from './components/photos/PhotoInfo.vue'
 import PhotoList from './components/photos/PhotoList.vue'
+import GoodList from './components/goods/GoodList.vue'
+import GoodsInfo from './components/goods/GoodsInfo.vue'
 // 3. 创建路由对象
 var router = new VueRouter({
     routes: [{
@@ -45,6 +47,14 @@ var router = new VueRouter({
         {
             path: '/home/photoinfo/:id',
             component: PhotoInfo
+        },
+        {
+            path: '/home/goodlist',
+            component: GoodList
+        },
+        {
+            path: '/home/goodsinfo/:id',
+            component: GoodsInfo
         },
     ],
     linkActiveClass: 'mui-active' //覆盖默认的路由高亮得类，叫做router-link-active
