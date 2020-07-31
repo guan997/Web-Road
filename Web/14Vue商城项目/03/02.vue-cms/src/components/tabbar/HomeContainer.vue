@@ -1,12 +1,7 @@
 <template>
   <div>
     <!-- 这是轮播图区域 -->
-    <mt-swipe :auto="4000">
-      <!-- 解决问题：重复的keys被发现  'item.url'+i--key的值具有唯一性。-->
-      <mt-swipe-item v-for="(item, i) in lunbotuLists" :key="'item.url'+i">
-        <img :src="item.img" alt />
-      </mt-swipe-item>
-    </mt-swipe>
+    <swiper-box :lunbotuLists="lunbotuLists" :isfull="true"></swiper-box>
 
     <!-- 九宫格到六宫格 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -51,6 +46,7 @@
 </template>
 <script>
 import { Toast } from "mint-ui";
+import swiper from '../subcomponents/swiper.vue'
 export default {
   data() {
     return {
@@ -75,33 +71,13 @@ export default {
         });
     },
   },
+  components: {
+    "swiper-box":swiper
+  }
 };
 </script>
 <style lang="scss" scope>
-.mint-swipe {
-  height: 200px;
-  // 交集选择器
-  // .mint-swipe-item:nth-child(1){
-  //     background: red;
-  // }
 
-  .mint-swipe-item {
-    // $交集选择器
-    &:nth-child(1) {
-      background: red;
-    }
-    &:nth-child(2) {
-      background: blue;
-    }
-    &:nth-child(3) {
-      background: cyan;
-    }
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
 .mui-grid-view.mui-grid-9 {
   background: white;
   border: none;
