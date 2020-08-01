@@ -121,7 +121,7 @@ export default {
     getSelectedCount(count) {
       // 当子组件把 选中的数量传递给父组件的时候，把选中的值保存到 data 上
       this.selectedCount = count;
-      console.log("父组件拿到的数量值是：" + this.selectedCount);
+      // console.log("父组件拿到的数量值是：" + this.selectedCount);
     },
     beforeEnter(el) {
       el.style.transform = "translate(0,0)";

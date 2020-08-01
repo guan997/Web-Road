@@ -1,7 +1,11 @@
 <template>
   <div class="app-container">
     <!-- 顶部区域 -->
-    <mt-header fixed title="Vue商城"></mt-header>
+    <mt-header fixed title="Vue商城">
+      <span @click="goBack" slot="left" v-show="flag">
+        <mt-button icon="back">返回</mt-button>
+      </span>
+    </mt-header>
     <!-- 中间区域 -->
     <transition>
       <router-view></router-view>
@@ -31,8 +35,33 @@
 </template>
 
 <script>
+export default {
+  data(){
+    return{
+      flag:false
+    }
+  },
+  created() {
+    // 加载时立即判断是否是home页面，防止页面刷新watch监听失效
+    this.flag = this.$route.path === "/home" ? false :true;
+  },
+  methods: {
+    goBack(){
+      // 点击后退
+      this.$router.go(-1);
+    }
+  },
+  watch: {
+    "$route.path":function(newVal){
+      if(newVal === "/home"){
+        this.flag = false;
+      }else{
+        this.flag = true;
+      }
+    }
+  },
+}
 </script>
-
 
 <style lang="scss" scoped>
 .mint-header {
