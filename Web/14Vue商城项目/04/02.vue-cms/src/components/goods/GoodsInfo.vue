@@ -107,28 +107,38 @@ export default {
     addToShopCar() {
       // 添加到购物车
       this.ballFlag = !this.ballFlag;
+      // 拼接处一个存到store中car数组里的商品信息对象
+      // {id:"",count:要购买的数量，price:商品的单价，selected:false}
+      var goodsinfo = {
+        id: this.id,
+        count: this.selectedCount,
+        price: this.goodsinfo.sell_price,
+        selected: true,
+      };
+      // 调用 store 中的 mutations 来将商品加入购物车
+      this.$store.commit("addToCar",goodsinfo);
     },
-    getSelectedCount(count){
+    getSelectedCount(count) {
       // 当子组件把 选中的数量传递给父组件的时候，把选中的值保存到 data 上
       this.selectedCount = count;
-      console.log("父组件拿到的数量值是："+ this.selectedCount);
+      console.log("父组件拿到的数量值是：" + this.selectedCount);
     },
     beforeEnter(el) {
       el.style.transform = "translate(0,0)";
     },
     enter(el, done) {
       el.offsetWidth;
-      el.style.transform ="translate(93px, 230px)";
+      el.style.transform = "translate(93px, 230px)";
       el.style.transition = "all 0.5s cubic-bezier(.4,-0.3,1,.68)";
       done();
     },
-    afterEnter(el){
+    afterEnter(el) {
       this.ballFlag = !this.ballFlag;
-    }
+    },
   },
   components: {
     "swiper-box": swiper,
-    "number": number,
+    number: number,
   },
 };
 </script>
