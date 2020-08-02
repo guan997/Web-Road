@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>44父子组件之间传值</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <coml v-bind:parentmsg1="msg" @func="getMsgForm"></coml>
+    </div>
+    <template id="templ">
+        <div>
+            <h1>这是子元素----{{parentmsg1}}</h1>
+            <input type="button" value="向父组件传递消息" @click="sendMsg">
+        </div>
+    </template>
+    <script>
+        var coml ={
+            template:"#templ",
+            data() {
+                return {
+                    msg:"子组件中的数据"
+                }
+            },
+            props:['parentmsg1'],
+            methods: {
+                sendMsg(){
+                    this.$emit('func',this.msg);
+                }
+            },
+        }
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"父组件中的数据",
+                msgFormat:''
+            },
+            methods:{
+                getMsgForm(data){
+                    this.msgFormat=data;
+                    console.log(this.msgFormat);
+                }
+            },
+            components:{
+                coml
+            }
+        })
+    </script>
+</body>
+</html>

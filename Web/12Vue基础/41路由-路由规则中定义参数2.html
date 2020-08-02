@@ -18,13 +18,14 @@
     </div>
     <script>
         var login = {
-            template: '<h1>登录---{{$router.params.id}}---{{$router.params.name}}</h1>',
+            template: '<h1>登录---{{$route.params.id}}---{{$route.params.name}}</h1>',
             data() {
                 return {
                     msg: '123'
                 }
             },
             created() {
+                // this可以省略
                 console.log(this.$route.params.id)
             },
         };
