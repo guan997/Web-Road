@@ -9,7 +9,7 @@ import Vuex from 'Vuex';
 Vue.use(Vuex)
 
 // 每次刚进入网站，会调用 main.js 在刚调用的时候，先从本地存储中，把 购物车的数据读出来，放到 store 中
-var car = JSON.parse(localStorage.getItem('car' || '[]'));
+var car = JSON.parse(localStorage.getItem('car') || '[]');
 var store = new Vuex.Store({
     state: { //this.$store.state.***
         car: car //购物车商品的数据，在car数组存储一些商品的对象
