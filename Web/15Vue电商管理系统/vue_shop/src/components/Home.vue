@@ -11,25 +11,35 @@
     <!-- 页面主体区域 -->
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside width="200px">
+      <el-aside :width="isCollapse ? '64px' : '200px'">
+        <!-- 控制侧边栏是否收缩 -->
+        <div class="toggle-button" @click="toggleCollapse">|||</div>
         <!-- 侧边栏菜单区域 -->
-        <el-menu background-color="#373d41" text-color="#fff">
+        <el-menu
+          background-color="#373d41"
+          text-color="#fff"
+          unique-opened
+          active-text-color="#409EFF"
+          :collapse="isCollapse"
+          :collapse-transition="false"
+        >
           <!-- 一级菜单 -->
-          <el-submenu index="1">
+          <!-- index只接受字符串,不接受数值,在后面拼接字符串 -->
+          <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id">
             <!-- 一级菜单的模板区域 -->
             <template slot="title">
               <!-- 图标 -->
-              <i class="el-icon-location"></i>
+              <i :class="iconsObj[item.id]"></i>
               <!-- 文本 -->
-              <span>导航一</span>
+              <span>{{ item.authName }}}</span>
             </template>
             <!-- 二级菜单 -->
-            <el-menu-item index="1-1-1">
+            <el-menu-item :index="subItem.id + ''" v-for="subItem in item.children">
               <template slot="title">
                 <!-- 图标 -->
-                <i class="el-icon-location"></i>
+                <i class="el-icon-menu"></i>
                 <!-- 文本 -->
-                <span>导航2</span>
+                <span>{{ subItem.authName }}</span>
               </template>
             </el-menu-item>
           </el-submenu>
@@ -42,12 +52,42 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      // 左侧菜单数据
+      menulist: [],
+      iconsObj: {
+        '125': 'iconfont icon-user',
+        '103': 'iconfont icon-tijikongjian',
+        '101': 'iconfont icon-shangpin',
+        '102': 'iconfont icon-danju',
+        '145': 'iconfont icon-baobiao',
+      },
+      // 默认为false不折叠
+      isCollapse: false,
+    }
+  },
+  created() {
+    this.getMenuList()
+  },
   methods: {
     logout() {
       // 清空token
       window.sessionStorage.clear()
       // 跳转到登录页
       this.$router.push('/login')
+    },
+    // 获取所有的菜单
+    async getMenuList() {
+      const { data: res } = await this.$http.get('menus')
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+      this.menulist = res.data
+      console.log(res)
+      // console.log(this.menulist)
+    },
+    // 点击按钮,切换菜单的折叠与展开
+    toggleCollapse() {
+      this.isCollapse = !this.isCollapse
     },
   },
 }
@@ -78,5 +118,20 @@ export default {
 }
 .el-aside {
   background-color: #333744;
+  .el-menu {
+    border-right: none;
+  }
+}
+.iconfont {
+  margin-right: 10px;
+}
+.toggle-button {
+  background-color: #4a5064;
+  font-size: 10px;
+  line-height: 24px;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.2em;
+  cursor: pointer;
 }
 </style>
