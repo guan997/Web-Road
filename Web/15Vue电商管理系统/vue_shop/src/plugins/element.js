@@ -1,6 +1,6 @@
 import Vue from 'vue'
 // element-ui按需导入
-import { Button, Form, FormItem, Input, Message, Container, Header, Aside, Main, Menu, MenuItem, Submenu } from 'element-ui'
+import { Button,Breadcrumb,BreadcrumbItem,Card, Form, FormItem, Input, Message, Container, Header, Aside, Main, Menu, MenuItem, Submenu } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Form)
@@ -13,4 +13,7 @@ Vue.use(Header)
 Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Submenu)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Card)
 Vue.prototype.$message = Message
