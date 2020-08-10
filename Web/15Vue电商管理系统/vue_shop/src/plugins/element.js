@@ -1,6 +1,31 @@
 import Vue from 'vue'
 // element-ui按需导入
-import { Button,Breadcrumb,BreadcrumbItem,Card,Pagination,Tooltip, Switch,Table,TableColumn, Row, Col, Form, FormItem, Input, Message, Container, Header, Aside, Main, Menu, MenuItem, Submenu } from 'element-ui'
+import {
+  Button,
+  Breadcrumb,
+  BreadcrumbItem,
+  MessageBox,
+  Dialog,
+  Card,
+  Pagination,
+  Tooltip,
+  Switch,
+  Table,
+  TableColumn,
+  Row,
+  Col,
+  Form,
+  FormItem,
+  Input,
+  Message,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Menu,
+  MenuItem,
+  Submenu
+} from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Form)
@@ -23,4 +48,7 @@ Vue.use(Switch)
 Vue.use(TableColumn)
 Vue.use(Tooltip)
 Vue.use(Pagination)
+Vue.use(Dialog)
+Vue.use(MessageBox)
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
