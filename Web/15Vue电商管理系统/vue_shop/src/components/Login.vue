@@ -71,8 +71,8 @@ export default {
   methods: {
     // 点击登录，进行登录验证
     login() {
-      this.$refs.loginFormRef.validate(async (vaild) => {
-        if (!vaild) return
+      this.$refs.loginFormRef.validate(async (valid) => {
+        if (!valid) return
         const { data: result } = await this.$http.post('login', this.loginForm)
         if (result.meta.status !== 200) {
           return this.$message.error('登陆失败')

@@ -320,10 +320,6 @@ export default {
         this.$message.success('删除用户成功！')
         this.getUserList()
     },
-    // 展示分配用户角色的对话框
-    showPickDialog() {
-      // this.pickDialogVisible = true
-    },
   },
 }
 </script>
