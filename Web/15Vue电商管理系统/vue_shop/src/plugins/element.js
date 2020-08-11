@@ -23,9 +23,12 @@ import {
   Aside,
   Main,
   Menu,
+  Tree,
   MenuItem,
   Submenu,
-  Tag
+  Tag,
+  Select,
+  Option
 } from 'element-ui'
 
 Vue.use(Button)
@@ -50,7 +53,11 @@ Vue.use(TableColumn)
 Vue.use(Tooltip)
 Vue.use(Pagination)
 Vue.use(Dialog)
-Vue.use(MessageBox)
+// Vue.use(MessageBox)
+Vue.component(MessageBox.name, MessageBox)
 Vue.use(Tag)
+Vue.use(Tree)
+Vue.use(Select)
+Vue.use(Option)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
