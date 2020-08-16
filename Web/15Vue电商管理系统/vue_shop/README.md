@@ -123,3 +123,7 @@ Vue element-ui引入MessageBox导致每个页面刷新后均弹出空的提示�
 
 ### 实现用户界面分配角色功能
 
+### 实现商品分类
+
+安装vue-table-with-tree-grid插件 展示数据
+
