@@ -300,7 +300,6 @@ export default {
     // 展示编辑用户的对话框
     async showEditDialog(id) {
       const { data: res } = await this.$http.get('users/' + id)
-      this.editDialogVisible = true
       if (res.meta.status !== 200) {
         this.$message.error('查询用户信息失败')
       }
