@@ -70,17 +70,15 @@
         <el-form-item label="分类名称" prop="cat_name">
           <el-input v-model="addCateForm.cat_name"></el-input>
         </el-form-item>
-        <el-form-item label="父级分类">
+        <el-form-item label="父级分类" prop="cascaderProps">
           <!-- options用来指定数据源 -->
           <!-- props用来指定配置对象 -->
           <el-cascader
-            expand-trigger="hover"
+            :props="{ expandTrigger: 'hover', checkStrictly : true , value: 'cat_id', label: 'cat_name',children: 'children'}"
             v-model="selsectedKeys"
             :options="parentCateList"
-            :props="cascaderProps"
             @change="parentCateChanged"
             clearable
-            change-on-select
           ></el-cascader>
         </el-form-item>
       </el-form>
@@ -163,6 +161,7 @@ export default {
       addCateFormRules: {
         cat_name: [
           { required: true, message: '请输入分类名称', trigger: 'blur' },
+          { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' },
         ],
       },
       //   父级分类的列表
