@@ -317,7 +317,7 @@ export default {
             roleDesc: this.editForm.roleDesc,
           }
         )
-        console.log(res)
+        // console.log(res)
         if (res.meta.status !== 200) {
           return this.$message.error('编辑角色信息失败:' + res.meta.msg)
         }
@@ -346,7 +346,7 @@ export default {
       }
       const { data: res } = await this.$http.delete('roles/' + id)
       if (res.meta.status !== 200) {
-        return this.$message.error('获取角色信息数据失败:'+res.meta.msg)
+        return this.$message.error('获取角色信息失败:'+res.meta.msg)
       }
       this.$message.success('删除成功')
       this.getRolesList()

@@ -21,3 +21,7 @@ body,
 .el-pagination{
     margin-top: 15px;
 }
+/* 级联选择器 */
+.el-cascader-menu{
+    height:240px
+}
