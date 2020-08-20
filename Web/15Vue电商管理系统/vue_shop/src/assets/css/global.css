@@ -25,3 +25,10 @@ body,
 .el-cascader-menu{
     height:240px
 }
+/* 步骤条区域 */
+.el-steps{
+    margin: 15px 0;
+}
+.el-steps__title{
+    font-size: 13px;
+}

@@ -131,3 +131,9 @@ Vue element-ui引入MessageBox导致每个页面刷新后均弹出空的提示�
 
 注意：显示过的数据应清空，防止无数据项时出现上次显示的数据
 
+### 实现商品列表主要功能
+
+get请求需要使用{params：value}
+this.$http.delete(`goods/${id}`)
+
+### 实现商品列表中的添加商品功能(暂未完成)
