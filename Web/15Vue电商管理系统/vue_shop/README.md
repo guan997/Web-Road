@@ -2,26 +2,8 @@
 
 ## Project setup
 ```
-yarn install
+npm install
 ```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 导入数据库
 ### 初始化后台文件
@@ -144,3 +126,8 @@ Vue element-ui引入MessageBox导致每个页面刷新后均弹出空的提示�
 .el-cascader-menu{height:240px}
 
 ### 完成商品分类主功能（删除和编辑功能暂未完成  => 已完成）
+
+### 实现分类参数所有功能
+
+注意：显示过的数据应清空，防止无数据项时出现上次显示的数据
+
