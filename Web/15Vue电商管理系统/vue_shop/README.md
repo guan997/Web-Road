@@ -137,3 +137,8 @@ get请求需要使用{params：value}
 this.$http.delete(`goods/${id}`)
 
 ### 实现商品列表中的添加商品功能(暂未完成)
+
+1.添加步骤条和tab栏
+3.使用上传组件 上传图片
+注意：上传组件没有指定axios，需要指定headers
+3.使用富文本vue-quill-editor 添加商品内容
