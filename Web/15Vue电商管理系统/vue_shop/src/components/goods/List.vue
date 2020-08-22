@@ -48,15 +48,16 @@
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-     <el-pagination
+    <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="queryInfo.pagenum"
       :page-sizes="[5, 8, 15, 20]"
       :page-size="queryInfo.pagesize"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="total" background>
-    </el-pagination>
+      :total="total"
+      background
+    ></el-pagination>
   </div>
 </template>
 <script>
@@ -73,8 +74,8 @@ export default {
         pagenum: 1,
         pagesize: 10,
       },
-    //   当前页码
-      currentPage:0,
+      //   当前页码
+      currentPage: 0,
     }
   },
   created() {
@@ -92,23 +93,23 @@ export default {
       // this.$message.success('获取商品列表成功')
       this.goodsList = res.data.goods
       this.total = res.data.total
-    //   console.log(this.goodsList)
+      //   console.log(this.goodsList)
       //   console.log(res)
     },
     // 每页显示个数的选项
-    handleSizeChange(newSize){
-        this.queryInfo.pagesize = newSize
-        this.getGoodsList()
+    handleSizeChange(newSize) {
+      this.queryInfo.pagesize = newSize
+      this.getGoodsList()
     },
     // 页码大小
-    handleCurrentChange(newNum){
-        this.queryInfo.pagenum = newNum
-        this.getGoodsList()
+    handleCurrentChange(newNum) {
+      this.queryInfo.pagenum = newNum
+      this.getGoodsList()
     },
     showEditDialog(id) {},
     // 删除商品事件
     async deleteList(id) {
-        // 弹框删除对应的参数信息
+      // 弹框删除对应的参数信息
       const confirmResult = await this.$confirm(
         '将删除此商品信息, 是否继续?',
         '提示',
@@ -123,17 +124,17 @@ export default {
       if (confirmResult !== 'confirm') {
         return this.$message.info('已取消删除')
       }
-      const {data:res} =await this.$http.delete(`goods/${id}`)
-      if(res.meta.status !== 200){
-          return this.$message.error('删除商品失败')
+      const { data: res } = await this.$http.delete(`goods/${id}`)
+      if (res.meta.status !== 200) {
+        return this.$message.error('删除商品失败')
       }
       this.$message.success('删除商品成功')
       this.getGoodsList()
     },
     // 商品添加
-    goAddpage(){
+    goAddpage() {
       this.$router.push('/goods/add')
-    }
+    },
   },
 }
 </script>

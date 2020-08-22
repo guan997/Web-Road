@@ -20,7 +20,13 @@
         <el-step title="完成"></el-step>
       </el-steps>
       <!-- tabs栏区域 -->
-      <el-form :model="addForm" ref="addFormRef" :rules="addFormRules" label-width="100px" label-position="top">
+      <el-form
+        :model="addForm"
+        ref="addFormRef"
+        :rules="addFormRules"
+        label-width="100px"
+        label-position="top"
+      >
         <el-tabs
           v-model="activeIndex"
           tab-position="left"
@@ -82,9 +88,7 @@
           </el-tab-pane>
           <el-tab-pane label="商品内容" name="4">
             <!-- 富文本编辑器组件 -->
-            <quill-editor
-              v-model="addForm.goods_introduce"
-            />
+            <quill-editor v-model="addForm.goods_introduce" />
             <!-- 添加商品的按钮 -->
             <el-button type="primary" class="btnAdd" @click="add">添加商品</el-button>
           </el-tab-pane>
@@ -98,6 +102,7 @@
   </div>
 </template>
 <script>
+import _ from 'lodash'
 export default {
   data() {
     return {
@@ -114,7 +119,9 @@ export default {
         // 图片的数组
         pics: [],
         // 商品的详情描述
-        goods_introduce:'',
+        goods_introduce: '',
+        // 商品的参数信息
+        attrs: [],
       },
       // 添加商品的表单数据规则
       addFormRules: {
@@ -178,7 +185,7 @@ export default {
     },
     // 监听级联选择器选中项变化，
     cascaderAddChanged() {
-      console.log(this.addForm.goods_cat)
+      // console.log(this.addForm.goods_cat)
       // 默认只能选择三级分类
       if (this.addForm.goods_cat.length !== 3) {
         // 级联选择器的数据只允许v-model使用数组
@@ -214,6 +221,7 @@ export default {
         })
         // console.log(res)
         this.manyTableDate = res.data
+        // console.log(this.manyTableDate)
         // 如果访问的是静态属性面板
       } else if (this.activeIndex === '2') {
         const { data: res } = await this.$http.get(
@@ -227,12 +235,12 @@ export default {
         }
         // console.log(res)
         this.onlyTableDate = res.data
-        // 如果访问的是上传图片面板
+        // console.log(this.manyTableDate)
       }
     },
     // 处理图片预览效果
     handlePreview(file) {
-      console.log(file)
+      // console.log(file)
       this.previewPath = file.response.data.url
       this.previewVisible = true
     },
@@ -259,15 +267,55 @@ export default {
       // console.log(this.addForm)
     },
     // 添加商品事件
-    add(){
+    add() {
       // 判断添加信息格式是否正确
-      this.$refs.addFormRef.validate(valid => {
-        if(!valid){
+      this.$refs.addFormRef.validate(async (valid) => {
+        if (!valid) {
           return this.$message.error('请填写必要的表单项')
         }
         // 执行添加的业务逻辑
+        // lodash cloneDeep(obj)
+        const form = _.cloneDeep(this.addForm)
+        form.goods_cat = form.goods_cat.join(',')
+        // console.log(form)
+        // 处理动态参数
+        if (!this.manyTableDate || !this.manyTableDate.length) {
+          return console.log(
+            'monyTableDate表单数据获取失败:' + this.manyTableDate
+          )
+        }
+        this.manyTableDate.forEach((item) => {
+          const newInfo = {
+            attr_id: item.attr_id,
+            attr_value: item.attr_vals.join(' '),
+          }
+          this.addForm.attrs.push(newInfo)
+        })
+        // 处理静态属性
+        if (!this.onlyTableDate || !this.onlyTableDate.length) {
+          return console.log(
+            'onlyTableDate表单数据获取失败:' + this.onlyTableDate
+          )
+        }
+        this.onlyTableDate.forEach((item) => {
+          const newInfo = {
+            attr_id: item.attr_id,
+            attr_value: item.attr_vals,
+          }
+          this.addForm.attrs.push(newInfo)
+        })
+        form.attrs = this.addForm.attrs
+        // console.log('this.addForm表单数据:' + form)
+        // 发起请求添加商品
+        // 商品的名称必须是唯一的
+        const { data: res } = await this.$http.post('goods', form)
+        if (res.meta.status !== 201) {
+          return this.$message.error('添加商品失败')
+        }
+        this.$message.success('添加商品成功')
+        this.$router.push('/goods')
       })
-    }
+    },
   },
   computed: {
     // 计算级联选择性是否选中三级分类
@@ -287,7 +335,7 @@ export default {
 .previewImg {
   width: 100%;
 }
-.btnAdd{
+.btnAdd {
   margin-top: 15px;
 }
 </style>
