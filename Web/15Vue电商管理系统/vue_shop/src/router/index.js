@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 Vue.use(VueRouter)
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
@@ -13,7 +12,7 @@ import Params from '../components/goods/Params.vue'
 import goodsList from '../components/goods/List.vue'
 import Add from '../components/goods/Add.vue'
 import Order from '../components/order/Order.vue'
-
+import Report from '../components/report/Report.vue'
 const routes = [{
     path: '/',
     redirect: '/login'
@@ -62,10 +61,13 @@ const routes = [{
         path: '/orders',
         component: Order
       },
+      {
+        path: '/reports',
+        component: Report
+      },
     ]
   }
 ]
-
 const router = new VueRouter({
   routes
 })
@@ -80,8 +82,7 @@ router.beforeEach((to, from, next) => {
   // 获取token
   const tokenStr = window.sessionStorage.getItem('token');
   // 没有token，强制跳转到登录页
-  if (!tokenStr) return next('/login');
-  next();
+  if (!tokenStr) return next('/login')
+  next()
 })
-
 export default router

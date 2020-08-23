@@ -155,3 +155,6 @@ Cannot read property 'forEach' of undefined
 1.实现布局
 2.获取订单数据
 3.使用TimeLine组件实现物流信息时间线显示
+
+### 实现数据报表界面
+使用Echarts渲染数据

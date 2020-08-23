@@ -175,7 +175,7 @@ export default {
       // console.log(this.loactionInfo)
     },
     loactionDialogClose() {},
-  },
+  }
 }
 </script>
 <style lang="less" scoped>

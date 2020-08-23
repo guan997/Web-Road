@@ -39,7 +39,7 @@ import {
   CheckboxGroup,
   Upload,
   Timeline,
-  TimelineItem,
+  TimelineItem
 } from 'element-ui'
 
 Vue.use(Button)
