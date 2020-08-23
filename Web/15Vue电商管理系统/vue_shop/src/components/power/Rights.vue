@@ -25,26 +25,26 @@
 </template>
 <script>
 export default {
-    data() {
-        return {
-            // 所有的权限列表
-            rightsList:[]
-        }
-    },
-    created() {
-        this.getRightsList()
-    },
-    methods: {
-        // 获取权限列表
-        async getRightsList(){
-            const {data: res} = await this.$http.get('rights/list')
-            if(res.meta.status !== 200){
-                this.$message.error("获取权限列表失败")
-            }
-            this.rightsList = res.data
-            // console.log(this.rightsList)
-        }
-    },
+  data() {
+    return {
+      // 所有的权限列表
+      rightsList: []
+    }
+  },
+  created() {
+    this.getRightsList()
+  },
+  methods: {
+    // 获取权限列表
+    async getRightsList() {
+      const { data: res } = await this.$http.get('rights/list')
+      if (res.meta.status !== 200) {
+        this.$message.error('获取权限列表失败')
+      }
+      this.rightsList = res.data
+      // console.log(this.rightsList)
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

@@ -57,11 +57,13 @@ rules: {
     "semi": false,
  // 使用单引号, 默认false(在jsx中配置无效, 默认都是双引号)
     "singleQuote": false,
-    
+//  每行超过200强制换行
+      "printWidth":200
 ```
 {
   "semi": false,
-  "singleQuote": true
+  "singleQuote": true,
+  "printWidth":200
 }  
 ```
 
@@ -117,7 +119,7 @@ Vue element-ui引入MessageBox导致每个页面刷新后均弹出空的提示�
 
 ### 完善角色列表功能
 
-发现bug（未解决）
+发现bug（Element插件问题）
 修改角色名称时，角色名称会出现第一次赋值的结果，一闪而过
 
 发现bug（已解决）
@@ -158,3 +160,17 @@ Cannot read property 'forEach' of undefined
 
 ### 实现数据报表界面
 使用Echarts渲染数据
+
+### 项目优化和上线
+- 通过nprogress添加进度条效果
+- 解决serve命令中提示的ESLint语法错误
+- 在执行build命令期间移除所有的console
+- 只在发布阶段移除所有的console
+- 修改默认打包入口文件
+ -  webpack配置关闭 webpack 的性能提示
+- 通过externals加载外部CDN资源
+- 通过CDN优化ElementUI的打包
+- 实现路由懒加载
+- 开启文件的Gzip网络传输压缩文件体积
+- 配置HTTPS服务
+- 使用pm2管理应用

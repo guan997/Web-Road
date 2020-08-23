@@ -67,16 +67,16 @@ export default {
       // 左侧菜单数据
       menulist: [],
       iconsObj: {
-        '125': 'iconfont icon-user',
-        '103': 'iconfont icon-tijikongjian',
-        '101': 'iconfont icon-shangpin',
-        '102': 'iconfont icon-danju',
-        '145': 'iconfont icon-baobiao',
+        125: 'iconfont icon-user',
+        103: 'iconfont icon-tijikongjian',
+        101: 'iconfont icon-shangpin',
+        102: 'iconfont icon-danju',
+        145: 'iconfont icon-baobiao'
       },
       // 默认为false不折叠
       isCollapse: false,
       // 被激活的链接地址
-      activePath: '',
+      activePath: ''
     }
   },
   created() {
@@ -106,8 +106,8 @@ export default {
     saveNavState(activePath) {
       window.sessionStorage.setItem('activePath', activePath)
       this.activePath = activePath
-    },
-  },
+    }
+  }
 }
 </script>
 <style scoped lang="less">

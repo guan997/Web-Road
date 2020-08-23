@@ -121,28 +121,28 @@ export default {
         // 商品的详情描述
         goods_introduce: '',
         // 商品的参数信息
-        attrs: [],
+        attrs: []
       },
       // 添加商品的表单数据规则
       addFormRules: {
         goods_name: [
-          { required: true, message: '请输入商品名称', trigger: 'blur' },
+          { required: true, message: '请输入商品名称', trigger: 'blur' }
         ],
         goods_price: [
-          { required: true, message: '请输入商品价格', trigger: 'blur' },
+          { required: true, message: '请输入商品价格', trigger: 'blur' }
         ],
         goods_weight: [
-          { required: true, message: '请输入商品重量', trigger: 'blur' },
+          { required: true, message: '请输入商品重量', trigger: 'blur' }
         ],
         goods_number: [
-          { required: true, message: '请输入商品数量', trigger: 'blur' },
+          { required: true, message: '请输入商品数量', trigger: 'blur' }
         ],
         goods_name: [
-          { required: true, message: '请输入商品名称', trigger: 'blur' },
+          { required: true, message: '请输入商品名称', trigger: 'blur' }
         ],
         goods_cat: [
-          { required: true, message: '请选择商品分类', trigger: 'blur' },
-        ],
+          { required: true, message: '请选择商品分类', trigger: 'blur' }
+        ]
       },
       // 商品分类列表
       cateList: [],
@@ -150,7 +150,7 @@ export default {
       cascaderProps: {
         value: 'cat_id',
         label: 'cat_name',
-        children: 'children',
+        children: 'children'
       },
       // 选中的分类
       selsectedKeys: '',
@@ -162,12 +162,12 @@ export default {
       uploadURL: 'http://127.0.0.1:8888/api/private/v1/upload',
       // 图片上传组件的headers请求头对象
       headerObj: {
-        Authorization: window.sessionStorage.getItem('token'),
+        Authorization: window.sessionStorage.getItem('token')
       },
       // 预览图的数据
       previewPath: '',
       // 预览图的显示和隐藏
-      previewVisible: false,
+      previewVisible: false
     }
   },
   created() {
@@ -208,7 +208,7 @@ export default {
         const { data: res } = await this.$http.get(
           `categories/${this.cateId}/attributes`,
           {
-            params: { sel: 'many' },
+            params: { sel: 'many' }
           }
         )
         if (res.meta.status !== 200) {
@@ -227,7 +227,7 @@ export default {
         const { data: res } = await this.$http.get(
           `categories/${this.cateId}/attributes`,
           {
-            params: { sel: 'only' },
+            params: { sel: 'only' }
           }
         )
         if (res.meta.status !== 200) {
@@ -260,7 +260,7 @@ export default {
       // console.log(response)
       // 1.拼接得到一个图片信息对象
       const picInfo = {
-        pic: response.data.tmp_path,
+        pic: response.data.tmp_path
       }
       // 2.将图片信息对象.push到pics数组中
       this.addForm.pics.push(picInfo)
@@ -287,7 +287,7 @@ export default {
         this.manyTableDate.forEach((item) => {
           const newInfo = {
             attr_id: item.attr_id,
-            attr_value: item.attr_vals.join(' '),
+            attr_value: item.attr_vals.join(' ')
           }
           this.addForm.attrs.push(newInfo)
         })
@@ -300,7 +300,7 @@ export default {
         this.onlyTableDate.forEach((item) => {
           const newInfo = {
             attr_id: item.attr_id,
-            attr_value: item.attr_vals,
+            attr_value: item.attr_vals
           }
           this.addForm.attrs.push(newInfo)
         })
@@ -315,7 +315,7 @@ export default {
         this.$message.success('添加商品成功')
         this.$router.push('/goods')
       })
-    },
+    }
   },
   computed: {
     // 计算级联选择性是否选中三级分类
@@ -324,8 +324,8 @@ export default {
         return this.addForm.goods_cat[2]
       }
       return null
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

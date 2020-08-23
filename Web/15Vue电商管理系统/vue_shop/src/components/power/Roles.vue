@@ -165,7 +165,7 @@ export default {
       // 树形控件的属性绑定对象
       treeProps: {
         label: 'authName',
-        children: 'children',
+        children: 'children'
       },
       //   默认选中的节点id数组
       defKeys: [],
@@ -179,15 +179,15 @@ export default {
       editFormRules: {
         roleName: [
           { required: true, message: '请输入角色名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
-        ],
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        ]
       },
       // 控制添加角色的显示隐藏状态
       addDialogVisible: false,
       // 添加用户的表单数据
       addForm: {
         roleName: '',
-        roleDesc: '',
+        roleDesc: ''
       },
       // 添加表单的验证规则对象
       addFormRules: {
@@ -197,10 +197,10 @@ export default {
             min: 3,
             max: 5,
             message: '长度在 3 到 5 个字符',
-            trigger: 'blur',
-          },
-        ],
-      },
+            trigger: 'blur'
+          }
+        ]
+      }
     }
   },
   created() {
@@ -225,7 +225,7 @@ export default {
         {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          type: 'warning',
+          type: 'warning'
         }
       ).catch((err) => err)
       if (confirmResult !== 'confirm') {
@@ -275,7 +275,7 @@ export default {
     async allotRights() {
       const keys = [
         ...this.$refs.treeRef.getCheckedKeys(),
-        ...this.$refs.treeRef.getHalfCheckedKeys(),
+        ...this.$refs.treeRef.getHalfCheckedKeys()
       ]
       const idStr = keys.join(',')
       const { data: res } = await this.$http.post(
@@ -295,7 +295,7 @@ export default {
       const { data: res } = await this.$http.get('roles/' + id)
       // console.log(res)
       if (res.meta.status !== 200) {
-        return this.$message.error('查询用户信息失败:'+res.meta.msg)
+        return this.$message.error('查询用户信息失败:' + res.meta.msg)
       }
       this.editForm = res.data
       // console.log(this.editForm.roleId)
@@ -314,7 +314,7 @@ export default {
           'roles/' + this.editForm.roleId,
           {
             roleName: this.editForm.roleName,
-            roleDesc: this.editForm.roleDesc,
+            roleDesc: this.editForm.roleDesc
           }
         )
         // console.log(res)
@@ -336,7 +336,7 @@ export default {
         {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          type: 'warning',
+          type: 'warning'
         }
       ).catch((err) => err)
       // 如果用户确认了删除，则返回为字符串 confirm
@@ -346,7 +346,7 @@ export default {
       }
       const { data: res } = await this.$http.delete('roles/' + id)
       if (res.meta.status !== 200) {
-        return this.$message.error('获取角色信息失败:'+res.meta.msg)
+        return this.$message.error('获取角色信息失败:' + res.meta.msg)
       }
       this.$message.success('删除成功')
       this.getRolesList()
@@ -359,13 +359,13 @@ export default {
     addRoles() {
       this.$refs.addFormRef.validate(async (valid) => {
         if (!valid) return
-        //可以发起添加用户的网络请求
+        // 可以发起添加用户的网络请求
         const { data: res } = await this.$http.post(
-          'roles',this.addForm
+          'roles', this.addForm
         )
         // console.log(res)
         if (res.meta.status !== 201) {
-          this.$message.error('添加角色失败：'+res.meta.msg)
+          this.$message.error('添加角色失败：' + res.meta.msg)
         }
         this.$message.success('添加角色成功')
         // 隐藏添加用户列表
@@ -373,8 +373,8 @@ export default {
         // 重新获取用户的列表
         this.getRolesList()
       })
-    },
-  },
+    }
+  }
 }
 </script>
 <style scoped lang="less">

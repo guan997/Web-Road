@@ -43,8 +43,18 @@
         </template>
         <!-- 操作 -->
         <template slot="opt" slot-scope="scope">
-          <el-button type="primary"  @click="showEditDialog(scope.row.cat_id)" icon="el-icon-edit" size="mini">编辑</el-button>
-          <el-button type="danger"  @click="removeCateById(scope.row.cat_id)" icon="el-icon-delete" size="mini">删除</el-button>
+          <el-button
+            type="primary"
+            @click="showEditDialog(scope.row.cat_id)"
+            icon="el-icon-edit"
+            size="mini"
+          >编辑</el-button>
+          <el-button
+            type="danger"
+            @click="removeCateById(scope.row.cat_id)"
+            icon="el-icon-delete"
+            size="mini"
+          >删除</el-button>
         </template>
       </tree-table>
       <!-- 分页区域 -->
@@ -87,8 +97,13 @@
         <el-button type="primary" @click="addCate">确 定</el-button>
       </span>
     </el-dialog>
-<!-- 编辑商品分类信息对话框 -->
-    <el-dialog title="修改商品分类" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed">
+    <!-- 编辑商品分类信息对话框 -->
+    <el-dialog
+      title="修改商品分类"
+      :visible.sync="editDialogVisible"
+      width="50%"
+      @close="editDialogClosed"
+    >
       <el-form :model="editForm" :rules="editFormCate" ref="editFormRef" label-width="100px">
         <el-form-item label="分类Id">
           <el-input v-model="editForm.cat_id" disabled></el-input>
@@ -235,15 +250,12 @@ export default {
       // console.log(this.selsectedKeys)
       // 如果selectedKeys数组中的length大于0，证明选中的父级分类
       // 反之，就说明没有选中任何分类
-      if(this.selsectedKeys.length > 0){
+      if (this.selsectedKeys.length > 0) {
         // 父级分类的id
-        this.addCateForm.cat_pid = this.selsectedKeys[
-          this.selsectedKeys.length - 1
-        ]
+        this.addCateForm.cat_pid = this.selsectedKeys[this.selsectedKeys.length - 1]
         // 为当前分类的等级赋值
         this.addCateForm.cat_level = this.selsectedKeys.length
-        return
-      }else {
+      } else {
         // 父级分类的id
         this.addCateForm.cat_name = 0
         // 为当前分类的等级赋值
@@ -251,12 +263,12 @@ export default {
       }
     },
     // 点击按钮，添加新的分类
-    addCate(){
-      this.$refs.addCateFormRef.validate(async valid => {
-        if(!valid) return
-        const {data:res} = await this.$http.post('categories',this.addCateForm)
+    addCate() {
+      this.$refs.addCateFormRef.validate(async (valid) => {
+        if (!valid) return
+        const { data: res } = await this.$http.post('categories', this.addCateForm)
         // console.log(res)
-        if(res.meta.status !== 201 ){
+        if (res.meta.status !== 201) {
           return this.$message.error('添加分类失败')
         }
         this.$message.success('添加分类成功')
@@ -266,7 +278,7 @@ export default {
       // console.log(this.addCateForm)
     },
     // 监听对话框的关闭事件，重置表单数据
-    addDialogClosed(){
+    addDialogClosed() {
       this.$refs.addCateFormRef.resetFields()
       this.selsectedKeys = []
       this.addCateForm.cat_level = 0
@@ -275,15 +287,11 @@ export default {
     // 根据id删除对应的角色信息
     async removeCateById(id) {
       // 弹框删除对应的用户信息
-      const confirmResult = await this.$confirm(
-        '将删除此商品分类, 是否继续?',
-        '提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
-        }
-      ).catch((err) => err)
+      const confirmResult = await this.$confirm('将删除此商品分类, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).catch((err) => err)
       // 如果用户确认了删除，则返回为字符串 confirm
       // 如果用户取消了删除，则返回了 cancel
       if (confirmResult !== 'confirm') {
@@ -292,7 +300,7 @@ export default {
       // console.log(id)
       const { data: res } = await this.$http.delete('categories/' + id)
       if (res.meta.status !== 200) {
-        return this.$message.error('删除商品分类失败:'+res.meta.msg)
+        return this.$message.error('删除商品分类失败:' + res.meta.msg)
       }
       this.$message.success('删除成功')
       this.getCateList()
@@ -303,7 +311,7 @@ export default {
       const { data: res } = await this.$http.get('categories/' + id)
       // console.log(res)
       if (res.meta.status !== 200) {
-        return this.$message.error('查询商品分类信息失败:'+res.meta.msg)
+        return this.$message.error('查询商品分类信息失败:' + res.meta.msg)
       }
       this.editForm = res.data
       // console.log(this.editForm.cat_id)
@@ -319,12 +327,9 @@ export default {
       this.$refs.editFormRef.validate(async (valid) => {
         if (!valid) return
         // 发起修改商品分类信息的数据请求
-        const { data: res } = await this.$http.put(
-          'categories/' + this.editForm.cat_id,
-          {
-            cat_name:this.editForm.cat_name,
-          }
-        )
+        const { data: res } = await this.$http.put('categories/' + this.editForm.cat_id, {
+          cat_name: this.editForm.cat_name,
+        })
         // console.log(res)
         if (res.meta.status !== 200) {
           return this.$message.error('编辑商品分类失败:' + res.meta.msg)

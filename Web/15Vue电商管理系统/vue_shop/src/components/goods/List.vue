@@ -72,10 +72,10 @@ export default {
       queryInfo: {
         query: '',
         pagenum: 1,
-        pagesize: 10,
+        pagesize: 10
       },
       //   当前页码
-      currentPage: 0,
+      currentPage: 0
     }
   },
   created() {
@@ -85,7 +85,7 @@ export default {
     //   根据分页获取对应的商品列表
     async getGoodsList() {
       const { data: res } = await this.$http.get('goods', {
-        params: this.queryInfo,
+        params: this.queryInfo
       })
       if (res.meta.status !== 200) {
         return this.$message.error('获取商品列表失败:' + res.meta)
@@ -116,7 +116,7 @@ export default {
         {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          type: 'warning',
+          type: 'warning'
         }
       ).catch((err) => err)
       // 如果用户确认了删除，则返回为字符串 confirm
@@ -134,8 +134,8 @@ export default {
     // 商品添加
     goAddpage() {
       this.$router.push('/goods/add')
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

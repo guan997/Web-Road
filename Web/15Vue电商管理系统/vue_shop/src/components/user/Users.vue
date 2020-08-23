@@ -180,7 +180,7 @@ export default {
         // 当前的页数
         pagenum: 1,
         // 当前每页显示多少条数据
-        pagesize: 2,
+        pagesize: 2
       },
       userlist: [],
       total: 0,
@@ -195,7 +195,7 @@ export default {
         username: '',
         password: '',
         email: '',
-        mobile: '',
+        mobile: ''
       },
       // 添加表单的验证规则对象
       addFormRules: {
@@ -205,8 +205,8 @@ export default {
             min: 3,
             max: 10,
             message: '长度在 3 到 10 个字符',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
@@ -214,29 +214,29 @@ export default {
             min: 3,
             max: 10,
             message: '长度在 6 到 15 个字符',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
         mobile: [
           { required: true, message: '请输入手机', trigger: 'blur' },
-          { validator: checkMobile, trigger: 'blur' },
+          { validator: checkMobile, trigger: 'blur' }
         ],
         email: [
           { required: true, message: '请输入邮箱', trigger: 'blur' },
-          { validator: checkEmail, trigger: 'blur' },
-        ],
+          { validator: checkEmail, trigger: 'blur' }
+        ]
       },
       // 修改表单的验证规则对象
       editFormRules: {
         email: [
           { required: true, message: '请输入邮箱', trigger: 'blur' },
-          { validator: checkEmail, trigger: 'blur' },
+          { validator: checkEmail, trigger: 'blur' }
         ],
         mobile: [
           { required: true, message: '请输入手机', trigger: 'blur' },
-          { validator: checkMobile, trigger: 'blur' },
-        ],
-      },
+          { validator: checkMobile, trigger: 'blur' }
+        ]
+      }
     }
   },
   created() {
@@ -246,7 +246,7 @@ export default {
     // 获取用户列表的参数列表
     async getUserList() {
       const { data: res } = await this.$http.get('users', {
-        params: this.queryInfo,
+        params: this.queryInfo
       })
       if (res.meta.status !== 200) {
         return this.$message.error('获取用户列表失败')
@@ -281,11 +281,11 @@ export default {
     addDialogClosed() {
       this.$refs.addFormRef.resetFields()
     },
-    //点击按钮，添加新用户
+    // 点击按钮，添加新用户
     addUser() {
       this.$refs.addFormRef.validate(async (valid) => {
         if (!valid) return
-        //可以发起添加用户的网络请求
+        // 可以发起添加用户的网络请求
         const { data: res } = await this.$http.post('users', this.addForm)
         if (res.meta.status !== 201) {
           this.$message.error('添加用户失败')
@@ -320,7 +320,7 @@ export default {
           'users/' + this.editForm.id,
           {
             email: this.editForm.email,
-            mobile: this.editForm.mobile,
+            mobile: this.editForm.mobile
           }
         )
         if (res.meta.status !== 200) {
@@ -341,7 +341,7 @@ export default {
         {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          type: 'warning',
+          type: 'warning'
         }
       ).catch((err) => err)
       // 如果用户确认了删除，则返回为字符串 confirm
@@ -375,7 +375,7 @@ export default {
       const { data: res } = await this.$http.put(
         `users/${this.userInfo.id}/role`,
         {
-          rid: this.selectedRoleId,
+          rid: this.selectedRoleId
         }
       )
       console.log(res)
@@ -387,11 +387,11 @@ export default {
       this.setRoleDialogVisible = false
     },
     // 监听分配角色对话框的关闭事件、
-    setRoleDialogClosed(){
+    setRoleDialogClosed() {
       this.selectedRoleId = ''
       this.userInfo = {}
     }
-  },
+  }
 }
 </script>
 <style lang="less" scoped>

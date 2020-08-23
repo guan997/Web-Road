@@ -33,7 +33,7 @@
         <el-table-column label="下单时间" prop="create_time">
           <template slot-scope="scope">{{scope.row.create_time | dateFormat}}</template>
         </el-table-column>
-        <el-table-column label="操作" prop="order">
+        <el-table-column label="操作">
           <template>
             <el-button type="primary" size="min" icon="el-icon-edit" @click="showBox"></el-button>
             <el-button type="success" size="min" icon="el-icon-location" @click="showLocationBox"></el-button>
@@ -103,7 +103,7 @@ export default {
       queryInfo: {
         query: '',
         pagenum: 1,
-        pagesize: 10,
+        pagesize: 10
       },
       // 数据总条数
       total: 0,
@@ -113,22 +113,22 @@ export default {
       // 地址表单数据对象
       addressForm: {
         address1: [],
-        address2: '',
+        address2: ''
       },
       // 地址表单数据对象验证规则
       addressFormRules: {
         address1: [
-          { required: true, message: '请选择省市区/县', trigger: 'blur' },
+          { required: true, message: '请选择省市区/县', trigger: 'blur' }
         ],
         address2: [
-          { required: true, message: '请输入详细地址', trigger: 'blur' },
-        ],
+          { required: true, message: '请输入详细地址', trigger: 'blur' }
+        ]
       },
       // 省市区数据
       citydata,
       // 物流对话框显示和隐藏
       loactionDialogVisible: false,
-      loactionInfo: [],
+      loactionInfo: []
     }
   },
   created() {
@@ -137,7 +137,7 @@ export default {
   methods: {
     async getOrderList() {
       const { data: res } = await this.$http.get('orders', {
-        params: this.queryInfo,
+        params: this.queryInfo
       })
       if (res.meta.status !== 200) {
         return this.$message.error('获取订单列表失败')
@@ -174,7 +174,7 @@ export default {
       this.loactionDialogVisible = true
       // console.log(this.loactionInfo)
     },
-    loactionDialogClose() {},
+    loactionDialogClose() {}
   }
 }
 </script>

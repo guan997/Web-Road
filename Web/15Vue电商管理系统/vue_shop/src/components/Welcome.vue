@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h3>1243</h3>
+        <h3>Welcome</h3>
     </div>
 </template>
 <script>
 export default {
-    data(){
-        return{}
-    }
+  data() {
+    return {}
+  }
 }
 </script>
 <style lang="less" scoped>

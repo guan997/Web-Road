@@ -41,7 +41,7 @@ export default {
       // 这是登陆表单的数据绑定对象
       loginForm: {
         username: 'admin',
-        password: '123456',
+        password: '123456'
       },
       // 这是表单的验证规则对象
       loginFormRules: {
@@ -52,8 +52,8 @@ export default {
             min: 3,
             max: 10,
             message: '用户名长度在 3 到 10 个字符',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
         // 验证密码是否合法
         password: [
@@ -62,10 +62,10 @@ export default {
             min: 6,
             max: 10,
             message: '密码长度在 6 到 10 个字符',
-            trigger: 'blur',
-          },
-        ],
-      },
+            trigger: 'blur'
+          }
+        ]
+      }
     }
   },
   methods: {
@@ -91,8 +91,8 @@ export default {
       // 获取实例对象
       // console.log(this)
       this.$refs.loginFormRef.resetFields()
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

@@ -7,7 +7,7 @@ module.exports = {
 
   extends: [
     'plugin:vue/essential',
-    '@vue/standard'
+    //'@vue/standard'
   ],
 
   parserOptions: {
@@ -17,6 +17,8 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'no-debugger': 'off',
-    'space-before-function-paren': 0
+    'space-before-function-paren': 0,
+    // 要求或禁止末尾逗号
+    'comma-dangle': 0,
   }
 }

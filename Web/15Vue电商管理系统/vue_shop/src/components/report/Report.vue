@@ -24,34 +24,34 @@ export default {
       // 需要合并的数据
       options: {
         title: {
-          text: '用户来源',
+          text: '用户来源'
         },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
             type: 'cross',
             label: {
-              backgroundColor: '#E9EEF3',
-            },
-          },
+              backgroundColor: '#E9EEF3'
+            }
+          }
         },
         grid: {
           left: '3%',
           right: '4%',
           bottom: '3%',
-          containLabel: true,
+          containLabel: true
         },
         xAxis: [
           {
-            boundaryGap: false,
-          },
+            boundaryGap: false
+          }
         ],
         yAxis: [
           {
-            type: 'value',
-          },
-        ],
-      },
+            type: 'value'
+          }
+        ]
+      }
     }
   },
   created() {},
@@ -69,7 +69,7 @@ export default {
     const result = _.merge(res.data, this.options)
     // 5使用刚指定的配置项和数据显示图表。
     myChart.setOption(result)
-  },
+  }
 }
 </script>
 <style lang="less" scoped>
