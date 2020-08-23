@@ -74,7 +74,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="editDialog">确 定</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
     <!-- 物流对话框对话框 -->
@@ -84,7 +84,13 @@
       width="50%"
       @close="loactionDialogClose"
     >
-      <span>143</span>
+      <el-timeline>
+        <el-timeline-item
+          v-for="(activity, index) in loactionInfo"
+          :key="index"
+          :timestamp="activity.time"
+        >{{activity.context}}</el-timeline-item>
+      </el-timeline>
     </el-dialog>
   </div>
 </template>
@@ -136,7 +142,7 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error('获取订单列表失败')
       }
-      console.log(res.data)
+      // console.log(res.data)
       this.total = res.data.total
       this.orderList = res.data.goods
     },
@@ -154,24 +160,19 @@ export default {
     showBox() {
       this.dialogVisible = true
     },
-    // 修改地址确认事件
-    editDialog() {
-      // console.log(this.orderList)
-    },
     // 关闭修改按钮对话框
     addressDialogClose() {
       this.$refs.addressFormRef.resetFields()
     },
     // 显示物流对话框
     async showLocationBox() {
-      console.log('1')
-      const { data: res } = await this.$http.get('/kuaidi/804909574412544580')
+      const { data: res } = await this.$http.get('/kuaidi/1106975712662')
       if (res.meta.status !== 200) {
         return this.$message.error('获取物流进度失败')
       }
       this.loactionInfo = res.data
       this.loactionDialogVisible = true
-      console.loactionInfo(this.loactionInfo)
+      // console.log(this.loactionInfo)
     },
     loactionDialogClose() {},
   },
