@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+            // 1.创建ajax对象
+            var xhr = new XMLHttpRequest()
+            xhr.open('post', 'http://localhost:3000/json')
+            // 2设置请求参数格式的类型
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            // 3.发送请求
+            // 将json对象转换为json字符串
+            // 注意：get 请求是不能提交 json 对象数据格式的，传统网站的表单提交也是不支持 json 对象数据格式的。
+            xhr.send(JSON.stringify({name:"tom",age:19}))
+            // 4.获取服务器端的数据
+            xhr.onload = function () {
+                console.log(xhr.responseText)
+            }
+    </script>
+</body>
+
+</html>

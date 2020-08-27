@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">发送Ajax请求</button>
+    <script>
+        var btn = document.getElementById('btn')
+        btn.onclick = function () {
+            // 1.创建ajax对象
+            var xhr = new XMLHttpRequest()
+            // 2.告诉Ajax对象要向哪发送请求，以什么方式发送请求
+            // 1)请求方式 2)请求地址
+            xhr.open('get', 'http://localhost:3000/first')
+            // 3.发送请求
+            xhr.send()
+            // 4.获取服务器端的数据
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    console.log('2')
+                    console.log(xhr.responseText)
+                }
+            }
+            console.log('1')
+            // 同步 即代码逐行执行
+            // 异步 程序不会等待异步代码执行完成后再继续执行后续代码，而是直接执行后续代码，
+            // 当后续代码执行完成后再回头看异步代码是否返回结果，
+            // 如果已有返回结果，再调用事先准备好的回调函数处理异步代码执行的结果。
+        }
+    </script>
+</body>
+
+</html>
