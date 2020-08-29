@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" name="username" id="">
+        <input type="text" name="password" id="">
+        <input type="button" value="提交" id="btn">
+    </form>
+    <script>
+        // 获取对象
+        var btn = document.getElementById('btn')
+        var form = document.getElementById('form')
+        btn.onclick = function(){
+            // 将普通的html表单转换为表单对象
+            var formData = new FormData(form)
+            // 创建ajax对象
+            var xhr = new XMLHttpRequest()
+            // 将ajax对象进行配置
+            xhr.open('post','/formData')
+            // 发送ajax请求
+            xhr.send(formData)
+            // 监听xhr对象下面的onload事件
+            xhr.onload = function(){
+                if(xhr.status == 200){
+                    console.log(xhr.responseText)
+                }
+            }
+        }
+    </script>
+</body>
+</html>
