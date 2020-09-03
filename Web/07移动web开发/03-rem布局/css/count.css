@@ -1,0 +1,10 @@
+div {
+  height: 190px;
+  width: 400px;
+  border: 10px solid red;
+  background-color: #444444;
+}
+p {
+  width: 1.64rem;
+  height: 1.64rem;
+}
