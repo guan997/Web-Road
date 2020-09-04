@@ -1,0 +1,67 @@
+body {
+    min-width: 320px;
+    width: 10rem;
+    margin: 0 auto;
+    line-height: 1.5;
+    font-family: Arial, Helvetica;
+    background-color: #f2f2ff;
+}
+a{
+    text-decoration: none;
+    font-size: 0.333333rem;
+}
+/* 这个插件默认的html文字大小 cssroot  16px */
+/* img{
+      width: 1.093333rem;
+      height: 1rem;
+  } */
+@media screen and (min-width:750px) {
+    html {
+        font-size: 75px !important;
+    }
+}
+
+/* search-content */
+.search-content {
+    display: flex;
+    position: fixed;
+    top: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10rem;
+    height: 1.173333rem;
+    background-color: #FFC001;
+}
+
+.classify {
+    width: 0.586667rem;
+    height: 0.933333rem;
+    background-color: pink;
+    margin: 0.146667rem 0.333333rem  0.133333rem;
+    background: url(../images/classify.png) no-repeat;
+    background-size: 0.586667rem 0.933333rem;
+}
+.search{
+    flex: 1;
+}
+.search input{
+    width: 100%;
+    height:0.88rem;
+    background-color: #FFF2cc;
+    outline: none;
+    border: 0;
+    color: #757575;
+    border-radius: 0.44rem;
+    margin-top: 0.16rem;
+    padding-left: 0.733333rem;
+    font-size: 0.333333rem;
+}
+.login{
+    width: 1rem;
+    height: 0.933333rem;
+    color: #fff;
+    line-height: 0.933333rem;
+    font-size: 0.333333rem;
+    text-align: center;
+    margin: 0.133333rem;
+}
