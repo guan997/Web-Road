@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-width: 320px;
+    width: 10rem;
+    margin: 0 auto;
+    line-height: 1.5;
+    font-family: Arial, Helvetica;
+}
+a{
+    text-decoration: none;
+    font-size: 0.333333rem;
+}
+li{
+    list-style: none;
+}
+@media screen and (min-width:750px) {
+    html {
+        font-size: 75px !important;
+    }
+}
+.bg{
+    width: 10rem;
+    height: 5.132275rem;
+}
+.bg img{
+    width: 100%;
+    height: 100%;
+}
+.banner{
+    width: 10rem;
+    height: 2.116402rem;
+}
+.banner ul{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.banner ul li{
+    flex: 1;
+    width: 2.804233rem;
+    height: 1.164021rem;
+    border-radius: 7%;
+    font-size: 0.661376rem;
+    line-height: 1.064021rem;
+    list-style-type: none;
+    background-color: red;
+    margin-left: 0.529101rem ;
+    margin-top: 0.529101rem;
+}
+.banner ul li:nth-child(1){
+    color: #fff;
+    background-color: #003a9b;
+}
+.banner ul li:nth-child(1) a{
+    color: #fff;
+}
+.banner ul li:nth-child(2){
+    color: black;
+    background-color: #fddf00;
+}
+.banner ul li:nth-child(2) a{
+    color: black;
+}
+.banner ul li:nth-child(3){
+    color: black;
+    background-color: #fddf00;
+    margin-right: 0.529101rem;
+}
+.banner ul li:nth-child(3) a{
+    color: black;
+}
+.titleH3{
+    width: 10rem;
+    height: 1.187302rem;
+}
+h3{
+    width: 2.645503rem;
+    font-size: 0.661376rem;
+    margin-left: 0.629101rem ;
+}
+.main{
+    width: 10rem;
+}
+.main .mainTop{
+    display: flex;
+    margin-left: 0.629101rem ;
+}
+.main .mainTop li{
+    border: 2px solid #f8f5f5;
+    margin-right: 0.37037rem ;
+}
+.main .mainTop li:nth-child(3){
+    margin-right: 0.529101rem;
+}
+.blackColor{
+    color: #333333;
+    font-size: 0.26455rem;
+}
+.pinkColor{
+    font-size: 0.26455rem;
+    font-weight: bold;
+    color: #e93194;
+}
+.mainBottom{
+    display: flex;
+    margin-left: 0.629101rem ;
+    flex-wrap:  wrap;
+}
+.mainBottom li{
+    width: 4.232804rem;
+    margin-top: 0.26455rem;
+    border: 2px solid #f8f5f5;
+    margin-right: 0.37037rem ;
+}
