@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <style>
+        [class^="col"] {
+            border: 1px solid red;
+        }
+        .row:nth-child(1){
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+         <!-- 如果孩子的份数相加等于12 则孩子能占满整个 的container 的宽度 -->
+        <!-- .col-sm-份数 总共12份 -->
+        <div class="row">
+            <div class="col-sm-4">
+                如果孩子的份数相加等于12 则孩子能占满整个 的container 的宽度
+            </div>
+            <div class="col-sm-4">
+                空间占位
+            </div>
+            <div class="col-sm-4">
+                空间占位
+            </div>
+        </div>
+        <!-- 如果孩子的份数相加 小于 12 则会？ 则占不满整个container 的宽度 会有空白 -->
+        <div class="row">
+            <div class="col-sm-4">
+                如果孩子的份数相加 小于 12 则会？ 则占不满整个container 的宽度 会有空白
+            </div>
+            <div class="col-sm-4">
+                空间占位
+            </div>
+            <div class="col-sm-2">
+                空间占位
+            </div>
+        </div>
+        <!-- 如果孩子的份数相加 大于 12 则会？多于的那一列会 另起一行显示 -->
+        <div class="row">
+            <div class="col-sm-4">
+                如果孩子的份数相加 大于 12 则会？多于的那一列会 另起一行显示
+            </div>
+            <div class="col-sm-4">
+                空间占位
+            </div>
+            <div class="col-sm-5">
+                空间占位
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-1 col-sm-4 col-lg-2 col-xs-8">
+                空间占位
+            </div>
+            <div class="col-xl-1 col-sm-4 col-lg-2 col-xs-8">
+                空间占位
+            </div>
+            <div class="col-xl-1 col-sm-4 col-lg-2 col-xs-8">
+                空间占位
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

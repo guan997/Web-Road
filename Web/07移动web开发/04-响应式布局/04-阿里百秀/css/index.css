@@ -1,0 +1,61 @@
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a{
+    color: #666;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+body{
+    background-color: #f5f5f5;
+}
+.container{
+    background-color: #fff;
+}
+/* 修改container的最大宽度为 1280 根据设计稿 */
+@media screen and (min-width:1280px){
+    .container{
+        max-width: 1280px;
+    }
+}
+/* header */
+header{
+    padding-left: 0!important;
+}
+.logo{
+    background-color: #429ad9;
+}
+.logo img{
+    width: 100%;
+}
+/* nav */
+.nav{
+    background-color: #eee;
+    border-bottom: 1px solid #ccc;
+}
+.nav ul{
+    width: 100%;
+}
+.nav a{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 30px;
+    font-size: 16px;
+}
+.nav a:hover{
+    background-color: #fff;
+    color: #333;
+}
+.nav a::before{
+    vertical-align: middle;
+    padding-left: 5px;
+}
+/* aside */
+aside{
+    border: 1px solid rebeccapurple;
+}

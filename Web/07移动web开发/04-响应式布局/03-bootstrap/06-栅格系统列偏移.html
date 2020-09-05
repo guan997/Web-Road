@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <style>
+        .row div{
+            height: 50px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">左侧</div>
+            <!-- 偏移的份数 就是 4 - 两个盒子的份数 = 8 -->
+            <div class="col-md-4 offset-md-4">右侧</div>
+        </div>
+        <div class="row">
+            <!-- 如果只有一个盒子 那么就偏移 = (12 - 8) /2 -->
+            <div class="col-md-8 offset-md-2">中间</div>
+        </div>
+    </div>
+</body>
+</html>

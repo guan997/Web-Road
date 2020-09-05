@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <style>
+        .row div{
+            height: 60px;
+            background-color: pink;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">1号空间-未定义序号，位置不变。</div>
+            <div class="col order-12">2号空间-排最后。</div>
+            <div class="col order-1"> 3号空间-放第1但受1号空间不变影响居第2位。</div>
+        </div>
+    </div>
+</body>
+</html>
