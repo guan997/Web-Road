@@ -1,61 +1,201 @@
-ul{
+ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
-a{
+
+a {
     color: #666;
     text-decoration: none;
 }
-a:hover{
+
+a:hover {
     text-decoration: none;
 }
-body{
+
+body {
     background-color: #f5f5f5;
 }
-.container{
+
+.container {
     background-color: #fff;
 }
+
+/* 清楚多余右内边距 */
+header, aside{
+    padding: 0!important;
+}
+.news li:nth-child(1),.news li:nth-child(3),.news li:nth-child(5){
+    padding-right: 0;
+}
 /* 修改container的最大宽度为 1280 根据设计稿 */
-@media screen and (min-width:1280px){
-    .container{
+@media screen and (min-width:1280px) {
+    .container {
         max-width: 1280px;
     }
 }
+
 /* header */
-header{
-    padding-left: 0!important;
-}
-.logo{
+/* header {
+    padding-left: 0 !important;
+} */
+
+.logo {
     background-color: #429ad9;
 }
-.logo img{
-    width: 100%;
+
+.logo img {
+    display: block;
+    /* width: 100%; */
+    /* logo不需要缩放 */
+    max-width: 100%;
+    margin: 0 auto;
+}
+/* 1.我们如果进入了小屏幕下  logo里面的图片就隐藏起来 */
+
+/* 2. 我们事先准备好一个盒子 在logo里面，它平时是隐藏起来的，只有在小屏幕下显示 */
+.logo span{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
 }
 /* nav */
-.nav{
+.nav {
     background-color: #eee;
     border-bottom: 1px solid #ccc;
 }
-.nav ul{
+
+.nav ul {
     width: 100%;
 }
-.nav a{
+
+.nav a {
     display: block;
     height: 50px;
     line-height: 50px;
     padding-left: 30px;
     font-size: 16px;
 }
-.nav a:hover{
+
+.nav a:hover {
     background-color: #fff;
     color: #333;
 }
-.nav a::before{
+
+.nav svg {
     vertical-align: middle;
-    padding-left: 5px;
+    margin-right: 5px;
+}
+
+
+/* 进入 小屏幕 还有 超小屏幕的时候 我们 nav 里面的li 浮动起来 并且宽度为 20%  */
+@media screen and (max-width:992px){
+    .nav li {
+        float: left;
+        width: 20%;
+    }
+    article{
+        margin-top: 10px;
+    }
+}
+/* 进入 超小屏幕的时候 我们 nav 文字会变成14px  */
+@media screen and (max-width:768px){
+    .nav li a{
+        font-size: 14px;
+        padding-left: 3px;
+    }
+    /* 处于超小屏幕 news 第一个li 宽度为 100%  剩下的小li  各 50% */
+    .news li:nth-child(1){
+        width: 100%!important;
+    }
+    .news li{
+        width: 50%!important;
+    }
+    .publish h4{
+        font-size: 14px;
+    }
+}
+/* news */
+.news li {
+    float: left;
+    width: 25%;
+    height: 128px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+}
+
+.news li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.news li:nth-child(1) {
+    width: 50%;
+    height: 266px;
+}
+
+.news li:nth-child(1) p {
+    line-height: 41px;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+.news li a img {
+    width: 100%;
+    height: 100%;
+}
+
+.news li a p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 41px;
+    padding: 5px 10px;
+    margin-bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    font-size: 12px;
+    color: #fff;
+}
+/* public */
+.publish{
+    border-top: 1px solid #ccc;
+}
+.publish h4{
+    margin: 20px 0 10px;
+}
+.publish .row{
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+.publish .row p{
+    margin-bottom: 10px;
+}
+.pic{
+    margin-top: 10px;
+}
+.pic img{
+    width: 100%;
 }
 /* aside */
-aside{
-    border: 1px solid rebeccapurple;
+.banner img{
+    width: 100%;
+}
+.hot{
+ display: block;   
+ margin-top: 20px;
+ padding: 0 20px 20px;
+ border: 1px solid #ccc;
+}
+.hot span{
+    border-radius: 0;
+    margin-bottom: 20px;
+}
+.hot p{
+    font-size: 12px;
 }
