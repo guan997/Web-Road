@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-js综合(变量定义提升-this指针指向-运算符优先级-对象属性及原型属性</title>
+</head>
+
+<body>
+    <script>
+        function Foo() {
+            getName = function () {
+                console.log(1)
+            }
+            return this
+        }
+        Foo.getName = function () {
+            console.log(2)
+        }
+        Foo.prototype.getName = function () {
+            console.log(3)
+        }
+        var getName = function () {
+            console.log(4)
+        }
+
+        function getName() {
+            console.log(5)
+        }
+
+        // 写出以下输出结果 
+        Foo.getName()
+        getName()
+        Foo().getName()
+        getName()
+        new Foo.getName()
+        new Foo().getName()
+        new new Foo().getName()
+    </script>
+
+    <!-- <script>
+        // 解析
+        function Foo() {
+            getName = function () { //去掉var就是全局变量
+                console.log(1)
+            }
+            return this //this指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this最终指向那个调用它的对象
+        }
+        Foo.getName = function () { //静态方法
+            console.log(2)
+        }
+        Foo.prototype.getName = function () { //公有方法
+            console.log(3)
+        }
+        var getName = function () {//变量被提升 
+            console.log(4) // 函数表达式此时覆盖函数声明的定义
+        }
+
+        function getName() {//函数声明被提升 
+            console.log(5)
+        }
+
+        // 写出以下输出结果 
+        Foo.getName() //2
+        // Foo.getName访问的是Foo函数上存储的静态属性 答案自然是2
+        // 对象的私有方法和属性，外部是不可以访问的
+        // 调用公有方法，公有属性 必须实例化对象
+
+        getName() // 4
+        // 直接调用那么就是访问上文作用域内的getName函数，关注4和5，知识点 变量声明提升，函数表达式和函数声明的区别
+        // 函数声明在js解析时会被提升，函数声明会被提升到作用域最前面，即使代码写在最后面，也会被提升到最前面 
+        // 函数表达式创建的函数是在js运行时赋值，且要等到表达式复制完成才能调用
+
+        Foo().getName() // 1
+        // 先执行Foo函数，然后调用Foo函数的返回值对象的getName属性函数
+        // getName = function () {}是一句函数赋值语句，注意它没有var声明，所以先向Foo函数左右与内寻找getName变量，没有，再向上层作用域寻找，既外层作用域是否含有getName变量
+        // 找到了，也就是var getName = function () {console.log(4)}，将此变量的值赋值为function(){alert(1)}
+        // 此处实际上是window调用Foo函数 所以this的指向是window
+
+        getName() // 1
+        // 这个变量在Foo函数执行时修改了，所以结果与第三问相同
+
+        new Foo.getName() //2
+        // 考察js的运算符优先级问题，参考MDN运算优先级
+        圆括号（）> 成员访问. > [] > new(带参数) > 函数调用() > new(无参数)
+        new Foo.getName()的优先级是 . > new(无参) > ()
+        可是当点运算后又因为有个括号，此时变成new有参数列表，所以执行new
+        故最终new Foo.getName()的优先级是 .成员访问 ->  new(带参数) 
+        故这里实际上将getName函数作为构造函数来执行 new (Foo.getName)()结果为2
+
+        new Foo().getName() //3
+        (new Foo()).getName()
+        new有参数列表跟点的优先级是同级，同级的话按照从左到右执行顺序，最后函数调用
+        JS中构造函数可以有返回值也可以没有。
+            1.没有返回值则按照其他语言一样返回实例化对象。
+            2.若有返回值则检查其返回值是否为引用类型。如果是非引用类型，如基本类型（String,Number,Boolean,Null,Undefined）则与无返回值相同，实际返回其实例化对象。
+            3.若返回值是引用类型，则实际返回值为这个引用类型。
+        题中，由于返回的是this，而this在构造函数中本来就代表当前实例化对象Foo()，最终Foo函数返回实例化对象。
+        之后调用实例化对象的getName函数，因为在Foo构造函数中没有为实例化对象添加任何属性，当前对象的原型对象(prototype)中寻找getName函数。
+        如果构造函数和原型链都有相同的方法，那么默认会拿构造函数的公有方法而不是原型链
+
+        new new Foo().getName()
+        new ((new Foo()).getName)();
+        先初始化Foo的实例化对象，然后将其原型上的getName函数作为构造函数再次new，所以最终结果为3
+    </script> -->
+
+    <!-- 强化 -->
+    <!-- <script>
+        function Foo() {
+            this.getName = function () {
+                console.log(3);
+                return {
+                    getName: getName //这个就是第六问中涉及的构造函数的返回值问题
+                }
+            }; //这个就是第六问中涉及到的，JS构造函数公有方法和原型链方法的优先级
+            getName = function () {
+                console.log(1);
+            };
+            return this
+        }
+        Foo.getName = function () {
+            console.log(2);
+        };
+        Foo.prototype.getName = function () {
+            console.log(6);
+        };
+        var getName = function () {
+            console.log(4);
+        };
+
+        function getName() {
+            console.log(5);
+        } //答案：
+        Foo.getName(); //2
+        getName(); //4
+        console.log(Foo())
+        Foo().getName(); //1
+        getName(); //1
+        new Foo.getName(); //2
+        new Foo().getName(); //3
+        //多了一问
+        new Foo().getName().getName(); //3 1
+        new new Foo().getName(); //3
+    </script> -->
+</body>
+
+</html>
