@@ -9,13 +9,13 @@ const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin')
 // 这个配置js文件，通过Node中的模块操作，向外暴露一个配置对象
 module.exports = {
-    mode:'development',
+    mode:'production',
     // 编写入口文件、输出打包文件的位置
     entry: path.join(__dirname, './src/index.js'), //入口，表示，要使用 webpack 打包哪个文件
     //指定出口，表示打包好的文件输出到哪个目录
     output: {
         path: path.join(__dirname, './dist'),
-        filename: 'bundle.js',
+        filename: 'bundle.[contenthash].js',
     },
     plugins: [ // 配置插件的节点
         // 创建一个 在内存中 生成 HTML  页面的插件
@@ -25,12 +25,6 @@ module.exports = {
             filename: 'index.html' // 指定生成的页面的名称
         })
     ],
-    devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
-        hot: true,
-        historyApiFallback: true,
-        compress: true
-    },
     module: {// 这个节点，用于配置 所有 第三方模块 加载器 
         // 所有第三方模块的 匹配规则
         rules: [{
