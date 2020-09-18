@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>var 和 let 从const的区别</h3>
+    <p>var是ES5语法 let和const是ES6语法</p>
+    <p>var有变量提升 let和const具有块级作用域，var没有</p>
+    <p>var和let是变量，可修改；const是常量，不可修改</p>
+    <h3>typeof能判断哪些类型</h3>
+    <p>undefined string number boolean symbol</p>
+    <p>object(注意,typeof能判断哪些类型 null === 'object')</p>
+    <p>function</p>
+    <h3>列举强制类型和类型转换</h3>
+    <p>强制：parseInt parseFloat toString</p>
+    <p>隐式：if、逻辑运算、==、+拼接字符串</p>
+    <h3>函数call和apply的区别</h3>
+    <p>apply：调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments);即A对象应用B对象的方法</p>
+    <p>call：调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.call(A, args1,args2);即A对象调用B对象的方法</p>
+    <p>call和apply都是调用一个对象的一个方法，用另一个对象替换当前对象。而不同之处在于传递的参数，apply最多只能有两个参数——新this对象和一个数组argArray，如果arg不是数组则会报错TypeError；</p>
+    <p>call则可以传递多个参数，第一个参数和apply一样，是用来替换的对象，后边是参数列表。</p>
+    <script src="./var-let-const.js"></script>
+</body>
+
+</html>
