@@ -1,0 +1,184 @@
+####  var 和 let 从const的区别 
+
+     var是ES5语法 let和const是ES6语法 
+
+     var有变量提升 let和const具有块级作用域，var没有 
+
+     var和let是变量，可修改；const是常量，不可修改 
+
+#### typeof能判断哪些类型 
+
+     undefined string number boolean symbol 
+
+     object(注意,typeof能判断哪些类型 null === 'object') 
+
+     function 
+
+#### 列举强制类型和类型转换 
+
+     强制：parseInt parseFloat toString 
+
+     隐式：if、逻辑运算、==、+拼接字符串 
+
+#### 函数call和apply的区别 
+
+     apply：调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments);即A对象应用B对象的方法 
+
+     call：调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.call(A, args1,args2);即A对象调用B对象的方法 
+
+     call和apply都是调用一个对象的一个方法，用另一个对象替换当前对象。而不同之处在于传递的参数，apply最多只能有两个参数——新this对象和一个数组argArray，如果arg不是数组则会报错TypeError；
+
+   call则可以传递多个参数，第一个参数和apply一样，是用来替换的对象，后边是参数列表。 
+
+#### 手写深度比较 
+
+isEqual.js
+
+#### split()和join()的区别 
+
+     '1-2-3'.split('-') //[1,2,3] 
+
+     [1,2,3].join('-') // 1-2-3 
+
+     split，是把一串字符（根据某个分隔符）分成若干个元素存放在一个数组里。而Join是把数组中的字符串连成一个长串，可以大体上认为是split的逆操作 
+
+#### 数组的pop push shift unshift分别是什么 
+
+##### 功能 返回值 是否会对原数组造成影响 
+
+     尾部添加(push) push() 方法将一个或多个元素添加到数组的末尾，并返回该数组的新长度。 
+
+     头部添加(unshift) unshift() 方法将一个或多个元素添加到数组的开头，并返回该数组的新长度。 
+
+     尾部删除(pop) pop() 方法将删除 arrayObject 的最后一个元素，把数组长度减 1，并且返回它删除的元素的值。如果数组已经为空，则 pop() 不改变数组， 并返回 undefined 值。 
+
+     头部删除(shift) shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。 
+
+#####      纯函数：
+
+1. 不改变源数组（没有副作用）；2. 返回一个数组
+
+​    concat map filter slice 
+
+#####     非纯函数
+
+​    push pop shift unshift
+
+​    forEach
+
+​    some every
+
+​    reduce 
+
+####    数组slice和splice区别 
+
+     slice()定义：从已有的数组中返回你选择的某段数组元素 
+
+     arrayObject.slice(start,end) 
+
+- ①：start表示从何处开始选取，end表示从何处开始结束选取，表示一个选取的范围 
+- ②：start可以为负数，此时它规定从数组尾部开始算起的位置。也就是-1，指最后一个元素，-2指倒数第二个元素，以此类推 
+- ③：end如果没有被指定参数，数组会包含从 start 到最后一个数组元素的所有元素
+- ④：slice()方法不会修改数组本身，而是返回所选取范围的数组元素。如果想删除数组中的某一个元素，需要使用splice() 
+
+     splice()定义：从数组中添加或删除元素，然后返回被删除的数组元素。 
+
+     splice()语法：arrayObject.splice(index,howmany,item1,.....,itemX) 
+
+- ①：index表示从什么位置开始添加或删除数组元素 
+- ②：howmany表示删除的元素数量，如果为0，则表示不删除数组元素 
+- ③：tem1,.....,itemX表示新增的数组元素 
+- ④：splice()方法会改变原始数组
+
+   ["1","2", "3"].map(parseInt) //[ 1, NaN, NaN ] 
+
+ parseInt()方法解析一个字符串参数，返回一个指定基数的整数。 
+
+ parseInt()方法有两个参数： 
+
+ string：需要解析的值。如果string不是一个字符串，那么会将其转化为字符串。 
+
+ radix：一个介于2和26之间的整数，表示string参数的基数。默认为10。 
+
+ 返回值：返回一个整数或者NaN。 
+
+ map()方法创建一个新数组，其结果是该数组中每个元素都调用一个提供的函数后返回的结果。 回调函数callback需要三个参数：
+
+​    currentValue：表示当前正在处理的元素。 
+
+​    index：可选。表示当前正在处理的元素在数组中的下标。 
+
+​    array：可选。表示当前被处理的数组。 
+
+     因此上面这段代码实际上是这样的： 
+
+```js
+ [1, 2, 3].map((item, index) => { 
+    return parseInt(item, index); 
+    });
+```
+
+​    将parseInt当做回调函数，但是在调用parseInt时会自动获取两个参数：数组中每个值以及数组的索引。 
+
+​    得益于map函数，map函数的回调函数默认有三个参数，第一个是数组每个元素，第二个是索引，第三个是元素所属的数组； 
+
+​    由于parseInt仅能接收前两个参数，所以我们运行代码时会得到以下结果： 
+
+​    parseInt(‘1’, 0)：在js中，当redix为0但是string不是0时，将会把基数当做10来处理，因此得到 1 
+
+​    parseInt(‘2’, 1)：由于redix=1，不在基数范围2-36之间并且2也不是可以表示一进制的数，所以得到结果 NaN 
+
+​    parseInt(‘3’, 2)：redix = 1是在2-36范围之间的，但是由于3不是能够表示二进制的数，所以得到结果 NaN 
+
+#### ajax请求get和post的区别 
+
+- get一般用于查询操作，post一般用于提交操作 
+- get参数拼接在url上，post放在请求体内（数据体积可更大） 
+- 安全性：post易于防止CSRF 
+
+#### 阻止事件冒泡和默认行为
+
+event.stopPropagation()
+
+event.preventDefault()
+
+#### 查找、添加、删除、移动节点
+
+dom-1.js dom-2.js
+
+#### 解释jsonp原理，为何不是真正的ajax
+
+- 浏览器的同源策略（服务端没有同源策略）和跨域
+- 那些html标签能绕过跨域
+  - <img> <script>
+  - 因为它们可能要请求外部的文件
+-	没有用到XMLHttpRequest(),要实现跨域必须经过服务端的批准不然就是非法的
+
+#### document load和ready的区别
+
+```js
+windom.addEventListener('load',function(){
+    //页面的全部资源加载完才会执行，包括图片、视频等
+})
+document.addEventListener('DOMContentLoaded',function(){
+    //DOM渲染完即可执行，此时图片、视频还可能没有加载完毕
+})
+```
+
+#### == 和 === 的区别
+
+- == 会尝试类型转换
+- === 严格相等
+- 哪些场景才用==
+
+```js
+// ==运算符
+// 除了 判断 null 之外， 其他都一律用 === ，例如
+const obj = {
+    x: 100
+}
+if (obj.a == null) {}
+// 相当于：
+if (obj.a === null || obj.a === undefined) {}
+```
+
