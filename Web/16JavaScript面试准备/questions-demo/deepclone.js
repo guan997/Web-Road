@@ -1,24 +1,5 @@
 /**
  * 深拷贝
- */
-const obj1 = {
-    age: 10,
-    name: 'xiaoming',
-    address: {
-        city: 'beijing'
-    },
-    arr: ['a', 'f', 'c']
-}
-const obj2 = deepClone(obj1)
-obj2.address.city = 'shanghai'
-obj2.arr[0] = 'a1'
-// 修改obj2的值不会影响obj1
-// obj2把obj1中的属性和对象以及数组都进行了拷贝
-console.log(obj1.address.city) //beijing
-console.log(obj1.arr[0]) // a
-
-/**
- * 深拷贝
  * @params {Object} obj 要拷贝的对象
  */
 function deepClone(obj = {}) {
@@ -43,3 +24,23 @@ function deepClone(obj = {}) {
     // 返回结果
     return result
 }
+/**
+ * 深拷贝
+ */
+const obj1 = {
+    age: 10,
+    name: 'xiaoming',
+    address: {
+        city: 'beijing'
+    },
+    arr: ['a', 'f', 'c']
+}
+const obj2 = deepClone(obj1)
+obj2.address.city = 'shanghai'
+obj2.arr[0] = 'a1'
+// 修改obj2的值不会影响obj1
+// obj2把obj1中的属性和对象以及数组都进行了拷贝
+console.log(obj1.address.city) //beijing
+console.log(obj1.arr[0]) // a
+console.log(obj2.address.city) //shanghai
+console.log(obj2.arr[0]) // a1
