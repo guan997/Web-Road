@@ -1,14 +1,15 @@
 let express = require('express');
 let app = express();
 
-app.use((req,res,next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+//允许跨域
+app.use((req,res,next)=>{
+    res.header('Access-Control-Allow-Origin','*');
     if(req.method === 'OPTIONS'){
         return res.send();
     }
     next();
 })
-app.get('/getTreeList', (req,res)=>{
+app.get('/getTreeList',(req,res) =>{
     res.json({
         code:0,
         parent:[
@@ -25,10 +26,11 @@ app.get('/getTreeList', (req,res)=>{
             {name:'文件2-2',pid:2,id:10004},
             {name:'文件1-1-1',pid:4,id:10005},
             {name:'文件2-1-1',pid:5,id:10006},
-        ],
+        ]
+
     })
 })
 // 监听端口
-app.listen(33333);
+app.listen(3333);
 // 控制台提示输出
-console.log('服务器启动成功 http://localhost:33333/');
+console.log('服务器启动成功 http://localhost:3333/');
