@@ -2,7 +2,7 @@
   <el-tree
     :data="allData"
     default-expand-all
-    :render-content="render"
+    :render-content="renderContent"
     :expand-on-click-node="false"
   ></el-tree>
 </template>
@@ -10,19 +10,19 @@
 import _ from "lodash";
 export default {
   props: {
-    delete:Function,
+    delete: Function,
     data: {
       type: Array,
       default: () => [],
     },
-    fileDrop:Array,
-    directoryDrop:Array
+    fileDrop: Array,
+    diectoryDrop: Array,
   },
   data() {
     return {
       allData: [],
-      currentId:'',//默认当前点击了谁的修改
-      currentContent:''//当前编辑的内容
+      currentId: "", //默认当前点击了谁的修改
+      currentContent: "", //当前编辑的内容
     };
   },
   watch: {
@@ -36,90 +36,119 @@ export default {
     isParent(data) {
       return data.type == "parent";
     },
-    handleRename(data){//重命名
-      this.currentId = data.name;
+    handleRename(data) {
+      //重命名
+      this.currentContent = data.name;
       this.currentId = data.id;
     },
-    remove(id){//删除页面中的内容
+    remove(id) {
+      //删除页面中的内容
       let list = _.cloneDeep(this.data);
-      list = list.filter(l => l.id !== id);
+      list = list.filter((l) => l.id !== id);
       // .sync 可以同步数据
-      this.$emit('update:data',list);//告诉父亲同步数据
+      this.$emit("update:data", list); //告诉父亲同步数据
       this.$message({
-        type:'success',
-        message:'删除成功!'
-      })
+        type: "success",
+        message: "删除成功!",
+      });
     },
-    handleRemove(data){//删除文件
-      this.$confirm(`此操作将永久删除该文件,${data.name} 是否继续?`, '提示', {
-        confirmButtonText:'确定',
-        cancelButtonText:'取消',
-        type:'warning'
-      }).then(()=>{
-        //不能直接将数据删除 需要调用用户的删除方法
-        //如果用户传递了delete方法 可以直接调用
-        this.delete?this.delete(data.id).then(()=>{
-          this.remove(data.id)
-        }):this.remove(data.id);            
-        //没有直接删除即可
-      }).catch(()=>{
-        this.$message({
-          type:'info',
-          message:'已取消删除'
+    handleRemove(data) {
+      //删除文件
+      this.$confirm(`此操作将永久删除该文件,${data.name} 是否继续?`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //不能直接将数据删除 需要调用用户的删除方法
+          //如果用户传递了delete方法 可以直接调用
+          this.delete
+            ? this.delete(data.id).then(() => {
+                this.remove(data.id);
+              })
+            : this.remove(data.id);
+          //没有直接删除即可
         })
-      })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
     },
-    handleCommand(data,value){
-      if(value === 'rn'){
+    handleCommand(data, value) {
+      if (value === "rn") {
         this.handleRename(data);
-      }else if(value === 'rm'){
+      } else if (value === "rm") {
         this.handleRemove(data);
       }
     },
-    canncel(){
-      this.currentId = '';
+    canncel() {
+      this.currentId = "";
     },
-    ok(data){
+    ok(data) {
       let list = _.cloneDeep(this.data);
-      list = list.filter(l => l.id !== id);
+      let item = list.find((l) => l.id === data.id);
       item.name = this.currentContent;
       this.currentId = "";
-      // .sync 可以同步数据
-      this.$emit('update:data',list);//告诉父亲同步数据
+      this.$emit("update:data", list); //告诉父亲同步数据
       this.$message({
-        type:'success',
-        message:'修改成功!'
-      })
+        type: "success",
+        message: "修改成功!",
+      });
     },
-    handleInput(v){
+    handleInput(v) {
       this.currentContent = v;
     },
-    renderContent(h, { node, data}) {
-      //   console.log(data.type);
-      let list = this.isParent(data)?this.directoryDrop:this.fileDrop;
+    renderContent(h, { node, data }) {
+      console.log(node);
+      let list = this.isParent(data) ? this.directoryDrop : this.fileDrop;
       return (
-        <div style={{width:'100%'}}>
-          {this.isParent(data) ? 
-         node.expanded?<i class="el-icon-folder-opened"></i>:
-            <i class="el-icon-folder"></i>: 
+        <div style={{ width: "100%" }}>
+          {this.isParent(data) ? (
+            node.expanded ? (
+              <i class="el-icon-folder-opened"></i>
+            ) : (
+              <i class="el-icon-folder"></i>
+            )
+          ) : (
             <i class="el-icon-document"></i>
-          }
-          {data.id === this.currentId ? <el-input value ={this.currentContent} 
-          on-input={this.handleInput}></el-input>:data.name}
-          {data.id !== this.currentId ? 
-          <el-dropdown placement="bottom-start" trigger="click" on-command={this.handleCommand.bind(this,data)}>
+          )}
+          {data.id === this.currentId ? (
+            <el-input
+              value={this.currentContent}
+              on-input={this.handleInput}
+            ></el-input>
+          ) : (
+            data.name
+          )}
+          {data.id !== this.currentId ? (
+            <el-dropdown
+              placement="bottom-start"
+              trigger="click"
+              on-command={this.handleCommand.bind(this, data)}
+            >
               <span class="el-dropdown-link">
-              <i class="el-icon-arrow-down el-icon-right" > </i></span>
-              <el-dropdown-menu slot="dropdown">
-                  {list.map(item=>{
-                    <el-dropdown-item command={item.text}>{item.value}</el-dropdown-item>
-                  })}
-              </el-dropdown-menu>
-          </el-dropdown>:<span style={{float:'right'}}>
-              <el-button type="text" on-click={this.ok.bind(this,data)}>确认</el-button>
-              <el-button type="text" on-click={this.canncel}>取消</el-button>
+                <i class="el-icon-arrow-down el-icon--right"> </i>
               </span>
-              }
+              <el-dropdown-menu slot="dropdown">
+                {list.map((item) => (
+                  <el-dropdown-item command={item.text}>
+                    {item.value}
+                  </el-dropdown-item>
+                ))}
+              </el-dropdown-menu>
+            </el-dropdown>
+          ) : (
+            <span style={{ float: "right" }}>
+              <el-button type="text" on-click={this.ok.bind(this, data)}>
+                确认
+              </el-button>
+              <el-button type="text" on-click={this.canncel}>
+                取消
+              </el-button>
+            </span>
+          )}
         </div>
       );
     },
@@ -132,6 +161,7 @@ export default {
         memo[current["id"]] = current;
         return memo;
       }, {});
+      console.log(21);
       console.log(treeMapList);
       // vue里vuex源码靠的就是reduce
       let result = AllData.reduce((arr, current) => {
@@ -151,7 +181,8 @@ export default {
         }
         return arr;
       }, []);
-      this.addData = result;
+      console.log(11);
+      this.allData = result;
       // console.log(this.addData);
     },
   },
@@ -160,18 +191,18 @@ export default {
   },
 };
 </script>
-<style lang="css">
-  .el-tree{
-    margin-top: 25px;
-    width: 50%;
-  }
-  .el-dropdown{
-    float: right;
-  }
-  .el-tree .el-tree-node__content{
-    height: 32px;
-  }
-  .el-tree .el-input{
-    width: 50%;
-  }
+<style>
+.el-tree {
+  margin-top: 25px;
+  width: 50%;
+}
+.el-dropdown {
+  float: right;
+}
+.el-tree .el-tree-node__content {
+  height: 32px;
+}
+.el-tree .el-input {
+  width: 50%;
+}
 </style>

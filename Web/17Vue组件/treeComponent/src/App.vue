@@ -45,6 +45,7 @@ export default {
     data.parent.forEach((p) => (p.type = "parent"));
     this.data = [...data.parent, ...data.child];
     // {1:{name:"文件夹1",pid:0,id:1}}
+    console.log(this.data)
   },
 };
 </script>
