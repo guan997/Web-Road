@@ -1,6 +1,6 @@
-### 基于慕课<a href="https://coding.imooc.com/class/400.html">`快速搞定前端JavaScript面试`</a>的学习总结以及扩展
+## 关于JavaScript部分的前端面试总结
 
-####  var 和 let 从const的区别 
+##  var 和 let 从const的区别 
 
      var是ES5语法 let和const是ES6语法 
 
@@ -8,7 +8,7 @@
 
      var和let是变量，可修改；const是常量，不可修改 
 
-#### typeof能判断哪些类型 
+## typeof能判断哪些类型 
 
      undefined string number boolean symbol 
 
@@ -16,13 +16,13 @@
 
      function 
 
-#### 列举强制类型和类型转换 
+## 列举强制类型和类型转换 
 
      强制：parseInt parseFloat toString 
 
      隐式：if、逻辑运算、==、+拼接字符串 
 
-#### 函数call和apply的区别 
+## 函数call和apply的区别 
 
      apply：调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments);即A对象应用B对象的方法 
 
@@ -32,11 +32,11 @@
 
    call则可以传递多个参数，第一个参数和apply一样，是用来替换的对象，后边是参数列表。 
 
-#### 手写深度比较 
+## 手写深度比较 
 
 isEqual.js
 
-#### split()和join()的区别 
+## split()和join()的区别 
 
      '1-2-3'.split('-') //[1,2,3] 
 
@@ -44,9 +44,9 @@ isEqual.js
 
      split，是把一串字符（根据某个分隔符）分成若干个元素存放在一个数组里。而Join是把数组中的字符串连成一个长串，可以大体上认为是split的逆操作 
 
-#### 数组的pop push shift unshift分别是什么 
+## 数组的pop push shift unshift分别是什么 
 
-##### 功能 返回值 是否会对原数组造成影响 
+## 功能 返回值 是否会对原数组造成影响 
 
      尾部添加(push) push() 方法将一个或多个元素添加到数组的末尾，并返回该数组的新长度。 
 
@@ -56,13 +56,13 @@ isEqual.js
 
      头部删除(shift) shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。 
 
-#####      纯函数：
+##      纯函数：
 
 1. 不改变源数组（没有副作用）；2. 返回一个数组
 
 ​    concat map filter slice 
 
-#####     非纯函数
+##     非纯函数
 
 ​    push pop shift unshift
 
@@ -72,7 +72,7 @@ isEqual.js
 
 ​    reduce 
 
-####    数组slice和splice区别 
+##    数组slice和splice区别 
 
      slice()定义：从已有的数组中返回你选择的某段数组元素 
 
@@ -132,23 +132,23 @@ isEqual.js
 
 ​    parseInt(‘3’, 2)：redix = 1是在2-36范围之间的，但是由于3不是能够表示二进制的数，所以得到结果 NaN 
 
-#### ajax请求get和post的区别 
+## ajax请求get和post的区别 
 
 - get一般用于查询操作，post一般用于提交操作 
 - get参数拼接在url上，post放在请求体内（数据体积可更大） 
 - 安全性：post易于防止CSRF 
 
-#### 阻止事件冒泡和默认行为
+## 阻止事件冒泡和默认行为
 
 event.stopPropagation()
 
 event.preventDefault()
 
-#### 查找、添加、删除、移动节点
+## 查找、添加、删除、移动节点
 
 dom-1.js dom-2.js
 
-#### 解释jsonp原理，为何不是真正的ajax
+## 解释jsonp原理，为何不是真正的ajax
 
 - 浏览器的同源策略（服务端没有同源策略）和跨域
 - 那些html标签能绕过跨域
@@ -156,7 +156,7 @@ dom-1.js dom-2.js
   - 因为它们可能要请求外部的文件
 -	没有用到XMLHttpRequest(),要实现跨域必须经过服务端的批准不然就是非法的
 
-#### document load和ready的区别
+## document load和ready的区别
 
 ```js
 windom.addEventListener('load',function(){
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded',function(){
 })
 ```
 
-#### == 和 === 的区别
+## == 和 === 的区别
 
 - == 会尝试类型转换
 - === 严格相等
@@ -184,19 +184,19 @@ if (obj.a == null) {}
 if (obj.a === null || obj.a === undefined) {}
 ```
 
-#### 函数声明和函数表达式的区别
+## 函数声明和函数表达式的区别
 
 - 函数声明function fn(){}
 - 函数表达式const  fn = function(){}
 - 函数声明会在代码执行前预加载，而函数表达式不会
 
-#### new Object()和Object.create()区别
+## new Object()和Object.create()区别
 
 - {}等同于new Object(),原型Object.prototype
 - Object.create(null)没有原型
 - O{bject.create({...})可指定原型
 
-#### this指向
+## this指向
 
 - 1.在全局作用域下 this对象指向的是window对象
 
@@ -217,7 +217,7 @@ const func = User.getCount
 console.log(func())//undefined window
 ```
 
-#### this指向场景问题
+## this指向场景问题
 
 ```js
 var obj = {
@@ -291,7 +291,7 @@ alert(a)
 // 100 10 10
 ```
 
-#### 正则表达式
+## 正则表达式
 
 ```js
 // 邮政编码
@@ -313,7 +313,7 @@ alert(a)
 /\d+\.\d+\.\d+\.\d+/
 ```
 
-#### 手写字符串trim保证浏览器兼容性
+## 手写字符串trim保证浏览器兼容性
 
 ```js
 String.prototype.trim = function(){
@@ -322,7 +322,7 @@ String.prototype.trim = function(){
 // 原型，this，正则表达式
 ```
 
-#### 获取多个数字中的最大值
+## 获取多个数字中的最大值
 
 ```js
 //手写max
@@ -341,12 +341,12 @@ console.log(max(12,32,53,64,143,1243,53))
 Math.max(12,32,53,64,143,1243,53)
 ```
 
-#### 如何用js实现继承
+## 如何用js实现继承
 
 - class继承
 - prototype继承 (ES5语法不推荐)
 
-#### 如何捕获js中的异常
+## 如何捕获js中的异常
 
 ```js
 try{
@@ -363,13 +363,13 @@ window.onerror = function(message, source, lineNum,colNum,error){
 }
 ```
 
-#### 什么是JSON
+## 什么是JSON
 
 - json是一种数据格式，本质是一段字符串
 - json格式和js对象结构一致，对js语言更友好
 - window.JSON是一个全局对象：JSON.stringify JSON.parse
 
-#### 获取当前页面url参数
+## 获取当前页面url参数
 
 ```js
 // 解析url参数
@@ -397,7 +397,7 @@ function queryNew(name){
 console.log(queryNew('b'))
 ```
 
-#### 将url参数解析为JS对象
+## 将url参数解析为JS对象
 
 ```js
 // 传统方式，分析search
@@ -427,7 +427,7 @@ function queryToObjNew(){
 console.log(queryToObjNew())
 ```
 
-#### 数组拍平
+## 数组拍平
 
 ```js
 var arr = [1, 2, [3, 4], 5];
@@ -452,7 +452,7 @@ const res = flat([1, 2, [3, 4, [10, 20, [100,200]]], 5])
 console.log(res)
 ```
 
-#### 数组去重
+## 数组去重
 
 - 传统方式，遍历元素挨个比较、去重
 - 使用Set
@@ -483,60 +483,104 @@ const resSet = uniqueSet([10,20,20,30,10,40,50])
 console.log(resSet)
 ```
 
-#### 手写深拷贝
+## 深拷贝和浅拷贝
 
-```js
-/**
- * 深拷贝
- * @params {Object} obj 要拷贝的对象
- */
-function deepClone(obj = {}) {
-    if (typeof obj !== 'object' || obj == null) {
-        // obj是null，或者不是对象和数组，直接返回
-        return obj
-    }
-    // 初始化返回结果
-    let result
-    if (obj instanceof Array) {
-        result = []
-    } else {
-        result = {}
-    }
-    for (let key in obj) {
-        // 保证key不是原型的属性
-        if (obj.hasOwnProperty(key)) {
-            // 递归调用
-            result[key] = deepClone(obj[key])
-        }
-    }
-    // 返回结果
-    return result
-}
-/**
- * 深拷贝
- */
-const obj1 = {
-    age: 10,
-    name: 'xiaoming',
-    address: {
-        city: 'beijing'
-    },
-    arr: ['a', 'f', 'c']
-}
-const obj2 = deepClone(obj1)
-obj2.address.city = 'shanghai'
-obj2.arr[0] = 'a1'
-// 修改obj2的值不会影响obj1
-// obj2把obj1中的属性和对象以及数组都进行了拷贝
-console.log(obj1.address.city) //beijing
-console.log(obj1.arr[0]) // a
-console.log(obj2.address.city) //shanghai
-console.log(obj2.arr[0]) // a1
+- 浅拷贝是创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址 ，所以**如果其中一个对象改变了这个地址，就会影响到另一个对象**。
+- 深拷贝是将一个对象从内存中完整的拷贝一份出来,从堆内存中开辟一个新的区域存放新对象,且**修改新对象不会影响原对象**。
+
+```
+var a1 = {b: {c: {}};
+
+var a2 = shallowClone(a1); // 浅拷贝方法
+a2.b.c === a1.b.c // true 新旧对象还是共享同一块内存
+
+var a3 = deepClone(a3); // 深拷贝方法
+a3.b.c === a1.b.c // false 新对象跟原对象不共享内存
 ```
 
-注意，Object.assign不是深拷贝，Object.assign只拷贝第一层级
+- 借助[ConardLi大佬](https://github.com/ConardLi)以下两张图片，帮我们更好的理解两者的含义：
+  [![img](https://camo.githubusercontent.com/0bd675b8e7ebefa5610405296b17d10a5cb2fa70/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323032302f332f312f313730393635323539666237363866643f773d36333426683d32373726663d706e6726733d3538313833)](https://camo.githubusercontent.com/0bd675b8e7ebefa5610405296b17d10a5cb2fa70/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323032302f332f312f313730393635323539666237363866643f773d36333426683d32373726663d706e6726733d3538313833)
+  [![img](https://camo.githubusercontent.com/e9c9843a300e0e3d208089f5c29dd0b30a6bcf0b/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323032302f332f312f313730393635326137393438643162383f773d36333426683d33373326663d706e6726733d3730343630)](https://camo.githubusercontent.com/e9c9843a300e0e3d208089f5c29dd0b30a6bcf0b/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323032302f332f312f313730393635326137393438643162383f773d36333426683d33373326663d706e6726733d3730343630)
 
-#### RAF requestAnimationFrame
+总而言之，浅拷贝只复制指向某个对象的指针，而不复制对象本身，**新旧对象还是共享同一块内存**。但深拷贝会另外创造一个一模一样的对象，**新对象跟原对象不共享内存**，修改新对象不会改到原对象。
+
+## 赋值和深/浅拷贝的区别
+
+这三者的区别如下，不过比较的前提都是**针对引用类型**：
+
+- 当我们把一个对象赋值给一个新的变量时，**赋的其实是该对象的在栈中的地址，而不是堆中的数据**。也就是两个对象指向的是同一个存储空间，无论哪个对象发生改变，其实都是改变的存储空间的内容，因此，两个对象是联动的。
+- 浅拷贝：重新在堆中创建内存，拷贝前后对象的基本数据类型互不影响，但拷贝前后对象的引用类型因共享同一块内存，会相互影响。
+- 深拷贝：从堆内存中开辟一个新的区域存放新对象，对对象中的子对象进行递归拷贝,拷贝前后的两个对象互不影响。
+
+## 手写深拷贝
+
+不使用WeakMap()
+
+- 检查`map`中有无克隆过的对象
+- 有 - 直接返回
+- 没有 - 将当前对象作为`key`，克隆对象作为`value`进行存储
+- 继续克隆
+
+```js
+function clone(target, map = new Map()) {
+    if (typeof target === 'object') {
+        let cloneTarget = Array.isArray(target) ? [] : {};
+        if (map.get(target)) {
+            return map.get(target);
+        }
+        map.set(target, cloneTarget);
+        for (const key in target) {
+            cloneTarget[key] = clone(target[key], map);
+        }
+        return cloneTarget;
+    } else {
+        return target;
+    }
+};
+```
+
+使用WeakMap()
+
+`weakMap`的作用：
+
+> WeakMap 对象是一组键/值对的集合，其中的键是弱引用的。其键必须是对象，而值可以是任意的。
+
+什么是弱引用呢？
+
+> 在计算机程序设计中，弱引用与强引用相对，是指不能确保其引用的对象不会被垃圾回收器回收的引用。 一个对象若只被弱引用所引用，则被认为是不可访问（或弱可访问）的，并因此可能在任何时刻被回收。
+
+我们默认创建一个对象：`const obj = {}`，就默认创建了一个强引用的对象，我们只有手动将`obj = null`，它才会被垃圾回收机制进行回收，如果是弱引用对象，垃圾回收机制会自动帮我们回收。
+
+```js
+function deepClone(obj, hash = new WeakMap()) {
+  if (obj === null) return obj; // 如果是null或者undefined我就不进行拷贝操作
+  if (obj instanceof Date) return new Date(obj);
+  if (obj instanceof RegExp) return new RegExp(obj);
+  // 可能是对象或者普通的值  如果是函数的话是不需要深拷贝
+  if (typeof obj !== "object") return obj;
+  // 是对象的话就要进行深拷贝
+  if (hash.get(obj)) return hash.get(obj);
+  let cloneObj = new obj.constructor();
+  // 找到的是所属类原型上的constructor,而原型上的 constructor指向的是当前类本身
+  hash.set(obj, cloneObj);
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      // 实现一个递归拷贝
+      cloneObj[key] = deepClone(obj[key], hash);
+    }
+  }
+  return cloneObj;
+}
+let obj = { name: 1, address: { x: 100 } };
+obj.o = obj; // 对象存在循环引用的情况
+let d = deepClone(obj);
+obj.address.x = 200;
+console.log(d);
+```
+
+注意就是对象存在**循环引用**的情况，即对象的属性直接的引用了自身的情况，解决循环引用问题，我们可以额外开辟一个存储空间，来存储当前对象和拷贝对象的对应关系，当需要拷贝当前对象时，先去存储空间中找，有没有拷贝过这个对象，如果有的话直接返回，如果没有的话继续拷贝
+
+## RAF requestAnimationFrame
 
 - 要想动画流畅，更新频率要60帧/s，即16.67更新第一视图(1000/60=16.67)
 - setTimeout要手动控制频率，而RAF浏览器会自动控制
@@ -570,14 +614,14 @@ function animateRAF(){
 animateRAF()
 ```
 
-#### 性能优化
+## 性能优化
 
 - 原则：多使用内存、缓存，减少计算、减少网络请求
 - 方向：加载页面，页面渲染，页面操作流畅度
 
 <a src="">`前端性能优化三大方案`</a>
 
-#### JavaScript数组越界问题
+## JavaScript数组越界问题
 
 ```js
 // js的数组索引越界
@@ -608,4 +652,6 @@ console.log(a[Math.pow(2, 32) + 1]); //undefined,没有存上?
 console.log(a[Math.pow(2, 32) - 1]) //"我比最大索引还大3?",原来是覆盖了第一个越界的元素
 console.log(a[Math.pow(2, 32)]) //"我比最大索引还大2",这个没被覆盖
 ```
-JavaScript中的数组是一个稍微有点特殊的普通对象，在Array.prototype.push方法执行时,会先把每个要push的元素push进去,也就是定义多个自身属性，然后才设置数组的length属性为最大的索引值+1，这个例子中就是Math.pow(2, 32) + 1,这时才会报错，但上面的元素已经push进去了。如果再次push的话，还会从当前的length属性-1的那个索引处开始push，也就出现了覆盖而不是继续追加的情况.
+- JavaScript中的数组是一个稍微有点特殊的普通对象，在Array.prototype.push方法执行时,会先把每个要push的元素push进去,也就是定义多个自身属性，然后才设置数组的length属性为最大的索引值+1，这个例子中就是Math.pow(2, 32) + 1,这时才会报错，但上面的元素已经push进去了。如果再次push的话，还会从当前的length属性-1的那个索引处开始push，也就出现了覆盖而不是继续追加的情况.
+
+<a href="https://coding.imooc.com/class/400.html">`快速搞定前端JavaScript面试`</a>
