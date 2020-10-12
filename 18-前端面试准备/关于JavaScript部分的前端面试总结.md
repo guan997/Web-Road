@@ -514,29 +514,47 @@ a3.b.c === a1.b.c // false 新对象跟原对象不共享内存
 
 ## 手写深拷贝
 
-不使用WeakMap()
-
-- 检查`map`中有无克隆过的对象
-- 有 - 直接返回
-- 没有 - 将当前对象作为`key`，克隆对象作为`value`进行存储
-- 继续克隆
-
 ```js
-function clone(target, map = new Map()) {
+/**
+ * 深拷贝
+ * @params {Object} target 要拷贝的对象
+ */
+// Map()可以替换为WeakMap()解决循环引用问题
+function deepClone(target, map = new Map()) {
+    //  如果是原始类型，无需继续拷贝，直接返回
+    // 如果是引用类型，创建一个新的对象，遍历需要克隆的对象，将需要克隆对象的属性执行深拷贝后依次添加到新对象上。
     if (typeof target === 'object') {
+        // 兼容数组
         let cloneTarget = Array.isArray(target) ? [] : {};
+        // 解决循环引用问题
+        // 检查map中有无克隆过的对象
+        // 有 - 直接返回
+        // 没有 - 将当前对象作为key，克隆对象作为value进行存储
+        // 继续克隆
         if (map.get(target)) {
             return map.get(target);
         }
         map.set(target, cloneTarget);
         for (const key in target) {
-            cloneTarget[key] = clone(target[key], map);
+            cloneTarget[key] = deepClone(target[key], map);
         }
         return cloneTarget;
     } else {
         return target;
     }
+}
+// 测试用例
+const target = {
+    field1: 1,
+    field2: undefined,
+    field3: {
+        child: 'child'
+    },
+    field4: [2, 4, 8]
 };
+target.target = target;
+
+console.log(deepClone(target));
 ```
 
 使用WeakMap()
@@ -550,6 +568,50 @@ function clone(target, map = new Map()) {
 > 在计算机程序设计中，弱引用与强引用相对，是指不能确保其引用的对象不会被垃圾回收器回收的引用。 一个对象若只被弱引用所引用，则被认为是不可访问（或弱可访问）的，并因此可能在任何时刻被回收。
 
 我们默认创建一个对象：`const obj = {}`，就默认创建了一个强引用的对象，我们只有手动将`obj = null`，它才会被垃圾回收机制进行回收，如果是弱引用对象，垃圾回收机制会自动帮我们回收。
+
+注意就是对象存在**循环引用**的情况，即对象的属性直接的引用了自身的情况，解决循环引用问题，我们可以额外开辟一个存储空间，来存储当前对象和拷贝对象的对应关系，当需要拷贝当前对象时，先去存储空间中找，有没有拷贝过这个对象，如果有的话直接返回，如果没有的话继续拷贝
+
+### 性能优化
+
+`while`的效率比`for、while、for in`的执行效率高，把`for in`遍历改变为`while`遍历。
+
+```js
+//使用while来实现一个通用的forEach遍历，iteratee是遍历的回掉函数，他可以接收每次遍历的value和index两个参数：
+function forEach(array, iteratee) {
+    let index = -1;
+    const length = array.length;
+    while (++index < length) {
+        iteratee(array[index], index);
+    }
+    return array;
+}
+//对我们的cloen函数进行改写：当遍历数组时，直接使用forEach进行遍历，当遍历对象时，使用Object.keys取出所有的key进行遍历，然后在遍历时把forEach会调函数的value当作key使用：
+function clone(target, map = new WeakMap()) {
+    if (typeof target === 'object') {
+        const isArray = Array.isArray(target);
+        let cloneTarget = isArray ? [] : {};
+
+        if (map.get(target)) {
+            return map.get(target);
+        }
+        map.set(target, cloneTarget);
+
+        const keys = isArray ? undefined : Object.keys(target);
+        forEach(keys || target, (value, key) => {
+            if (keys) {
+                key = value;
+            }
+            cloneTarget[key] = clone2(target[key], map);
+        });
+
+        return cloneTarget;
+    } else {
+        return target;
+    }
+}
+```
+
+### 其他数据类型
 
 ```js
 function deepClone(obj, hash = new WeakMap()) {
@@ -577,8 +639,6 @@ let d = deepClone(obj);
 obj.address.x = 200;
 console.log(d);
 ```
-
-注意就是对象存在**循环引用**的情况，即对象的属性直接的引用了自身的情况，解决循环引用问题，我们可以额外开辟一个存储空间，来存储当前对象和拷贝对象的对应关系，当需要拷贝当前对象时，先去存储空间中找，有没有拷贝过这个对象，如果有的话直接返回，如果没有的话继续拷贝
 
 ## RAF requestAnimationFrame
 
