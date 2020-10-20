@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计数器</title>
+    <style>
+        body {
+            /* counter-reset - 创建或者重置计数器 */
+            counter-reset: section;
+        }
+
+        h1 {
+            counter-reset: subsection;
+        }
+
+        h1::before {
+            /* counter-increment - 递增变量 */
+            counter-increment: section;
+            /* content - 插入生成的内容 */
+            /* counter() 或 counters() 函数 - 将计数器的值添加到元素 */
+            content: "Section"counter(section) ":";
+        }
+
+        h2::before {
+            counter-increment: subsection;
+            content: counter(section) "."counter(subsection) " ";
+        }
+
+        ol {
+            counter-reset: sectionol;
+            list-style-type: none;
+        }
+
+        li::before {
+            counter-increment: sectionol;
+            /* 计数器也可用于列表中，列表的子元素会自动创建。这里我们使用了 counters() 函数在不同的嵌套层级中插入字符串: */
+            content: counters(sectionol, '.') ' ';
+        }
+    </style>
+</head>
+
+<body>
+    <h1>使用CSS 计数器：</h1>
+    <h2>HTML 教程</h2>
+    <h2>CSS 教程</h2>
+    <h2>JavaScript 教程</h2>
+
+
+    <h1>HTML 教程</h1>
+    <h2>HTML 教程</h2>
+    <h2>HTML 教程</h2>
+    <h1>CSS 教程</h1>
+    <h2>HTML 教程</h2>
+    <h2>HTML 教程</h2>
+    <ol>
+        <li>item</li>
+        <li>item
+            <ol>
+                <li>item</li>
+                <li>item</li>
+                <li>item
+                    <ol>
+                        <li>item</li>
+                        <li>item</li>
+                        <li>item</li>
+                    </ol>
+                </li>
+                <li>item</li>
+            </ol>
+        </li>
+        <li>item</li>
+        <li>item</li>
+    </ol>
+
+    <ol>
+        <li>item</li>
+        <li>item</li>
+    </ol>
+</body>
+
+</html>

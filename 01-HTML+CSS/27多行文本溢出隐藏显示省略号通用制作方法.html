@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>多行文本溢出隐藏，显示省略号通用两年制作方法</title>
-		<style type="text/css">
-			p {
-				height: 30px;
-				line-height: 2em;
-				overflow: hidden;
-				border: 1px solid red;
-				position: relative;
-			}
-			p::after{
-				position: absolute;
-				content: "...";
-				right: 0;
-				bottom: 0;
-				padding: 0px 10px 0px 10px;
-				background: white;
-			}
-		</style>
-	</head>
-	<body>
-		<p>
-			多行文本溢出隐藏，显示省略号多行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号
-			多行文本溢出隐藏，显示省略号v
-			多行文本溢出隐藏，显示省略号多行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号
-			多行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号
-		</p>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title>多行文本溢出隐藏，显示省略号通用方法</title>
+	<style type="text/css">
+		p:nth-child(1) {
+			height: 30px;
+			line-height: 2em;
+			overflow: hidden;
+			border: 1px solid red;
+			position: relative;
+		}
+
+		p:nth-child(1)::after {
+			position: absolute;
+			content: "...";
+			right: 0;
+			bottom: 0;
+			padding: 0px 10px 0px 10px;
+			background: white;
+		}
+
+		div{
+			border: 1px solid #000000;
+		}
+	</style>
+</head>
+
+<body>
+	<p>
+		多行文本溢出隐藏，显 示省略号 多行文本溢出隐藏，显示省略号单行文本溢出隐藏，显 示省略号 单行文本溢出隐藏，显示省略号
+		多行文本溢出隐藏，显示省略号
+		多行文本溢出隐藏，显示省略号多行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号
+		多行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号单行文本溢出隐藏，显示省略号
+	</p>
+</body>
+
 </html>
