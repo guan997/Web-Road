@@ -18,9 +18,15 @@
 
     <!-- 动态组件 -->
     <!-- <component :is="NextTickName"/> -->
-    <div v-for="(val, key) in newsData" :key="key">
+    <!-- <div v-for="(val, key) in newsData" :key="key">
       <component :is="val.type" />
-    </div>
+    </div> -->
+
+    <!-- keep-alive -->
+    <!-- <KeepAlive/> -->
+
+    <!-- mixin -->
+    <MixinDemo/>
   </div>
 </template>
 <script>
@@ -28,6 +34,8 @@
 // import NextTick from './NextTick'
 // import SlotDemo from './SlotDemo'
 // import ScopedSlotDemo from './ScopedSlotDemo'
+// import KeepAlive from './KeepAlive'
+import MixinDemo from './MixinDemo'
 
 export default {
   components: {
@@ -35,6 +43,8 @@ export default {
     // NextTick
     // ScopedSlotDemo,
     // SlotDemo
+    // KeepAlive
+    MixinDemo
   },
   data() {
     return {
