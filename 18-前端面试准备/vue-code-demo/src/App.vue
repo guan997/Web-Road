@@ -1,19 +1,23 @@
 <template>
     <div id="app">
         <!-- vue 高级特性 -->
-        <AdvanceUse/>
+        <!-- <AdvanceUse/> -->
         <!-- vue组件 -->
         <!-- <ComponentsDemo/> -->
-    </div>
+        <!-- 购物车 -->
+        <CartDemo/>
+    </div> 
 </template>
 <script>
-import AdvanceUse from './components/AdvanceUse/index'
+// import AdvanceUse from './components/AdvanceUse/index'
 // import ComponentsDemo from './components/ComponentsDemo/index'
+import CartDemo from './components/Cart/index'
 export default {
     name:'app',
     components:{
-        AdvanceUse
+        // AdvanceUse
         // ComponentsDemo
+        CartDemo
     }
 }
 </script>
