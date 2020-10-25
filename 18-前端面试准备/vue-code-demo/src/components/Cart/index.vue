@@ -1,17 +1,17 @@
 <template>
     <div>
-        <ProductionItem :list='productionList'/>
+        <ProductionList :list='productionList'/>
         <hr>
         <CartList :productionList="productionList" :cartList="cartList"/>
     </div>
 </template>
 <script>
-import ProductionItem from './ProductionItem/index'
+import ProductionList from './ProductionList/index'
 import CartList from './CartList/index'
 import event from './event'
 export default {
     components:{
-        ProductionItem,
+        ProductionList,
         CartList
     },
     data() {
@@ -57,7 +57,7 @@ export default {
             })
         },
         // 从购物车删除一个商品
-        delFormCart(id){
+        delFromCart(id){
             // 从购物车中找出商品
             const prd = this.cartList.find(item => item.id === id)
             if(prd == null){
