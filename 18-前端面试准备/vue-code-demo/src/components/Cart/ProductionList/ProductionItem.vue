@@ -2,7 +2,7 @@
     <div>
         <span>{{item.title}}</span>&nbsp;
         <span>{{item.price}}元</span>&nbsp;
-        <a href="#" @click="clickHandler(item.id, $event)">加入购物车</a>
+        <a href="#" id="my-click" @click="clickHandler(item.id, $event)">加入购物车</a>
     </div>
 </template>
 
@@ -27,3 +27,9 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+   /* .my-click{
+       pointer-events:none;
+   }  */
+</style>

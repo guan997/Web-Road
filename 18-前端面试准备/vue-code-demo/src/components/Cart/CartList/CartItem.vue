@@ -1,9 +1,9 @@
 <template>
     <div>
         <span>{{item.title}}</span>&nbsp;
-        <span>(数量{{item.quantity}})</span>&nbsp;
-        <a href="#" @click="addClickHandler(item.id, $event)">增加</a>&nbsp;
-        <a href="#" @click="delClickHandler(item.id, $event)">减少</a>&nbsp;
+        <span>(购买数量:{{item.quantity}}&nbsp;库存剩余：{{item.inventory}})</span>&nbsp;
+        <a href="#" v-if="item.inventory" @click="addClickHandler(item.id, $event)">增加</a>&nbsp;
+        <a href="#"  @click="delClickHandler(item.id, $event)">减少</a>&nbsp;
     </div>
 </template>
 
