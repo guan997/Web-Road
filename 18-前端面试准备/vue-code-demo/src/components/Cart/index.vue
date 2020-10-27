@@ -52,6 +52,9 @@ export default {
     addToCart(id) {
       // 购物车中是否有该商品
       const prd = this.cartList.find((item) => item.id === id);
+      
+      // 遗留待解决bug 库存不够时 依然可以加入购物车
+
       var prdInventory = this.productionList.find((item) => item.id === id)
         .inventory--;
       // eslint-disable-next-line

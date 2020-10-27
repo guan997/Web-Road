@@ -1,88 +1,101 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<style>
-			/* 鼠标变换样式 */
-			div{
-				word-break: keep-all;/*
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		/* 鼠标变换样式 */
+		div {
+			word-break: keep-all;
+			/*
 				word-break: keep-all;不允许单词拆开
 				word-break: break-all;允许单词拆开*/
+			height: 120px;
+			width: 200px;
+			background-color: beige;
+		}
 
-				height: 120px;
-				width: 200px;background-color: beige;
-			}
-			div:first-child{
-				background-color: beige;
-				cursor:default;
-			}
-			div:nth-child(2){
-				background-color: blue;
-				cursor:pointer;
-			}
-			div:nth-child(3){
-				background-color: #3D98FF;
-				cursor: move;
-			}
-			div:nth-child(4){
-				background-color: goldenrod;
-				cursor: text;
-			}
-			input{
-				width: 100px;
-				outline: 0;/*消除轮廓线*/
-				
-			}
-			textarea{
-				resize: none;/*禁止拖拽*/
-				outline: #0000FF;
-				width: 300px;
-				height: 120px;
-				border: 1px  solid gray;
-				color: #666666;
-				background-color: # #87CEEB;
-				text-align: center;
-				margin-left: auto;
-				margin-right: auto;
-				vertical-align: middle;
-			}
-			img{
-				height: 120px;
-				width: 200px;
-				vertical-align: middle;
-				/*可以消除图片缝隙
+		div:first-child {
+			background-color: beige;
+			cursor: default;
+		}
+
+		div:nth-child(2) {
+			background-color: blue;
+			cursor: pointer;
+		}
+
+		div:nth-child(3) {
+			background-color: #3D98FF;
+			cursor: move;
+		}
+
+		div:nth-child(4) {
+			background-color: goldenrod;
+			cursor: text;
+		}
+
+		input {
+			width: 100px;
+			outline: 0;
+			/*消除轮廓线*/
+		}
+
+		textarea {
+			resize: none;
+			/*禁止拖拽*/
+			outline: #0000FF;
+			width: 300px;
+			height: 120px;
+			border: 1px solid gray;
+			color: #666666;
+			background-color: #87CEEB;
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		img {
+			height: 120px;
+			width: 200px;
+			vertical-align: middle;
+			/*可以消除图片缝隙
 				 vertical-align：top或者middle
 				 display:black;
 				 */
-			}
-			p{
-				border: 1px solid red;
-				width: 100px;
-				white-space:  nowrap;/*
+		}
+
+		p {
+			border: 1px solid red;
+			width: 100px;
+			white-space: nowrap;
+			/*
 				white-space:  nowrap;强制在同一行内显示是文本，
 				直到文本结束或者遇到br标签才换行
 				white-space:  normal;*/
-				/* 超出文字显示省略号，首先添加强制一行显示，
+			/* 超出文字显示省略号，首先添加强制一行显示，
 				其次overflow:hidden;
 				text-overflow：ellipsis省略号 clip直接剪裁 */
-				overflow:hidden;
-				text-overflow: ellipsis;/**/
-			}
-		</style>
-	</head>
-	<body>
-		<div><!-- 鼠标经过这里，变成小白 default -->
-		<img src="img/adv.jpg" >
-		</div>
-		<div>鼠标经过这里，小手 pointer</div>
-		<div>鼠标经过这里，移动 move aaaaaaaaaaaaaaaaaaaaaaa</div>
-		<div>鼠标经过这里，text text aaaaaaaaaaaaaaa</div>
-		消除轮廓线<input type="text"><br>
-		用户留言<textarea rows="10" cols="10">
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<!-- 鼠标经过这里，变成小白 default -->
+		<img src="img/adv.jpg">
+	</div>
+	<div>鼠标经过这里，小手 pointer</div>
+	<div>鼠标经过这里，移动 move aaaaaaaaaaaaaaaaaaaaaaa</div>
+	<div>鼠标经过这里，text text aaaaaaaaaaaaaaa</div>
+	消除轮廓线<input type="text"><br>
+	用户留言<textarea rows="10" cols="10">
 			文本域
 		</textarea><br>
-		<img src="img/sun.jpg" >默认基线对齐，现在是中线对齐
-		<p>qgedsu oh abd ssoiu1234</p>
-	</body>
+	<img src="img/sun.jpg">默认基线对齐，现在是中线对齐
+	<p>qgedsu oh abd ssoiu1234</p>
+</body>
+
 </html>
