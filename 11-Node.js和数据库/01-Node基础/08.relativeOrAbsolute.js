@@ -2,7 +2,7 @@ const fs = require('fs');
 // 路径模块
 const path = require('path');
 
-// 当前目录
+// __dirname获取当前文件所在的绝对路径
 console.log(__dirname);
 
 // 路径拼接
