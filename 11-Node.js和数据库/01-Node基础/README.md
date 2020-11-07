@@ -139,3 +139,61 @@ Node.js会去node_modules文件夹中
 如果是文件夹看里面是否有index.js
 如果没有index.js查看该文件夹中的package.json中的main选项确定模块入口文件
 否则找不到报错
+
+### 服务器端基础概念
+
+### 网站的组成
+网站应用程序主要分为两大部分：客户端和服务器端。
+客户端：在浏览器中运行的部分，就是用户看到并与之交互的界面程序。使用HTML、CSS、JavaScript构建。
+服务器端：在服务器中运行的部分，负责存储数据和处理应用逻辑。
+
+### Node网站服务器 
+能够提供网站访问服务的机器就是网站服务器，它能够接收客户端的请求，能够对请求做出响应。
+
+URL的组成：传输协议://服务器IP或域名:端口/资源所在位置标识
+
+### 创建web服务器
+```js
+  // 引用系统模块
+ const http = require('http');
+  // 创建web服务器
+ const app = http.createServer();
+  // 当客户端发送请求的时候
+ app.on('request', (req, res) => {
+        //  响应
+       res.end('<h1>hi, user</h1>');
+ });
+  // 监听3000端口
+ app.listen(3000);
+ console.log('服务器已启动，监听3000端口，请访问 localhost:3000')
+```
+
+### HTTP协议的概念
+超文本传输协议（英文：HyperText Transfer Protocol，缩写：HTTP）规定了如何从网站服务器传输超文本到本地浏览器，它基于客户端服务器架构工作，是客户端（用户）和服务器端（网站）请求和应答的标准。
+
+报文：在HTTP请求和响应的过程中传递的数据块就叫报文，包括要传送的数据和一些附加信息，并且要遵守规定好的格式。
+
+### 请求报文
+1. 请求方式 （Request Method）
+GET     请求数据
+POST   发送数据
+2. 请求地址 （Request URL）
+```js
+ app.on('request', (req, res) => {
+     req.headers  // 获取请求报文
+     req.url      // 获取请求地址
+     req.method   // 获取请求方法
+ });
+```
+### 响应报文
+1. HTTP状态码
+200 请求成功
+404 请求的资源没有被找到
+500 服务器端错误
+400 客户端请求有语法错误
+2. 内容类型
+text/html
+text/css
+application/javascript
+image/jpeg
+application/json
