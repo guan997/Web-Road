@@ -197,3 +197,94 @@ text/css
 application/javascript
 image/jpeg
 application/json
+
+### HTTP请求与响应处理
+### 请求参数
+客户端向服务器端发送请求时，有时需要携带一些客户信息，客户信息需要通过请求参数的形式传递到服务器端，比如登录操作。
+
+### GET请求参数
+参数被放置在浏览器地址栏中，例如：http://localhost:3000/?name=zhangsan&age=20
+参数获取需要借助系统模块url，url模块用来处理url地址
+```js
+ const http = require('http');
+ // 导入url系统模块 用于处理url地址
+ const url = require('url');
+ const app = http.createServer();
+ app.on('request', (req, res) => {
+     // 将url路径的各个部分解析出来并返回对象
+         // true 代表将参数解析为对象格式
+     let {query} = url.parse(req.url, true);
+     console.log(query);
+ });
+ app.listen(3000);
+```
+
+### POST请求参数
+参数被放置在请求体中进行传输
+获取POST参数需要使用data事件和end事件
+使用querystring系统模块将参数转换为对象格式
+```js
+ // 导入系统模块querystring 用于将HTTP参数转换为对象格式
+ const querystring = require('querystring');
+ app.on('request', (req, res) => {
+     let postData = '';
+     // 监听参数传输事件
+     req.on('data', (chunk) => postData += chunk;);
+     // 监听参数传输完毕事件
+     req.on('end', () => { 
+         console.log(querystring.parse(postData)); 
+     }); 
+ });
+```
+
+### 路由
+http://localhost:3000/index
+http://localhost:3000/login
+路由是指客户端请求地址与服务器端程序代码的对应关系。简单的说，就是请求什么响应什么。
+```js
+ // 当客户端发来请求的时候
+ app.on('request', (req, res) => {
+     // 获取客户端的请求路径
+     let { pathname } = url.parse(req.url);
+     if (pathname == '/' || pathname == '/index') {
+         res.end('欢迎来到首页');
+     } else if (pathname == '/list') {
+         res.end('欢迎来到列表页页');
+     } else {
+        res.end('抱歉, 您访问的页面出游了');
+     }
+ });
+```
+
+### 静态资源
+服务器端不需要处理，可以直接响应给客户端的资源就是静态资源，例如CSS、JavaScript、image文件。
+http://www.baidu.com/images/logo.png
+
+### 动态资源
+相同的请求地址不同的响应资源，这种资源就是动态资源。
+http://www.baidu.com/article?id=1
+http://www.baidu.com/article?id=2
+
+### 客户端请求途径
+### GET方式
+浏览器地址栏
+link标签的href属性
+script标签的src属性
+img标签的src属性
+Form表单提交
+### POST方式
+Form表单提交
+
+### Node.js异步编程
+### 同步API, 异步API
+```js
+ // 路径拼接
+ const public = path.join(__dirname, 'public');
+ // 请求地址解析
+ const urlObj = url.parse(req.url);
+ // 读取文件
+ fs.readFile('./demo.txt', 'utf8', (err, result) => {
+     console.log(result);
+ });
+```
+

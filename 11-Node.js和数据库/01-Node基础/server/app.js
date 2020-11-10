@@ -1,6 +1,6 @@
 // 用于创建网站服务器的模块
 const http = require('http');
-// 用于处理url地址
+// 用于处理请求url地址
 const url = require('url');
 // app对象就是网站服务器对象
 const app =http.createServer();
@@ -24,9 +24,16 @@ app.on('request', (req, res) => {
     console.log(req.url);
     // 要解析的url地址
     // 将查询参数解析成对象形式
+    console.log(url.parse(req.url));
+
+    // let params = url.parse(req.url, true).query;
+    // console.log(params.name);
+    // console.log(params.age);
+
+    // 对象解构
     let { query, pathname} = url.parse(req.url, true);
-    // console.log(query.name);
-    // console.log(query.age);
+    console.log(query.name);
+    console.log(query.age);
 
     if(pathname == '/index' || pathname == '/'){
         res.end('<h2>欢迎来到首页</h2>');
