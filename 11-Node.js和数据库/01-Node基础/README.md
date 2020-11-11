@@ -259,6 +259,9 @@ http://localhost:3000/login
 ### 静态资源
 服务器端不需要处理，可以直接响应给客户端的资源就是静态资源，例如CSS、JavaScript、image文件。
 http://www.baidu.com/images/logo.png
+mime模块获取访问的文件类型
+npm install mime
+mime.getType(realPath);
 
 ### 动态资源
 相同的请求地址不同的响应资源，这种资源就是动态资源。
