@@ -290,4 +290,159 @@ Form表单提交
      console.log(result);
  });
 ```
+同步API：只有当前API执行完成后，才能继续执行下一个API
+```js
+console.log('before'); 
+console.log('after');
+```
+异步API：当前API的执行不会阻塞后续代码的执行
+```js
+console.log('before');
+setTimeout(
+   () => { console.log('last');
+}, 2000);
+console.log('after');
+```
+同步API可以从返回值中拿到API执行的结果, 但是异步API是不可以的
+异步函数的返回值通过回调函数拿到
+```js
+    // 同步
+  function sum (n1, n2) { 
+      return n1 + n2;
+  } 
+  const result = sum (10, 20);
+```
+```js
+    // 异步
+  function getMsg () { 
+      setTimeout(function () { 
+          return { msg: 'Hello Node.js' }
+      }, 2000);
+  }
+  const msg = getMsg ();
+```
+### 回调函数
+自己定义函数让别人去调用。
+```js
+  // getData函数定义
+ function getData (callback) {}
+  // getData函数调用
+ getData (() => {});
+```
+### 使用回调函数获取异步API执行结果
+```js
+function getMsg (callback) {
+    setTimeout(function () {
+        callback ({ msg: 'Hello Node.js' })
+    }, 2000);
+}
+getMsg (function (msg) { 
+    console.log(msg);
+});
+// getData((n)=>{
+//     console.log('callback函数被调用了');
+//     console.log(n);
+// });
+```
+### 同步API, 异步API的区别（代码执行顺序）
+同步API从上到下依次执行，前面代码会阻塞后面代码的执行
+```js
+for (var i = 0; i < 100000; i++) { 
+    console.log(i);
+}
+console.log('for循环后面的代码');
+```
+异步API不会等待API执行完成后再向下执行代码
+```js
+console.log('代码开始执行'); 
+setTimeout(() => { console.log('2秒后执行的代码')}, 2000);
+setTimeout(() => { console.log('"0秒"后执行的代码')}, 0); 
+console.log('代码结束执行');
+```
+### 代码执行顺序分析
+异步执行的运行机制如下。（同步执行也是如此，因为它可以被视为没有异步任务的异步执行。）
+
+（1）所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。
+
+（2）主线程之外，还存在一个"任务队列"（task queue）。只要异步任务有了运行结果，就在"任务队列"之中放置一个事件。
+
+（3）一旦"执行栈"中的所有同步任务执行完毕，系统就会读取"任务队列"，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。
+
+（4）主线程不断重复上面的第三步。
+`http://www.ruanyifeng.com/blog/2014/10/event-loop.html`
+
+### Node.js中的异步API
+```js
+ fs.readFile('./demo.txt', (err, result) => {});
+```
+```js
+ var server = http.createServer();
+ server.on('request', (req, res) => {});
+```
+如果异步API后面代码的执行依赖当前异步API的执行结果，但实际上后续代码在执行的时候异步API还没有返回结果，这个问题要怎么解决呢？
+```js
+fs.readFile('./demo.txt', (err, result) => {});
+console.log('文件读取结果');
+```
+需求：依次读取A文件、B文件、C文件
+
+### 回调函数地狱问题： 回调函数嵌套层次过多，难以维护
+```js
+const fs = require('fs');
+// 回调函数嵌套层次过多，难以维护，导致回调函数地狱问题
+fs.readFile('./1.txt', 'utf8', (err, result1) => {
+    console.log(result1);
+    fs.readFile('./2.txt', 'utf8', (err, result2) => {
+        console.log(result2);
+        fs.readFile('./3.txt', 'utf8', (err, result3) => {
+            console.log(result3);
+        })
+    })
+})
+```
+### Promise
+Promise出现的目的是解决Node.js异步编程中回调地狱的问题。
+```js
+let promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        if (true) {
+            resolve({name: '张三'})
+        }else {
+            reject('失败了') 
+        } 
+    }, 2000);
+});
+promise.then(result => console.log(result); // {name: '张三'})
+       .catch(error => console.log(error); // 失败了)
+```
+1.Promise 是一个 构造函数，既然是构造函数，可以  new Promise() 得到一个 Promise 的实例；
+2. 在 Promise 上，有两个函数，分别叫做 resolve（成功之后的回调函数） 和 reject（失败之后的回调函数）
+3. 在 Promise 构造函数的 Prototype 属性上，有一个 .then() 方法，也就说，只要是 Promise 构造函数创建的实例，都可以访问到 .then() 方法
+4. Promise 表示一个 异步操作；每当 new 一个 Promise 的实例，这个实例，就表示一个具体的异步操作；
+5. Promise 创建的实例，是一个异步操作，这个 异步操作的结果，有两种状态：
+ 5.1 状态1： 异步执行成功了，在内部调用 成功的回调函数 resolve 把结果返回给调用者；
+ 5.2 状态2： 异步执行失败了，在内部调用 失败的回调函数 reject 把结果返回给调用者；
+ 5.3 由于 Promise 的实例，是一个异步操作，所以，内部拿到 操作的结果后，无法使用 return 把操作的结果返回给调用者； 这时候，只能使用回调函数的形式，来把 成功 或 失败的结果，返回给调用者；
+6. 在 new 出来的 Promise 实例上，调用.then() 方法，【预先】 为 这个 Promise 异步操作，指定 成功（resolve） 和 失败（reject） 回调函数；
+### 5.9 异步函数
+异步函数是异步编程语法的终极解决方案，它可以让我们将异步代码写成同步的形式，让代码不再有回调函数嵌套，使代码变得清晰明了。
+```js
+const fn = async () => {};
+async function fn () {}
+```
+### 异步函数关键字
+async关键字
+1. 普通函数定义前加async关键字 普通函数变成异步函数
+2. 异步函数默认返回promise对象
+3. 在异步函数内部使用return关键字进行结果返回 结果会被包裹的promise对象中 return关键字代替了
+
+resolve方法
+4. 在异步函数内部使用throw关键字抛出程序异常
+5. 调用异步函数再链式调用then方法获取异步函数执行结果
+6. 调用异步函数再链式调用catch方法获取异步函数执行的错误信息
+
+await关键字
+1. await关键字只能出现在异步函数中
+2. await promise await后面只能写promise对象 写其他类型的API是不不可以的
+3. await关键字可是暂停异步函数向下执行 直到promise返回结果
 
