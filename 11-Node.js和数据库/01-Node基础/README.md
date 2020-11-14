@@ -1,5 +1,130 @@
 # Node.js
 
+# Node.js基础
+
+## Node.js 的组成
+JavaScript 由三部分组成，ECMAScript，DOM，BOM。
+Node.js是由ECMAScript及Node 环境提供的一些附加API组成的，包括文件、网络、路径等等一些更加强大的 API。
+
+### Node.js全局对象global
+在浏览器中全局对象是window，在Node中全局对象是global。
+Node中全局对象下有以下方法，可以在任何地方使用，global可以省略。
+console.log()     在控制台中输出
+setTimeout()     设置超时定时器
+clearTimeout()  清除超时时定时器
+setInterval()      设置间歇定时器
+clearInterval()   清除间歇定时器
+
+## 模块加载及包
+
+### JavaScript开发弊端
+JavaScript在使用时存在两大问题，文件依赖和命名冲突。
+
+### 软件中的模块化开发
+一个功能就是一个模块，多个模块可以组成完整应用，抽离一个模块不会影响其他功能的运行。
+
+### Node.js中模块化开发规范
+Node.js规定一个JavaScript文件就是一个模块，模块内部定义的变量和函数默认情况下在外部无法得到
+模块内部可以使用exports对象进行成员导出， 使用require方法导入其他模块。
+
+### 模块成员导出
+```js
+  // a.js
+  // 在模块内部定义变量
+ let version = 1.0;
+ // 在模块内部定义方法
+ const sayHi = name => `您好, ${name}`;
+ // 向模块外部导出数据 
+ exports.version = version;
+ exports.sayHi = sayHi;
+```
+
+### 模块成员的导入
+```js
+  // b.js
+  // 在b.js模块中导入模块a
+ let a = require('./b.js');
+  // 输出b模块中的version变量
+ console.log(a.version);
+  // 调用b模块中的sayHi方法 并输出其返回值
+ console.log(a.sayHi('讲师')); 
+```
+
+### 模块成员导出的另一种方式
+```js
+module.exports.version = version;
+module.exports.sayHi = sayHi;
+```
+exports是module.exports的别名(地址引用关系)，导出对象最终以module.exports为准
+
+### 系统模块
+Node运行环境提供的API. 因为这些API都是以模块化的方式进行开发的, 所以我们又称Node运行环境提供的API为系统模块
+
+### 系统模块fs 文件操作
+f：file 文件 ，s：system 系统，文件操作系统。
+```js
+const fs = require('fs');
+```
+读取文件内容
+```js
+fs.reaFile('文件路径/文件名称'[,'文件编码'], callback);
+```
+写入文件内容
+```js
+fs.writeFile('文件路径/文件名称', '数据', callback);
+```
+
+```js
+ const content = '<h3>正在使用fs.writeFile写入文件内容</h3>';
+ fs.writeFile('../index.html', content, err => {
+   if (err != null) { 
+       console.log(err);
+       return;
+   }
+   console.log('文件写入成功');
+ });
+
+```
+
+### 系统模块path 路径操作
+为什么要进行路径拼接 
+不同操作系统的路径分隔符不统一
+/public/uploads/avatar
+Windows 上是 \   /
+Linux 上是 /
+
+### 路径拼接语法
+```js
+path.join('路径', '路径', ...)
+```
+```js
+  // 导入path模块
+ const path = require('path');
+  // 路径拼接
+ let finialPath = path.join('itcast', 'a', 'b', 'c.css');
+  // 输出结果 itcast\a\b\c.css
+ console.log(finialPath);
+```
+### 相对路径VS绝对路径 
+大多数情况下使用绝对路径，因为相对路径有时候相对的是命令行工具的当前工作目录
+在读取文件或者设置文件路径时都会选择绝对路径
+使用__dirname获取当前文件所在的绝对路径
+
+## 第三方模块
+别人写好的、具有特定功能的、我们能直接使用的模块即第三方模块，由于第三方模块通常都是由多个文件组成并且被放置在一个文件夹中，所以又名包。
+
+### 第三方模块有两种存在形式：
+以js文件的形式存在，提供实现项目具体功能的API接口。
+以命令行工具形式存在，辅助项目开发
+
+### 获取第三方模块
+npmjs.com：第三方模块的存储和分发仓库
+下载：npm install 模块名称
+卸载：npm unintall package 模块名称
+全局安装与本地安装
+命令行工具：全局安装
+库文件：本地安装
+
 ### 第三方模块 nodemon
 辅助项目开发 当文件被修改时自动执行文件
 在Node.js中，每次修改文件都要在命令行工具中重新执行该文件，非常繁琐
@@ -41,7 +166,8 @@
 -   gulp.parallel() 多个依赖嵌套'html','css','js'并行
 在以前的 gulp 版本中，task() 方法用来将函数注册为任务（task）。虽然这个 API 依旧是可以使用的，但是 导出（export）将会是主要的注册机制，除非遇到 export 不起作用的情况。
 
-### 组合任务
+## 组合任务
+
 Gulp 提供了两个强大的组合方法： series() 和 parallel()，允许将多个独立的任务组合为一个更大的操作。这两个方法都可以接受任意数目的任务（task）函数或已经组合的操作。series() 和 parallel() 可以互相嵌套至任意深度。
 
 如果需要让任务（task）按顺序执行，请使用 series() 方法。
@@ -53,7 +179,7 @@ Gulp 提供了两个强大的组合方法： series() 和 parallel()，允许将
 
 gulp.series|4.0 依赖顺序执行
 gulp.parallel|4.0 多个依赖嵌套'html','css','js'并行
-### Gulp插件
+## Gulp插件
 -   gulp-htmlmin:html文件压缩
 -   gulp-csso：压缩css
 -   gulp-babel：javascript语法转化
@@ -97,7 +223,7 @@ gulp.task('default', gulp.series(gulp.parallel('htmlmin','cssmin','jsmin','copy'
 npm init -y 生成默认package.json
 npm init 生成package.json
 
-### 项目依赖
+## 项目依赖
 在项目的开发阶段和线上运营阶段，都需要依赖的第三方包，称为项目依赖
 使用npm install 包名 命令下载的文件会默认添加到package.json文件的dependencies字段中
 
@@ -123,7 +249,7 @@ npm install --production
 }
 ```
 
-### Node.js中模块加载机制
+## Node.js中模块加载机制
 ### 模块查找规则-当模块拥有路径但没有后缀时
 require方法根据模块路径查找模块，如果是完整路径，直接引入模块。
 如果模块后缀省略，先找同名JS文件再找同名JS文件夹
@@ -140,7 +266,9 @@ Node.js会去node_modules文件夹中
 如果没有index.js查看该文件夹中的package.json中的main选项确定模块入口文件
 否则找不到报错
 
-### 服务器端基础概念
+# 请求响应原理及HTTP协议
+
+## 服务器端基础概念
 
 ### 网站的组成
 网站应用程序主要分为两大部分：客户端和服务器端。
@@ -150,9 +278,24 @@ Node.js会去node_modules文件夹中
 ### Node网站服务器 
 能够提供网站访问服务的机器就是网站服务器，它能够接收客户端的请求，能够对请求做出响应。
 
+### IP地址
+互联网中设备的唯一标识。
+IP是Internet Protocol Address的简写，代表互联网协议地址.
+
+### 域名
+由于IP地址难于记忆，所以产生了域名的概念，所谓域名就是平时上网所使用的网址。
+http://www.itheima.com  =>  http://124.165.219.100/
+虽然在地址栏中输入的是网址, 但是最终还是会将域名转换为ip才能访问到指定的网站服务器。
+
+### 端口
+端口是计算机与外界通讯交流的出口，用来区分服务器电脑中提供的不同的服务。
+
+### URL
+统一资源定位符，又叫URL（Uniform Resource Locator），是专为标识Internet网上资源位置而设的一种编址方式，我们平时所说的网页地址指的即是URL。
+
 URL的组成：传输协议://服务器IP或域名:端口/资源所在位置标识
 
-### 创建web服务器
+## 创建web服务器
 ```js
   // 引用系统模块
  const http = require('http');
@@ -237,7 +380,7 @@ application/json
  });
 ```
 
-### 路由
+## 路由
 http://localhost:3000/index
 http://localhost:3000/login
 路由是指客户端请求地址与服务器端程序代码的对应关系。简单的说，就是请求什么响应什么。
@@ -278,7 +421,7 @@ Form表单提交
 ### POST方式
 Form表单提交
 
-### Node.js异步编程
+## Node.js异步编程
 ### 同步API, 异步API
 ```js
  // 路径拼接
@@ -371,11 +514,11 @@ console.log('代码结束执行');
 （4）主线程不断重复上面的第三步。
 `http://www.ruanyifeng.com/blog/2014/10/event-loop.html`
 
-### Node.js中的异步API
-```js
+## Node.js中的异步API
+、```js
  fs.readFile('./demo.txt', (err, result) => {});
 ```
-```js
+​```js
  var server = http.createServer();
  server.on('request', (req, res) => {});
 ```
