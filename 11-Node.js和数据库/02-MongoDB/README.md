@@ -42,6 +42,16 @@ MongoDB可视化操作软件，是使用图形界面操作数据库的一种方�
 ### 启动MongoDB
 
 在命令行工具中运行**net start mongoDB**即可启动MongoDB，否则MongoDB将无法连接。
+net start MongoDB启动,提示发生系统错误 5 拒绝访问 ！
+解决方法：直接cmd用管理员的方式 打开 然后启动
+测试：
+ 若启动成功，会显示mongoDB默认的监听端口：27017，mysql的是3306
+　　在浏览器中输入http://localhost:27017/。会出现：
+　　It looks like you are trying to access MongoDB over HTTP on the native driver port.
+
+　　表明服务已经启动。
+关闭MongoDB: net stop mongoDB
+.mongod --dbpath dada路径开启服务
 
 ### **数据库连接**
 
@@ -79,9 +89,7 @@ MongoDB可视化操作软件，是使用图形界面操作数据库的一种方�
 创建文档实际上就是向集合中插入数据.
 
 分为两步：
-
 ①创建集合实例。
-
 ②调用实例对象下的save方法将数据保存到数据库中。
 
 ```js
