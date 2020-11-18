@@ -1,3 +1,5 @@
+// 如何创建集合以及向集合中插入文档
+
 // 引入mongoose第三方模块 用来操作数据库
 const mongoose = require('mongoose');
 // 数据库连接

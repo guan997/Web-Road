@@ -1,3 +1,5 @@
+// 如何连接mongodb数据库
+
 // 引入mongoose第三方模块 用来操作数据库
 const mongoose = require('mongoose');
 // 数据库连接

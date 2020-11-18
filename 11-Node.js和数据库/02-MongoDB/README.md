@@ -105,7 +105,7 @@ net start MongoDB启动,提示发生系统错误 5 拒绝访问 ！
 ```
 
 ### **创建文档**
-
+关于数据库的所有操作都是异步操作
 ```js
 Course.create({name: 'JavaScript基础', author: '黑马讲师', isPublish: true}, (err, doc) => { 
      //  错误对象
@@ -123,9 +123,17 @@ Course.create({name: 'JavaScript基础', author: 'aa', isPublish: true})
 
 ### **mongoDB**数据库导入数据
 
-mongoimport –d 数据库名称 –c 集合名称 –file 要导入的数据文件
-
+mongoimport –d 数据库名称 –c 集合名称 -–file 要导入的数据文件
+例如：mongoimport -d playground -c users --file ./user.json
 找到mongodb数据库的安装目录，将安装目录下的bin目录放置在环境变量中。
+WIN10系统MongoDB安装目录bin文件夹下没有mongoimport.exe，导致MongoDB数据库导入数据使用mongoimport模块失败
+'mongoimport' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+解决办法：
+1.直接在https://www.mongodb.com/try/download/database-tools?tck=docs_databasetools 下载 。
+解压文件
+2.把压缩包内bin文件夹下所有的exe文件复制粘贴到你MongoDB安装目录bin文件夹下：C:\Program Files\MongoDB\Server\4.4\bin
+找到MongoDB数据库安装目录将安装目录下的bin文件夹目录放置在环境变量中：复制C:\Program Files\MongoDB\Server\4.4\bin到
 
 ### 查询文档
 
@@ -158,7 +166,7 @@ Course.findOne({name: 'node.js基础'}).then(result => console.log(result))
 // 返回文档
  {
     _id: 5c0917ed37ec9b03c07cf95f,
-    name: 'node.js基础',
+    name: 'node.js基础',     
     author: 'aa‘
 }
 ```
@@ -198,19 +206,19 @@ Course.findOne({name: 'node.js基础'}).then(result => console.log(result))
 ### 删除文档
 
 ```js
- // 删除单个
-Course.findOneAndDelete({}).then(result => console.log(result))
+ // 删除单个 返回所删除的文档
+Course.findOneAndDelete({查询条件}).then(result => console.log(result))
 ```
 
 ```js
- // 删除多个
+ // 删除多个  返回一个对象 n代表删除了几条数据
 User.deleteMany({}).then(result => console.log(result))
 ```
 
 ### 更新文档
 
 ```js
-// 更新单个
+// 更新单个 第一个
 User.updateOne({查询条件}, {要修改的值}).then(result => console.log(result))
 ```
 
