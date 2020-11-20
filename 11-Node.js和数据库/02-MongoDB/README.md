@@ -240,9 +240,21 @@ User.updateMany({查询条件}, {要更改的值}).then(result => console.log(re
 - trim: true 去除字符串两边的空格
 - validate: 自定义验证器
 - default: 默认值
-
+minlength:[2,'长度不能小于2'],
 获取错误信息：error.errors['字段名称'].message
 
+```js
+.catch(error => {
+    // console.log(error);
+    // 获取错误信息
+    const err = error.errors;
+    // 循环错误信息对象
+    for(var attr in err){
+        // 将错误信息打印到控制台中
+        console.log(err[attr]['message']);
+    }
+})
+```
 ### **集合关联**
 
 通常**不同集合的数据之间是有关系的**，例如文章信息和用户信息存储在不同集合中，但文章是某个用户发表的，要查询文章的所有信息包括发表用户，就需要用到集合关联。
@@ -259,6 +271,7 @@ const User = mongoose.model('User', new mongoose.Schema({ name: { type: String }
 const Post = mongoose.model('Post', new mongoose.Schema({
     title: { type: String },
     // 使用ID将文章集合和作者集合进行关联
+    // id具有特有的值，类型type: mongoose.Schema.Types.ObjectId, ref关联
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }));
 //联合查询
