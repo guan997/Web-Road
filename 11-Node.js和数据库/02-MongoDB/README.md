@@ -107,7 +107,7 @@ net start MongoDB启动,提示发生系统错误 5 拒绝访问 ！
 ### **创建文档**
 关于数据库的所有操作都是异步操作
 ```js
-Course.create({name: 'JavaScript基础', author: '黑马讲师', isPublish: true}, (err, doc) => { 
+Course.create({name: 'JavaScript基础', author: 'ccc', isPublish: true}, (err, doc) => { 
      //  错误对象
     console.log(err)
      //  当前插入的文档
