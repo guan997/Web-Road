@@ -67,7 +67,7 @@ const fs = require('fs');
 ```
 读取文件内容
 ```js
-fs.reaFile('文件路径/文件名称'[,'文件编码'], callback);
+fs.reaFile('文件路径/文件名称','文件编码', callback);
 ```
 写入文件内容
 ```js
