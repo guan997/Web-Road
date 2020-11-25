@@ -1,0 +1,13 @@
+{{extend './common/layout.art'}}
+{{block 'content'}}
+<p> {{ msg }} </p>
+{{/block}}
+
+{{block 'link'}}
+<link rel="stylesheet" type="text/css" href="./main.css">
+{{/block}}
+
+{{block 'title'}}
+标题
+{{/block}}
+

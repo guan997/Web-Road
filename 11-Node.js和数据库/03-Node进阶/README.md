@@ -72,7 +72,7 @@
 
 标准语法： {{ 数据 }}
 
-原始语法：<%=数据 %>
+原始语法：<%= 数据 %>
 
 ### **原文输出**
 
@@ -133,7 +133,9 @@
 
 使用模板继承可以将网站HTML骨架抽离到单独的文件中，其他页面模板可以继承骨架文件。
 
-![]([https://github.com/guan997/Web-Road/tree/master/11-Node.js%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93/02-MongoDB](https://github.com/guan997/Web-Road/tree/master/11-Node.js和数据库/03-Node进阶/images/a1.png)
+<img src="https://github.com/guan997/Web-Road/blob/master/11-Node.js%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93/03-Node%E8%BF%9B%E9%98%B6/images/a1.png?raw=true">
+
+
 
 坑一：填充css内容
 
@@ -184,7 +186,7 @@
 
 知识点：http请求响应、数据库、模板引擎、静态资源访问。
 
-![]([https://github.com/guan997/Web-Road/tree/master/11-Node.js%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93/02-MongoDB](https://github.com/guan997/Web-Road/tree/master/11-Node.js和数据库/03-Node进阶/images/a2.png)
+<img src="https://github.com/guan997/Web-Road/blob/master/11-Node.js%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93/03-Node%E8%BF%9B%E9%98%B6/images/a2.png?raw=true">
 
 **制作流程**
 
@@ -369,7 +371,7 @@ Express是一个基于Node平台的web应用开发框架，它提供了一系列
 
 中间件就是一堆方法，可以接收客户端发来的请求、可以对请求做出响应，也可以将请求继续交给下一个中间件继续处理。
 
-![]([https://github.com/guan997/Web-Road/tree/master/11-Node.js%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93/02-MongoDB](https://github.com/guan997/Web-Road/tree/master/11-Node.js和数据库/03-Node进阶/images/a3.png)
+
 
 中间件主要由两部分构成，中间件方法以及请求处理函数。
 
