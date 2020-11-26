@@ -173,7 +173,10 @@
 ### **模板配置**
 
 1.向模板中导入变量 template.defaults.imports.变量名 = 变量值;
-
+    例如:时间格式进行格式化
+    对时间处理第三方模块
+    npm install dateformat
+    使用dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
 2.设置模板根目录 template.defaults.root = 模板目录
 
 3.设置模板默认后缀 template.defaults.extname = '.art'
@@ -191,11 +194,45 @@
 **制作流程**
 
 1.建立项目文件夹并生成项目描述文件
-
+    npm init -y
 2.创建网站服务器实现客户端和服务器端通信
+    ```js
+// 引入http模块
+const http = require('http');
+// 创建网站服务器
+const app = http.createServer();
+// 当客户端访问服务端的时候
+app.on('request', (req, res) => { 
+    // 启用路由功能
+    router(req, res, () => {
 
+    })
+})
+// 端口监听
+app.listen(3000);
+console.log('服务器启动成功：http://localhost:3000/')
+    ```
 3.连接数据库并根据需求设计学员信息表
+    npm install mongoose
+    ```js
+    // 引入数据库模块
+const mongoose = require('mongoose');
+// 数据库连接
 
+//useUnifiedTopology: true当前服务器发现和监视引擎已弃用，将在将来的版本中删除。使用新的服务器发现和监视引擎，通过选项{useUnifiedTopology:true}指向MongoClient构造函数。
+mongoose.connect('mongodb://localhost/playground',{ useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => console.log('数据库连接成功'))
+    .catch(() => console.log('数据库连接失败'));
+// 创建网站服务器
+const app = http.createServer();
+// 当客户端访问服务端的时候
+app.on('request', (req, res) => {
+    // 启用路由功能
+    router(req, res, () => {
+
+    })
+})
+    ```
 4.创建路由并实现页面模板呈递
 
 5.实现静态资源访问
