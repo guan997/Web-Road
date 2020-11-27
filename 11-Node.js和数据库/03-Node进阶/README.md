@@ -183,7 +183,7 @@
 
 ## 案例
 
-### **案例介绍** **–** **学生档案管理**
+### 案例介绍学生档案管理
 
 目标：模板引擎应用，强化node.js项目制作流程。
 
@@ -223,36 +223,41 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/playground',{ useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('数据库连接成功'))
     .catch(() => console.log('数据库连接失败'));
-// 创建网站服务器
-const app = http.createServer();
-// 当客户端访问服务端的时候
-app.on('request', (req, res) => {
-    // 启用路由功能
-    router(req, res, () => {
-
-    })
-})
     ```
 4.创建路由并实现页面模板呈递
-
+    npm install art-template
+    ```js
+    // 引入模板引擎
+const template = require('art-template');
+    ```
 5.实现静态资源访问
 
 6.实现学生信息添加功能
 
 7.实现学生信息展示功能
 
-### **第三方模块** **router**
+### 第三方模块router
 
+npm install router
 功能：实现路由
 
 使用步骤：
 
 1.获取路由对象
-
+```js
+// 引入router模块
+const getRouter = require('router');
+// 获取路由对象
+const router = getRouter();
+```
 2.调用路由对象提供的方法创建路由
-
+```js
+router.get('/add', (req, res) => {
+    let html = template('index.art',{});
+    res.end(html);
+})
+```
 3.启用路由，使路由生效
-
 ```js
 const getRouter = require('router')
 const router = getRouter();
@@ -264,18 +269,17 @@ server.on('request', (req, res) => {
 })
 ```
 
-**第三方模块** **serve-static**
+### 第三方模块serve-static
 
 功能：实现静态资源访问服务
 
 步骤：
-
+npm install serve-static
 1.引入serve-static模块获取创建静态资源服务功能的方法
-
+    require('serve-static')
 2.调用方法创建静态资源服务并指定静态资源服务目录
-
+    serveStatic('public')
 3.启用静态资源服务功能
-
 ```js
 const serveStatic = require('serve-static')
 const serve = serveStatic('public')
@@ -285,26 +289,94 @@ server.on('request', () => {
 server.listen(3000)
 ```
 
-### **添加学生信息功能步骤分析**
+### 添加学生信息功能步骤分析
 
 1.在模板的表单中指定请求地址与请求方式
-
+```js
+// 呈递学生档案信息页面
+router.get('/add', (req, res) => {
+    let html = template('index.art',{});
+    res.end(html);
+})
+// 呈递学生档案信息列表页面
+router.get('/list', (req, res) => {
+    let html = template('list.art',{});
+    res.end(html);
+})
+```
 2.为每一个表单项添加name属性
 
 3.添加实现学生信息功能路由
-
+```js
+// 实现学生档案信息页面
+router.post('/add', (req, res) => {
+    // 接收post请求参数
+    let formData = '';
+    req.on('data', param => {
+        formData += param;
+    });
+    req.on('end', () => {
+        console.log(querystring.parse(formData));
+        res.end('abc');
+    })
+})
+```
 4.接收客户端传递过来的学生信息
-
+```js
+// 实现学生档案信息页面
+router.post('/add', (req, res) => {
+    // 接收post请求参数
+    let formData = '';
+    req.on('data', param => {
+        formData += param;
+    });
+    req.on('end', async() => {
+        await Student.create(querystring.parse(formData));
+        res.writeHead(301, {
+            Location: '/list'
+        });
+        res.end();
+    })
+})
+```
 5.将学生信息添加到数据库中
-
+```js
+Student.create(querystring.parse(formData));
+```
 6.将页面重定向到学生信息列表页面
-
-### **学生信息列表页面分析**
+```js
+res.writeHead(301, {
+            Location: '/list'
+        });
+```
+### 学生信息列表页面分析
 
 1.从数据库中将所有的学生信息查询出来
-
+```js
+const students = await Student.find();
+    console.log(students);
+```
 2.通过模板引擎将学生信息和HTML模板进行拼接
-
+```js
+// 呈递学生档案信息列表页面
+router.get('/list', async(req, res) => {
+    const students = await Student.find();
+    console.log(students);
+    let html = template('list.art', {
+        students:students
+    });
+    res.end(html);
+})
+//list.art
+                <th>{{$value.sex == '0' ? '男' : '女'}}</th>
+				<th>
+					{{each $value.hobbies}}
+					<span>{{ $value }}</span>
+					{{/each}}
+				</th>
+				<th>{{$value.collage}}</th>
+				<th>{{ dateformat($value.enterDate, 'yyyy-mm-dd') }}</th>
+```
 3.将拼接好的HTML模板响应给客户端
 
 # Express框架
