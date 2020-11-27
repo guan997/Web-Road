@@ -1,0 +1,7 @@
+{{ msg }}
+
+<ul>
+{{each users}}
+    <li>姓名：{{$value.name}} 年龄：{{$value.age}}</li>
+{{/each}}
+</ul>

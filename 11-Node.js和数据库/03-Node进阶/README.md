@@ -1,7 +1,7 @@
 # Node进阶
 
 # 模板引擎artTemplate
-
+`01-art-template中是本章节中的代码`
 ##  模板引擎的基础概念
 
 ### **模板引擎**
@@ -182,7 +182,7 @@
 3.设置模板默认后缀 template.defaults.extname = '.art'
 
 ## 案例
-
+`02-students中是本案例代码`
 ### 案例介绍学生档案管理
 
 目标：模板引擎应用，强化node.js项目制作流程。
@@ -473,14 +473,17 @@ Express是一个基于Node平台的web应用开发框架，它提供了一系列
  // 程序监听3000端口
  app.listen(3000);
 ```
-
+    send()
+    1.send()方法内部会检测响应内容的类型
+    2.send()方法会自动设置http状态码
+    3.send()方法会帮我们自动设置响应的内容类型及编码
 ## Express中间件
 
 ### **什么是中间件**
 
 中间件就是一堆方法，可以接收客户端发来的请求、可以对请求做出响应，也可以将请求继续交给下一个中间件继续处理。
 
-
+<img src="https://github.com/guan997/Web-Road/blob/master/11-Node.js%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93/03-Node%E8%BF%9B%E9%98%B6/images/b3.png?raw=true">
 
 中间件主要由两部分构成，中间件方法以及请求处理函数。
 
@@ -540,13 +543,14 @@ app.use 第一个参数也可以传入请求地址，代表不论什么请求方
 在程序执行的过程中，不可避免的会出现一些无法预料的错误，比如文件读取失败，数据库连接失败。
 
 错误处理中间件是一个集中处理错误的地方。
-
+new Error();//创建错误实例 throw 抛出 Error(message) err.message 错误信息
+错误处理中间件只能捕获同步代码错误
 ```js
  app.use((err, req, res, next) => {
      res.status(500).send('服务器发生未知错误');
  })
 ```
-
+异步代码出错
 当程序出现错误时，调用next()方法，并且将错误信息通过参数的形式传递给next()方法，即可触发错误处理中间件。
 
 ```js
@@ -662,7 +666,7 @@ localhost:3000/find/123
 
 ### 静态资源的处理
 
-通过Express内置的**express.static**可以方便地托管静态文件，例如img、CSS、JavaScript 文件等。
+通过Express内置的express.static可以方便地托管静态文件，例如img、CSS、JavaScript 文件等。
 
 ```js
 app.use(express.static('public'));
@@ -698,7 +702,7 @@ app.use(express.static('public'));
 
 ### app.locals对象
 
-将变量设置到app.locals对象下面，这个数据在所有的模板中都可以获取到。
+将变量设置到app.locals对象(公共数据)下面，这个数据在所有的模板中都可以获取到。
 
 ```js
  app.locals.users = [{
