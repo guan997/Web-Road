@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <style>
+        body {
+            /* background: url("./img/mi.jpg") no-repeat center; */
+        }
+
+        * {
+            margin: 0px;
+            border: 0px;
+            box-sizing: border-box;
+        }
+
+        .rg_layout {
+            width: 900px;
+            height: 500px;
+            border: 10px solid #EEEEEE;
+            background: white;
+            margin: auto;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .rg_left {
+            float: left;
+            margin: 15px;
+        }
+
+        .rg_left>p:first-child {
+            color: #FFD026;
+            font-size: 20px;
+        }
+
+        .rg_left>p:last-child {
+            color: #A6A6A6;
+            font-size: 20px;
+        }
+
+        .rg_center {
+            width: 500px;
+            float: left;
+        }
+
+        .rg_right {
+            float: right;
+            margin: 10px;
+        }
+
+        .rg_right>p:last-child {
+            font-size: 5px;
+        }
+
+        .rg_right p a {
+            color: pink;
+        }
+
+        .td_left {
+            text-align: right;
+            width: 100px;
+            height: 50px;
+        }
+
+        .shurukuang,
+        #birthday,
+        #register,
+        #collage {
+            margin-left: 30px;
+            width: 251px;
+            height: 32px;
+            border: 1px solid #A6A6A6;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+
+        #register {
+            width: 150px;
+        }
+
+        #xingbie {
+            padding-left: 30px;
+        }
+
+        #jpg_code {
+            width: 90px;
+            height: 32px;
+            border-radius: 5px;
+            vertical-align: middle;
+        }
+
+        #btn_sub {
+            width: 150px;
+            height: 40px;
+            background-color: #FFD026;
+            border: 1px solid #FFD026;
+        }
+
+        #bt_zhuce {
+            padding-left: 135px;
+        }
+
+        .error {
+            color: red;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rg_layout">
+        <div class="rg_left">
+            <p>来访登记</p>
+            <p>WELCOME USER</p>
+        </div>
+        <div class="rg_center">
+            <form action=" " id="form" method="get">
+                <table>
+
+                    <tr>
+                        <td class="td_left">用户名</td>
+                        <td><input type="text" class="shurukuang" id="username" placeholder="请输入用户名"> </td>
+                        <td><span id="s_username" class="error"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">账号</td>
+                        <td><input type="text" class="shurukuang" id="email" placeholder="请输入手机号或者邮箱账号"> </td>
+                        <td><span id="s_email" class="error"></span></td>
+                    </tr>
+                    <!-- <tr>
+                        <td class="td_left">手机号</td>
+                        <td><input type="text" class="shurukuang" id="tel" placeholder="请输入"> </td>
+                        <td><span id="s_tel" class="error"></span></td>
+                    </tr> -->
+                    <tr>
+                        <td class="td_left"><label for="collage">所属学院:</label></td>
+                        <td><input type="text" name="collage" id="collage" list="cList" placeholder="请选择来访部门">
+                            <datalist id="cList">
+                                <option value="技术部"></option>
+                                <option value="人事部"></option>
+                                <option value="总裁办"></option>
+                            </datalist></td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">来访事由</td>
+                        <td id="xingbie"><input type="radio" required name="gender" id="male"> 面试
+                            <input type="radio" name="gender" id="female"> 访客</td>
+                        <td><span id="s_sex" class="error"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">来访日期</td>
+                        <td><input type="date" required id="birthday"> </td>
+                        <td><span id="s_date" class="error"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_left">验证码</td>
+                        <td><input type="text" id="register" required width="100px" height="30px">
+                            <img src="./img/01.jpg" id="jpg_code"></td>
+                        <td><span id="s_yanzheng" class="error"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="bt_zhuce"><input type="submit" id="btn_sub" value="登记"></td>
+                    </tr>
+                </table>
+            </form>
+
+        </div>
+        <!-- <div class="rg_right">
+            <p>已有帐号？<a href="#">立即登录</a></p>
+        </div> -->
+    </div>
+
+    <script>
+        //给表单绑定onsubmit事件，监听器中判断每一个方法校验的结果
+
+        //定义一些方法分别校验各个表单项
+        window.onload = function () {
+            document.getElementById("form").onsubmit = function () {
+
+                var flag1 = checkusername();
+                var flag4 = checkemail();
+                if (flag1 && flag4) {
+                    alert('登记成功');
+                }else{
+                    return flag1 && flag4;
+                }
+
+            }
+            //给用户名和密码框分别绑定离焦事件
+            document.getElementById("username").onblur = checkusername;
+            document.getElementById("email").onblur = checkemail;
+            // document.getElementById("tel").onblur = checktel;
+        }
+
+        function checkusername() {
+            let username = document.getElementById("username").value;
+            var reg_username = /^\w{6,12}$/;
+            var flag_username = reg_username.test(username);
+            var s_username = document.getElementById("s_username");
+            if (flag_username) {
+                s_username.innerHTML = "<img src='./img/mi.jpg' width='35' height='25'/>";
+            } else {
+                s_username.innerHTML = "用户名长度在6-12位";
+            }
+            return flag_username;
+        }
+
+        function checkemail() {
+            let email = document.getElementById("email").value;
+            var reg_email = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            var flag_email = reg_email.test(email);
+            var reg_tel = /^\d{11}$/;
+            var flag_tel = reg_tel.test(email);
+            var s_email = document.getElementById("s_email");
+            if (flag_email || flag_tel) {
+                s_email.innerHTML = "<img src='./img/mi.jpg' width='35' height='25'/>";
+            } else {
+                s_email.innerHTML = "请输入正确的手机号或者邮箱";
+            }
+            return flag_email || flag_tel;
+        }
+
+        function checktel() {
+            let tel = document.getElementById("tel").value;
+            var reg_tel = /^\d{11}$/;
+            var flag_tel = reg_tel.test(tel);
+            var s_tel = document.getElementById("s_tel");
+            if (flag_tel) {
+                s_tel.innerHTML = "<img src='./img/mi.jpg' width='35' height='25'/>";
+            } else {
+                s_tel.innerHTML = "手机号需要11位数字";
+            }
+            return flag_tel;
+        }
+
+        function checkname() {
+            let name = document.getElementById("name").value;
+            var reg_name = /^\w{6,12}$/;
+            var flag_name = reg_name.test(name);
+            var s_name = document.getElementById("s_name");
+            if (flag_name) {
+                s_name.innerHTML = "<img src='./img/mi.jpg' width='35' height='25'/>";
+            } else {
+                s_name.innerHTML = "请填写6-12位字符";
+            }
+            return flag_name;
+        }
+    </script>
+</body>
+
+</html>
