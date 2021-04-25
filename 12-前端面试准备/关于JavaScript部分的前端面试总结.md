@@ -389,7 +389,10 @@ alert(a)
 3. function定义的函数不论位置先后，调用皆没有问题，箭头函数定义一定要在调用前才行，否则是找不到的
 4. function是可以定义构造函数的，而箭头函数不行的
 
-## EventLoop
+## 事件循环（Event Loop）
+
+在浏览器的实现上，诸如渲染任务、JavaScript 脚本执行、User Interaction（用户交互）、网络处理都跑在同一个线程上，当执行其中一个类型的任务的时候意味着其他任务的阻塞，为了有序的对各个任务按照优先级进行执行浏览器实现了我们称为 Event Loop 调度流程。
+简单来说，Event Loop 就是执行代码、收集和处理事件以及执行队列中子任务的一个过程。
 
 （1）所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。
 
@@ -399,27 +402,51 @@ alert(a)
 
 （4）主线程不断重复上面的第三步。
 
-主线程运行的时候，产生堆（heap）和栈（stack），栈中的代码调用各种外部API，它们在"任务队列"中加入各种事件（click，load，done）。只要栈中的代码执行完毕，主线程就会去读取"任务队列"，依次执行那些事件所对应的回调函数。
+![image-20210426001854830](https://github.com/guan997/LeetCode/blob/master/javascript/images/eventloop.png)
 
-异步任务有宏任务和微任务。
+上图中，主线程运行的时候，产生堆（heap）和栈（stack），栈中的代码调用各种外部API，它们在"任务队列"中加入各种事件（click，load，done）。只要栈中的代码执行完毕，主线程就会去读取"任务队列"，依次执行那些事件所对应的回调函数。
 
-2.宏任务macrotask：
+**异步任务有宏任务和微任务。**
 
-（事件队列中的每一个事件都是一个macrotask）
+**宏任务macrotask**
+在一次新的事件循环的过程中，遇到宏任务时，宏任务将被加入任务队列，但需要等到下一次事件循环才会执行。
+**常见宏任务**： setTimeout 、 setInterval 、 requestAnimationFrame
 
 优先级：主代码块 > setImmediate > MessageChannel > setTimeout / setInterval
 
 比如：setImmediate指定的回调函数，总是排在setTimeout前面
 
-3.微任务包括：
+**微任务**
+当前事件循环的任务队列为空时，微任务队列中的任务就会被依次执行。在执行过程中，如果遇到微任务，微任务被加入到当前事件循环的微任务队列中。简单来说，只要有微任务就会继续执行，而不是放到下一个事件循环才执行。微任务队列属于任务运行环境内的一员，并非处于全局的位置。也就是说，每个任务都会有一个微任务
+队列。
+**常见微任务**： Promise.then 、 Promise.catch 、 MutationObserver  
 
 优先级：process.nextTick > Promise > MutationObserver
+
+**流程**
+
+1. 取出一个宏任务执行，如果碰到宏任务，将其放入任务队列，如果碰到微任务，将其放入微任务队列
+
+2. 检查微任务队列是否有可执行的微任务，如果有则执行微任务。微任务执行过程中，如果碰到宏任务，将其放入任务队列。如果碰到微任务，继续将其放入当前的微任务队列，直到微任务全部执行。
+
+3. 更新渲染阶段，判断是否需要渲染，也就是说不一定每一轮 Event Loop 都会对应一次浏览器渲染。
+
+4. 对于需要渲染的文档，执行 requestAnimationFrame 帧动画回调。
+
+5. 对于需要渲染的文档，重新渲染绘制用户界面。
+
+6. 判断任务队列和微任务队列是否为空，如果是，则进行 Idle 空闲周期的算法，判断是否要执行requestIdleCallback 的回调函数。  
+
+**在当前任务运行环境内，微任务总是先于宏任务执行；**
+`requestAnimationFrame 回调在页面渲染之前调用，适合做动画；`
+`requestIdleCallback 在渲染屏幕之后调用，可以使用它来执行一些不太重要的任务。`  
 
 ### setTimeout和Promise执行顺序
 
 **Promise——>其后的.then()——>setTimeout**
 
 ```js
+//js-synthesis/eventLoop.js
 console.log('打印'+1);
 setTimeout(function(){
     console.log('打印'+2);
@@ -507,6 +534,7 @@ console.log("end");
 ```js
 async function async1() {
     console.log("async1 start");
+//await  async2();//执行这一句后，输出async2后，await会让出当前线程，后面的任务直接放入微任务，然后继续执行async1()函数后面的同步代码
     await async2();
     console.log("async1 end");
 }
@@ -535,7 +563,24 @@ console.log('script end');
 // settimeout
 ```
 
+执行到setTimeout函数时，将其回调函数加入队列(此队列与promise队列不是同一个队列，执行的优先级低于promise)。继续执行
 
+创建promise对象里面的代码属于同步代码，promise的异步性体现在then与catch处，所以promise1被输出，然后将then函数的代码加入队列，继续执行同步代码，输出script end。
+
+至此同步代码执行完毕，开始从队列中调取任务执行，执行async1中await后面的代码，输出async1 end，由于刚刚提到过，setTimeout的任务队列优先级低于promise队列，所以首先执行promise队列的第一个任务，执行then方法的部分，输出promise2。
+
+最后promise队列中任务执行完毕，再执行setTimeout的任务队列，输出settimeout。
+
+v8引擎版本不同可能会导致async1 end 和 promise2的顺序不同
+
+先执行同步代码，遇到异步代码就先加入队列，然后按入队的顺序执行异步代码，最后执行setTimeout队列的代码
+
+`promise.Trick()>promise的回调>async>setTimeout>setImmediate`
+
+### **async/await**
+
+1. 带async关键字的函数会返回一个promise对象，如果里面没有await，执行起来等同于普通函数；如果没有await，async函数并没有很厉害是不是
+2. await 关键字要在 async 关键字函数的内部，await 写在外面会报错；await如同他的语意，就是在等待，等待右侧的表达式完成。此时的await会让出线程，阻塞async内后续的代码，先去执行async外的代码,后面的任务直接放入微任务。等外面的同步代码执行完毕，才会执行里面的后续代码。就算await的不是promise对象，是一个同步函数，也会等这样操作
 
 ## 正则表达式
 
