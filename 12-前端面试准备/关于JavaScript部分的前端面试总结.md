@@ -385,12 +385,157 @@ alert(a)
 ## es6新增的箭头函数和之前function函数有什么区别
 
 1. 写法不同
-
 2. 使用function定义的函数，this的指向随着调用环境的变化而变化，而箭头函数中的this指向是固定不变的，一直指向的是定义函数的环境
-
 3. function定义的函数不论位置先后，调用皆没有问题，箭头函数定义一定要在调用前才行，否则是找不到的
-
 4. function是可以定义构造函数的，而箭头函数不行的
+
+## EventLoop
+
+（1）所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。
+
+（2）主线程之外，还存在一个"任务队列"（task queue）。只要异步任务有了运行结果，就在"任务队列"之中放置一个事件。
+
+（3）一旦"执行栈"中的所有同步任务执行完毕，系统就会读取"任务队列"，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。
+
+（4）主线程不断重复上面的第三步。
+
+主线程运行的时候，产生堆（heap）和栈（stack），栈中的代码调用各种外部API，它们在"任务队列"中加入各种事件（click，load，done）。只要栈中的代码执行完毕，主线程就会去读取"任务队列"，依次执行那些事件所对应的回调函数。
+
+异步任务有宏任务和微任务。
+
+2.宏任务macrotask：
+
+（事件队列中的每一个事件都是一个macrotask）
+
+优先级：主代码块 > setImmediate > MessageChannel > setTimeout / setInterval
+
+比如：setImmediate指定的回调函数，总是排在setTimeout前面
+
+3.微任务包括：
+
+优先级：process.nextTick > Promise > MutationObserver
+
+### setTimeout和Promise执行顺序
+
+**Promise——>其后的.then()——>setTimeout**
+
+```js
+console.log('打印'+1);
+setTimeout(function(){
+    console.log('打印'+2);
+})
+new Promise(function(resolve){
+        console.log('打印'+3);
+        resolve();
+      }).then(function(){
+        console.log(4);
+      }
+  );
+console.log('打印'+10);
+new Promise(function(resolve){
+      setTimeout(function () {
+        console.log('打印'+5);
+      });
+      resolve();
+  }).then(function(){
+
+  console.log('打印'+6)});
+setTimeout(function(){
+    new Promise(function(resolve){
+        console.log('打印'+7);
+      });
+})
+//执行结果：
+//1;3;10;4;6;2;5;7
+```
+
+```js
+console.log('打印' + 1); //第一个：打印1
+setTimeout(function () {
+    console.log('打印' + 2); //第六个：打印2 
+})
+new Promise(function (resolve, reject) {
+    console.log('打印' + 3); //第二个：打印3
+}).then(
+    console.log('打印' + 4)); //第三个：打印4                        
+console.log('打印' + 10); //第四个：打印10
+new Promise(function (resolve, reject) {
+    setTimeout(function () {
+        console.log('打印' + 5); //第七个：打印5
+    });
+}).then(
+    console.log('打印' + 6)); //第五个：打印6
+setTimeout(function () {
+    new Promise(function (resolve, reject) {
+        console.log('打印' + 7); //第八个：打印7
+    });
+})
+```
+
+Promise比setTimeout()先执行。
+
+因为Promise定义之后便会立即执行，其后的.then()是异步里面的微任务。
+
+而setTimeout()是异步的宏任务。
+
+```js
+console.log("start");
+setTimeout(() => {
+    console.log("setTimeout")
+})
+Promise.resolve().
+	then(function () {
+    	console.log('promise1')
+	})
+    .then(function () {
+   	 	console.log('promise2')
+})
+console.log("end");
+// 主程序和和settimeout都是宏任务，两个promise是微任务
+// 第一个宏任务（主程序）执行完，执行全部的微任务（两个promise），
+// 再执行下一个宏任务（settimeout），所以结果为：
+// 输出
+// start     
+// end       
+// promise1  
+// promise2  
+// setTimeout
+```
+
+### setTimeout async promise执行顺序
+
+```js
+async function async1() {
+    console.log("async1 start");
+    await async2();
+    console.log("async1 end");
+}
+async function async2() {
+    console.log('async2');
+}
+console.log("script start");
+setTimeout(function () {
+    console.log("settimeout");
+}, 0);
+async1();
+new Promise(function (resolve) {
+    console.log("promise1");
+    resolve();
+}).then(function () {
+    console.log("promise2");
+});
+console.log('script end');
+// script start
+// async1 start
+// async2
+// promise1
+// script end
+// async1 end
+// promise2
+// settimeout
+```
+
+
 
 ## 正则表达式
 
@@ -816,3 +961,58 @@ console.log(a[Math.pow(2, 32)]) //"我比最大索引还大2",这个没被覆盖
 - JavaScript中的数组是一个稍微有点特殊的普通对象，在Array.prototype.push方法执行时,会先把每个要push的元素push进去,也就是定义多个自身属性，然后才设置数组的length属性为最大的索引值+1，这个例子中就是Math.pow(2, 32) + 1,这时才会报错，但上面的元素已经push进去了。如果再次push的话，还会从当前的length属性-1的那个索引处开始push，也就出现了覆盖而不是继续追加的情况.
 
 <a href="https://coding.imooc.com/class/400.html">`快速搞定前端JavaScript面试`</a>
+
+## 面试题
+
+### return
+
+```js
+function foo1(){
+    return {
+        bar:"hello"
+    };
+}
+function foo2(){
+    return 
+    {
+        bar:"hello"
+    };
+}
+console.log("foo1 returns:")
+console.log(foo1())
+console.log("foo2 returns:")
+console.log(foo2())
+```
+
+```js
+//输出结果
+foo1 returns:
+{ bar: 'hello' }
+foo2 returns:
+undefined
+```
+
+这不仅令人惊讶，而且让人困惑，因为 foo2 返回 undefined，却没有任何错误
+抛出 。
+原因与这样一个事实有关 ， 即分号在 JavaScript 中是一个可选项（尽管 省 略它们 通
+常是非常糟糕的形式。结果是  当 碰到 foo2（）中包含 return 语句的代码行时（代码行上没有其他任何代码），分号会立即自动插入返回语句之后，也不会抛出错误 ， 因为代码的其余部分是完全有效的 ， 即使它没有得到调用或做任何事情 。这也说明了在 JavaScript 中大括号的位直应该放在语句后面的编程风格更符合 JavaScript
+的语法要求。  
+
+如下所示
+
+```js
+function foo2() {
+    //在foo2（）中遇到包含return语句的行没有其他内容时，会在return语句之后立即自动插入分号。
+    //return=>
+     return；
+     {
+       bar: "hello"
+     };
+}
+```
+
+
+
+
+
+  
