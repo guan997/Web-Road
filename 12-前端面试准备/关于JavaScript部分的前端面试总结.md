@@ -184,6 +184,46 @@ if (obj.a == null) {}
 if (obj.a === null || obj.a === undefined) {}
 ```
 
+## 如何判断两个变量相等
+
+小提示：这里需要分基本类型和引用类型，面试官在这里具体想问的是 Object.is 的实现原理。
+
+- MDN的定义:
+
+> Object.is() 方法判断两个值是否为同一个值
+
+Object.is()的用法与全等===基本一致，唯有不同的两点：
+1.+0与-0为false
+2.NaN与NaN为true
+
+- 注意：
+
+> 0和+0是一样的，但是0和-0是不一样的
+
+**特例**
+
+```js
+Object.is(0, -0);            // false
+Object.is(+0, -0);           // false
+Object.is(0, +0);            // true
+Object.is(NaN, 0/0);         // true
+```
+
+**Object.is() 的实现原理**
+
+```js
+  Object.is = function(x, y) {
+    if (x === y) {
+      // 1/+0 = +Infinity， 1/-0 = -Infinity, +Infinity不等于-Infinity
+      // Infinity 属性用于存放表示正无穷大的数值。负无穷大是表示负无穷大一个数字值。
+      return x !== 0 || 1 / x === 1 / y;
+    } 
+      // 一个变量不等于自身变量,那么它一定是 NaN
+      // 两个都是NaN的时候返回true
+      return x !== x && y !== y;
+  };
+```
+
 ## 函数声明和函数表达式的区别
 
 - 函数声明function fn(){}
