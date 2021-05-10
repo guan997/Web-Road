@@ -24,7 +24,7 @@ export default {
         this.list.push(`${Date.now()}`)
 
         // 1. 异步渲染，$nextTick 待 DOM 渲染完再回调
-        // 3. 页面渲染时会将 data 的修改做整合，多次 data 修改只会渲染一次
+        // 2. 页面渲染时会将 data 的修改做整合，多次 data 修改只会渲染一次
 
         // vue是异步的
         // $nextTick将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。

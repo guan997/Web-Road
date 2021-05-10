@@ -41,6 +41,7 @@ computed:{
 - 事件被绑定到哪里？事件是被注册到当前元素的
 
 ```js
+<!-- 事件-->
 <template>
     <div>
         <p>{{num}}</p>
@@ -252,31 +253,100 @@ export default {
 
 ## 高级特性
 
-## 自定义v-model
+### 自定义v-model
 
 ```vue
+<!-- <CustomVModel v-model="name"/> -->
 <template>
     <div>
-        <input type="text" :value="text" @input="$emit('change', $event.target.value)">
+        <input type="text" :value="text1" @input="$emit('change1', $event.target.value)">
+        <!-- 1. 上面的 input 使用了 :value 而不是 v-model
+        2. 上面的 change1 和 model.event1 要对应起来
+        3. text1 属性对应起来 -->
     </div>
-    <!-- 使用：value不使用v-model -->
-    <!-- change和model.event对应起来 -->
 </template>
-
 <script>
 export default {
     model:{
-        prop:'text',//对应到props：text
-        event: 'change'
+        prop:'text1',// 对应 props text1
+        event:'change1'
     },
-    props: {
-        text:String
+    props:{
+        text1:String,
+        default(){
+            return ''
+        }
     }
 }
 </script>
 ```
 
+### $nextTick
+
+$nextTick:在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+
+```js
+// 修改数据
+vm.msg = 'Hello'
+// DOM 还没有更新
+Vue.nextTick(function () {
+  // DOM 更新了
+})
+```
+
+- Vue是异步渲染（原理）
+
+- data改变之后，DOM不会立刻渲染
+
+- $nextTick会在DOM渲染之后被触发，以获取最新DOM节点
+
+  ```js
+  // 1. 异步渲染，$nextTick 待 DOM 渲染完再回调
+  // 2. 页面渲染时会将 data 的修改做整合，多次 data 修改只会渲染一次
+  
+  // vue是异步的
+  // $nextTick将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。
+  // 它跟全局方法 Vue.nextTick一样，不同的是回调的 this 自动绑定到调用它的实例上 
+  ```
+
+### slot
+
+### 动态、异步组件
+
+动态组件：组件之间切换
+
+- :is="conponent-name"用法
+- 需要根据数据，动态渲染的场景。即组件类型不确定
+
+### keep-alive
+
+#### 何时使用keep-alive
+
+- 缓存组件，不需要重复渲染
+- 如多个静态tab页的切换
+- 优化性能
+
+#### ＜keep-alive＞组件的作用 
+
+​	当 ＜keep - alive＞ 包裹动态纽件时，会缓存不活动的组件实例，而不是销毁它们 。
+​	<keep alive＞是一个抽象纽件，它自身不会渲染 一 个 DOM 元素，也不会出现在父纽件
+当在 ＜keep-alive＞ 内切换组件时，它的 activated 和 deactivated 这两个生命周期钩子
+函数将会执行 。
+
+```vue
+<keep-alive>
+	<component :is =” view ” ></component>
+</keep-alive>
+```
+
 ## 
+
+#### mixin
+
+#### refs
+
+- 设置ref="名"之后
+- 可以通过this.$refs.名获取Dom元素
 
 # 面试题
 
@@ -329,25 +399,6 @@ v-show : v-show 则适用于需要非常频繁切换条件的场景。
 - mounted
 - JS是单线程的，ajax异步获取数据
 - 放在mounted之前没有用，只有让逻辑更加混乱
-
-## 何时使用keep-alive
-
-- 缓存组件，不需要重复渲染
-- 如多个静态tab页的切换
-- 优化性能
-
-## ＜keep-alive＞组件的作用 
-
-​	当 ＜keep - alive＞ 包裹动态纽件时，会缓存不活动的组件实例，而不是销毁它们 。
-​	<keep alive＞是一个抽象纽件，它自身不会渲染 一 个 DOM 元素，也不会出现在父纽件
-当在 ＜keep-alive＞ 内切换组件时，它的 activated 和 deactivated 这两个生命周期钩子
-函数将会执行 。
-
-```vue
-<keep-alive>
-	<component :is =” view ” ></component>
-</keep-alive>
-```
 
 ## 何时需要使用beforeDestory
 

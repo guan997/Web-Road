@@ -3,8 +3,8 @@
     <p>vue高级特性</p>
     <hr />
     <!-- 自定义v-model -->
-    <!-- <p>{{ name }}</p>
-    <CustomVModel v-model="name"/> -->
+    <!-- <p>{{ name }}</p> -->
+    <!-- <CustomVModel v-model="name"/> -->
     <!-- <NextTick/> -->
     <!-- slot插槽 -->
     <!-- <SlotDemo :url="website.url">
@@ -18,15 +18,15 @@
 
     <!-- 动态组件 -->
     <!-- <component :is="NextTickName"/> -->
-    <!-- <div v-for="(val, key) in newsData" :key="key">
+    <div v-for="(val, key) in newsData" :key="key">
       <component :is="val.type" />
-    </div> -->
+    </div>
 
     <!-- keep-alive -->
     <!-- <KeepAlive/> -->
 
     <!-- mixin -->
-    <MixinDemo/>
+    <!-- <MixinDemo/> -->
   </div>
 </template>
 <script>
@@ -35,7 +35,7 @@
 // import SlotDemo from './SlotDemo'
 // import ScopedSlotDemo from './ScopedSlotDemo'
 // import KeepAlive from './KeepAlive'
-import MixinDemo from './MixinDemo'
+// import MixinDemo from './MixinDemo'
 
 export default {
   components: {
@@ -44,7 +44,7 @@ export default {
     // ScopedSlotDemo,
     // SlotDemo
     // KeepAlive
-    MixinDemo
+    // MixinDemo
   },
   data() {
     return {
@@ -54,7 +54,7 @@ export default {
         title: "baidu",
         subTitle: "百度一下，你就知道",
       },
-      // NextTickName:"NextTick",
+      NextTickName:"NextTick",
       newsData: {
         1: { 
           type: "text" 
