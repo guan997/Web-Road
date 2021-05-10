@@ -16,6 +16,25 @@
 
      function 
 
+## 引用类型
+
+js里面除了基本类型外，其他的赋值都是传址，赋值前后的变量指向同一片内存，存储在堆中，基本数据类型存储在栈中，赋值前后的变量是按值存放的
+
+```js
+var a = [1,2,3,4,5,6]
+var b = a;
+a[0] = 7;
+console.log(b[0]);//7
+
+var c = {
+    a:1,
+    b:2
+}
+var d = c;
+c.a = 3;
+console.log(d.a);//3
+```
+
 ## 列举强制类型和类型转换 
 
      强制：parseInt parseFloat toString 
