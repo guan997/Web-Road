@@ -188,12 +188,6 @@ export default {
 
 - vuex
 
-### 组件渲染和更新的过程
-
-
-
-
-
 ### Vue 生命周期
 
 挂载->更新->销毁阶段
@@ -311,18 +305,86 @@ Vue.nextTick(function () {
 
 ### slot
 
+slot：具名插槽
+
+ <slot>{{ user.lastName }}</slot>
+
+`<slot>` 元素有一个特殊的 attribute：`name`。这个 attribute 可以用来定义额外的插槽
+
+```vue
+<!--container组件-->
+<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>
+```
+
+一个不带 `name` 的 `<slot>` 出口会带有隐含的名字“default”。
+
+在向具名插槽提供内容的时候，我们可以在一个 `<template>` 元素上使用 `v-slot` 指令，并以 `v-slot` 的参数的形式提供其名称：
+
+```vue
+<base-layout>
+  <template v-slot:header>
+    <h1>Here might be a page title</h1>
+  </template>
+
+  <p>插入到main slot中，即没有命名的slot</p>
+  <p>And another one.</p>
+
+  <template v-slot:footer>
+    <p>Here's some contact info</p>
+  </template>
+</base-layout>
+```
+
+`<template>` 元素中的所有内容都将会被传入相应的插槽。任何没有被包裹在带有 `v-slot` 的 `<template>` 中的内容都会被视为默认插槽的内容。
+
+作用域插槽
+
+```vue
+<ScopedSlotDemo :url="website.url">
+      <template v-slot="slotProps">
+        {{slotProps.slotData.title}}
+      </template>
+</ScopedSlotDemo> 
+<!--slot组件-->
+<slot :slotData="website">
+            {{website.subTitle}} <!-- 默认值显示 subTitle ，即父组件不传内容时 -->
+</slot>
+```
+
 ### 动态、异步组件
 
 动态组件：组件之间切换
 
 - :is="conponent-name"用法
 - 需要根据数据，动态渲染的场景。即组件类型不确定
+- `import CustomVModel from "./CustomVModel";`
+
+异步组件：
+
+- import()函数
+- 按需加载，异步加载大组件
+- `components: {FormDemo: () => import('../BaseUse/FormDemo')}`
+
+何时使用异步组件
+
+- 加载大组件
+- 路由异步加载
 
 ### keep-alive
 
 #### 何时使用keep-alive
 
-- 缓存组件，不需要重复渲染
+- 缓存组件，频繁切换，不需要重复渲染
 - 如多个静态tab页的切换
 - 优化性能
 
@@ -339,82 +401,142 @@ Vue.nextTick(function () {
 </keep-alive>
 ```
 
-## 
-
 #### mixin
+
+mixins:[myMixin],//可以添加多个，会合并起来
+
+- 多个组件有相同的逻辑，抽离出来
+- Composition 解决这些问题
+- mixin不完美有一些缺点 
+  - 变量来源不明确，不利于阅读
+  - 多mixin可能会造成命名冲突
+  - mixin和组件可能出现多对多的关系，复杂度较高
 
 #### refs
 
 - 设置ref="名"之后
 - 可以通过this.$refs.名获取Dom元素
 
-# 面试题
+## Vuex
 
-## 至少说出 vue.js 中的4种指令和它们的用法
+- 基本概念，使用，API
 
-- v- if：判 断对象是否隐藏。
-- v-for：循环渲染 。
-- v-bind：绑定一个属性 。
-- v-model ：实现数据双向绑定 。
+  - state
+  - getter
+  - action
+  - mutation
+  - modules
 
-## v-if 和 v-show 的区别？以及适用场景有哪些？
+- 用于Vue组件
 
-v-if 相当于真正的条件渲染，当条件为假，元素不会被渲染。
-而 v-show 不管初始条件是什么，第一次的时候元素总被渲染。之后的切换相当于 display:none和 display:block 的切换。
-适用场景：
-v-if : 适用于在运行时很少改变条件，不需要频繁切换条件的场景
-v-show : v-show 则适用于需要非常频繁切换条件的场景。  
+  - dispatch
+  - commit
+  - mapState
+  - mapGetters
+  - mapActions
+  - mapMutations
 
-## 为何data必须是一个函数？
+  <img src="https://vuex.vuejs.org/vuex.png">
 
-​	如果data是一个函数的话，这样每复用一次组件，就会返回一份新的data，类似于给每个组件实例创建一个私有的数据空间，让各个组件实例维护各自的数据。而单纯的写成对象形式，就使得所有组件实例共用了一份data，就会造成一个变了全都会变的结果。
+  actions才能做异步操作，访问后台api，ajax操作
 
-​	所以说vue组件的data必须是函数。这都是因为js的特性带来的，跟vue本身设计无关。
+- state的数据结构设计
 
-​	js本身的面向对象编程也是基于原型链和构造函数，应该会注意原型链上添加一般都是一个函数方法而不会去添加一个对象了。
+## Vue-router
 
-## 双向数据绑定v-model的实现原理
+### 基本使用
 
-- input元素的value = this.name
-- 绑定input事件this.name = $event.target.value
-- data更新触发re-render
+- `router.go(n)`在 history 记录中向前或者后退多少步
 
-## 多个组件有相同的逻辑，如何抽离
+- 使用 `<router-link>` 创建 a 标签来定义导航链接
 
-- mixin
-- 以及mixin的一些缺点 待补充
+- `router.replace(location, onComplete?, onAbort?)`替换掉当前的 history 记录
 
-## 何时使用异步组件
+- `router.beforeEach` 注册一个全局前置守卫(to, from, next)
 
-- 加载大组件
-- 路由异步加载
+- ```js
+  // BAD
+  router.beforeEach((to, from, next) => {
+    if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+    // 如果用户未能验证身份，则 `next` 会被调用两次
+    next()
+  })
+  ```
 
-## 如何将组件所有的props传递给子组件
+- 路由模式(hash、H5 history)
+- 路由配置(动态路由、懒加载)
 
-- props
-- <User v-bind="$props"/>
+```js
+const router = new VueRouter({
+  mode: 'history',
+  routes: [...]
+})
+```
 
-## ajax请求应该放在哪个生命周期
+```js
+const User = {
+	//获取参数
+	template: '<div>User{{$route.params..id}}</div>'
+}
+const router = new VueRouter({
+	routes:[
+		//动态路径参数 以冒号开头 
+		{path:'/user/id',component:User}
+	]
+})
+```
 
-- mounted
-- JS是单线程的，ajax异步获取数据
-- 放在mounted之前没有用，只有让逻辑更加混乱
+### vue-router异步加载 懒加载
 
-## 何时需要使用beforeDestory
+```js
+export default new VueRouter({
+	routes: [
+		{
+			path: '/',
+            //path配置路径
+			//compontent配置对应的组件
+			compontent: () => import(
+				/*webpackChunkName: "navigator"*/
+				'./../compontents/Navigator'
+			)
+		},
+		{
+			path: '/feedback',
+			compontent: () => import(
+				/*webpackChunkName: "feedback"*/
+				'./../compontents/Feedback'
+			)
+		},
+	]
+})
+```
 
-- 解绑自定义事件event.$off
-- 清除定时器
-- 解绑自定义的DOM事件，如window scroll等
+### Vue—router常用的路由模式
 
-## Vuex中action和mutation有何区别
+在 vue-router 单页面应用中，则是路径之间的切换，也就是组件的切换。路由模块的本质 就是建立起url和页面之间的映射关系。
+vue-router 原理是更新视图而不重新请求页面。 vue-router 共有3种模式：hash模式、history模式、abstract模式。  
 
-- action中处理异步，mutation不可以
-- mutation做原子操作（每次做一个操作）
-- action可以整合多个mutation
+#### 1、Hash 模式(默认)
 
-## Vue路由钩子函数
+Hash 模式(默认)，如http://abc.com/#/user/10
 
-### 全局钩子
+hash 模式使用 hashchange 监听地址栏的 hash 值的变化，加载对应的页面。每次的 hash 值变化后依然会在浏览器留下历史记录，可以通过浏览器的前进后退按钮回到上一个页面。  
+
+#### 2、History 模式
+
+History 模式，如http://abc.com/user/10，需要服务器端的支持，无特殊需求可选择前者
+
+hashchange 只能改变 # 后面的代码片段。
+这种模式充分利用了 html5 history interface 中新增的 pushState() 和 replaceState() 方
+法。这两个方法应用于浏览器记录栈，在当前已有的 back、forward、go 基础之上，它们提供了对历史记录修改的功能。只是当它们执行修改时，虽然改变了当前的 URL ，但浏览器不会立即向后端发送请求  
+
+#### 3、abstract
+
+不涉及和浏览器地址的相关记录。通过数组维护模拟浏览器的历史记录栈。  
+
+### Vue路由钩子函数
+
+#### 全局钩子
 
 - beforeEach
   路由进入前调用
@@ -444,10 +566,10 @@ v-show : v-show 则适用于需要非常频繁切换条件的场景。
   })
   ```
 
-### 路由独享钩子
+#### 路由独享钩子
 
 - beforeEnter
-    路由进入前调用， beforeEnter 在 beforeEach 之后执行
+  路由进入前调用， beforeEnter 在 beforeEach 之后执行
 
   ```vue
   const router = new VueRouter({
@@ -463,7 +585,7 @@ v-show : v-show 则适用于需要非常频繁切换条件的场景。
   })
   ```
 
-### 组件钩子
+#### 组件钩子
 
 - beforeRouteEnter
   路由确认前调用，组件实例还没被创建，不能获取组件实例 this  
@@ -498,49 +620,149 @@ v-show : v-show 则适用于需要非常频繁切换条件的场景。
   }
   ```
 
-## Vue—router常用的路由模式
+## 原理
 
-在 vue-router 单页面应用中，则是路径之间的切换，也就是组件的切换。路由模块的本质 就是建立起url和页面之间的映射关系。
-vue-router 原理是更新视图而不重新请求页面。 vue-router 共有3种模式：hash模式、history模式、abstract模式。  
+### 组件化和MVVM
 
-### 1、Hash 模式(默认)
+数据驱动视图
 
-hash 模式使用 hashchange 监听地址栏的 hash 值的变化，加载对应的页面。每次的 hash 值变化后依然会在浏览器留下历史记录，可以通过浏览器的前进后退按钮回到上一个页面。  
+```vue
+<!-- MVVM -->
+<template>
+  //view
+  <div id="app">
+    // viewModel
+    <p @click="changeName">{{name}}</p>
+    <ul>
+        <li v-for="(item, index) in list" :key="index">
+            {{item}}
+        </li>
+    </ul>
+    <button @click="addItem">添加一项</button>
+  </div>
+</template>
 
-### 2、History 模式
+<script>
+export default {
+  name: 'app',
+  //model
+  data() {
+      return {
+        name: 'vue',
+        list: ['a', 'b', 'c']
+      }
+  },
+  // viewModel
+  methods: {
+    changeName() {
+        this.name = '小明'
+    },
+    addItem() {
+        this.list.push(`${Date.now()}`)
+    }
+  }
+}
+</script>
+```
 
-hashchange 只能改变 # 后面的代码片段。
-这种模式充分利用了 html5 history interface 中新增的 pushState() 和 replaceState() 方
-法。这两个方法应用于浏览器记录栈，在当前已有的 back、forward、go 基础之上，它们提供了对历史记录修改的功能。只是当它们执行修改时，虽然改变了当前的 URL ，但浏览器不会立即向后端发送请求  
+### 响应式原理
 
-### 3、abstract
+- 响应式原理：组件data的数据一旦变化，立刻触发视图的更新
+- 实现数据驱动视图的第一步
+- 核心API-Object.defineProperty
+  - Object.defineProperty的一些缺点(Vue3启用Proxy)
+  - Proxy有兼容性问题，兼容性不好，且无法polyfill
 
-不涉及和浏览器地址的相关记录。通过数组维护模拟浏览器的历史记录栈。  
+#### Object.defineProperty基本用法
 
-## 如何配置vue-router异步加载
+Object.defineProperty ⽅法会直接在⼀个对象上定义⼀个新属性， 或者修改⼀个对象的现有属性， 并返回这个对象。
+
+语法：
+		Object.defineProperty(obj, prop, descriptor)
+obj 是要在其上定义属性的对象； prop 是要定义或修改的属性的名称； descriptor 是将被定义或修改的属性描述符。⽐较核⼼的是 descriptor ， 它有很多可选键值， 具体的可以去参阅它的⽂档。 这⾥我们最关⼼的是get 和 set ， get 是⼀个给属性提供的 getter ⽅法， 当我们访问了该属性的时候会触发 getter ⽅法； set 是⼀个给属性提供的 setter ⽅法， 当我们对该属性做修改的时候会触发 setter ⽅法。
+⼀旦对象拥有了 getter 和 setter， 我们可以简单地把这个对象称为响应式对象。   那么 Vue.js 把哪些对象变成了响应式对象了呢？ 
 
 ```js
-export default new VueRouter({
-	routes: [
-		{
-			path: '/',
-            //path配置路径
-			//compontent配置对应的组件
-			compontent: () => import(
-				/*webpackChunkName: "navigator"*/
-				'./../compontents/Navigator'
-			)
-		},
-		{
-			path: '/feedback',
-			compontent: () => import(
-				/*webpackChunkName: "feedback"*/
-				'./../compontents/Feedback'
-			)
-		},
-	]
-})
+var data = {};
+var name = 'xiaoming';
+Object.defineProperty(data, "name", {
+    get:function() {
+        console.log('get')
+        return name
+    },
+    set:function (newVal) {
+        console.log('set')
+        name = newVal
+    }
+});
+//测试
+console.log(data.name) // get xiaoming
+data.name = 'list' //set
 ```
+
+
+
+vdom和diff算法
+
+模板编译
+
+组件渲染过程
+
+前端路由
+
+# 面试题
+
+## 至少说出 vue.js 中的4种指令和它们的用法
+
+- v- if：判 断对象是否隐藏。
+- v-for：循环渲染 。
+- v-bind：绑定一个属性 。
+- v-model ：实现数据双向绑定 。
+
+## v-if 和 v-show 的区别？以及适用场景有哪些？
+
+v-if 相当于真正的条件渲染，当条件为假，元素不会被渲染。
+而 v-show 不管初始条件是什么，第一次的时候元素总被渲染，相当于 display:none和 display:block 的切换。
+适用场景：
+v-if : 适用于在运行时很少改变条件，不需要频繁切换条件的场景
+v-show : v-show 则适用于需要非常频繁切换条件的场景。  
+
+## 为何data必须是一个函数？
+
+​	如果data是一个函数的话，这样每复用一次组件，就会返回一份新的data，类似于给每个组件实例创建一个私有的数据空间，让各个组件实例维护各自的数据。而单纯的写成对象形式，就使得所有组件实例共用了一份data，就会造成一个变了全都会变的结果。
+
+​	所以说vue组件的data必须是函数。这都是因为js的特性带来的，跟vue本身设计无关。
+
+​	js本身的面向对象编程也是基于原型链和构造函数，应该会注意原型链上添加一般都是一个函数方法而不会去添加一个对象了。
+
+## 双向数据绑定v-model的实现原理
+
+- input元素的value = this.name
+- 绑定input事件this.name = $event.target.value
+- data更新触发re-render
+
+## 如何将组件所有的props传递给子组件
+
+- props
+- <User v-bind="$props"/>
+
+## ajax请求应该放在哪个生命周期
+
+- mounted
+- JS是单线程的，ajax异步获取数据
+- 放在mounted之前没有用，只有让逻辑更加混乱
+
+## 何时需要使用beforeDestory
+
+- 解绑自定义事件event.$off
+- 清除定时器
+- 解绑自定义的DOM事件，如window scroll等
+
+## Vuex中action和mutation有何区别
+
+- action中处理异步，mutation不可以
+- mutation做原子操作（每次做一个操作）
+- action可以整合多个mutation
 
 ## 用vnode描述一个DOM结构
 

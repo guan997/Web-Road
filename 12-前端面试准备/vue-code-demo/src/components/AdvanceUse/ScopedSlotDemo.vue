@@ -12,7 +12,7 @@ export default {
         return{
             website:{
                 url:'http://taobao.com/',
-                title:'taobao',
+                title:'taobao1',
                 subTtile:'淘宝'
             }
         }

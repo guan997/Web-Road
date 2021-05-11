@@ -2,9 +2,9 @@
     <div id="app">
         <!-- 基本使用 -->
         <!-- watch -->
-        <!-- <BaseUse/> -->
+        <BaseUse/>
         <!-- vue 高级特性 -->
-        <AdvanceUse/>
+        <!-- <AdvanceUse/> -->
         <!-- vue组件 -->
         <!-- <ComponentsDemo/> -->
         <!-- 购物车 -->
@@ -12,17 +12,17 @@
     </div> 
 </template>
 <script>
-import AdvanceUse from './components/AdvanceUse/index.vue'
+// import AdvanceUse from './components/AdvanceUse/index.vue'
 // import ComponentsDemo from './components/ComponentsDemo/index'
-// import BaseUse from './components/BaseUse/EventFuDemo.vue'
+import BaseUse from './components/BaseUse/Todo.vue'
 // import ComponentsDemo from './components/ComponentsDemo/v-model.vue'
 // import CartDemo from './components/Cart/index'
 export default {
     name:'app',
     components:{
-        AdvanceUse
+        // AdvanceUse
         // ComponentsDemo,
-        // BaseUse
+        BaseUse
         // CartDemo
     }
 }

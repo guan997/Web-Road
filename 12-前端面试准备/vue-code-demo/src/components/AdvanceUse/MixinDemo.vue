@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import  myMixin from './mixin' // 可以添加多个，会自动合并起来
+import  myMixin from './mixin' 
 export default {
-    mixins:[myMixin],
+    mixins:[myMixin],//可以添加多个，会合并起来
     data() {
         return {
             name:'淘大宝',

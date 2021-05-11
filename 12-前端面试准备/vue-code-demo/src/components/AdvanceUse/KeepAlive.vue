@@ -3,7 +3,7 @@
         <button @click="changeState('A')">A</button>
         <button @click="changeState('B')">B</button>
         <button @click="changeState('C')">C</button>
-        <!-- tab 切换 -->
+        <!-- tab 切换 缓存不需要重复渲染-->
         <keep-alive>
             <KeepAliveStateA v-if="state === 'A'"/>
             <KeepAliveStateB v-if="state === 'B'"/>
