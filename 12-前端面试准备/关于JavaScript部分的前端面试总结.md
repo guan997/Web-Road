@@ -691,6 +691,44 @@ console.log(max(12,32,53,64,143,1243,53))
 Math.max(12,32,53,64,143,1243,53)
 ```
 
+# promise循环多个异步请求并发
+
+Promise.all(promise)，all方法中的参数是一个由多个promise组成的集合；
+async/await是异步请求的语法糖；
+new Promise新建多个promise，（resolve,reject）是获取结果或者失败结果的返回；
+axios是在vue中使用异步请求的方法，同理可以使用jq.Ajax或者原生Ajax去请求参数；
+map是es6中的循环处理方法，返回一个由内部return的新数组；
+
+```js
+//数组+异步请求
+const datas = ['10017','10018','10019']
+async function login(array){
+	const promise = array.map(i=>{
+		const url = 'http://197.1.1.1/login?user='+i
+		return new Promise((resolve,reject) => {
+			axios.get(url).then(res=>resolve(res)).catch(err=>reject(err))
+		})) 
+	})
+	const {data}  = await Promise.all(promise)
+	if(data)console.log(data) //结果参数的和
+}
+//对象数组+加模拟异步请求
+const datas = [{name:'小明'},{name:'小红'},{name:'小李'}]
+async function login(array){
+	const promise = array.map(i=>{
+		const url = 'http://197.1.1.1/login?user='+i.name
+		return new Promise((resolve,reject) => {
+			 setTimeout(resolve, 0, url);
+		})
+	})
+	const res  = await Promise.all(promise)
+	if(res) console.log(res) 
+	//> Array ["http://197.1.1.1/login?user=小明", "http://197.1.1.1/login?user=小红", "http://197.1.1.1/login?user=小李"]
+}
+ login(datas)
+
+```
+
 ## 如何用js实现继承
 
 - class继承

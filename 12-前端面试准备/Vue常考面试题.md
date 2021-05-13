@@ -700,7 +700,83 @@ console.log(data.name) // get xiaoming
 data.name = 'list' //set
 ```
 
+### vue是如何实现数据双向绑定的  
 
+`双向数据绑定v-model的实现原理`
+
+- input元素的value = this.name
+- 绑定input事件this.name = $event.target.value
+- data更新触发re-render
+
+vue实现数据双向绑定的原理：就是用 Object.defineproperty() 重新定义对象  设置属性值 （set方法）和 获取属性值（get方法）的操纵来实现的
+
+描述：
+
+Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+
+语法：
+
+​				Object.defineProperty(obj, prop, descriptor)
+参数：
+
+​				obj：要定义属性的对象。
+
+​				prop：要定义或修改的属性的名称。
+
+​				descriptor：要定义或修改的属性描述符。
+
+对象里目前存在的   属性描述符   有两种主要形式：数据描述符和存取描述符。数据描述符是一个具有值的属性，该值可以是可写的，也可以是不可写的。存取描述符是由 getter 函数和 setter 函数所描述的属性。一个描述符只能是这两者其中之一；不能同时是两者。
+
+get：属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 this 对象（由于继承关系，这里的this并不一定是定义该属性的对象）。该函数的返回值会被用作属性的值。
+默认为 undefined。
+
+set：属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值），会传入赋值时的 this 对象。
+默认为 undefined。
+
+```html
+<!DOCTYPE html>
+<!-- js3 vue是如何实现数据双向绑定的 -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="ipt">
+    <p id="p">Object</p>
+    <script>
+        let obj = {}
+        Object.defineProperty(obj, 'name', {
+            get() {
+                console.log('获取了属性值');
+                return p.innerHTML
+            },
+            set(newvalue) {
+                p.innerHTML = ipt.value = newvalue
+                console.log('设置了属性值');
+            }
+        })
+        //获取 obj.name 的值(会执行 get 方法)
+        ipt.value = obj.name
+        //监听 input 事件  
+        ipt.addEventListener('input', (e) => {
+            //设置 obj.name 的值(会执行 set 方法)
+            obj.name = e.target.value
+        })
+    </script>
+</body>
+
+</html>
+```
+
+获取对象 obj.name的值时，会触发 get 方法，得到是 p 标签的内容；
+
+设置对象 obj.name的值时，会触发 set 方法，将 p 标签的内容设置成已经变换的值(用户输入input的内容)。
+
+这样就实现了一个简单的数据双向绑定.
 
 vdom和diff算法
 
@@ -735,11 +811,7 @@ v-show : v-show 则适用于需要非常频繁切换条件的场景。
 
 ​	js本身的面向对象编程也是基于原型链和构造函数，应该会注意原型链上添加一般都是一个函数方法而不会去添加一个对象了。
 
-## 双向数据绑定v-model的实现原理
-
-- input元素的value = this.name
-- 绑定input事件this.name = $event.target.value
-- data更新触发re-render
+- 
 
 ## 如何将组件所有的props传递给子组件
 
