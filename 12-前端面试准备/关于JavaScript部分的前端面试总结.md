@@ -175,7 +175,7 @@ dom-1.js dom-2.js
   - 因为它们可能要请求外部的文件
 -	没有用到XMLHttpRequest(),要实现跨域必须经过服务端的批准不然就是非法的
 
-## document load和ready的区别
+## document load和DOMContentLoaded的区别
 
 ```js
 windom.addEventListener('load',function(){
@@ -532,30 +532,7 @@ setTimeout(function(){
       });
 })
 //执行结果：
-//1;3;10;4;6;2;5;7
-```
-
-```js
-console.log('打印' + 1); //第一个：打印1
-setTimeout(function () {
-    console.log('打印' + 2); //第六个：打印2 
-})
-new Promise(function (resolve, reject) {
-    console.log('打印' + 3); //第二个：打印3
-}).then(
-    console.log('打印' + 4)); //第三个：打印4                        
-console.log('打印' + 10); //第四个：打印10
-new Promise(function (resolve, reject) {
-    setTimeout(function () {
-        console.log('打印' + 5); //第七个：打印5
-    });
-}).then(
-    console.log('打印' + 6)); //第五个：打印6
-setTimeout(function () {
-    new Promise(function (resolve, reject) {
-        console.log('打印' + 7); //第八个：打印7
-    });
-})
+//1;3;4;10;6;2;5;7
 ```
 
 Promise比setTimeout()先执行。
@@ -909,7 +886,7 @@ a3.b.c === a1.b.c // false 新对象跟原对象不共享内存
  */
 // Map()可以替换为WeakMap()解决循环引用问题
 function deepClone(target, map = new Map()) {
-    //  如果是原始类型，无需继续拷贝，直接返回
+    // 如果是原始类型，无需继续拷贝，直接返回
     // 如果是引用类型，创建一个新的对象，遍历需要克隆的对象，将需要克隆对象的属性执行深拷贝后依次添加到新对象上。
     if (typeof target === 'object') {
         // 兼容数组
@@ -1134,10 +1111,8 @@ foo2 returns:
 undefined
 ```
 
-这不仅令人惊讶，而且让人困惑，因为 foo2 返回 undefined，却没有任何错误
-抛出 。
-原因与这样一个事实有关 ， 即分号在 JavaScript 中是一个可选项（尽管 省 略它们 通
-常是非常糟糕的形式。结果是  当 碰到 foo2（）中包含 return 语句的代码行时（代码行上没有其他任何代码），分号会立即自动插入返回语句之后，也不会抛出错误 ， 因为代码的其余部分是完全有效的 ， 即使它没有得到调用或做任何事情 。这也说明了在 JavaScript 中大括号的位直应该放在语句后面的编程风格更符合 JavaScript
+这不仅令人惊讶，而且让人困惑，因为 foo2 返回 undefined，却没有任何错误抛出 。
+原因与这样一个事实有关 ， 即分号在 JavaScript 中是一个可选项（尽管 省 略它们 通常是非常糟糕的形式。结果是  当 碰到 foo2（）中包含 return 语句的代码行时（代码行上没有其他任何代码），分号会立即自动插入返回语句之后，也不会抛出错误 ， 因为代码的其余部分是完全有效的 ， 即使它没有得到调用或做任何事情 。这也说明了在 JavaScript 中大括号的位直应该放在语句后面的编程风格更符合 JavaScript
 的语法要求。  
 
 如下所示
