@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瀑布流</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/vue-resource-1.3.4.js"></script>
+    <script src="./lib/vue-lazyload.js"></script>
+    <link rel="stylesheet" href="./css/WaterfallFlow.css">
+</head>
+
+<body>
+    <div id="app" class="goods-list">
+        <div class="goods-item" v-for="item in goodslist" :key="item.id" v-cloak>
+            <img v-lazy="item.url" alt />
+            <span class="day">7日上新</span>
+            <p class="title"><b>{{ item.productName }}</b></p>
+            <div class="info">
+                <p class="price">
+                    <span class="now"><b>￥359</b></span>
+                    <span class="old"><s>￥440</s></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        Vue.use(VueLazyload)
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                goodslist: [], //存放商品列表的数组
+            },
+            created() {
+                this.getGoodsList();
+            },
+            methods: {
+                // 获取商品列表
+                getGoodsList() {
+                    var url = 'https://testconsole.wetry.shop/console/product/spu/kol/decent';
+                    this.$http.post(url, {
+                        url: 'zs'
+                    }, {
+                        emulateJSON: true
+                    }).then(result => {
+                        console.log(result.body);
+                        if (result.body.code === 0) {
+                            this.goodslist = result.body.data;
+                            console.log(this.goodslist);
+                        }
+                    });
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>
