@@ -1,4 +1,4 @@
-## 关于JavaScript部分的前端面试总结
+关于JavaScript部分的前端面试总结
 
 ##   var和let以及const的区别
 
@@ -15,6 +15,132 @@
      object(注意,typeof能判断哪些类型 null === 'object') 
 
      function 
+
+## 数组循环
+
+- for-in
+
+  使用`for-in`进行遍历时，`i`为对象的`key`,数组的`index`。
+
+  （1）索引为字符串
+
+  （2）无顺序（通常用于对象或json中）
+
+  （3）可扩展属性也会遍历
+
+  ```js
+  var arr = ["a","b","c"];
+  for(var v in arr){           //这里的v代表的是key值，主要用于输出key值
+      console.log(typeof v);     //string，索引为字符串
+      console.log(arr[v]);
+  }
+  //string
+  //a
+  //string
+  //b
+  //string
+  //c
+  ```
+
+  
+
+- for-of
+
+  区别
+  遍历对象时推荐使用for-in，其中i为对象的key。使用for-of会报错。
+  遍历数组时推荐使用for-of，其中i为数组每一项的值。使用for-in则不能保证遍历顺序且会遍历出自定义属性。
+  for-in是ES5特性，fro-of是ES6特性，注意兼容
+  如果要使用for-of遍历普遍对象，需要配合Object.keys()一起使用。
+
+1.forEach()
+
+forEach会遍历数组, 没有返回值, 不允许在循环体内写return, 不会改变原来数组的内容.forEach()也可以循环对象。
+
+```js
+let array = [1,2,3,4];
+array.forEach((item, index, array) => {
+　　console.log(item);
+});
+```
+
+2.map()
+
+map 遍历数组, 会返回一个新数组, 不会改变原来数组里的内容
+
+```js
+let array = [1, 2, 3, 4];
+let temp = array.map((item, index, array) => {
+　　return item * 10;
+});
+console.log(temp);　　//  [10, 20, 30, 40];
+console.log(array);　　// [1, 2, 3, 4]
+```
+
+```js
+let temp2 = array.map(String);　　// 把数组里的元素都转成字符串
+console.log(temp2);
+```
+
+3.filter()
+
+filter 会过滤掉数组中不满足条件的元素, 把满足条件的元素放到一个新数组中, 不改变原数组
+
+```js
+let array = [1, 2, 3, 4];
+let temp = array.filter((item, index, array) => {
+　　return item >  3;
+});
+console.log(temp);　　// [4]
+console.log(array);　　// [1, 2, 3, 4]
+```
+
+4.reduce()
+
+```js
+let array = [1, 2, 3, 4];
+let temp = array.reduce((x, y) => {
+	console.log("x,"+x);
+	console.log("y,"+y);
+	console.log("x+y,",Number(x)+Number(y));
+	return x + y;
+});
+console.log(temp);　　// 10
+console.log(array);　　// [1, 2, 3, 4]
+```
+
+x 是上一次计算过的值, 第一次循环的时候是数组中的第1个元素
+y 是数组中的每个元素, 第一次循环的时候是数组的第2个元素
+
+5.every()
+
+every遍历数组, 每一项都是true, 则返回true, 只要有一个是false, 就返回false
+
+```js
+let array = [1, 2, 3, 4];
+let bo = array.every((item, index, array) => {
+　　return item > 2;
+});
+console.log(bo);　　　　// false;
+```
+
+6.some()
+
+遍历数组的每一项, 有一个返回true, 就停止循环
+
+```js
+let array = [1, 2, 3, 4];
+let temp = array.some((item, index, array) => {
+　　return item > 5;
+});
+console.log(temp);　　// true
+```
+
+以上6个方法IE9及以上才支持。不过可以通过babel转义支持IE低版本。
+以上均不改变原数组。
+some、every返回true、false。
+map、filter返回一个新数组。
+reduce让数组的前后两项进行某种计算，返回最终操作的结果。
+forEach 无返回值。
 
 ## 引用类型
 
@@ -90,6 +216,10 @@ isEqual.js
 ​    some every
 
 ​    reduce 
+
+​	sort
+
+​	reverse
 
 ##    数组slice和splice区别 
 
@@ -668,7 +798,7 @@ console.log(max(12,32,53,64,143,1243,53))
 Math.max(12,32,53,64,143,1243,53)
 ```
 
-# promise循环多个异步请求并发
+## promise循环多个异步请求并发
 
 Promise.all(promise)，all方法中的参数是一个由多个promise组成的集合；
 async/await是异步请求的语法糖；
