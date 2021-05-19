@@ -1,4 +1,4 @@
-# Vue
+Vue
 
 ## 基本使用
 
@@ -178,15 +178,58 @@ export default {
 
 `ComponentsDemo`
 
-- 父子组件通信  props和this.$emit
+#### 父子组件通信  props和this.$emit
 
-  props父组件向子组件传递一个信息，$emit子组件向父组件触发一个事件
+props父组件向子组件传递一个信息，$emit子组件向父组件触发一个事件
 
-- 非父子组件通信：自定义事件event.$on (绑定)  event.$off(关闭)  event.$emit(调用)
+父组件A通过props的方式向子组件B传递，B to A 通过在 B 组件中 $emit, A 组件中 v-on 的方式实现。
 
-  `父组件初始化完才能初始化子组件，子组件渲染完才能渲染父组件`
+**父组件通过props向下传递数据给子组件。注：组件中的数据共有三种形式：data、props、computed**
 
-- vuex
+#### 非父子组件通信（兄弟）、**父子、跨级**：`$emit`/`$on`
+
+自定义事件event.$on (绑定)  event.$off(关闭)  event.$emit(调用)
+
+`父组件初始化完才能初始化子组件，子组件渲染完才能渲染父组件`
+
+#### Vuex与localStorage
+
+vuex 是 vue 的状态管理器，存储的数据是响应式的。但是并不会保存起来，刷新之后就回到了初始状态，**具体做法应该在vuex里数据改变的时候把数据拷贝一份保存到localStorage里面，刷新之后，如果localStorage里有保存的数据，取出来再替换store里的state。**
+
+```js
+let defaultCity = "上海"
+try {   // 用户关闭了本地存储功能，此时在外层加个try...catch
+  if (!defaultCity){
+    defaultCity = JSON.parse(window.localStorage.getItem('defaultCity'))
+  }
+}catch(e){}
+export default new Vuex.Store({
+  state: {
+    city: defaultCity
+  },
+  mutations: {
+    changeCity(state, city) {
+      state.city = city
+      try {
+      window.localStorage.setItem('defaultCity', JSON.stringify(state.city));
+      // 数据改变的时候把数据拷贝一份保存到localStorage里面
+      } catch (e) {}
+    }
+  }
+})
+```
+
+需要注意的是：由于vuex里，我们保存的状态，都是数组，而localStorage只支持字符串，所以需要用JSON转换：
+
+```js
+JSON.stringify(state.subscribeList);   // array -> string
+JSON.parse(window.localStorage.getItem("subscribeList"));    // string -> array 
+```
+
+#### `$attrs`/`$listeners`
+
+- `$parent` / `$children`、
+- `$attrs`/`$listeners`和provide/inject
 
 ### Vue 生命周期
 
@@ -194,11 +237,13 @@ export default {
 
 <img src="https://cn.vuejs.org/images/lifecycle.png" height="1200"/>
 
-1. beforeCreate: 在实例创建之前调用，由于实例还未创建，所以无法访问实例上的 data 
+1. beforeCreate: 在实例创建之前调用**（初始化界面前）**，由于实例还未创建，所以无法访问实例上的 data 
    computed 、 method 等。基本业务逻辑是不需要它的。
-2. created: 在实例创建完成后调用，这时已完成数据的观测，可以获取数据和更改数据，但还无法与dom进行交互，如果想要访问dom，可以使用 vm.$nextTick 。此时可以对数据进更改，不会触发 updated 。（不能获取到真实的 DOM 元素）可以在里边完成 ajax，不能操作 DOM。  
-3.  beforeMount: 在挂载之前调用，这时的模板已编译完成并生成 render 函数，准备开始渲染。在此时也可以对数据进行更改，不会触发 updated 。
-4. mounted: 在挂载完成后调用，真实的dom挂载完毕，可以访问到dom节点，使用 $refs 属性对dom进行操作。
+2. created: 在实例创建完成后调用**（初始化界面后）**，这时已完成数据的观测，可以获取数据和更改数据，但还无法与dom进行交互，如果想要访问dom，可以使用 vm.$nextTick 。此时可以对数据进更改，不会触发 updated 。（不能获取到真实的 DOM 元素）可以在里边完成 ajax，不能操作 DOM。  
+3.  beforeMount: 在挂载之前调用**（渲染dom前）**，这时的模板已编译完成并生成 render 函数，准备开始渲染。在此时也可以对数据进行更改，不会触发 updated 。
+4. mounted: 在挂载完成后调用**（渲染dom后）**，真实的dom挂载完毕，数据完成双向绑定，可以访问到dom节点，使用 $refs 属性对dom进行操作。
+
+   - 接口请求一般放在`mounted`中，但需要注意的是服务端渲染时不支持mounted，需要放到`created`中
 5. beforeUpdate: 在更新之前调用，也就是响应式数据发生更新，虚拟dom重新渲染之前被触发，在当前阶段进行更改数据，不会造成重渲染。
 6. updated： 在更新完成之后调用，组件dom已完成更新。要注意的是避免在此期间更改数据，这可能会导致死循环。
 7. beforeDestroy： 在实例销毁之前调用，这时实例还可以被使用，一般这个周期内可以做清除计时器和销毁自定义事件。
@@ -248,6 +293,13 @@ export default {
 ## 高级特性
 
 ### 自定义v-model
+
+在给<input />元素添加v-model属性时，默认会把value作为元素的属性，然后把'input'事件作为实时传递value的触发事件
+
+相当于是v-on,v-bind的结合
+
+- v-bind:绑定响应式数据value
+- 绑定触发 事件input并传递数据
 
 ```vue
 <!-- <CustomVModel v-model="name"/> -->
@@ -441,6 +493,10 @@ mixins:[myMixin],//可以添加多个，会合并起来
   actions才能做异步操作，访问后台api，ajax操作
 
 - state的数据结构设计
+
+### Vuex原理
+
+Vuex实现了一个单向数据流，在全局拥有一个State存放数据，当组件要更改State中的数据时，必须通过Mutation进行，Mutation同时提供了订阅者模式供外部插件调用获取State数据的更新。而当所有异步操作(常见于调用后端接口异步获取更新数据)或批量的同步操作需要走Action，但Action也是无法直接修改State的，还是需要通过Mutation来修改State的数据。最后，根据State的变化，渲染到视图上。
 
 ## Vue-router
 
@@ -675,11 +731,27 @@ export default {
 
 #### Object.defineProperty基本用法
 
-Object.defineProperty ⽅法会直接在⼀个对象上定义⼀个新属性， 或者修改⼀个对象的现有属性， 并返回这个对象。
+Object.defineProperty ⽅法会直接在⼀个对象上定义⼀个新属性， 或者修改⼀个对象的现有属性， 并返回这个对象。s
 
 语法：
-		Object.defineProperty(obj, prop, descriptor)
-obj 是要在其上定义属性的对象； prop 是要定义或修改的属性的名称； descriptor 是将被定义或修改的属性描述符。⽐较核⼼的是 descriptor ， 它有很多可选键值， 具体的可以去参阅它的⽂档。 这⾥我们最关⼼的是get 和 set ， get 是⼀个给属性提供的 getter ⽅法， 当我们访问了该属性的时候会触发 getter ⽅法； set 是⼀个给属性提供的 setter ⽅法， 当我们对该属性做修改的时候会触发 setter ⽅法。
+
+​				Object.defineProperty(obj, prop, descriptor)
+参数：
+
+​				obj：要定义属性的对象。
+
+​				prop：要定义或修改的属性的名称。
+
+​				descriptor：要定义或修改的属性描述符。
+
+⽐较核⼼的是 descriptor ， 它有很多可选键值，有两种主要形式：数据描述符和存取描述符。数据描述符是一个具有值的属性，该值可以是可写的，也可以是不可写的。存取描述符是由 getter 函数和 setter 函数所描述的属性。一个描述符只能是这两者其中之一；不能同时是两者。
+
+get：属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 this 对象（由于继承关系，这里的this并不一定是定义该属性的对象）。该函数的返回值会被用作属性的值。
+默认为 undefined。
+
+set：属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值），会传入赋值时的 this 对象。
+默认为 undefined。·
+
 ⼀旦对象拥有了 getter 和 setter， 我们可以简单地把这个对象称为响应式对象。   那么 Vue.js 把哪些对象变成了响应式对象了呢？ 
 
 ```js
@@ -700,38 +772,62 @@ console.log(data.name) // get xiaoming
 data.name = 'list' //set
 ```
 
-### vue是如何实现数据双向绑定的  
-
-`双向数据绑定v-model的实现原理`
+### 双向数据绑定v-model的实现原理
 
 - input元素的value = this.name
 - 绑定input事件this.name = $event.target.value
 - data更新触发re-render
 
-vue实现数据双向绑定的原理：就是用 Object.defineproperty() 重新定义对象  设置属性值 （set方法）和 获取属性值（get方法）的操纵来实现的
+[前端靓仔_Maybe](https://juejin.cn/post/6844904015516401678)
 
-描述：
+vue实现数据双向绑定的原理：vue是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发响应的监听回调。
 
-Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+**具体步骤**
 
-语法：
+**第一步：**
+ 需要observer的数据对象进行递归遍历，包括子属性对象的属性，都加上setter和getter这样的方法，给这个对象的某个值赋值时，就会触发setter，那么就能监听到了数据变化
 
-​				Object.defineProperty(obj, prop, descriptor)
-参数：
+**第二步：**
+ compile解析模板，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个节点对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图
 
-​				obj：要定义属性的对象。
+**第三步：**
+ Watcher订阅名是 observer和 Compile之间通信的桥梁，主要做的事情是：
+ 1.在自身实例化时往属性订阅器(dep)里面添加自己
+ 2.自身必须有一个 update()方法
+ 3.待属性变动dep.notice()通知时，能调用自身的update()方法，并触发Compile中定的回调，则功成身退
 
-​				prop：要定义或修改的属性的名称。
+**第四步:**
+ MVVM作为数据绑定的入口，整合  observer、 Compile和 Watcher三者，通过 Observer来监听自己的model数据変化，通过 Compile来解析编译模板指令，最终利用 Watcher搭起 Observer和 Compile之间的通信标梁，达到数据变化-＞视图更新新:视图交互变化(Input)-＞数据mode变更的双向绑定效果。
 
-​				descriptor：要定义或修改的属性描述符。
+以上便是比较官方的口吻讲解vue的双向数据绑定原理，那么接下来，说说我对双向数据绑定原理的理解，要理解vue的双向数据绑定原理那就必须先理解MVC与MVVM模式的区别然后再理解vue的单项数据绑定原理，接下来给大家以图片和文字结合的方式讲解下：
 
-对象里目前存在的   属性描述符   有两种主要形式：数据描述符和存取描述符。数据描述符是一个具有值的属性，该值可以是可写的，也可以是不可写的。存取描述符是由 getter 函数和 setter 函数所描述的属性。一个描述符只能是这两者其中之一；不能同时是两者。
+**1.MVC和MVVM的区别：**
 
-get：属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 this 对象（由于继承关系，这里的this并不一定是定义该属性的对象）。该函数的返回值会被用作属性的值。
-默认为 undefined。
 
-set：属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值），会传入赋值时的 this 对象。
-默认为 undefined。
+
+![img](https://user-gold-cdn.xitu.io/2019/12/7/16ede18f160f131c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+所以从上图可以看出来，MVVM设计模式是自动化的，vue就是采取了这种设计模式，我们可以发现，真正把数据和视图分离开的是MVVM模式，并不是MVC，因为controller当中有大量手工的DOM操作，只要界面改变，你的controller中的代码必须要更改（jquery），比如你可以想象一下，你页面当中元素的位置变了，你的选择器是不是肯定要变，选择器就写在DOM操作里面，这就是MVC和MVVM两种设计模式的区别。
+
+**2.vue的单项单项数据绑定原理：**
+
+
+
+![img](https://user-gold-cdn.xitu.io/2019/12/7/16ede2ff5a75589d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+单项绑定过程(自己总结的)：变量变了，由set发通知给watcher，watcher告知虚拟DOM树，叫它该比较了，我这有值变了，于是生成新的dom树进行一个比较，然后逐级分类比较，比较出哪个元素发生变化就把这个元素更新到页面，这就是单项数据绑定原理。
+
+**3.vue双向数据绑定原理**
+ vue的双向数据绑定原理，当页面有一个input元素咋办，这时候v-model双向数据绑定就派上用场了，但是v-model双向数据绑定原理又是怎样的呢？请看下图：
+
+
+
+![img](https://user-gold-cdn.xitu.io/2019/12/7/16ede3f4bc83638a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+
+ v-model原理其实就是给input事件绑定oninput事件 就会立刻调用底层对象对应的setter方法 改变data里的属性的值 从而实现双向数据绑定
+
+v-model主要提供了两个功能，view层输入值影响data的属性值，data属性值发生改变会更新view层的数值变化。
 
 ```html
 <!DOCTYPE html>
@@ -778,19 +874,45 @@ set：属性的 setter 函数，如果没有 setter，则为 undefined。当属�
 
 这样就实现了一个简单的数据双向绑定.
 
-vdom和diff算法
+### vdom和diff算法
 
-模板编译
+Virtual DOM是对DOM的抽象,本质上是JavaScript对象,这个对象就是更加轻量级的对DOM的描述。
 
-组件渲染过程
+diff的目的就是比较新旧Virtual DOM Tree找出差异并更新.在现代的各种Virtual DOM库都是只比较同级差异,在这种情况下我们的时间复杂度是O(n).
 
-前端路由
+**为什么需要Virtual DOM**
+
+既然我们已经有了DOM,为什么还需要额外加一层抽象?
+
+首先,我们都知道在前端性能优化的一个秘诀就是尽可能少地操作DOM,不仅仅是DOM相对较慢,更因为频繁变动DOM会造成浏览器的回流或者重回,这些都是性能的杀手,因此我们需要这一层抽象,在patch过程中尽可能地一次性将差异更新到DOM中,这样保证了DOM不会出现性能很差的情况.
+
+其次,现代前端框架的一个基本要求就是无须手动操作DOM,一方面是因为手动操作DOM无法保证程序性能,多人协作的项目中如果review不严格,可能会有开发者写出性能较低的代码,另一方面更重要的是省略手动DOM操作可以大大提高开发效率.
+
+最后,也是Virtual DOM最初的目的,就是更好的跨平台,比如Node.js就没有DOM,如果想实现SSR(服务端渲染),那么一个方式就是借助Virtual DOM,因为Virtual DOM本身是JavaScript对象.
+
+**diff**
+
+我们可以假设有旧的Vnode数组和新的Vnode数组这两个数组,而且有四个变量充当指针分别指到两个数组的头尾.
+
+重复下面的对比过程，直到两个数组中任一数组的头指针超过尾指针，循环结束:
+
+- 头头对比: 对比两个数组的头部，如果找到，把新节点patch到旧节点，头指针后移
+- 尾尾对比: 对比两个数组的尾部，如果找到，把新节点patch到旧节点，尾指针前移
+- 旧尾新头对比: 交叉对比，旧尾新头，如果找到，把新节点patch到旧节点，旧尾指针前移，新头指针后移
+- 旧头新尾对比: 交叉对比，旧头新尾，如果找到，把新节点patch到旧节点，新尾指针前移，旧头指针后移
+- 利用key对比: 用新指针对应节点的key去旧数组寻找对应的节点,这里分三种情况,当没有对应的key，那么创建新的节点,如果有key并且是相同的节点，把新节点patch到旧节点,如果有key但是不是相同的节点，则创建新节点
+
+### 模板编译
+
+#### 组件渲染过程
+
+#### 前端路由
 
 # 面试题
 
 ## 至少说出 vue.js 中的4种指令和它们的用法
 
-- v- if：判 断对象是否隐藏。
+- v- if：判断对象是否隐藏。
 - v-for：循环渲染 。
 - v-bind：绑定一个属性 。
 - v-model ：实现数据双向绑定 。
@@ -913,6 +1035,10 @@ watch： 更多的是「观察」的作用，类似于某些数据的监听回�
 
 - 异步渲染(以及合并data修改)，以提高渲染性能
 - $nextTick在DOM更新完之后，触发回调
+
+## Virtual DOM 真的比操作原生 DOM 快吗？
+
+框架的意义在于为你掩盖底层的 DOM 操作，让你用更声明式的方式来描述你的目的，从而让你的代码更容易维护。没有任何框架可以比纯手动的优化 DOM 操作更快，因为框架的 DOM 操作层需要应对任何上层 API 可能产生的操作，它的实现必须是普适的。
 
 ## vue常见性能优化方式
 

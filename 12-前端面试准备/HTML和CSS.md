@@ -1,4 +1,82 @@
 # HTML和CSS
+
+## 布局方式
+
+### 1.静态布局：
+
+传统布局，屏幕宽高变化时，盒子使用横向或者竖向的滚动条来查看被遮挡部分，也就是不管浏览器窗口的大小怎么变化就按html语义标签排列的布局来布置。
+
+### 2.弹性布局(flex)：
+
+css3引入的，flex布局；优点在于其容易上手，根据flex规则很容易达到某个布局效果，然而缺点是：浏览器兼容性比较差，只能兼容到ie9及以上；
+
+**Flex 布局**
+
+Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。
+
+任何一个容器都可以指定为 Flex 布局。
+
+容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。
+
+项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。
+
+**容器的属性**
+
+- flex-direction决定主轴的方向（即项目的排列方向）。
+  - row（默认值）：主轴为水平方向，起点在左端。
+  - row-reverse：主轴为水平方向，起点在右端。
+  - column：主轴为垂直方向，起点在上沿。
+  - column-reverse：主轴为垂直方向，起点在下沿。
+- flex-wrap 是否换行
+  - flex-wrap: nowrap | wrap | wrap-reverse;
+- flex-flow：flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。
+- justify-content定义了项目在主轴上的对齐方式。
+  - flex-start（默认值）：左对齐
+  - flex-end：右对齐
+  - center： 居中
+  - space-between：两端对齐，项目之间的间隔都相等。
+  - space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+- align-items：定义项目在交叉轴上如何对齐。
+  - flex-start：交叉轴的起点对齐。
+  - flex-end：交叉轴的终点对齐。
+  - center：交叉轴的中点对齐。
+  - baseline: 项目的第一行文字的基线对齐。
+  - stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+- align-content定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+  - flex-start：与交叉轴的起点对齐。
+  - flex-end：与交叉轴的终点对齐。
+  - center：与交叉轴的中点对齐。
+  - space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
+  - space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+  - stretch（默认值）：轴线占满整个交叉轴。
+
+### 3.自适应布局：
+
+分别为不同的屏幕分辨率定义布局，在每个布局中，页面元素不随窗口大小的调整而发生变化，当窗口大小到达一定分辨率时变化一次。
+
+### 4.流式布局：
+
+页面元素的宽度按照屏幕进行适配调整，元素的位置不变，大小变化，屏幕太大或者太小导致元素不能正常显示。
+
+### 5.响应式布局：
+
+<meta name="viewport" content="divice-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+使用meta标签设置，页面元素宽度随窗口调整自动适配。主要属性及其含义如下：name="viewport"：  名称=视图；width=device-width 页面宽度=设备宽度(可以理解为获取你手机的屏幕宽度)；initial-scale - 初始的缩放比例 ；minimum-scale - 允许用户缩放到的最小比例  ；maximum-scale - 允许用户缩放到的最大比例 ；user-scalable - 用户是否可以手动缩放 。
+
+6.网格布局：grid
+
+二维布局系统，随意的定义每行每列的数目和大小。也非常简单方便，兼容性较差。
+
+
+
+作者：Beauty_Beast
+链接：https://www.jianshu.com/p/6d647338f121
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+- - 
+
 ## 瀑布流
 
 `[艾涵](https://www.cnblogs.com/ainyi/)`

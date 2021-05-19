@@ -18,6 +18,8 @@
 
 ## 数组循环
 
+### for-in和for-of
+
 - for-in
 
   使用`for-in`进行遍历时，`i`为对象的`key`,数组的`index`。
@@ -26,35 +28,119 @@
 
   （2）无顺序（通常用于对象或json中）
 
-  （3）可扩展属性也会遍历
+  （3）可扩展属性(自定义属性)也会遍历
 
   ```js
-  var arr = ["a","b","c"];
-  for(var v in arr){           //这里的v代表的是key值，主要用于输出key值
-      console.log(typeof v);     //string，索引为字符串
-      console.log(arr[v]);
+  let obj={
+      name:"张三丰",
+      age:108,
+      job:"programmer"
   }
-  //string
-  //a
-  //string
-  //b
-  //string
-  //c
+  for(let i in obj){
+      console.log("i:"+i,","+obj[i]);
+  }
+  //i:name,张三丰
+  //i:age,108
+  //i:job,programmer
+  let arr = [12,23,34], arr.name = "张三丰";
+  for(let j in arr){
+      console.log("i:"+j,","+arr[j]);
+  }
+  //i:0,12
+  //i:1,23
+  //i:2,34
+  //i:name,张三丰
   ```
-
-  
 
 - for-of
 
-  区别
-  遍历对象时推荐使用for-in，其中i为对象的key。使用for-of会报错。
-  遍历数组时推荐使用for-of，其中i为数组每一项的值。使用for-in则不能保证遍历顺序且会遍历出自定义属性。
-  for-in是ES5特性，fro-of是ES6特性，注意兼容
-  如果要使用for-of遍历普遍对象，需要配合Object.keys()一起使用。
+  使用`for-of`对对象进行遍历时报错，对数组进行遍历时，`i`直接是数组每一项的值。
+
+  1.目前遍历 数组 最便利的方法
+
+  2.避免了for-in，forEach的所有缺陷(for-of可以跳出循环,避免了forEach的缺陷)
+  3.可以用在数组，字符串，set和map数据 上
+  4.不支持对象的遍历（但是它提供了其他的三种方法）
+              ①Object.keys()
+              ②Object.values()
+              ③Object.entries()
+
+  `for-of`没有对数组的自定义属性进行遍历。
+
+  ```js
+  let obj={
+      name:"张三丰",
+      age:108,
+      job:"programmer"
+  }
+  for(let i of obj){
+      console.log("i:"+i,","+obj[i]); //obj is not iterable
+  }
+  let arr = [12,23,34]
+  arr.name = "张三丰";
+  for(let j of arr){
+      console.log("i:"+j,","+arr[j]);
+  } 
+  //i:12,undefined
+  //i:23,undefined
+  //i:34,undefined
+  var arr = ['q','w','e'];
+      for(var v of arr){
+          console.log(v);
+          break;
+  }
+  //q
+  var str = "hello"; //for-of循环字符串
+  for(var v of str){
+     console.log(v);
+  }
+  //h
+  //e
+  //l
+  //l
+  //o
+  ```
+
+(1）Object.keys()遍历对象的属性
+
+(2)  Object.values()遍历对象的属性值  
+
+(3)  Object.entries() 遍历对象obj的属性和属性值    
+
+```js
+var obj = {
+    name:"hello",
+    age:"18"
+};
+for(var i of Object.keys(obj)){
+   console.log(i);
+    //name
+	//age
+}
+for(var i of Object.vales(obj)){
+   console.log(i);
+	//hello
+	//18
+}
+for(var i of Object.entries(obj)){
+   console.log(i);
+	//["name","hello"]
+	//["age","18"]
+}
+```
+
+### for-in和for-of区别
+
+遍历对象时推荐使用for-in，其中i为对象的key。使用for-of会报错。
+遍历数组时推荐使用for-of，其中i为数组每一项的值。使用for-in则不能保证遍历顺序且会  遍历出自定义属性。
+for-in是ES5特性，fro-of是ES6特性，注意兼容
+如果要使用for-of遍历普遍对象，需要配合Object.keys()一起使用。
+
+### 数组循环其他常用的方法
 
 1.forEach()
 
-forEach会遍历数组, 没有返回值, 不允许在循环体内写return, 不会改变原来数组的内容.forEach()也可以循环对象。
+会遍历数组, 没有返回值, 不允许在循环体内写return, 不会改变原来数组的内容.forEach()也可以循环对象。
 
 ```js
 let array = [1,2,3,4];
@@ -72,7 +158,7 @@ let array = [1, 2, 3, 4];
 let temp = array.map((item, index, array) => {
 　　return item * 10;
 });
-console.log(temp);　　//  [10, 20, 30, 40];
+console.log(temp);　　 // [10, 20, 30, 40];
 console.log(array);　　// [1, 2, 3, 4]
 ```
 
@@ -476,6 +562,101 @@ function f1(){
         console.log(object.getNameFunc()());
 ```
 
+## 函数柯里化
+
+add(1)(2)(3)(4)输出的值怎么成为10，很简单，大家都明白是1+2+3+4的累加。那使用基础函数是怎么实现的呢？
+
+```js
+function add (a, b, c, d) {
+	return a + b + c + d
+}
+add(1, 2, 3, 4) // 10
+```
+
+
+add(1, 2, 3, 4) // 10那如何add(1)(2)(3)(4)如何也输出10呢？小伙伴接下来可能会想到这样：
+
+```js
+function add (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return a + b + c + d
+			}
+		}
+	}
+}
+```
+
+函数柯里化概念： 柯里化（Currying）是把接受多个参数的函数转变为接受一个单一参数的函数，并且返回接受余下的参数且返回结果的新函数的技术。
+
+二、函数柯里化解决方案
+
+函数柯里化有两种不同的场景，一种为函数参数个数定长的函数，另外一种为函数参数个数不定长的函数。
+
+1.函数参数个数定长的柯里化解决方案
+
+```js
+// 定长参数
+function add (a, b, c, d) {
+	return [
+	  ...arguments
+	].reduce((a, b) => a + b)
+}
+
+function currying (fn) {
+	let len = fn.length
+	let args = []
+	return function _c (...newArgs) {
+		// 合并参数
+		args = [
+			...args,
+			...newArgs
+		]
+		// 判断当前参数集合args的长度是否 < 目标函数fn的需求参数长度
+		if (args.length < len) {
+			// 继续返回函数
+			return _c
+		} else {
+			// 返回执行结果
+			return fn.apply(this, args.slice(0, len))
+		}
+	}
+}
+let addCurry = currying(add)
+let total = addCurry(1)(2)(3)(4) // 同时支持addCurry(1)(2, 3)(4)该方式调用
+console.log(total) // 10
+```
+
+2.函数参数个数不定长的柯里化解决方案
+
+问题升级：那这个问题再升级一下，函数的参数个数不确定时，如何实现呢？
+
+```js
+function add (...args) {
+	return args.reduce((a, b) => a + b)
+}
+
+function currying (fn) {
+	let args = []
+	return function _c (...newArgs) {
+		if (newArgs.length) {
+			args = [
+				...args,
+				...newArgs
+			]
+			return _c
+		} else {
+			return fn.apply(this, args)
+		}
+	}
+}
+
+let addCurry = currying(add)
+// 注意调用方式的变化
+console.log(addCurry(1)(2)(3)(4, 5)())
+```
+
 ## this指向
 
 - 1.在全局作用域下 this对象指向的是window对象
@@ -862,7 +1043,7 @@ window.onerror = function(message, source, lineNum,colNum,error){
 
 - json是一种数据格式，本质是一段字符串
 - json格式和js对象结构一致，对js语言更友好
-- window.JSON是一个全局对象：JSON.stringify JSON.parse
+- window.JSON是一个全局对象：JSON.stringify  JSON.parse
 
 ## 获取当前页面url参数
 
@@ -968,7 +1149,12 @@ function unique(arr){
 }
 const res = unique([10,20,20,30,10,40,50])
 console.log(res)
-
+// filter()过滤
+var norepeat = function(arr) {
+    return arr.filter(function(val, index, array) {
+        return array.indexOf(val) === index;
+    })
+}
 // 使用Set (无序，不能重复) 需要考虑兼容性
 function uniqueSet(arr){
     const set = new Set(arr)
