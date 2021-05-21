@@ -291,17 +291,17 @@ isEqual.js
 
 1. 不改变源数组（没有副作用）；2. 返回一个数组
 
-​    concat map filter slice 
+​    concat map filter slice  forEach
+
+​    some every
+
+​    reduce 
 
 ##     非纯函数
 
 ​    push pop shift unshift
 
-​    forEach
-
-​    some every
-
-​    reduce 
+   
 
 ​	sort
 
