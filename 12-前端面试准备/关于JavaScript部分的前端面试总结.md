@@ -1,12 +1,26 @@
-关于JavaScript部分的前端面试总结
+# 关于JavaScript部分的前端面试总结
 
-##   var和let以及const的区别
+## var和let以及const的区别
 
      var是ES5语法 let和const是ES6语法 
 
      var有变量提升 let和const具有块级作用域，var没有 
 
      var和let是变量，可修改；const是常量，不可修改 
+
+```js
+
+function a(){
+    console.log('a');
+}
+var a = function(){
+    console.log('b')
+}
+a()
+// b
+```
+
+
 
 ## typeof能判断哪些类型 
 
@@ -58,15 +72,16 @@
 
   1.目前遍历 数组 最便利的方法
 
-  2.避免了for-in，forEach的所有缺陷(for-of可以跳出循环,避免了forEach的缺陷)
+  
+  
   3.可以用在数组，字符串，set和map数据 上
   4.不支持对象的遍历（但是它提供了其他的三种方法）
               ①Object.keys()
               ②Object.values()
-              ③Object.entries()
-
-  `for-of`没有对数组的自定义属性进行遍历。
-
+            ③Object.entries()
+  
+`for-of`没有对数组的自定义属性进行遍历。
+  
   ```js
   let obj={
       name:"张三丰",
@@ -136,7 +151,7 @@ for(var i of Object.entries(obj)){
 for-in是ES5特性，fro-of是ES6特性，注意兼容
 如果要使用for-of遍历普遍对象，需要配合Object.keys()一起使用。
 
-### 数组循环其他常用的方法
+### 数组循环其他常用的方法和区别
 
 1.forEach()
 
@@ -176,7 +191,7 @@ let array = [1, 2, 3, 4];
 let temp = array.filter((item, index, array) => {
 　　return item >  3;
 });
-console.log(temp);　　// [4]
+console.log(temp);　　 // [4]
 console.log(array);　　// [1, 2, 3, 4]
 ```
 
@@ -190,7 +205,7 @@ let temp = array.reduce((x, y) => {
 	console.log("x+y,",Number(x)+Number(y));
 	return x + y;
 });
-console.log(temp);　　// 10
+console.log(temp);　　 // 10
 console.log(array);　　// [1, 2, 3, 4]
 ```
 
@@ -475,11 +490,10 @@ Object.is(NaN, 0/0);         // true
 
 闭包：在一个作用域中可以访问另一个作用域的变量。在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此也可以把闭包简单理解成"定义在一个函数内部的函数"。
 
-闭包主要是为了设计私有的方法和支量 。 闭包的优点是可以避免全局变量
-的污染；缺点是闭包会常驻内存， 增加内存使用 量 ，使用不当很容易造成内存泄漏 。 
+闭包主要是为了设计私有的方法和支量 。 闭包的优点是可以避免全局变量的污染；缺点是闭包会常驻内存， 增加内存使用 量 ，使用不当很容易造成内存泄漏 。 
 **闭包有 3 个特性** 。
 ( I ） 函数嵌套函数 。
-( 2 ）在函数内部可以引用外部的参数和支量 。
+( 2 ）在函数内部可以引用外部的参数和变量 。
 ( 3 ）参数和变量不会以垃圾回收机制回收 。  
 
 **闭包的用途**
@@ -871,6 +885,7 @@ console.log("end");
 // 输出
 // start     
 // end       
+
 // promise1  
 // promise2  
 // setTimeout

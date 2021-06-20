@@ -240,7 +240,7 @@
 		<style type="text/css">
 			/*
 			1、先让子盒子的上下边缘和父盒子的水平中心线重叠，然后再让
-			子盒子再往会移动自身的一半距离
+			子盒子再往回移动自身的一半距离
 			2、实用表格的vertical-align:middle; display：table-cell
 			3、使用maring计算盒子的上下边距，使盒子居中
 			***/

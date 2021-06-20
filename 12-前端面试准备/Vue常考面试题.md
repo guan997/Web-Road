@@ -1,4 +1,4 @@
-Vue
+# Vue
 
 ## 基本使用
 
@@ -493,6 +493,45 @@ mixins:[myMixin],//可以添加多个，会合并起来
   actions才能做异步操作，访问后台api，ajax操作
 
 - state的数据结构设计
+
+### 基本使用
+
+#### vue store 存储 dispatch 和 commit的区别
+
+dispatch: 含有异步操作
+存储：
+
+```js
+this.$store.dispatch('initUserInfo',friend);
+```
+
+取值：
+
+```js
+this.$store.getters.userInfo;
+```
+
+commit:同步操作
+存储：
+
+```js
+this.$store.commit('initUserInfo',friend);
+```
+
+取值：
+
+```js
+this.$store.state.userInfo;
+```
+
+主要区别是：
+dispatch：含有异步操作，例如向后台提交数据，写法： 
+
+```js
+this.$store.dispatch(‘mutations方法名’,值)
+```
+
+commit：同步操作，写法：this.$store.commit(‘mutations方法名’,值)
 
 ### Vuex原理
 
