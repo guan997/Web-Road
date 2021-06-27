@@ -2635,45 +2635,103 @@ submitForm = () => {
 
 ### 拉取API数据
 
+推荐在 [`componentDidMount`](https://reactjs.bootcss.com/docs/react-component.html#mounting) 这个生命周期函数中发起 AJAX 请求。这样做可以拿到 AJAX 请求返回的数据并通过 `setState` 来更新组件。
+
 React 的一种非常常见的用法是从 API 中提取数据。了解如何通过状态数组创建组件、渲染和映射。此代码的新方面是`componentDidMount()`React 生命周期方法。**生命周期**是在 React 中调用方法的顺序。**挂载**是指一个项目被插入到 DOM 中。
 
 当我们拉入 API 数据时，我们想使用`componentDidMount`，因为我们想确保在我们引入数据之前组件已经渲染到 DOM。在下面的片段中，您将看到我们如何从 Wikipedia API 引入数据并将其显示在页面上
 api.js
 
-```jsx
-import React, {Component} from 'react'
+### 使用 AJAX 请求结果去改变组件内部 state
 
-class App extends Component {
-  state = {
-    data: [],
+下面这个组件演示了如何在 `componentDidMount` 中发起 AJAX 请求去更新组件的 state 。
+
+```jsx
+import React from 'react';
+class MyComponent extends React.Component {
+constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: []
+    };
   }
 
-  // Code is invoked after the component is mounted/inserted into the DOM tree.
   componentDidMount() {
-    const url =
-      'https://en.wikipedia.org/w/api.php?action=opensearch&search=Seona+Dancing&format=json&origin=*'
-
-    fetch(url)
-      .then((result) => result.json())
-      .then((result) => {
-        this.setState({
-          data: result,
-        })
-      })
+    fetch("https://api.example.com/items")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.items
+          });
+        },
+        // 注意：需要在此处处理错误
+        // 而不是使用 catch() 去捕获错误
+        // 因为使用 catch 去捕获异常会掩盖掉组件本身可能产生的 bug
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
   }
 
   render() {
-    const {data} = this.state
-
-    const result = data.map((entry, index) => {
-      return <li key={index}>{entry}</li>
-    })
-
-    return <ul>{result}</ul>
+    const { error, isLoaded, items } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <ul>
+          {items.map(item => (
+            <li key={item.id}>
+              {item.name} {item.price}
+            </li>
+          ))}
+        </ul>
+      );
+    }
   }
 }
-
-export default App
+// class Api extends Component{
+//     state = {
+//         data: [],
+//     }
+//     componentDidMount(){
+//         const url = 'http://localhost:3300/'
+//         fetch(url).then((result) => result.json())
+//         .then((result) => {
+//             this.setState({
+//                 data:result,
+//             })
+//         },
+//         // 注意：需要在此处处理错误
+//         // 而不是使用 catch() 去捕获错误
+//         // 因为使用 catch 去捕获异常会掩盖掉组件本身可能产生的 bug
+//         (error) => {
+//           this.setState({
+//             isLoaded: true,
+//             error
+//           });
+//         }
+//         )
+//     }
+//     render(){
+//         const {data} = this.state;
+//         const result = data.map((entry, index) => {
+//         return <li key={index}>{entry}</li>
+//         })
+//     return <ul>{result}</ul>
+//     }
+// }
+// export default Api;
+export default MyComponent ;
 ```
 
 在本地服务器中保存并运行此文件后，您将看到 DOM 中显示的 Wikipedia API 数据。
