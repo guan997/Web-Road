@@ -79,7 +79,7 @@ npx create-react-app my-app --tlate typescript
 
   - 安装comiit依赖yarn add @commitlint/cli @commitlint/config-conventional --dev
 
-  - 之后运行echo "modules.exports = {extends:['@commitlint/config-conventional']}" > commitlint.config.js配置
+  - 之后运行echo "module.exports = {extends:['@commitlint/config-conventional']}" > commitlint.config.js配置
 
   - 之后在package.json中的"husky": {
 
@@ -90,6 +90,45 @@ npx create-react-app my-app --tlate typescript
        "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
 
       }
+
+    - 规则
+
+    - ```
+      ype-enum
+      condition: type is found in value
+      
+      rule: always
+      
+      level: error
+      
+      value
+      
+      [
+        'build',
+        'chore',
+        'ci',//脚本配置
+        'docs',//文档
+        'feat',//功能
+        'fix',
+        'perf',//性能
+        'refactor',
+        'revert',
+        'style',//样式
+        'test'
+      ];
+      echo "foo: some message" # fails
+      echo "fix: some message" # passes
+      type-case
+      description: type is in case value
+      rule: always
+      level: error
+      value
+      'lowerCase'
+      echo "FIX: some message" # fails
+      echo "fix: some message" # passes
+      ```
+
+    - 
 
 # 报错
 
