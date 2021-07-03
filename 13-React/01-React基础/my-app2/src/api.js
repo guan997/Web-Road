@@ -1,6 +1,6 @@
 import React from 'react';
 class MyComponent extends React.Component {
-constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       error: null,
@@ -82,4 +82,4 @@ constructor(props) {
 //     }
 // }
 // export default Api;
-export default MyComponent ;
+export default MyComponent;
