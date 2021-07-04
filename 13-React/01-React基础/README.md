@@ -11784,8 +11784,6 @@ React 一些常用的 API 名字很冗长。比如，我们采用 `componentDidM
 
 这种做法的不好之处是有时对于 Facebook 团队无需关心的事，比如“起步”的体验，我们不能够给予足够的重视。我们已经觉察到了，我们正在着手思考如何做才能使社区里的每个人都受益，不重蹈以前开源项目的覆辙。
 
-Is this page useful?[编辑此页面](https://github.com/reactjs/zh-hans.reactjs.org/tree/master/content/docs/design-principles.md)
-
 ### 报错总结
 
 >  // console报错信息如下
@@ -11845,10 +11843,9 @@ Router容器包裹着路由跳转的Prompt
 
 > // Line 31:24: Expected '===' and instead saw '==' eqeqeq 
 
-esink报错 使用eslint-disable-line忽略这行的eslink
+#### esink报错 使用eslint-disable-line忽略这行的eslink
 
 >  React项目警告：Imported JSX component xxx must be in PascalCase or
-
 
 问题原因
 React发现了带下划线的组件命名，将带下划线的组件命名改为驼峰命名即可
@@ -11857,7 +11854,7 @@ React发现了带下划线的组件命名，将带下划线的组件命名改为
 >
 > Attempted import error: './Game/Game' does not contain a default export (imported as 'Game').
 
-**export default 和 export 区别：**
+#### **export default 和 export 区别：**
 
 - 1.export与export default均可用于导出常量、函数、文件、模块等	 
 - 2.你可以在其它文件或模块中通过import+(常量 | 函数 | 文件 | 模块)名的方式，将其导入，以便能够对其进行使用 

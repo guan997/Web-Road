@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {ProjectListScreen} from './screen/project-list/index.jsx'
 function App() {
   return (

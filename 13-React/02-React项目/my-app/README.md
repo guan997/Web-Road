@@ -273,6 +273,240 @@ encodeURIComponent("转译")转译成字母
 
 encodeURI("URI")转译整个URI
 
+## JSX渲染
+
+yarn add qs避免url后手动追加name
+
+​    fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.personId}`) =>
+
+   fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(
+
+qs.stringify(cleanObject(param))会把param准换为name=${param.name}&personId=${param.personId}`
+
+```js
+//index.jsx
+import React from "react"
+import * as qs from 'qs';
+import {cleanObject,useMount,useDebounce} from '../../utils/index';
+import { useEffect, useState } from "react"
+import {SearchPanel} from './search-panel'
+import {List} from './list'
+// 根据运行的命令去自动选择读取.env还是.env.development
+const apiUrl = process.env.REACT_APP_API_URL;
+export const ProjectListScreen = () => {
+    const [users, setUsers] = useState([])
+    // 负责人列表
+    const [param, setParam] = useState({
+        name: '',
+        personId: ''
+    });
+    const [list, setList] = useState([]);
+    // 利用useDebounce快速处理事件，减少请求
+    const debouncedParam = useDebounce(param, 2000);
+    // 获取项目列表api的数据 :当param改变时获取
+    // 使用fetch获取，返回给response
+    useEffect(() => {
+        // 传搜索对象post 为避免param.name对象为空值，避免歧义
+        // fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.personId}`).then(async response => {
+        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async response => {
+            if (response.ok) {
+                setList(await response.json())
+            }
+        })
+    }, [debouncedParam])
+    // useEffect(() => {
+    //     fetch(`${apiUrl}/users`).then(async response => {
+    //         if (response.ok) {
+    //             setUsers(await response.json())
+    //         }
+    //     })
+    // }, [])//只在页面加载时执行一次 初始化，如果不想看到满屏空数组和useEffect，把useEffect抽象出来
+    // 避免加载时有空数组
+    useMount(() => {
+        fetch(`${apiUrl}/users`).then(async response => {
+            if (response.ok) {
+                setUsers(await response.json())
+            }
+        })
+    })
+    // useDebounce
+    return (
+        <div>
+            <SearchPanel users={users} param={param} setParam={setParam} />
+            <List list={list} users={users}/>
+        </div>
+    )
+}
+//list
+import React from "react"
+export const List = ({ users, list }) => {
+    return <table>
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>负责人</th>
+            </tr>
+        </thead>
+        <tbody>
+            {
+                list.map(project => <tr key={project.id}>
+                    <td>{project.name}</td>
+                    {/* 不含personname需要用personid渲染 从user中找personid */}
+                    {/* 如果找不到值很有可能变成undefined */}
+                    {/* ?.表示 如果前面表达式为undefined则整个表达式都是undefined，故不会报任何错误 */}
+                    {/* 为undefined时默认值为未知 */}
+                    <td>{users.find(user => user.id === project.personId)?.name || '未知'}</td>
+                </tr>)
+            }
+        </tbody>
+    </table>
+}
+//search-panel
+import React from "react"
+// import { useEffect, useState } from "react"
+// 解构赋值
+export const SearchPanel = ({users,param, setParam}) => {
+    return <form>
+        <div>
+            {/* setParam(Object.assing({},param,{name:evt.target.value})) */}
+            <input type="text" value={param.name} onChange={evt => setParam({
+                ...param,
+                name: evt.target.value
+            },10000)}/>
+            {/* 选择负责人 */}
+            <select 
+                value={param.personId} 
+                onChange={evt => setParam({
+                    ...param,
+                    personId: evt.target.value
+            })}>
+                <option value={''}>负责人</option>
+                {users.map(user => 
+                    <option value = {user.id} key = {user.id}>
+                        {user.name}
+                    </option>)}
+            </select>
+        </div>
+    </form>
+}
+//utils/index
+import { useEffect, useState } from "react";
+
+// 判断是否为0 常用
+export const isFalsy = (value) => value === 0 ? false : !value;
+// !!value 一个“！”号是对值求反，两个“！！”转换为布尔值
+// 在一个函数里，改变一个函数的本身是不好的
+// 调用函数时，函数不知道函数内部有改变会原污染函数
+export const cleanObject = (object) => {
+    Object.assign({}, object);
+    const result = { ...object };
+    // 遍历对象的键
+    Object.keys(result).forEach(key => {
+        const value = result[key];
+        // 当value为0时也需要判断，因为0有意义
+        if (isFalsy(value)) {//如果value值为空，undefined，则删除
+            delete result[key];
+        }
+    })
+    return result;
+};
+// 避免出现[]
+export const useMount = (callback) => {
+    useEffect(() => {
+        callback()
+        // eslint-disable-next-line
+    }, [])
+}
+// 节流
+// const debounce = (func,delay) =>{
+//     let timeout;
+//     return(...param) =>{
+//         // 闭包
+//         if(timeout){//如果timeout有值 清除定时器
+//             clearTimeout(timeout);
+//         }//timeout没有值设置定时器
+//         timeout = setTimeout(function(){
+//             func(...param);
+//         },delay);
+//     }
+// }
+// const log = debounce(() => console.log('call'),5000)
+// log()
+// log()
+// log()
+
+// debounce 原理讲解：
+// 0s ---------> 1s ---------> 2s --------> ...
+//     一定要理解：这三个函数都是同步操作，所以它们都是在 0~1s 这个时间段内瞬间完成的；
+//     log()#1 // timeout#1
+//     log()#2 // 发现 timeout#1！取消之，然后设置timeout#2
+//     log()#3 // 发现 timeout#2! 取消之，然后设置timeout#3
+//             // 所以，log()#3 结束后，就只剩timeout#3在独自等待了
+
+
+// 利用hook写debounce
+// 上一个设置的被下一个清理，只有最后一个存取下来，
+export const useDebounce = (value, delay) => {
+    // useState是响应式的value值改变，useState就会触发
+    const [debouncedValue, setDebouncedValue] = useState(value);
+    useEffect(() => {
+        // 每次value或者delay的值变化以后，设置一个定时器
+        const timeout = setTimeout(() => setDebouncedValue(value), delay);
+        // 每次在上一个useEffect处理完以后再运行
+        return () => clearTimeout(timeout);
+    }, [value, delay])
+    return debouncedValue;
+}
+// Custom Hook的最大特征就是在hook中借助别的hook，如果不借助，单纯用函数就好
+```
+
+### useEffect()
+
+组件加载时渲染一次
+
+## 用Custom Hook提取并复用组件代码
+
+Custom Hook是react最新也是最优秀的组件代码复用方案
+
+写useMount和useDebounce两个Custom Hook
+
+系统自带的hook或者自定义的Custom Hook都不可以在普通函数中运行，只能在组件中运行或者hook中运行、
+
+在写Custom Hook的时候一定要以use开头
+
+debounce处理快速处理的事件，减少请求
+
+```js
+// 节流
+const debounce = (func,delay) =>{
+    let timeout;
+    return() =>{
+        // 闭包
+        if(timeout){//如果timeout有值 清除定时器
+            clearTimeout(timeout);
+        }//timeout没有值设置定时器
+        timeout = setTimeout(function(){
+            func();
+        },delay);
+    }
+}
+const log = debounce(() => console.log('call'),5000)
+log()
+log()
+log()
+
+// debounce 原理讲解：
+// 0s ---------> 1s ---------> 2s --------> ...
+//     一定要理解：这三个函数都是同步操作，所以它们都是在 0~1s 这个时间段内瞬间完成的；
+//     log()#1 // timeout#1
+//     log()#2 // 发现 timeout#1！取消之，然后设置timeout#2
+//     log()#3 // 发现 timeout#2! 取消之，然后设置timeout#3
+//             // 所以，log()#3 结束后，就只剩timeout#3在独自等待了
+
+```
+
+
+
 ## TypeScript vs JavaScript
 
 TypeScript 是 "强类型" 版的 JavaScript，当我们在代码中定义变量(包括普通变量、函数、组件、hook等)的时候，TypeScript 允许我们在定义的同时指定其类型，这样使用者在使用不当的时候就会被及时报错提醒
@@ -574,3 +808,20 @@ Require stack:
 npx mrm@2 lint-staged
 ```
 
+## eslint
+
+src\utils\index.js
+  Line 24:7:  React Hook useEffect has a missing dependency: 'callback'. Either include it or remove the dependency array. If 'callback' changes too often, 
+find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+
+export const useMount = (callback) => {
+
+  useEffect(() => {
+
+​    callback()
+
+​    // eslint-disable-next-line
+
+  },[])
+
+}
