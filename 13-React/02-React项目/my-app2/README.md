@@ -205,15 +205,13 @@ __json_server_mock__告诉代码没什么关系，私人电话传递信息
 
 代表：[json-server](https://github.com/typicode/json-server)
 
+```js
 npm install -g json-server//安装
 json-server --watch db.json//启用
 yarn add json-server -D //配置
-
-```js
-
  __json_server_mock__
 "json-server": "json-server
- __json_server_mock__/db.json --watch --port 3001",
+ __json_server_mock__/db.json --watch",
    启用npm run json-serve（mock）
 __JSON_serve_mock//创立文件夹
       "scripts": {
@@ -464,11 +462,9 @@ export const useDebounce = (value, delay) => {
 
 ### useEffect()
 
-组件加载时渲染一次，使用 `useEffect` 完成副作用操作。赋值给 `useEffect` 的函数会在组件渲染到屏幕之后执行，可以选择让它 [在只有某些值改变的时候](https://react.docschina.org/docs/hooks-reference.html#conditionally-firing-an-effect) 才执行。
+组件加载时渲染一次
 
-## Custom Hook
-
-### 用Custom Hook提取并复用组件代码
+## 用Custom Hook提取并复用组件代码
 
 Custom Hook是react最新也是最优秀的组件代码复用方案
 
@@ -478,7 +474,7 @@ Custom Hook是react最新也是最优秀的组件代码复用方案
 
 在写Custom Hook的时候一定要以use开头
 
-debounce减少工程搜索请求刷新频率，快速处理事件，减少请求
+debounce处理快速处理的事件，减少请求
 
 ```js
 // 节流
@@ -507,20 +503,6 @@ log()
 //     log()#3 // 发现 timeout#2! 取消之，然后设置timeout#3
 //             // 所以，log()#3 结束后，就只剩timeout#3在独自等待了
 
-// 利用hook写debounce
-// 上一个设置的被下一个清理，只有最后一个存取下来，
-export const useDebounce = (value, delay) => {
-    // useState是响应式的value值改变，useState就会触发
-    const [debouncedValue, setDebouncedValue] = useState(value);
-    useEffect(() => {
-        // 每次value或者delay的值变化以后，设置一个定时器
-        const timeout = setTimeout(() => setDebouncedValue(value), delay);
-        // 每次在上一个useEffect处理完以后再运行
-        return () => clearTimeout(timeout);
-    }, [value, delay])
-    return debouncedValue;
-}
-// Custom Hook的最大特征就是在hook中借助别的hook，如果不借助，单纯用函数就好
 ```
 
 
@@ -530,44 +512,19 @@ export const useDebounce = (value, delay) => {
 TypeScript 是 "强类型" 版的 JavaScript，当我们在代码中定义变量(包括普通变量、函数、组件、hook等)的时候，TypeScript 允许我们在定义的同时指定其类型，这样使用者在使用不当的时候就会被及时报错提醒
 
 ```jsx
-interface User{
-    id:string;
-    name:string;
-    email:string;
-    title:string;
-    organization:string
-};
-// 定义形参类型
-interface SearchPanelProps{
-    users:User[];
-    param:{
-        name:string;
-        personId:string;
-    },
-    // setParam应该是一个函数类型，void代表无返回，param和什么的param同类型SearchPanelProps['param']
-    setParam:(param:SearchPanelProps['param']) => void;
+interface SearchPanelProps {
+  users: User[],
+  param: {
+    name: string;
+    personId: string;
+  },
+  setParam: (param: SearchPanelProps['param']) => void;
 }
-// ts希望对每一个函数的形参都要规定类型interface
-// 解构赋值
-export const SearchPanel = ({users,param, setParam} : SearchPanelProps) => {
- 
+
+export const SearchPanel = ({users, param, setParam}: SearchPanelProps) => {}
 ```
 
 经常用 TypeScript 的感受：比起原来的 JavaScript，TypeScript 带来了完全不一样的开发体验，bug 大大减少了，编辑器提示快了，代码更易读了， 开发速度快了(看似多写代码，其实由于前面几点节省了大量开发时间)，上手了就回不去了
-
-crtl+可以查看ts类型说明书
-
-lib.dom.d.ts定义了所有dom类型
-
-import * as qs from 'qs';
-
-qs中没有ts类型定义故用时不会报错
-
-安装qs的ts依赖 -D开发时用
-
-yarn add @types/qs -D
-
-x.d.ts是说明书 点击时会跳转到它
 
 ## TypeScript 的类型
 
@@ -596,8 +553,6 @@ let color: string = "blue";
 ```
 
 ### 3. array
-
-delay?:number ?表示这个参数可有可无，时间也可以number
 
 在 TS 中，array 一般指**所有元素类型相同**的值的集合，比如：
 
@@ -649,7 +604,7 @@ const isFalsy = (value: any): boolean => {
 }; 
 ```
 
-1. 直接声明你想要的函数类型：fn: () => void
+1. 直接声明你想要的函数类型：
 
 ```jsx
 /**
@@ -805,10 +760,6 @@ const isFalsy = (value: unknown) => {
   return value === 0 ? true : !!value; 
 }; 
 ```
-
-### 忽略ts 暂不处理
-
-//@ts-ignore
 
 ## .d.ts
 
