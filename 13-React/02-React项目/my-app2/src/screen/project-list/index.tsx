@@ -12,6 +12,9 @@ const apiUrl = process.env.REACT_APP_API_URL;
 export const ProjectListScreen = () => {
     const [users, setUsers] = useState([])
     // 负责人列表
+    // 泛型 S S自定义
+    // function useState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S>>];
+   
     const [param, setParam] = useState({
         name: '',
         personId: ''

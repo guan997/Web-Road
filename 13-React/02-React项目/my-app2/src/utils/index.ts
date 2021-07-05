@@ -61,8 +61,8 @@ export const useMount = (callback : () => void) => {
 
 // 利用hook写debounce
 // 上一个设置的被下一个清理，只有最后一个存取下来，?表示这个参数可有可无
-// any后面用泛型规范类型
-export const useDebounce = (value :unknown, delay?:number) :any => {
+// any后面用泛型规范类型 泛型
+export const useDebounce = <V>(value : V, delay?:number) :any => {
     // useState是响应式的value值改变，useState就会触发
     const [debouncedValue, setDebouncedValue] = useState(value);
     useEffect(() => {

@@ -205,13 +205,15 @@ __json_server_mock__告诉代码没什么关系，私人电话传递信息
 
 代表：[json-server](https://github.com/typicode/json-server)
 
-```js
 npm install -g json-server//安装
 json-server --watch db.json//启用
 yarn add json-server -D //配置
+
+```js
+
  __json_server_mock__
 "json-server": "json-server
- __json_server_mock__/db.json --watch",
+ __json_server_mock__/db.json --watch --port 3001",
    启用npm run json-serve（mock）
 __JSON_serve_mock//创立文件夹
       "scripts": {
@@ -462,9 +464,11 @@ export const useDebounce = (value, delay) => {
 
 ### useEffect()
 
-组件加载时渲染一次
+组件加载时渲染一次，使用 `useEffect` 完成副作用操作。赋值给 `useEffect` 的函数会在组件渲染到屏幕之后执行，可以选择让它 [在只有某些值改变的时候](https://react.docschina.org/docs/hooks-reference.html#conditionally-firing-an-effect) 才执行。
 
-## 用Custom Hook提取并复用组件代码
+## Custom Hook
+
+### 用Custom Hook提取并复用组件代码
 
 Custom Hook是react最新也是最优秀的组件代码复用方案
 
@@ -474,7 +478,7 @@ Custom Hook是react最新也是最优秀的组件代码复用方案
 
 在写Custom Hook的时候一定要以use开头
 
-debounce处理快速处理的事件，减少请求
+debounce减少工程搜索请求刷新频率，快速处理事件，减少请求
 
 ```js
 // 节流
@@ -503,28 +507,69 @@ log()
 //     log()#3 // 发现 timeout#2! 取消之，然后设置timeout#3
 //             // 所以，log()#3 结束后，就只剩timeout#3在独自等待了
 
+// 利用hook写debounce
+// 上一个设置的被下一个清理，只有最后一个存取下来，
+export const useDebounce = (value, delay) => {
+    // useState是响应式的value值改变，useState就会触发
+    const [debouncedValue, setDebouncedValue] = useState(value);
+    useEffect(() => {
+        // 每次value或者delay的值变化以后，设置一个定时器
+        const timeout = setTimeout(() => setDebouncedValue(value), delay);
+        // 每次在上一个useEffect处理完以后再运行
+        return () => clearTimeout(timeout);
+    }, [value, delay])
+    return debouncedValue;
+}
+// Custom Hook的最大特征就是在hook中借助别的hook，如果不借助，单纯用函数就好
 ```
 
 
 
 ## TypeScript vs JavaScript
 
+js中在runtime时报错
+
 TypeScript 是 "强类型" 版的 JavaScript，当我们在代码中定义变量(包括普通变量、函数、组件、hook等)的时候，TypeScript 允许我们在定义的同时指定其类型，这样使用者在使用不当的时候就会被及时报错提醒
 
 ```jsx
-interface SearchPanelProps {
-  users: User[],
-  param: {
-    name: string;
-    personId: string;
-  },
-  setParam: (param: SearchPanelProps['param']) => void;
+interface User{
+    id:string;
+    name:string;
+    email:string;
+    title:string;
+    organization:string
+};
+// 定义形参类型
+interface SearchPanelProps{
+    users:User[];
+    param:{
+        name:string;
+        personId:string;
+    },
+    // setParam应该是一个函数类型，void代表无返回，param和什么的param同类型SearchPanelProps['param']
+    setParam:(param:SearchPanelProps['param']) => void;
 }
-
-export const SearchPanel = ({users, param, setParam}: SearchPanelProps) => {}
+// ts希望对每一个函数的形参都要规定类型interface
+// 解构赋值
+export const SearchPanel = ({users,param, setParam} : SearchPanelProps) => {
+ 
 ```
 
 经常用 TypeScript 的感受：比起原来的 JavaScript，TypeScript 带来了完全不一样的开发体验，bug 大大减少了，编辑器提示快了，代码更易读了， 开发速度快了(看似多写代码，其实由于前面几点节省了大量开发时间)，上手了就回不去了
+
+crtl+可以查看ts类型说明书
+
+lib.dom.d.ts定义了所有dom类型
+
+import * as qs from 'qs';
+
+qs中没有ts类型定义故用时不会报错
+
+安装qs的ts依赖 -D开发时用
+
+yarn add @types/qs -D
+
+x.d.ts是说明书 点击时会跳转到它
 
 ## TypeScript 的类型
 
@@ -554,6 +599,8 @@ let color: string = "blue";
 
 ### 3. array
 
+delay?:number ?表示这个参数可有可无，时间也可以number
+
 在 TS 中，array 一般指**所有元素类型相同**的值的集合，比如：
 
 ```jsx
@@ -575,7 +622,7 @@ let personList = [john, jack] // 这里 john 和 jack 都是 User 类型的
 let l = ['jack', 10]
 ```
 
-在 TS 中不是 数组/array，它们叫作 tuple，下面会提到
+**在 TS 中不是 数组/array，它们叫作 tuple**，下面会提到
 
 ### 4. boolean
 
@@ -589,14 +636,16 @@ let isDone: boolean = false;
 
 两种方法
 
-1. 在我们熟悉的 "JS函数" 上直接声明参数和返回值：
+1.在我们熟悉的 "JS函数" 上直接声明参数和返回值：
+
+因为**类型推断**，可以省略箭头前 :boolean
 
 ```jsx
 /**
  * 这是我们上节课写的代码，大家可能发现了
  * 我在这里做了一些修改，在箭头前边加上了 :boolean
  * 但是在我们上节课的代码中是没有这个:boolean 的，
- * 之所以不需要加是因为 类型推断，这个我们在下面会讲
+ * 之所以不需要加是因为 **类型推断**，这个我们在下面会讲
  * @param value
  */
 const isFalsy = (value: any): boolean => { 
@@ -604,7 +653,7 @@ const isFalsy = (value: any): boolean => {
 }; 
 ```
 
-1. 直接声明你想要的函数类型：
+2.直接声明你想要的函数类型：fn: () => void
 
 ```jsx
 /**
@@ -629,6 +678,7 @@ any 表示这个值可以是任何值，被定义为 any 就意味着不做任�
 let looselyTyped: any = 4;
 // looselyTyped 的值明明是个4，哪里来的ifItExists方法呢？
 // 由于声明为any，我们没法在静态检查阶段发现这个错误
+// any后面用泛型规范类型
 looselyTyped.ifItExists();
 ```
 
@@ -665,7 +715,7 @@ export const useMount = (fn: () => void) => {
 const [users, setUsers] = useState([])
 ```
 
-tuple 是 "数量固定，类型可以各异" 版的数组
+**tuple 是 "数量固定，类型可以各异" 版的数组**
 
 在 React 中有可能使用 tuple 的地方就是 custom hook 的返回值，注意 isHappy → tomIsHappy 以及其他名字的变化，这里使用tuple的好处就显现出来了：便于使用者重命名
 
@@ -682,6 +732,8 @@ const SomeComponent = () => {
 ```
 
 ### 10. enum
+
+enum类似于对象
 
 ```jsx
 enum Color {
@@ -705,11 +757,9 @@ let n: null = null;
 
 unknown 表示这个值可以是任何值
 
-❓❓❓❓❓❓
-
 这句话怎么这么熟悉，刚才是不是用来形容 any 的？
 
-unknown 的用法：在你想用 any 的时候，用 unknown 来代替，简单来说，unknown是一个"严格"版的 any
+unknown 的用法：在你想用 any 的时候，用 unknown 来代替，简单来说，**unknown是一个"严格"版的 any**
 
 ```jsx
 const isFalsy = (value: unknown) => { 
@@ -754,12 +804,18 @@ let a = 1
 function add(a: number, b: number) {
   return a + b;
 }
-
+读
 // 自动推断返回值为boolean
 const isFalsy = (value: unknown) => { 
   return value === 0 ? true : !!value; 
 }; 
 ```
+
+unknown可以负给任何值 ，也不能在unknown读任何函数
+
+### 忽略ts 暂不处理
+
+//@ts-ignore
 
 ## .d.ts
 
@@ -768,6 +824,250 @@ JS 文件 + .d.ts 文件   === ts 文件
 .d.ts 文件可以让 JS 文件继续维持自己JS文件的身份，而拥有TS的类型保护
 
 一般我们写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts文件
+
+## 泛型
+
+计泛型的关键目的是在成员之间提供有意义的约束，这些成员可以是：
+
+- 类的实例成员
+- 类的方法
+- 函数参数
+- 函数返回值
+
+ // 泛型 S S自定义 泛型让代码保持了良好的灵活性
+
+  // function useState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S>>];
+
+  export const useDebounce = <V>(value : V, delay?:number) :any => {
+
+### [#](https://jkchao.github.io/typescript-book-chinese/typings/generices.html#动机和示例)动机和示例
+
+下面是对一个先进先出的数据结构——队列，在 `TypeScript` 和 `JavaScript` 中的简单实现。
+
+```ts
+class Queue {
+  private data = [];
+  push = item => this.data.push(item);
+  pop = () => this.data.shift();
+}
+```
+
+在上述代码中存在一个问题，它允许你向队列中添加任何类型的数据，当然，当数据被弹出队列时，也可以是任意类型。在下面的示例中，看起来人们可以向队列中添加`string` 类型的数据，但是实际上，该用法假定的是只有 `number` 类型会被添加到队列里。
+
+```ts
+class Queue {
+  private data = [];
+  push = item => this.data.push(item);
+  pop = () => this.data.shift();
+}
+
+const queue = new Queue();
+
+queue.push(0);
+queue.push('1'); // Oops，一个错误
+
+// 一个使用者，走入了误区
+console.log(queue.pop().toPrecision(1));
+console.log(queue.pop().toPrecision(1)); // RUNTIME ERROR
+```
+
+一个解决的办法（事实上，这也是不支持泛型类型的唯一解决办法）是为这些约束创建特殊类，如快速创建数字类型的队列：
+
+```ts
+class QueueNumber {
+  private data = [];
+  push = (item: number) => this.data.push(item);
+  pop = (): number => this.data.shift();
+}
+
+const queue = new QueueNumber();
+
+queue.push(0);
+queue.push('1'); // Error: 不能推入一个 `string` 类型，只能是 `number` 类型
+
+// 如果该错误得到修复，其他将不会出现问题
+```
+
+当然，快速也意味着痛苦。例如当你想创建一个字符串的队列时，你将不得不再次修改相当大的代码。我们真正想要的一种方式是无论什么类型被推入队列，被推出的类型都与推入类型一样。当你使用泛型时，这会很容易：
+
+```ts
+// 创建一个泛型类
+class Queue<T> {
+  private data: T[] = [];
+  push = (item: T) => this.data.push(item);
+  pop = (): T | undefined => this.data.shift();
+}
+
+// 简单的使用
+const queue = new Queue<number>();
+queue.push(0);
+queue.push('1'); // Error：不能推入一个 `string`，只有 number 类型被允许
+```
+
+另外一个我们见过的例子：一个 `reverse` 函数，现在在这个函数里提供了函数参数与函数返回值的约束：
+
+```ts
+function reverse<T>(items: T[]): T[] {
+  const toreturn = [];
+  for (let i = items.length - 1; i >= 0; i--) {
+    toreturn.push(items[i]);
+  }
+  return toreturn;
+}
+
+const sample = [1, 2, 3];
+let reversed = reverse(sample);
+
+reversed[0] = '1'; // Error
+reversed = ['1', '2']; // Error
+
+reversed[0] = 1; // ok
+reversed = [1, 2]; // ok
+```
+
+在此章节中，你已经了解在*类*和*函数*上使用泛型的例子。一个值得补充一点的是，你可以为创建的成员函数添加泛型：
+
+```ts
+class Utility {
+  reverse<T>(items: T[]): T[] {
+    const toreturn = [];
+    for (let i = items.length; i >= 0; i--) {
+      toreturn.push(items[i]);
+    }
+    return toreturn;
+  }
+}
+```
+
+TIP
+
+你可以随意调用泛型参数，当你使用简单的泛型时，泛型常用 `T`、`U`、`V` 表示。如果在你的参数里，不止拥有一个泛型，你应该使用一个更语义化名称，如 `TKey` 和 `TValue` （通常情况下，以 `T` 作为泛型的前缀，在其他语言如 C++ 里，也被称为模板）
+
+### [#](https://jkchao.github.io/typescript-book-chinese/typings/generices.html#误用的泛型)误用的泛型
+
+我见过开发者使用泛型仅仅是为了它的 hack。当你使用它时，你应该问问自己：你想用它来提供什么样的约束。如果你不能很好的回答它，你可能会误用泛型，如：
+
+```ts
+declare function foo<T>(arg: T): void;
+```
+
+在这里，泛型完全没有必要使用，因为它仅用于单个参数的位置，使用如下方式可能更好：
+
+```ts
+declare function foo(arg: any): void;
+```
+
+### [#](https://jkchao.github.io/typescript-book-chinese/typings/generices.html#设计模式：方便通用)设计模式：方便通用
+
+考虑如下函数：
+
+```ts
+declare function parse<T>(name: string): T;
+```
+
+在这种情况下，泛型 `T` 只在一个地方被使用了，它并没有在成员之间提供约束 `T`。这相当于一个如下的类型断言：
+
+```ts
+declare function parse(name: string): any;
+
+const something = parse('something') as TypeOfSomething;
+```
+
+仅使用一次的泛型并不比一个类型断言来的安全。它们都给你使用 API 提供了便利。
+
+另一个明显的例子是，一个用于加载 json 返回值函数，它返回你任何传入类型的 `Promise`：
+
+```ts
+const getJSON = <T>(config: { url: string; headers?: { [key: string]: string } }): Promise<T> => {
+  const fetchConfig = {
+    method: 'GET',
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    ...(config.headers || {})
+  };
+  return fetch(config.url, fetchConfig).then<T>(response => response.json());
+};
+```
+
+请注意，你仍然需要明显的注解任何你需要的类型，但是 `getJSON<T>` 的签名 `config => Promise<T>` 能够减少你一些关键的步骤（你不需要注解 `loadUsers` 的返回类型，因为它能够被推出来）：
+
+```ts
+type LoadUserResponse = {
+  user: {
+    name: string;
+    email: string;
+  }[];
+};
+
+function loaderUser() {
+  return getJSON<LoadUserResponse>({ url: 'https://example.com/users' });
+}
+```
+
+与此类似：使用 `Promise<T>` 作为一个函数的返回值比一些如：`Promise<any>` 的备选方案要好很多。
+
+### [#](https://jkchao.github.io/typescript-book-chinese/typings/generices.html#配合-axios-使用)配合 axios 使用
+
+通常情况下，我们会把后端返回数据格式单独放入一个 interface 里：
+
+```ts
+// 请求接口数据
+export interface ResponseData<T = any> {
+  /**
+   * 状态码
+   * @type { number }
+   */
+  code: number;
+
+  /**
+   * 数据
+   * @type { T }
+   */
+  result: T;
+
+  /**
+   * 消息
+   * @type { string }
+   */
+  message: string;
+}
+```
+
+当我们把 API 单独抽离成单个模块时：
+
+```ts
+// 在 axios.ts 文件中对 axios 进行了处理，例如添加通用配置、拦截器等
+import Ax from './axios';
+
+import { ResponseData } from './interface.ts';
+
+export function getUser<T>() {
+  return Ax.get<ResponseData<T>>('/somepath')
+    .then(res => res.data)
+    .catch(err => console.error(err));
+}
+```
+
+接着我们写入返回的数据类型 `User`，这可以让 TypeScript 顺利推断出我们想要的类型：
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+async function test() {
+  // user 被推断出为
+  // {
+  //  code: number,
+  //  result: { name: string, age: number },
+  //  message: string
+  // }
+  const user = await getUser<User>();
+}
+```
+
+https://jkchao.github.io/typescript-book-chinese/typings/generices.html
 
 # 报错
 
