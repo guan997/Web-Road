@@ -10,6 +10,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "jira-dev-tool": "^1.7.61",
     "json-server": "react-scripts object",
     "qs": "^6.10.1",
     "react": "^17.0.2",
@@ -66,5 +67,8 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
